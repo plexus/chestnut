@@ -9,7 +9,8 @@
                  [org.clojure/clojurescript "0.0-2311"]
                  [ring "1.2.2"]
                  [compojure "1.1.8"]
-                 [enlive "1.1.5"]]
+                 [enlive "1.1.5"]
+                 [om "0.7.1"]]
 
   :profiles {:dev { :repl-options {:init-ns chestnut.server}
                    :plugins [[com.cemerick/austin "0.1.4"]
