@@ -10,12 +10,21 @@
                  [ring "1.2.2"]
                  [compojure "1.1.8"]
                  [enlive "1.1.5"]
-                 [om "0.7.1"]]
+                 [om "0.7.1"]
+                 [figwheel "0.1.3-SNAPSHOT"]]
 
-  :profiles {:dev { :repl-options {:init-ns chestnut.server}
-                   :plugins [[com.cemerick/austin "0.1.4"]
-                             [lein-cljsbuild "1.0.3"]]
-                   :cljsbuild {:builds [{:source-paths ["src/cljs"]
-                                         :compiler {:output-to "target/classes/public/app.js"
-                                                    :optimizations :simple
-                                                    :pretty-print true}}]}}})
+  :profiles {:dev
+             {:repl-options {:init-ns chestnut.server}
+              :plugins [[com.cemerick/austin "0.1.5-SNAPSHOT"]
+                        [lein-cljsbuild "1.0.3"]
+                        [lein-figwheel "0.1.2-SNAPSHOT"]]
+              :cljsbuild {:builds
+                          [{:source-paths ["src/cljs"]
+                            :compiler {:output-to     "resources/public/app.js"
+                                       :output-dir    "resources/public/out"
+                                       ;;:optimizations :simple
+                                       :optimizations :none
+                                       :pretty-print  true
+                                       :source-map    true}}]}
+              :figwheel {:http-server-root "public" ;; resources/public
+                         :port 3449 }}})
