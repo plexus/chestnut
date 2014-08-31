@@ -13,7 +13,7 @@ If you're using this from Emacs make sure your CIDER is up to date.
 At the moment Chestnut is not yet registered as a leiningen plugin, so you have to install it locally first.
 
 ```
-git co https://github.com/plexus/chestnut
+git checkout https://github.com/plexus/chestnut
 cd chestnut
 lein install
 ```
