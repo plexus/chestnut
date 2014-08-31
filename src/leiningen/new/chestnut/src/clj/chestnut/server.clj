@@ -1,4 +1,4 @@
-(ns chestnut.server
+(ns {{name}}.server
   (:require [cemerick.austin.repls :refer (browser-connected-repl-js)]
             [net.cgrand.enlive-html :as enlive]
             [compojure.route :refer (resources)]
