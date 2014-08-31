@@ -4,9 +4,7 @@
 
 (def render (renderer "chestnut"))
 
-(defn chestnut
-  "FIXME: write documentation"
-  [name]
+(defn chestnut [name]
   (let [data {:name name
               :sanitized (name-to-path name)}]
     (main/info "Generating fresh 'lein new' chestnut project.")

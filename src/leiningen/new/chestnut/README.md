@@ -1,8 +1,7 @@
-# chestnut
+# {{name}}
 
-An example ClojureScript setup with Figwheel, Austin, Om.
 
-## Usage
+## Development
 
 Start a REPL (in a terminal: `lein repl`, or from Emacs: open a clj/cljs file in the project, then do `M-x cider-jack-in`).
 
@@ -19,15 +18,9 @@ In a terminal do `lein figwheel`, this will watch and recompile your ClojureScri
 
 Now browse to `http://localhost:10555` and enjoy.
 
-## Sources
-
-I used the [browser-connected-repl](https://github.com/cemerick/austin/tree/master/browser-connected-repl-sample) that's included with [Austin](https://github.com/cemerick/austin) as a starting point, then pulled in bits from [cljs-liveedit-webapp](https://github.com/ejlo/cljs-liveedit-webapp) until things worked.
-
-If you're using this from Emacs make sure your CIDER is up to date.
-
 ## License
 
-Copyright © 2014 Arne Brasseur
+Copyright © 2014 FIXME
 
 Distributed under the Eclipse Public License either version 1.0 or (at
 your option) any later version.
