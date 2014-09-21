@@ -10,21 +10,36 @@ If you're using this from Emacs make sure your CIDER is up to date.
 
 ## Usage
 
-At the moment Chestnut is not yet registered as a leiningen plugin, so you have to install it locally first.
-
-```
-git clone https://github.com/plexus/chestnut
-cd chestnut
-lein install
-```
-
-After that you can create your Om project!
-
 ```
 lein new chestnut <name>
 ```
 
-Further instructions on how to get started can be found in the README of your new project.
+After that open the README of your new project for further instructions.
+
+tl;dr
+
+```
+$ lein repl
+
+(run)
+(browser-repl)
+```
+
+```
+$ lein figwheel
+```
+
+Browse to `http://localhost:10555`
+
+## Local copy
+
+To run a local copy (if you want to customize Chestnut):
+
+``` sh
+git clone https://github.com/plexus/chestnut.git
+cd chestnut
+lein install
+```
 
 ## License
 
