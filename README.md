@@ -2,12 +2,6 @@
 
 A Leiningen template for a ClojureScript setup with Figwheel, Austin, Om.
 
-## Sources
-
-I used the [browser-connected-repl](https://github.com/cemerick/austin/tree/master/browser-connected-repl-sample) that's included with [Austin](https://github.com/cemerick/austin) as a starting point, then pulled in bits from [cljs-liveedit-webapp](https://github.com/ejlo/cljs-liveedit-webapp) until things worked.
-
-If you're using this from Emacs make sure your CIDER is up to date.
-
 ## Usage
 
 ```
@@ -40,6 +34,10 @@ git clone https://github.com/plexus/chestnut.git
 cd chestnut
 lein install
 ```
+
+## Sources
+
+I used the [browser-connected-repl](https://github.com/cemerick/austin/tree/master/browser-connected-repl-sample) that's included with [Austin](https://github.com/cemerick/austin) as a starting point, then pulled in bits from [cljs-liveedit-webapp](https://github.com/ejlo/cljs-liveedit-webapp) until things worked.
 
 ## License
 
