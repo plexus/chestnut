@@ -41,7 +41,7 @@ Clojure/ClojureScript apps effectively. It comes with
   interface. Chestnut uses a Jetty server to serve the Clojurescript
   app. This way you already have an HTTP server running in case you
   want to add server-side functionality.
-* Heroku support. Chestnut apps all have the bits and pieces to be
+* Heroku support. Chestnut apps have all the bits and pieces to be
   deployable to Heroku. Getting your app on the web is as simple as
   `git push`.
 
