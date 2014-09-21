@@ -4,7 +4,11 @@
             [om.dom :as dom :include-macros true]
             [figwheel.client :as fw :include-macros true]))
 
-(enable-console-print!)
+(def localhost? (-> js/window
+                    (.-location)
+                    (.-host)
+                    (.indexOf "localhost")
+                    (>= 0)))
 
 (defonce app-state (atom {:text "Hello world!"}))
 
@@ -16,6 +20,10 @@
   app-state
   {:target (. js/document (getElementById "app"))})
 
-(fw/watch-and-reload
+(if localhost?
+  (enable-console-print!))
+
+(if localhost?
+ (fw/watch-and-reload
   :websocket-url   "ws://localhost:3449/figwheel-ws"
-  :jsload-callback (fn [] (print "reloaded")))
+  :jsload-callback (fn [] (print "reloaded"))))

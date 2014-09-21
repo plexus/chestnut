@@ -20,4 +20,12 @@
              ["LICENSE"
               (render "LICENSE" data)]
              ["README.md"
-              (render "README.md" data)])))
+              (render "README.md" data)]
+             [".gitignore"
+              (render ".gitignore" data)]
+
+             ;; Heroku support
+             ["system.properties"
+              (render "system.properties" data)]
+             ["Procfile"
+              (render "Procfile" data)])))
