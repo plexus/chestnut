@@ -1,5 +1,7 @@
 # chestnut
 
+[![Clojars Project](http://clojars.org/chestnut/lein-template/latest-version.svg)](http://clojars.org/chestnut/lein-template)
+
 A Leiningen template for a ClojureScript setup with Figwheel, Austin, Om.
 
 ## Usage
