@@ -12,7 +12,7 @@
                  [compojure "1.1.8"]
                  [enlive "1.1.5"]
                  [om "0.7.1"]
-                 [figwheel "0.1.3-SNAPSHOT"]
+                 [figwheel "0.1.4-SNAPSHOT"]
                  [environ "0.5.0"]]
 
   :plugins [[com.cemerick/austin "0.1.5-SNAPSHOT"]
@@ -32,7 +32,7 @@
                                         :pretty-print  true}}}}
 
   :profiles {:dev {:repl-options {:init-ns {{name}}.server}
-                   :plugins [[lein-figwheel "0.1.3-SNAPSHOT"]]
+                   :plugins [[lein-figwheel "0.1.4-SNAPSHOT"]]
                    :figwheel {:http-server-root "public"
                               :port 3449 }}
 
