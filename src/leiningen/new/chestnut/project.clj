@@ -20,20 +20,27 @@
 
   :min-lein-version "2.0.0"
 
-  :hooks [leiningen.cljsbuild]
-
   :uberjar-name "{{sanitized}}.jar"
 
-  :cljsbuild {:builds [{:source-paths ["src/cljs"]
-                        :compiler {:output-to     "resources/public/app.js"
-                                   :output-dir    "resources/public/out"
-                                   :optimizations :none
-                                   :pretty-print  true
-                                   :source-map    true}}]}
+  :cljsbuild {:builds {:app {:source-paths ["src/cljs"]
+                             :compiler {:output-to     "resources/public/app.js"
+                                        :output-dir    "resources/public/out"
+                                        :source-map    "resources/public/out.js.map"
+                                        :preamble      ["react/react.min.js"]
+                                        :externs       ["react/externs/react.js"]
+                                        :optimizations :none
+                                        :pretty-print  true}}}}
 
   :profiles {:dev {:repl-options {:init-ns {{name}}.server}
                    :plugins [[lein-figwheel "0.1.3-SNAPSHOT"]]
                    :figwheel {:http-server-root "public"
                               :port 3449 }}
 
-             :production {:env {:production true}}})
+             :uberjar {:hooks [leiningen.cljsbuild]
+                       :env {:production true}
+                       :omit-source true
+                       :aot :all
+                       :cljsbuild {:builds {:app
+                                            {:compiler
+                                             {:optimizations :advanced
+                                              :pretty-print false}}}}}})

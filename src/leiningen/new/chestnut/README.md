@@ -49,8 +49,7 @@ Leiningen "production" profile, instead of "dev". To locally simulate
 what Heroku does you can do:
 
 ``` sh
-lein cljsbuild clean
-lein with-profile -dev,+production uberjar
+lein uberjar
 foreman start
 ```
 
