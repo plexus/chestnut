@@ -7,13 +7,21 @@
             [clojure.java.io :as io]
             [environ.core :refer [env]]))
 
-(defmacro if-dev-mode [then-body else-body]
-  (if (not (env :production)) then-body else-body))
+(defn body-transforms []
+  (if (env :is-dev)
+    (comp
+     (enlive/set-attr :class "is-dev")
+     (enlive/prepend
+      (enlive/html [:script {:type "text/javascript"} (browser-connected-repl-js)]))
+     (enlive/prepend
+      (enlive/html [:script {:type "text/javascript" :src "/out/goog/base.js"}]))
+     (enlive/prepend
+      (enlive/html [:script {:type "text/javascript" :src "/react/react.js"}]))
+     (enlive/append
+      (enlive/html [:script {:type "text/javascript"} "goog.require('{{name}}.core')"])))
+    identity))
 
-(if-dev-mode
- (enlive/deftemplate page (io/resource "index.html") []
-   [:body] (enlive/append (enlive/html [:script (browser-connected-repl-js)])))
- (enlive/deftemplate page (io/resource "index.html") []))
+(enlive/deftemplate page (io/resource "index.html") [] [:body] (body-transforms))
 
 (defn browser-repl []
   (let [repl-env (reset! cemerick.austin.repls/browser-repl-env
@@ -22,6 +30,7 @@
 
 (defroutes site
   (resources "/")
+  (resources "/react" {:root "react"})
   (GET "/*" req (page)))
 
 (defn run [& [port]]

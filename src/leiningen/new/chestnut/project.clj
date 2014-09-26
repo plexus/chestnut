@@ -35,7 +35,8 @@
   :profiles {:dev {:repl-options {:init-ns {{name}}.server}
                    :plugins [[lein-figwheel "0.1.4-SNAPSHOT"]]
                    :figwheel {:http-server-root "public"
-                              :port 3449 }}
+                              :port 3449 }
+                   :env {:is-dev true}}
 
              :uberjar {:hooks [leiningen.cljsbuild]
                        :env {:production true}

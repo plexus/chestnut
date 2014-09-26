@@ -2,13 +2,9 @@
   (:require [clojure.browser.repl]
             [om.core :as om :include-macros true]
             [om.dom :as dom :include-macros true]
-            [figwheel.client :as fw :include-macros true]))
+            [figwheel.client :as figwheel :include-macros true]))
 
-(def localhost? (-> js/window
-                    (.-location)
-                    (.-host)
-                    (.indexOf "localhost")
-                    (>= 0)))
+(def is-dev (some #{is-dev} (-> js/window (.-body) (.-classList))))
 
 (defonce app-state (atom {:text "Hello world!"}))
 
@@ -20,10 +16,8 @@
   app-state
   {:target (. js/document (getElementById "app"))})
 
-(if localhost?
-  (enable-console-print!))
-
-(if localhost?
- (fw/watch-and-reload
-  :websocket-url   "ws://localhost:3449/figwheel-ws"
-  :jsload-callback (fn [] (print "reloaded"))))
+(if is-dev
+  (enable-console-print!)
+  (figwheel/watch-and-reload
+   :websocket-url   "ws://localhost:3449/figwheel-ws"
+   :jsload-callback (fn [] (print "reloaded"))))
