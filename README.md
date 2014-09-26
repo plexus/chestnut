@@ -54,6 +54,8 @@ Clojure/ClojureScript apps effectively. It comes with
 ## Options
 
 * `--http-kit` Use [HTTP Kit](http://http-kit.org/server.html) instead of Jetty
+* `--site-middleware` Use the `compojure.handler.site` middleware, instead of `compojure.handler.api` (see [compojure.handler documentation](http://weavejester.github.io/compojure/compojure.handler.html))
+* `--om-tools` Use Prismatic's [om-tools.dom](https://github.com/Prismatic/om-tools) instead of `om.dom`
 
 ## Local copy
 

@@ -1,8 +1,7 @@
 (ns {{name}}.core
   (:require [om.core :as om :include-macros true]
-            [om.dom :as dom :include-macros true]
             [figwheel.client :as figwheel :include-macros true]
-            [weasel.repl :as weasel]))
+            [weasel.repl :as weasel]{{{core-cljs-requires}}}))
 
 (defonce app-state (atom {:text "Hello Chestnut!"}))
 

@@ -15,8 +15,7 @@
                  [figwheel "0.1.4-SNAPSHOT"]
                  [environ "1.0.0"]
                  [com.cemerick/piggieback "0.1.3"]
-                 [weasel "0.4.0-SNAPSHOT"]
-                 {{{project-clj-deps}}}]
+                 [weasel "0.4.0-SNAPSHOT"]{{{project-clj-deps}}}]
 
   :plugins [[lein-cljsbuild "1.0.3"]
             [lein-environ "1.0.0"]]
