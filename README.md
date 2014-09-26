@@ -61,6 +61,27 @@ cd chestnut
 lein install
 ```
 
+## Changelog
+
+### v0.3.0
+
+* Switched to Weasel for Austin
+* Optimized uberjar
+* Fix usage of {{name}}/{{sanitized}}
+* Load react from the jar, instead of from Facebook's CDN
+* Update dependencies (Clojurescript, Ring, Compojure, Environ)
+
+### v0.2.0
+
+* Uberjar support
+* Heroku support (Procfile, system.properties)
+* added .gitignore
+* First version of development/production modes
+
+### v0.1.0
+
+* First release, containing Austin, Figwheel, Om
+
 ## Sources
 
 I used the

@@ -14,11 +14,11 @@ In the REPL do
 (browser-repl)
 ```
 
-The first starts the webserver at 10555. The second starts the austin
-REPL server at a random port.
+The first starts the webserver at 10555. The second starts the Weasel
+REPL server.
 
 In a terminal do `lein figwheel`, this will watch and recompile your
-ClojureScript, and start the figwheel server on port 3449 (the
+ClojureScript, and start the figwheel server (the
 default). Whenever your code changes, figwheel will recompile it and
 send it to the browser immediately.
 
