@@ -23,7 +23,7 @@
     ["org.httpkit.server :refer [run-server]"]
     ["ring.adapter.jetty :refer [run-jetty]"]))
 
-(defn colre-cljs-requires [opts]
+(defn core-cljs-requires [opts]
   (if (om-tools? opts)
     ["om.dom :as dom :include-macros true"]
     ["om-tools.dom :as dom :include-macros true"]))
