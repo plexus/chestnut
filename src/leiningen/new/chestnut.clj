@@ -1,12 +1,34 @@
 (ns leiningen.new.chestnut
   (:require [leiningen.new.templates :refer [renderer name-to-path ->files]]
-            [leiningen.core.main :as main]))
+            [leiningen.core.main :as main]
+            [clojure.string :refer [join]]))
 
 (def render (renderer "chestnut"))
 
-(defn chestnut [name]
+(defn dep-list [n list]
+  (fn []
+    (join "\n"
+          (conj (map #(str (apply str (repeat n " "))  "[" % "]") (rest list))
+                (str "[" (first list) "]")))))
+
+(defn http-kit? [opts]
+  (some #{"--http-kit"} opts))
+
+(defn server-clj-requires [opts]
+  (if (http-kit? opts)
+    ["org.httpkit.server :refer [run-server]"]
+    ["ring.adapter.jetty :refer [run-jetty]"]))
+
+(defn project-clj-deps [opts]
+  (if (http-kit? opts) ["http-kit \"2.1.19\""] []))
+
+(defn chestnut [name & opts]
   (let [data {:name name
-              :sanitized (name-to-path name)}]
+              :sanitized (name-to-path name)
+              :server-clj-requires (dep-list 12 (server-clj-requires opts))
+              :project-clj-deps (dep-list 17 (project-clj-deps opts))
+              :server-command (if (http-kit? opts) "run-server" "run-jetty")
+              }]
     (main/info "Generating fresh 'lein new' chestnut project.")
     (->files data
              ["project.clj"

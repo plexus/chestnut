@@ -51,6 +51,10 @@ Clojure/ClojureScript apps effectively. It comes with
   deployable to Heroku. Getting your app on the web is as simple as
   `git push`.
 
+## Options
+
+* `--http-kit` Use [HTTP Kit](http://http-kit.org/server.html) instead of Jetty
+
 ## Local copy
 
 To run a local copy (if you want to customize Chestnut):
@@ -62,6 +66,12 @@ lein install
 ```
 
 ## Changelog
+
+### v0.4.0
+
+* Option to switch to HTTP Kit for a web server
+* Add reloading middleware
+* Add default compojure.handler.site middleware
 
 ### v0.3.0
 
