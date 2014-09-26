@@ -33,7 +33,8 @@
                                         :optimizations :none
                                         :pretty-print  true}}}}
 
-  :profiles {:dev {:repl-options {:init-ns {{name}}.server}
+  :profiles {:dev {:repl-options {:init-ns {{name}}.server
+                                  :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
                    :plugins [[lein-figwheel "0.1.4-SNAPSHOT"]]
                    :figwheel {:http-server-root "public"
                               :port 3449 }
