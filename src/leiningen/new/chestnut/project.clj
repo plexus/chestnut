@@ -7,16 +7,17 @@
   :source-paths ["src/clj" "src/cljs"]
 
   :dependencies [[org.clojure/clojure "1.6.0"]
-                 [org.clojure/clojurescript "0.0-2311"]
-                 [ring "1.2.2"]
-                 [compojure "1.1.8"]
+                 [org.clojure/clojurescript "0.0-2342"]
+                 [ring "1.3.1"]
+                 [compojure "1.1.9"]
                  [enlive "1.1.5"]
                  [om "0.7.1"]
                  [figwheel "0.1.4-SNAPSHOT"]
-                 [environ "0.5.0"]]
+                 [environ "1.0.0"]]
 
   :plugins [[com.cemerick/austin "0.1.5-SNAPSHOT"]
-            [lein-cljsbuild "1.0.3"]]
+            [lein-cljsbuild "1.0.3"]
+            [lein-environ "1.0.0"]]
 
   :min-lein-version "2.0.0"
 
