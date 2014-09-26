@@ -1,12 +1,10 @@
 (ns {{name}}.core
-  (:require [clojure.browser.repl]
-            [om.core :as om :include-macros true]
+  (:require [om.core :as om :include-macros true]
             [om.dom :as dom :include-macros true]
-            [figwheel.client :as figwheel :include-macros true]))
+            [figwheel.client :as figwheel :include-macros true]
+            [weasel.repl :as weasel]))
 
-(def is-dev (some #{is-dev} (-> js/window (.-body) (.-classList))))
-
-(defonce app-state (atom {:text "Hello world!"}))
+(defonce app-state (atom {:text "Hello Chestnut!"}))
 
 (om/root
   (fn [app owner]
@@ -16,8 +14,11 @@
   app-state
   {:target (. js/document (getElementById "app"))})
 
-(if is-dev
+(def is-dev (.contains (.. js/document -body -classList) "is-dev"))
+
+(when is-dev
   (enable-console-print!)
   (figwheel/watch-and-reload
-   :websocket-url   "ws://localhost:3449/figwheel-ws"
-   :jsload-callback (fn [] (print "reloaded"))))
+   :websocket-url "ws://localhost:3449/figwheel-ws"
+   :jsload-callback (fn [] (print "reloaded")))
+  (weasel/connect "ws://localhost:9001" :verbose true))

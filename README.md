@@ -2,7 +2,11 @@
 
 [![Clojars Project](http://clojars.org/chestnut/lein-template/latest-version.svg)](http://clojars.org/chestnut/lein-template)
 
-A Leiningen template for a ClojureScript setup with Figwheel, Austin, Om.
+A Leiningen template for a Clojure/ClojureScript app, featuring a
+great dev setup (browser-connected REPL, live code reloading), easy
+deployment (generate optimized uberjar, run with Foreman).
+
+Contains a starting point for using Om.
 
 ## Usage
 
@@ -35,7 +39,7 @@ Clojure/ClojureScript apps effectively. It comes with
 * [Figwheel](https://github.com/bhauman/lein-figwheel) Automatically
   reload your ClojureScript code as soon as you save the file, no need
   for browser refresh.
-* [Austin](https://github.com/cemerick/austin) Next generation browser
+* [Weasel](https://github.com/tomjakubowski/weasel) Next generation browser
   connected REPL. Try things out and manipulate your running app.
 * [Om](https://github.com/swannodette/om) ClojureScript interface to
   Facebook's React.

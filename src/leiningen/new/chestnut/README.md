@@ -49,8 +49,7 @@ Leiningen "production" profile, instead of "dev". To locally simulate
 what Heroku does you can do:
 
 ``` sh
-lein uberjar
-foreman start
+lein with-profile -dev,+production uberjar && foreman start
 ```
 
 Now your app is running at

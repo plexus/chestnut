@@ -13,15 +13,16 @@
                  [enlive "1.1.5"]
                  [om "0.7.1"]
                  [figwheel "0.1.4-SNAPSHOT"]
-                 [environ "1.0.0"]]
+                 [environ "1.0.0"]
+                 [com.cemerick/piggieback "0.1.3"]
+                 [weasel "0.4.0-SNAPSHOT"]]
 
-  :plugins [[com.cemerick/austin "0.1.5-SNAPSHOT"]
-            [lein-cljsbuild "1.0.3"]
+  :plugins [[lein-cljsbuild "1.0.3"]
             [lein-environ "1.0.0"]]
 
   :min-lein-version "2.0.0"
 
-  :uberjar-name "{{sanitized}}.jar"
+  :uberjar-name "{{name}}.jar"
 
   :cljsbuild {:builds {:app {:source-paths ["src/cljs"]
                              :compiler {:output-to     "resources/public/app.js"
