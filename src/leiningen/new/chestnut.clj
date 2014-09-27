@@ -23,24 +23,29 @@
     ["org.httpkit.server :refer [run-server]"]
     ["ring.adapter.jetty :refer [run-jetty]"]))
 
-(defn colre-cljs-requires [opts]
+(defn core-cljs-requires [opts]
   (if (om-tools? opts)
-    ["om.dom :as dom :include-macros true"]
-    ["om-tools.dom :as dom :include-macros true"]))
+    ["om-tools.dom :as dom :include-macros true"
+     "om-tools.core :refer-macros [defcomponent]"]
+    ["om.dom :as dom :include-macros true"]))
 
 (defn project-clj-deps [opts]
   (cond-> []
-          (http-kit? opts) (conj ["http-kit \"2.1.19\""])
-          (om-tools? opts) (conj ["prismatic/om-tools \"0.3.2\""])))
+          (http-kit? opts) (conj "http-kit \"2.1.19\"")
+          (om-tools? opts) (conj "prismatic/om-tools \"0.3.3\"")))
+
+(defn template-data [name opts]
+  {:name name
+   :sanitized (name-to-path name)
+   :server-clj-requires (dep-list 14 (server-clj-requires opts))
+   :core-cljs-requires (dep-list 14 (core-cljs-requires opts))
+   :project-clj-deps (dep-list 17 (project-clj-deps opts))
+   :server-command (if (http-kit? opts) "run-server" "run-jetty")
+   :compojure-handler (if (site-middleware? opts) "site" "api")
+   :not-om-tools? (fn [block] (if (om-tools? opts) "" block))})
 
 (defn chestnut [name & opts]
-  (let [data {:name name
-              :sanitized (name-to-path name)
-              :server-clj-requires (dep-list 14 (server-clj-requires opts))
-              :core-cljs-requires (dep-list 14 (core-cljs-deps opts))
-              :project-clj-deps (dep-list 17 (project-clj-deps opts))
-              :server-command (if (http-kit? opts) "run-server" "run-jetty")
-              :compojure-handler (if (site-middleware? opts) "site" "api")}]
+  (let [data (template-data name opts)]
     (main/info "Generating fresh 'lein new' chestnut project.")
     (->files data
              ["project.clj"
@@ -53,6 +58,8 @@
               (render "src/clj/chestnut/dev.clj" data)]
              ["src/cljs/{{sanitized}}/core.cljs"
               (render "src/cljs/chestnut/core.cljs" data)]
+             ["src/cljs/{{sanitized}}/dev.cljs"
+              (render "src/cljs/chestnut/dev.cljs" data)]
              ["LICENSE"
               (render "LICENSE" data)]
              ["README.md"
