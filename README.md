@@ -57,6 +57,8 @@ Clojure/ClojureScript apps effectively. It comes with
 * `--site-middleware` Use the `compojure.handler.site` middleware, instead of `compojure.handler.api` (see [compojure.handler documentation](http://weavejester.github.io/compojure/compojure.handler.html))
 * `--om-tools` Use Prismatic's [om-tools.dom](https://github.com/Prismatic/om-tools) instead of `om.dom`
 
+Use `--` to separate these options from Leiningen's options, e.g. `lein new chestnut foo -- --om-tools --http-kit`
+
 ## Local copy
 
 To run a local copy (if you want to customize Chestnut):
