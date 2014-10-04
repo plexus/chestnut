@@ -25,11 +25,7 @@ $ lein repl
 (browser-repl)
 ```
 
-```
-$ lein figwheel
-```
-
-Browse to [http://localhost:10555](http://localhost:10555).
+Wait a bit, then browse to [http://localhost:10555](http://localhost:10555).
 
 ## List of Contents
 
@@ -70,6 +66,11 @@ lein install
 ```
 
 ## Changelog
+
+### v0.5.0
+
+* Run figwheel inside `(run)` so we only need one process
+* Configure figwheel's CSS reloading and load a placeholder `style.css`
 
 ### v0.4.0
 

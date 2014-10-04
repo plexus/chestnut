@@ -14,15 +14,17 @@ In the REPL do
 (browser-repl)
 ```
 
-The first starts the webserver at 10555. The second starts the Weasel
-REPL server.
+The call to `(run)` does two things, it starts the webserver at port
+10555, and also the Figwheel server which takes care of live reloading
+ClojureScript code. Give them some time to start.
 
-In a terminal do `lein figwheel`, this will watch and recompile your
-ClojureScript, and start the figwheel server (the
-default). Whenever your code changes, figwheel will recompile it and
-send it to the browser immediately.
+Running `(browser-repl)` starts the Weasel REPL server, and drops you
+into a ClojureScript REPL. Evaluating expressions here will only work
+once you've loaded the page, so the browser can connect to Weasel.
 
-Now browse to `http://localhost:10555` and enjoy.
+When you see the line `Successfully compiled "resources/public/app.js" in 21.36 seconds.`, you're ready to go. Browse to `http://localhost:10555` and enjoy.
+
+**Attention: It is not longer needed to run `lein fighwheel` separately. This is now taken care of behind the scenes**
 
 ## Deploying to Heroku
 

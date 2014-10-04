@@ -52,6 +52,8 @@
               (render "project.clj" data)]
              ["resources/index.html"
               (render "resources/index.html" data)]
+             ["resources/public/css/style.css"
+              (render "resources/public/css/style.css" data)]
              ["src/clj/{{sanitized}}/server.clj"
               (render "src/clj/chestnut/server.clj" data)]
              ["src/clj/{{sanitized}}/dev.clj"

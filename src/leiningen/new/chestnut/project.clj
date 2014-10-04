@@ -15,19 +15,20 @@
                  [figwheel "0.1.4-SNAPSHOT"]
                  [environ "1.0.0"]
                  [com.cemerick/piggieback "0.1.3"]
-                 [weasel "0.4.0-SNAPSHOT"]{{{project-clj-deps}}}]
+                 [weasel "0.4.0-SNAPSHOT"]
+                 [leiningen "2.5.0"]{{{project-clj-deps}}}]
 
   :plugins [[lein-cljsbuild "1.0.3"]
             [lein-environ "1.0.0"]]
 
-  :min-lein-version "2.0.0"
+  :min-lein-version "2.5.0"
 
   :uberjar-name "{{name}}.jar"
 
   :cljsbuild {:builds {:app {:source-paths ["src/cljs"]
-                             :compiler {:output-to     "resources/public/app.js"
-                                        :output-dir    "resources/public/out"
-                                        :source-map    "resources/public/out.js.map"
+                             :compiler {:output-to     "resources/public/js/app.js"
+                                        :output-dir    "resources/public/js/out"
+                                        :source-map    "resources/public/js/out.js.map"
                                         :preamble      ["react/react.min.js"]
                                         :externs       ["react/externs/react.js"]
                                         :optimizations :none
@@ -37,7 +38,8 @@
                                   :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
                    :plugins [[lein-figwheel "0.1.4-SNAPSHOT"]]
                    :figwheel {:http-server-root "public"
-                              :port 3449 }
+                              :port 3449
+                              :css-dirs ["resources/public/css"]}
                    :env {:is-dev true}}
 
              :uberjar {:hooks [leiningen.cljsbuild]
