@@ -71,6 +71,10 @@ lein install
 
 * Run figwheel inside `(run)` so we only need one process
 * Configure figwheel's CSS reloading and load a placeholder `style.css`
+* Refresh Om when Figwheel reloads
+* Update ClojureScript: 0.0-2342 => 0.0-2356
+* Update Compojure: 1.1.9 => 1.2.0
+* Update Om: 0.7.1 => 0.7.3
 
 ### v0.4.0
 
@@ -104,7 +108,7 @@ I used the
 that's included with [Austin](https://github.com/cemerick/austin) as a
 starting point, then pulled in bits from
 [cljs-liveedit-webapp](https://github.com/ejlo/cljs-liveedit-webapp)
-until things worked.
+until things worked. Figwheel's [Flappy Bird Demo app](https://github.com/bhauman/flappy-bird-demo) also provided some ideas. The concept of refreshing Om when Figwheel reloads was taken from [this blog post](http://blog.michielborkent.nl/blog/2014/09/25/figwheel-keep-Om-turning/) by [Michiel Borkent](https://github.com/borkdude).
 
 For Heroku support I looked at Heroku's
 [clojure-getting-started](https://github.com/heroku/clojure-getting-started)
