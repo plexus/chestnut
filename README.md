@@ -8,13 +8,15 @@ deployment (generate optimized uberjar, run with Foreman).
 
 Contains a starting point for using Om.
 
+This README may describe unreleased features. Please compare the version number on Clojars to the changelog below, and check the README in your generated project for instructions pertaining to your version.
+
 ## Usage
 
 ```
 lein new chestnut <name>
 ```
 
-After that open the README of your new project for further instructions.
+After that open the README of your generated project for detailed instructions.
 
 ## tl;dr
 
@@ -57,7 +59,7 @@ Use `--` to separate these options from Leiningen's options, e.g. `lein new ches
 
 ## Local copy
 
-To run a local copy (if you want to customize Chestnut):
+If you want to customize Chestnut, or try unreleased features, you can run directly from master like this:
 
 ``` sh
 git clone https://github.com/plexus/chestnut.git
@@ -65,9 +67,11 @@ cd chestnut
 lein install
 ```
 
+Note that master may be partially or wholly broken. I try to do extensive manual testing before releasing a new stable version, so if you don't like surprises then stick to the version on Clojars. Issue reports and pull requests are very welcome.
+
 ## Changelog
 
-### v0.5.0
+### v0.5.0 (unreleased)
 
 * Run figwheel inside `(run)` so we only need one process
 * Configure figwheel's CSS reloading and load a placeholder `style.css`
