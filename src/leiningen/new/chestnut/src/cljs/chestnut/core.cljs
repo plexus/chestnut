@@ -1,6 +1,8 @@
 (ns {{name}}.core
-    (:require [{{name}}.dev :refer [is-dev?]]
-              [om.core :as om :include-macros true]{{{core-cljs-requires}}}))
+  (:require-macros [cljs.core.async.macros :refer [go]])
+  (:require [{{name}}.dev :refer [is-dev?]]
+            [cljs.core.async :refer [chan <!]]
+            [om.core :as om :include-macros true]{{{core-cljs-requires}}}))
 
 (defonce app-state (atom {:text "Hello Chestnut!"}))
 (defonce re-render-ch (chan))

@@ -37,8 +37,8 @@
 (defn template-data [name opts]
   {:name name
    :sanitized (name-to-path name)
-   :server-clj-requires (dep-list 14 (server-clj-requires opts))
-   :core-cljs-requires (dep-list 14 (core-cljs-requires opts))
+   :server-clj-requires (dep-list 12 (server-clj-requires opts))
+   :core-cljs-requires (dep-list 12 (core-cljs-requires opts))
    :project-clj-deps (dep-list 17 (project-clj-deps opts))
    :server-command (if (http-kit? opts) "run-server" "run-jetty")
    :compojure-handler (if (site-middleware? opts) "site" "api")

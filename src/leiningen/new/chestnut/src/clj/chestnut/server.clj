@@ -1,12 +1,12 @@
 (ns {{name}}.server
-    (:require [clojure.java.io :as io]
-              [{{name}}.dev :refer [is-dev? inject-devmode-html browser-repl start-figwheel]]
-              [compojure.core :refer [GET defroutes]]
-              [compojure.route :refer [resources]]
-              [compojure.handler :refer [{{compojure-handler}}]]
-              [net.cgrand.enlive-html :refer [deftemplate]]
-              [ring.middleware.reload :as reload]
-              [environ.core :refer [env]]{{{server-clj-requires}}}))
+  (:require [clojure.java.io :as io]
+            [{{name}}.dev :refer [is-dev? inject-devmode-html browser-repl start-figwheel]]
+            [compojure.core :refer [GET defroutes]]
+            [compojure.route :refer [resources]]
+            [compojure.handler :refer [{{compojure-handler}}]]
+            [net.cgrand.enlive-html :refer [deftemplate]]
+            [ring.middleware.reload :as reload]
+            [environ.core :refer [env]]{{{server-clj-requires}}}))
 
 (deftemplate page
   (io/resource "index.html") [] [:body] (if is-dev? inject-devmode-html identity))
