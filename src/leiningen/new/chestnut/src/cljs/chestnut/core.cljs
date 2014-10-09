@@ -1,11 +1,13 @@
 (ns {{name}}.core
   (:require-macros [cljs.core.async.macros :refer [go]])
-  (:require [{{name}}.dev :refer [is-dev?]]
+  (:require [{{name}}.dev :as dev]
             [cljs.core.async :refer [chan <!]]
             [om.core :as om :include-macros true]{{{core-cljs-requires}}}))
 
 (defonce app-state (atom {:text "Hello Chestnut!"}))
 (defonce re-render-ch (chan))
+
+(dev/setup re-render-ch)
 
 (om/root
   (fn [app owner]
