@@ -79,6 +79,7 @@ Note that master may be partially or wholly broken. I try to do extensive manual
 * Update ClojureScript: 0.0-2342 => 0.0-2371
 * Update Compojure: 1.1.9 => 1.2.0
 * Update Om: 0.7.1 => 0.7.3
+* No longer depend on Weasel in production mode
 
 ### v0.4.0
 
