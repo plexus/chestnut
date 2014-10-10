@@ -9,6 +9,6 @@
       (reify
         om/IRender
         (render [_]
-          (dom/h1 {{#not-om-tools?}} nil{{/not-om-tools?}}(:text app)))))
+          (dom/h1 {{#not-om-tools?}}nil {{/not-om-tools?}}(:text app)))))
     app-state
     {:target (. js/document (getElementById "app"))}))
