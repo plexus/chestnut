@@ -76,7 +76,7 @@ Note that master may be partially or wholly broken. I try to do extensive manual
 * Run figwheel inside `(run)` so we only need one process
 * Configure figwheel's CSS reloading and load a placeholder `style.css`
 * Refresh Om when Figwheel reloads
-* Update ClojureScript: 0.0-2342 => 0.0-2356
+* Update ClojureScript: 0.0-2342 => 0.0-2371
 * Update Compojure: 1.1.9 => 1.2.0
 * Update Om: 0.7.1 => 0.7.3
 

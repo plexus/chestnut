@@ -7,8 +7,7 @@
   :source-paths ["src/clj" "src/cljs"]
 
   :dependencies [[org.clojure/clojure "1.6.0"]
-                 [org.clojure/clojurescript "0.0-2356" :scope "provided"]
-                 [org.clojure/core.async "0.1.346.0-17112a-alpha" :scope "provided"]
+                 [org.clojure/clojurescript "0.0-2371" :scope "provided"]
                  [ring "1.3.1"]
                  [compojure "1.2.0"]
                  [enlive "1.1.5"]
@@ -41,13 +40,15 @@
                    :figwheel {:http-server-root "public"
                               :port 3449
                               :css-dirs ["resources/public/css"]}
-                   :env {:is-dev true}}
+                   :env {:is-dev true}
+                   :cljsbuild {:builds {:app {:source-paths ["env/dev/cljs"]}}}}
 
              :uberjar {:hooks [leiningen.cljsbuild]
                        :env {:production true}
                        :omit-source true
                        :aot :all
                        :cljsbuild {:builds {:app
-                                            {:compiler
+                                            {:source-paths ["env/prod/cljs"]
+                                             :compiler
                                              {:optimizations :advanced
                                               :pretty-print false}}}}}})

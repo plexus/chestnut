@@ -60,8 +60,10 @@
               (render "src/clj/chestnut/dev.clj" data)]
              ["src/cljs/{{sanitized}}/core.cljs"
               (render "src/cljs/chestnut/core.cljs" data)]
-             ["src/cljs/{{sanitized}}/dev.cljs"
-              (render "src/cljs/chestnut/dev.cljs" data)]
+             ["env/dev/cljs/{{sanitized}}/dev.cljs"
+              (render "env/dev/cljs/chestnut/dev.cljs" data)]
+             ["env/prod/cljs/{{sanitized}}/prod.cljs"
+              (render "env/prod/cljs/chestnut/prod.cljs" data)]
              ["LICENSE"
               (render "LICENSE" data)]
              ["README.md"
