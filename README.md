@@ -2,13 +2,20 @@
 
 [![Clojars Project](http://clojars.org/chestnut/lein-template/latest-version.svg)](http://clojars.org/chestnut/lein-template)
 
-A Leiningen template for a Clojure/ClojureScript app, featuring a
-great dev setup (browser-connected REPL, live code reloading), easy
-deployment (generate optimized uberjar, run with Foreman).
+A Leiningen template for a Clojure/ClojureScript app based on Om,
+featuring a great dev setup, and easy deployment.
 
-Contains a starting point for using Om.
+For smooth development you get instant reloading of Clojure,
+ClojureScript, and CSS. A browser-connected REPL is also included.
 
-This README may describe unreleased features. Please compare the version number on Clojars to the changelog below, and check the README in your generated project for instructions pertaining to your version.
+For deployment you get uberjar support, meaning you can get all your
+code compiled, optimized, and packaged in a single executable JAR
+file. It also contains the necessary artifacts to work on Heroku out
+of the box.
+
+This README may describe unreleased features. Please compare the
+version number on Clojars to the changelog below, and check the README
+in your generated project for instructions pertaining to your version.
 
 ## Usage
 
@@ -52,7 +59,7 @@ Clojure/ClojureScript apps effectively. It comes with
 ## Options
 
 * `--http-kit` Use [HTTP Kit](http://http-kit.org/server.html) instead of Jetty
-* `--site-middleware` Use the `compojure.handler.site` middleware, instead of `compojure.handler.api` (see [compojure.handler documentation](http://weavejester.github.io/compojure/compojure.handler.html))
+* `--site-middleware` Use the `compojure.handler.site` middleware (session, CSRF), instead of `compojure.handler.api` (see [compojure.handler documentation](http://weavejester.github.io/compojure/compojure.handler.html))
 * `--om-tools` Use Prismatic's [om-tools.dom](https://github.com/Prismatic/om-tools) instead of `om.dom`
 
 Use `--` to separate these options from Leiningen's options, e.g. `lein new chestnut foo -- --om-tools --http-kit`
@@ -71,7 +78,7 @@ Note that master may be partially or wholly broken. I try to do extensive manual
 
 ## Changelog
 
-### v0.5.0 (unreleased)
+### v0.5.0
 
 * Run figwheel inside `(run)` so we only need one process
 * Configure figwheel's CSS reloading and load a placeholder `style.css`
