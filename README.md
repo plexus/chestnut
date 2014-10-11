@@ -49,9 +49,10 @@ Clojure/ClojureScript apps effectively. It comes with
 * [Om](https://github.com/swannodette/om) ClojureScript interface to
   Facebook's React.
 * [Ring](https://github.com/ring-clojure/ring) Clojure's de facto HTTP
-  interface. Chestnut uses a Jetty server to serve the Clojurescript
-  app. This way you already have an HTTP server running in case you
-  want to add server-side functionality.
+  interface. Chestnut uses a Jetty or HttpKit server to serve the
+  Clojurescript app. This way you already have an HTTP server running
+  in case you want to add server-side functionality. Chestnut also
+  inserts a Ring middleware to reload server-side Clojure files.
 * Heroku support. Chestnut apps have all the bits and pieces to be
   deployable to Heroku. Getting your app on the web is as simple as
   `git push`.
