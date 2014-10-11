@@ -82,6 +82,13 @@ Note that master may be partially or wholly broken. I try to do extensive manual
 * Java 1.7 or later
 * Leiningen 2
 
+## FAQ
+
+* **Q:** I'm seeing warnings while compiling ClojureScript.
+  **A:** There are a few known warnings, but they should not affect the functioning of your app.
+* **Q:** I changed the `{:text "Hello Chestnut!"}` portion and saved the file, but the changes don't show up.
+  **A:** It's a feature. The `app-state` is defined with `defonce`, so your application state doesn't reset every time you save a file. If you do want to reset after every change, change `(defonce app-state ..)` to `(def app-state ...)`.
+
 ## Changelog
 
 ### v0.5.0
