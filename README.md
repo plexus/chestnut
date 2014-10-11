@@ -76,6 +76,11 @@ lein install
 
 Note that master may be partially or wholly broken. I try to do extensive manual testing before releasing a new stable version, so if you don't like surprises then stick to the version on Clojars. Issue reports and pull requests are very welcome.
 
+## Requirements
+
+* Java 1.7 or later
+* Leiningen 2
+
 ## Changelog
 
 ### v0.5.0
