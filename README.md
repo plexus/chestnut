@@ -42,7 +42,7 @@ This template gives you everything you need to start developing
 Clojure/ClojureScript apps effectively. It comes with
 
 * [Figwheel](https://github.com/bhauman/lein-figwheel) Automatically
-  reload your ClojureScript code as soon as you save the file, no need
+  reload your ClojureScript and CSS as soon as you save the file, no need
   for browser refresh.
 * [Weasel](https://github.com/tomjakubowski/weasel) Next generation browser
   connected REPL. Try things out and manipulate your running app.
