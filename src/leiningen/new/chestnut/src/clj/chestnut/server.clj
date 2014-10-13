@@ -1,6 +1,6 @@
-(ns {{name}}.server
+(ns {{project-ns}}.server
   (:require [clojure.java.io :as io]
-            [{{name}}.dev :refer [is-dev? inject-devmode-html browser-repl start-figwheel]]
+            [{{project-ns}}.dev :refer [is-dev? inject-devmode-html browser-repl start-figwheel]]
             [compojure.core :refer [GET defroutes]]
             [compojure.route :refer [resources]]
             [compojure.handler :refer [{{compojure-handler}}]]

@@ -1,4 +1,4 @@
-(ns {{name}}.core
+(ns {{project-ns}}.core
   (:require [om.core :as om :include-macros true]{{{core-cljs-requires}}}))
 
 (defonce app-state (atom {:text "Hello Chestnut!"}))

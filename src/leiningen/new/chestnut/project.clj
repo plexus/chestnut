@@ -1,4 +1,4 @@
-(defproject {{name}} "0.1.0-SNAPSHOT"
+(defproject {{full-name}} "0.1.0-SNAPSHOT"
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"
@@ -34,7 +34,7 @@
                                         :optimizations :none
                                         :pretty-print  true}}}}
 
-  :profiles {:dev {:repl-options {:init-ns {{name}}.server
+  :profiles {:dev {:repl-options {:init-ns {{project-ns}}.server
                                   :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
                    :plugins [[lein-figwheel "0.1.4-SNAPSHOT"]]
                    :figwheel {:http-server-root "public"

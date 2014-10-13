@@ -1,4 +1,4 @@
-(ns {{name}}.prod
-  (:require [{{name}}.core :as core]))
+(ns {{project-ns}}.prod
+  (:require [{{project-ns}}.core :as core]))
 
 (core/main)
