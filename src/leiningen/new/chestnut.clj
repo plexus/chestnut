@@ -1,5 +1,6 @@
 (ns leiningen.new.chestnut
-  (:require [leiningen.new.templates :refer [renderer name-to-path ->files]]
+  (:require [leiningen.new.templates :refer [renderer name-to-path ->files
+                                             sanitize sanitize-ns project-name]]
             [leiningen.core.main :as main]
             [clojure.string :refer [join]]))
 
@@ -35,7 +36,10 @@
           (om-tools? opts) (conj "prismatic/om-tools \"0.3.3\"")))
 
 (defn template-data [name opts]
-  {:name name
+  {:full-name name
+   :name (project-name name)
+   :project-goog-module (sanitize (sanitize-ns name))
+   :project-ns (sanitize-ns name)
    :sanitized (name-to-path name)
    :server-clj-requires (dep-list 12 (server-clj-requires opts))
    :core-cljs-requires (dep-list 12 (core-cljs-requires opts))

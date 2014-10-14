@@ -1,5 +1,5 @@
-(ns {{name}}.dev
-  (:require [{{name}}.core :as core]
+(ns {{project-ns}}.dev
+  (:require [{{project-ns}}.core :as core]
             [figwheel.client :as figwheel :include-macros true]
             [cljs.core.async :refer [put!]]
             [weasel.repl :as weasel]))
