@@ -32,7 +32,12 @@
                                         :preamble      ["react/react.min.js"]
                                         :externs       ["react/externs/react.js"]
                                         :optimizations :none
-                                        :pretty-print  true}}}}
+                                        :pretty-print  true}}
+                       :release {:source-paths ["src/cljs"]
+                              :compiler {:output-to     "target/app.js"
+                                         :preamble      ["react/react.min.js"]
+                                         :externs       ["react/externs/react.js"]
+                                         :optimizations :advanced}}}}
 
   :profiles {:dev {:repl-options {:init-ns {{project-ns}}.server
                                   :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
