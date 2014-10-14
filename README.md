@@ -84,10 +84,12 @@ Note that master may be partially or wholly broken. I try to do extensive manual
 
 ## FAQ
 
-* **Q:** I'm seeing warnings while compiling ClojureScript.
+* **Q:** I'm seeing warnings while compiling ClojureScript. <br>
   **A:** There are a few known warnings, but they should not affect the functioning of your app.
-* **Q:** I changed the `{:text "Hello Chestnut!"}` portion and saved the file, but the changes don't show up.
+* **Q:** I changed the `{:text "Hello Chestnut!"}` portion and saved the file, but the changes don't show up. <br>
   **A:** It's a feature. The `app-state` is defined with `defonce`, so your application state doesn't reset every time you save a file. If you do want to reset after every change, change `(defonce app-state ..)` to `(def app-state ...)`.
+* **Q:** I just want to compile ClojureScript to fully optimized JavaScript, so I can use it in a static HTML site. <br>
+  **A:** Invoke cljsbuild with the uberjar profile active, like this: `lein with-profile -dev,+uberjar cljsbuild once`, then look for `resources/public/js/app.js`.
 
 ## Changelog
 
