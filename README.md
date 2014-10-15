@@ -62,6 +62,7 @@ Clojure/ClojureScript apps effectively. It comes with
 * `--http-kit` Use [HTTP Kit](http://http-kit.org/server.html) instead of Jetty
 * `--site-middleware` Use the `compojure.handler.site` middleware (session, CSRF), instead of `compojure.handler.api` (see [compojure.handler documentation](http://weavejester.github.io/compojure/compojure.handler.html))
 * `--om-tools` Use Prismatic's [om-tools.dom](https://github.com/Prismatic/om-tools) instead of `om.dom`
+* `--cljx` Using [cljx](https://github.com/lynaghk/cljx) allows you to keep your Clojure and ClojureScript code in the same files. 
 
 Use `--` to separate these options from Leiningen's options, e.g. `lein new chestnut foo -- --om-tools --http-kit`
 
