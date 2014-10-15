@@ -37,7 +37,7 @@
                                         :pretty-print  true}}}}
 
   :profiles {:dev {:repl-options {:init-ns {{project-ns}}.server
-                                  :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
+                                  :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl{{{nrepl-middleware}}}]}
 
                    :plugins [[lein-figwheel "0.1.4-SNAPSHOT"]{{{project-dev-plugins}}}]
 
