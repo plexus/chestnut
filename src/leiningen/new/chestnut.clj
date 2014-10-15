@@ -19,6 +19,15 @@
 (defn om-tools? [opts]
   (some #{"--om-tools"} opts))
 
+(defn cljx? [opts]
+  (some #{"--cljx"} opts))
+
+(def cljx-plugin
+  "com.keminglabs/cljx \"0.4.0\" :exclusions [org.clojure/clojure]")
+
+(def cljx-source-paths
+  " \"target/generated/clj\" \"target/generated/cljx\"")
+
 (defn server-clj-requires [opts]
   (if (http-kit? opts)
     ["org.httpkit.server :refer [run-server]"]
@@ -35,6 +44,10 @@
           (http-kit? opts) (conj "http-kit \"2.1.19\"")
           (om-tools? opts) (conj "prismatic/om-tools \"0.3.3\"")))
 
+(defn project-plugins [opts]
+  (cond-> []
+          (cljx? opts) (conj cljx-plugin)))
+
 (defn template-data [name opts]
   {:full-name name
    :name (project-name name)
@@ -44,39 +57,57 @@
    :server-clj-requires (dep-list 12 (server-clj-requires opts))
    :core-cljs-requires (dep-list 12 (core-cljs-requires opts))
    :project-clj-deps (dep-list 17 (project-clj-deps opts))
+   :project-dev-plugins (dep-list 29 (project-plugins opts))
    :server-command (if (http-kit? opts) "run-server" "run-jetty")
    :compojure-handler (if (site-middleware? opts) "site" "api")
-   :not-om-tools? (fn [block] (if (om-tools? opts) "" block))})
+   :not-om-tools? (fn [block] (if (om-tools? opts) "" block))
 
-(defn chestnut [name & opts]
-  (let [data (template-data name opts)]
-    (main/info "Generating fresh 'lein new' chestnut project.")
-    (->files data
-             ["project.clj"
-              (render "project.clj" data)]
-             ["resources/index.html"
-              (render "resources/index.html" data)]
-             ["resources/public/css/style.css"
-              (render "resources/public/css/style.css" data)]
-             ["src/clj/{{sanitized}}/server.clj"
-              (render "src/clj/chestnut/server.clj" data)]
-             ["src/clj/{{sanitized}}/dev.clj"
-              (render "src/clj/chestnut/dev.clj" data)]
-             ["src/cljs/{{sanitized}}/core.cljs"
-              (render "src/cljs/chestnut/core.cljs" data)]
-             ["env/dev/cljs/{{sanitized}}/dev.cljs"
-              (render "env/dev/cljs/chestnut/dev.cljs" data)]
-             ["env/prod/cljs/{{sanitized}}/prod.cljs"
-              (render "env/prod/cljs/chestnut/prod.cljs" data)]
-             ["LICENSE"
-              (render "LICENSE" data)]
-             ["README.md"
-              (render "README.md" data)]
-             [".gitignore"
-              (render ".gitignore" data)]
+   ;; cljx
+   :cljx-source-paths (if (cljx? opts) cljx-source-paths "")
+   :cljx-extension (if (cljx? opts) "|\\.cljx")
+   :jar-exclusions? (fn [block] (if (cljx? opts) block ""))
+   :cljx-cljsbuild-spath (if (cljx? opts) " \"target/generated/cljs\"" "")
+   :cljx-hook? (fn [block] (if (cljx? opts) (str block "\n") ""))
+   :cljx-build? (fn [block] (if (cljx? opts) (str block "\n") ""))
+   :cljx-uberjar-hook (if (cljx? opts) "cljx.hooks " "")})
+
+(defn format-files-args [name opts]
+  (let [data (template-data name opts)
+        args [data
+              ["project.clj"
+               (render "project.clj" data)]
+              ["resources/index.html"
+               (render "resources/index.html" data)]
+              ["resources/public/css/style.css"
+               (render "resources/public/css/style.css" data)]
+              ["src/clj/{{sanitized}}/server.clj"
+               (render "src/clj/chestnut/server.clj" data)]
+              ["src/clj/{{sanitized}}/dev.clj"
+               (render "src/clj/chestnut/dev.clj" data)]
+              ["src/cljs/{{sanitized}}/core.cljs"
+               (render "src/cljs/chestnut/core.cljs" data)]
+              ["env/dev/cljs/{{sanitized}}/dev.cljs"
+               (render "env/dev/cljs/chestnut/dev.cljs" data)]
+              ["env/prod/cljs/{{sanitized}}/prod.cljs"
+               (render "env/prod/cljs/chestnut/prod.cljs" data)]
+              ["LICENSE"
+               (render "LICENSE" data)]
+              ["README.md"
+               (render "README.md" data)]
+              [".gitignore"
+               (render ".gitignore" data)]
 
              ;; Heroku support
              ["system.properties"
               (render "system.properties" data)]
              ["Procfile"
-              (render "Procfile" data)])))
+              (render "Procfile" data)]]]
+
+    (if (cljx? opts)
+      (conj args ["src/cljx/{{sanitized}}/core.cljx"
+                  (render "src/cljx/chestnut/core.cljx" data)])
+      args)))
+
+(defn chestnut [name & opts]
+  (main/info "Generating fresh 'lein new' chestnut project.")
+  (apply ->files (format-files-args name opts)))
