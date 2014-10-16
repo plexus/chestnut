@@ -78,7 +78,7 @@ lein with-profile -dev,+production uberjar && foreman start
 ```
 
 Now your app is running at
-[http://localhost:5000](http://localhost:5000) in production mode.
+[http://localhost:10555](http://localhost:10555) in production mode.
 
 ## License
 
