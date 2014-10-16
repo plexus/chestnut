@@ -54,6 +54,8 @@
     (->files data
              ["project.clj"
               (render "project.clj" data)]
+             ["profiles.clj"
+              (render "profiles.clj" data)]
              ["resources/index.html"
               (render "resources/index.html" data)]
              ["resources/public/css/style.css"
