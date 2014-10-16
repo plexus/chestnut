@@ -6,9 +6,17 @@
 
 (def render (renderer "chestnut"))
 
-(defn dep-list [n list]
+(defn wrap-indent [wrap n list]
   (fn []
-    (join "" (map #(str "\n" (apply str (repeat n " ")) "[" % "]") list))))
+    (->> list
+         (map #(str "\n" (apply str (repeat n " ")) (wrap %)))
+         (join ""))))
+
+(defn dep-list [n list]
+  (wrap-indent #(str "[" % "]") n list))
+
+(defn indent [n list]
+  (wrap-indent identity n list))
 
 (defn http-kit? [opts]
   (some #{"--http-kit"} opts))
@@ -52,10 +60,6 @@
   (cond-> []
           (cljx? opts) (conj "cljx.repl-middleware/wrap-cljx")))
 
-(defn middle-wares [list]
-  (fn []
-    (join "" (map #(str "\n" (apply str (repeat 53 " ")) %) list))))
-
 (defn template-data [name opts]
   {:full-name name
    :name (project-name name)
@@ -66,7 +70,7 @@
    :core-cljs-requires (dep-list 12 (core-cljs-requires opts))
    :project-clj-deps (dep-list 17 (project-clj-deps opts))
    :project-dev-plugins (dep-list 29 (project-plugins opts))
-   :nrepl-middleware (middle-wares (project-nrepl-middleware opts))
+   :nrepl-middleware (indent 53 (project-nrepl-middleware opts))
    :server-command (if (http-kit? opts) "run-server" "run-jetty")
    :compojure-handler (if (site-middleware? opts) "site" "api")
    :not-om-tools? (fn [block] (if (om-tools? opts) "" block))
