@@ -74,7 +74,6 @@
    ;; cljx
    :cljx-source-paths (if (cljx? opts) cljx-source-paths "")
    :cljx-extension (if (cljx? opts) "|\\.cljx")
-   :jar-exclusions? (fn [block] (if (cljx? opts) block ""))
    :cljx-cljsbuild-spath (if (cljx? opts) " \"target/generated/cljs\"" "")
    :cljx-hook? (fn [block] (if (cljx? opts) (str block "\n") ""))
    :cljx-build? (fn [block] (if (cljx? opts) (str block "\n") ""))

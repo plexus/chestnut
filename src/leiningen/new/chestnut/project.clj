@@ -23,8 +23,6 @@
 
   :min-lein-version "2.5.0"
 
-  :jar-exclusions [#"\.swp|\.swo|\.DS_Store{{{cljx-extension}}}"]
-
   :uberjar-name "{{name}}.jar"
 
   :cljsbuild {:builds {:app {:source-paths ["src/cljs"{{{cljx-cljsbuild-spath}}}]
