@@ -19,7 +19,7 @@
                  [leiningen "2.5.0"]{{{project-clj-deps}}}]
 
   :plugins [[lein-cljsbuild "1.0.3"]
-            [lein-environ "1.0.0"]]
+            [lein-environ "1.0.0"]{{{less-plugin}}}]
 
   :min-lein-version "2.5.0"
 
@@ -33,6 +33,10 @@
                                         :externs       ["react/externs/react.js"]
                                         :optimizations :none
                                         :pretty-print  true}}}}
+  {{#less?}}
+  :less {:source-paths ["src/less"]
+       :target-path "resources/public/css"}
+  {{/less?}}
 
   :profiles {:dev {:repl-options {:init-ns {{project-ns}}.server
                                   :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl{{{nrepl-middleware}}}]}
@@ -58,7 +62,7 @@
                    {{/cljx-build?}}
                    :cljsbuild {:builds {:app {:source-paths ["env/dev/cljs"]}}}}
 
-             :uberjar {:hooks [{{cljx-uberjar-hook}}leiningen.cljsbuild]
+             :uberjar {:hooks [{{cljx-uberjar-hook}}leiningen.cljsbuild{{less-hook}}]
                        :env {:production true}
                        :omit-source true
                        :aot :all

@@ -30,6 +30,9 @@
 (defn cljx? [opts]
   (some #{"--cljx"} opts))
 
+(defn less? [opts]
+  (some #{"--less"} opts))
+
 (def cljx-plugin
   "com.keminglabs/cljx \"0.4.0\" :exclusions [org.clojure/clojure]")
 
@@ -81,7 +84,13 @@
    :cljx-cljsbuild-spath (if (cljx? opts) " \"target/generated/cljs\"" "")
    :cljx-hook? (fn [block] (if (cljx? opts) (str block "\n") ""))
    :cljx-build? (fn [block] (if (cljx? opts) (str block "\n") ""))
-   :cljx-uberjar-hook (if (cljx? opts) "cljx.hooks " "")})
+   :cljx-uberjar-hook (if (cljx? opts) "cljx.hooks " "")
+
+   :less? (fn [block] (if (less? opts) (str "\n" block) ""))
+   :less-refer (if (less? opts) " start-less" "")
+   :less-start (if (less? opts) "\n        (start-less)" "")
+   :less-hook (if (less? opts) " leiningen.less" "")
+   :less-plugin (if (less? opts) "\n            [lein-less \"1.7.2\"]" "")})
 
 (defn format-files-args [name opts]
   (let [data (template-data name opts)
@@ -90,8 +99,11 @@
                (render "project.clj" data)]
               ["resources/index.html"
                (render "resources/index.html" data)]
-              ["resources/public/css/style.css"
-               (render "resources/public/css/style.css" data)]
+              (if (less? opts)
+                ["src/less/style.less"
+                 (render "src/less/style.less" data)]
+                ["resources/public/css/style.css"
+                 (render "resources/public/css/style.css" data)])
               ["src/clj/{{sanitized}}/server.clj"
                (render "src/clj/chestnut/server.clj" data)]
               ["src/clj/{{sanitized}}/dev.clj"

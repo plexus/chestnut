@@ -1,6 +1,6 @@
 (ns {{project-ns}}.server
   (:require [clojure.java.io :as io]
-            [{{project-ns}}.dev :refer [is-dev? inject-devmode-html browser-repl start-figwheel]]
+            [{{project-ns}}.dev :refer [is-dev? inject-devmode-html browser-repl start-figwheel{{less-refer}}]]
             [compojure.core :refer [GET defroutes]]
             [compojure.route :refer [resources]]
             [compojure.handler :refer [{{compojure-handler}}]]
@@ -24,7 +24,8 @@
 (defn run [& [port]]
   (defonce ^:private server
     (do
-      (if is-dev? (start-figwheel))
+      (when is-dev?
+        (start-figwheel){{less-start}})
       (let [port (Integer. (or port (env :port) 10555))]
         (print "Starting web server on port" port ".\n")
         ({{server-command}} http-handler {:port port
