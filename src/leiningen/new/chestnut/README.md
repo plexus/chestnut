@@ -26,7 +26,7 @@ When you see the line `Successfully compiled "resources/public/app.js"
 in 21.36 seconds.`, you're ready to go. Browse to
 `http://localhost:10555` and enjoy.
 
-**Attention: It is not longer needed to run `lein fighwheel`
+**Attention: It is not longer needed to run `lein figwheel`
   separately. This is now taken care of behind the scenes**
 
 ## Trying it out
