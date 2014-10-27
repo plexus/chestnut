@@ -93,6 +93,8 @@ Note that master may be partially or wholly broken. I try to do extensive manual
   **A:** Invoke cljsbuild with the uberjar profile active, like this: `lein with-profile -dev,+uberjar cljsbuild once`, then look for `resources/public/js/app.js`.
 * **Q** I'm getting `CompilerException java.lang.IllegalAccessError: in-seconds does not exist` when using Spyscope 0.1.4 or earlier.<br>
   **A** Upgrade to [Spyscope 0.1.5](https://github.com/dgrnbrg/spyscope/issues/15), this issue is caused by an outdated dependency on cljs-time.
+* **Q** I upgraded the version of Om in project.clj, but it seems I'm still using the old version, what's up?
+  **A** If you already did a build before, cljsbuild/figwheel won't pick up on the updated version automatically. Do a `lein cljsbuild clean`, then start Figwheel again.
 
 ## Changelog
 
