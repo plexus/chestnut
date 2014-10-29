@@ -99,6 +99,10 @@ Note that master may be partially or wholly broken. I try to do extensive manual
 
 ## Changelog
 
+### v0.7.0-SNAPSHOT
+
+* Add support for the LESS CSS pre-processor ([Denis Golonev](/teur))
+
 ### v0.6.0
 
 * Add optional support for CLJX ([Olli Piepponen](/luxbock))
