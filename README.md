@@ -63,6 +63,7 @@ Clojure/ClojureScript apps effectively. It comes with
 * `--site-middleware` Use the `compojure.handler.site` middleware (session, CSRF), instead of `compojure.handler.api` (see [compojure.handler documentation](http://weavejester.github.io/compojure/compojure.handler.html))
 * `--om-tools` Use Prismatic's [om-tools.dom](https://github.com/Prismatic/om-tools) instead of `om.dom`
 * `--cljx` Using [cljx](https://github.com/lynaghk/cljx) allows you to write code that is shared between Clojure and ClojureScript.
+* `--less` Use [less](https://github.com/montoux/lein-less) for compiling Less CSS files.
 
 Use `--` to separate these options from Leiningen's options, e.g. `lein new chestnut foo -- --om-tools --http-kit`
 
@@ -93,7 +94,7 @@ Note that master may be partially or wholly broken. I try to do extensive manual
   **A:** Invoke cljsbuild with the uberjar profile active, like this: `lein with-profile -dev,+uberjar cljsbuild once`, then look for `resources/public/js/app.js`.
 * **Q** I'm getting `CompilerException java.lang.IllegalAccessError: in-seconds does not exist` when using Spyscope 0.1.4 or earlier.<br>
   **A** Upgrade to [Spyscope 0.1.5](https://github.com/dgrnbrg/spyscope/issues/15), this issue is caused by an outdated dependency on cljs-time.
-* **Q** I upgraded the version of Om in project.clj, but it seems I'm still using the old version, what's up?
+* **Q** I upgraded the version of Om in project.clj, but it seems I'm still using the old version, what's up?<br>
   **A** If you already did a build before, cljsbuild/figwheel won't pick up on the updated version automatically. Do a `lein cljsbuild clean`, then start Figwheel again.
 
 ## Changelog

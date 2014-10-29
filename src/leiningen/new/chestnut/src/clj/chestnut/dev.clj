@@ -21,3 +21,9 @@
   (future
     (print "Starting figwheel.\n")
     (lein/-main ["figwheel"])))
+{{#less?}}
+(defn start-less []
+  (future
+    (println "Starting less.")
+    (lein/-main ["less" "auto"])))
+{{/less?}}
