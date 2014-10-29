@@ -103,12 +103,12 @@ Note that master may be partially or wholly broken. I try to do extensive manual
 
 ### v0.7.0-SNAPSHOT
 
-* Add support for the LESS CSS pre-processor ([Denis Golovnev](/teur))
+* Add support for the LESS CSS pre-processor ([Denis Golovnev](https://github.com/teur))
 
 ### v0.6.0
 
-* Add optional support for CLJX ([Olli Piepponen](/luxbock))
-* Support generation of projects named using the groupId/artifactId convention (e.g. com.example/foo) ([Steeve Beliveau](/stebel))
+* Add optional support for CLJX ([Olli Piepponen](https://github.com/luxbock))
+* Support generation of projects named using the groupId/artifactId convention (e.g. com.example/foo) ([Steeve Beliveau](https://github.com/stebel))
 
 ### v0.5.0
 
