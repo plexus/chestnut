@@ -98,6 +98,11 @@ Note that master may be partially or wholly broken. I try to do extensive manual
 
 ## Changelog
 
+### v0.6.0
+
+* Add optional support for CLJX ([Olli Piepponen](/luxbock))
+* Support generation of projects named using the groupId/artifactId convention (e.g. com.example/foo) ([Steeve Beliveau](/stebel))
+
 ### v0.5.0
 
 * Run figwheel inside `(run)` so we only need one process
