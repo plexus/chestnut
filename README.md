@@ -103,7 +103,7 @@ Note that master may be partially or wholly broken. I try to do extensive manual
 
 ### v0.7.0-SNAPSHOT
 
-* Add support for the LESS CSS pre-processor ([Denis Golonev](/teur))
+* Add support for the LESS CSS pre-processor ([Denis Golovnev](/teur))
 
 ### v0.6.0
 
