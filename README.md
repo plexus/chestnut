@@ -86,6 +86,8 @@ Note that master may be partially or wholly broken. I try to do extensive manual
 
 ## FAQ
 
+* **Q:** How can I get the features in the SNAPSHOT version? <br>
+  **A:** Use leiningen's `--snapshot` flag, e.g. `lein new chestnut my-project --snapshot`
 * **Q:** I'm seeing warnings while compiling ClojureScript. <br>
   **A:** There are a few known warnings, but they should not affect the functioning of your app.
 * **Q:** I changed the `{:text "Hello Chestnut!"}` portion and saved the file, but the changes don't show up. <br>
