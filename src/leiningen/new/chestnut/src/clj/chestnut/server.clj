@@ -5,6 +5,7 @@
             [compojure.route :refer [resources]]
             [compojure.handler :refer [{{compojure-handler}}]]
             [net.cgrand.enlive-html :refer [deftemplate]]
+            [net.cgrand.reload :refer [auto-reload]]
             [ring.middleware.reload :as reload]
             [environ.core :refer [env]]{{{server-clj-requires}}}))
 
@@ -25,6 +26,7 @@
   (defonce ^:private server
     (do
       (when is-dev?
+        (auto-reload *ns*)
         (start-figwheel){{less-start}})
       (let [port (Integer. (or port (env :port) 10555))]
         (print "Starting web server on port" port ".\n")
