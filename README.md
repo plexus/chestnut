@@ -104,7 +104,8 @@ Note that master may be partially or wholly broken. I try to do extensive manual
 ### v0.7.0-SNAPSHOT
 
 * Add support for the LESS CSS pre-processor ([Denis Golovnev](https://github.com/teur))
-* Make weasel print both to the REPL and the browser console ([Marcus Lewis](https://github.com/mrcslws)
+* Make weasel print both to the REPL and the browser console ([Marcus Lewis](https://github.com/mrcslws))
+* Enable auto-reload of enlive templates in dev mode ([Ray H](https://github.com/rymndhng))
 
 ### v0.6.0
 
