@@ -4,7 +4,7 @@
 ## Development
 
 Start a REPL (in a terminal: `lein repl`, or from Emacs: open a
-clj/cljs file in the project, then do `M-x cider-jack-in`. Make sure
+clj/cljs file in the project, add nrepl for CIDER `:plugins [[cider/cider-nrepl "0.8.0-SNAPSHOT"]]`, then do `M-x cider-jack-in`. Make sure
 CIDER is up to date).
 
 In the REPL do
@@ -13,6 +13,7 @@ In the REPL do
 (run)
 (browser-repl)
 ```
+_If you are using CIDER repl, you will need to manually switch to `(ns {{name}}.server)` first before doing above operations!_
 
 The call to `(run)` does two things, it starts the webserver at port
 10555, and also the Figwheel server which takes care of live reloading
