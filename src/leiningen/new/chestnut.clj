@@ -104,6 +104,8 @@
                  (render "src/less/style.less" data)]
                 ["resources/public/css/style.css"
                  (render "resources/public/css/style.css" data)])
+              ["resources/public/js/polyfill.js"
+               (render "resources/public/js/polyfill.js" data)]
               ["src/clj/{{sanitized}}/server.clj"
                (render "src/clj/chestnut/server.clj" data)]
               ["src/clj/{{sanitized}}/dev.clj"
