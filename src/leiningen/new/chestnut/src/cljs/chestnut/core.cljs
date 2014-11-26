@@ -1,5 +1,6 @@
-(ns {{project-ns}}.core
-  (:require [om.core :as om :include-macros true]{{{core-cljs-requires}}}))
+(ns {{name}}.core
+  (:require [om.core :as om :include-macros true]
+            {{{core-cljs-requires}}}))
 
 (defonce app-state (atom {:text "Hello Chestnut!"}))
 
@@ -9,6 +10,6 @@
       (reify
         om/IRender
         (render [_]
-          (dom/h1 {{#not-om-tools?}}nil {{/not-om-tools?}}(:text app)))))
+          (dom/h1 {{#not-om-tools?}} nil{{/not-om-tools?}}(:text app)))))
     app-state
     {:target (. js/document (getElementById "app"))}))
