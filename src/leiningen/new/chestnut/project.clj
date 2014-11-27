@@ -37,18 +37,18 @@
                                         :preamble      ["react/react.min.js"]
                                         :externs       ["react/externs/react.js"]
                                         :optimizations :none
-                                        :pretty-print  true}}}
+                                        :pretty-print  true}}
                         {{#spec?}}
                         :dev {:source-paths ["src/cljs"  "spec/cljs"]
-                             :compiler {:output-to     "resources/public/js/app_spec.js"
-                                        :output-dir    "resources/public/js/spec"
-                                        :source-map    "resources/public/js/spec.js.map"
-                                        :preamble      ["react/react.min.js"]
-                                        :externs       ["react/externs/react.js"]
-                                        :optimizations :whitespace
-                                        :pretty-print  false}
-                              :notify-command ["phantomjs"  "bin/speclj" "resources/public/js/app_spec.js"]}
-                        {{/spec?}}
+                              :compiler {:output-to     "resources/public/js/app_spec.js"
+                                         :output-dir    "resources/public/js/spec"
+                                         :source-map    "resources/public/js/spec.js.map"
+                                         :preamble      ["react/react.min.js"]
+                                         :externs       ["react/externs/react.js"]
+                                         :optimizations :whitespace
+                                         :pretty-print  false}
+                               :notify-command ["phantomjs"  "bin/speclj" "resources/public/js/app_spec.js"]}
+                        {{/spec?}}}
               {{#spec?}}
               :test-commands {"test" ["phantomjs" "bin/speclj" "resources/public/js/app_spec.js"]}
               {{/spec?}}}
@@ -68,8 +68,6 @@
                    :env {:is-dev true}
 
                    :dependencies [{{spec-dep}}]
-
-                   :cljsbuild {:builds {:app {:source-paths ["env/dev/cljs"]}}}
 
                    {{#cljx-hook?}}
                    :hooks [cljx.hooks]
