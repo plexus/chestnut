@@ -33,6 +33,9 @@
 (defn less? [opts]
   (some #{"--less"} opts))
 
+(defn spec? [opts]
+  (some #{"--spec"} opts))
+
 (def cljx-plugin
   "com.keminglabs/cljx \"0.4.0\" :exclusions [org.clojure/clojure]")
 
@@ -86,10 +89,16 @@
    :cljx-build? (fn [block] (if (cljx? opts) (str block "\n") ""))
    :cljx-uberjar-hook (if (cljx? opts) "cljx.hooks " "")
 
+   ;; tests
+   :spec? (fn [block] (if (spec? opts) (str "\n" block) ""))
+   :spec-plugin (if (spec? opts) "\n            [speclj \"3.1.0\"]" "")
+   :spec-dep (if (spec? opts) "[speclj \"3.1.0\"]" "")
+
+   ;; less stylesheets
    :less? (fn [block] (if (less? opts) (str "\n" block) ""))
-   :less-refer (if (less? opts) " start-less" "")
-   :less-start (if (less? opts) "\n        (start-less)" "")
-   :less-hook (if (less? opts) " leiningen.less" "")
+   :less-refer  (if (less? opts) " start-less" "")
+   :less-start  (if (less? opts) "\n        (start-less)" "")
+   :less-hook   (if (less? opts) " leiningen.less" "")
    :less-plugin (if (less? opts) "\n            [lein-less \"1.7.2\"]" "")})
 
 (defn format-files-args [name opts]
@@ -116,6 +125,13 @@
                (render "env/dev/cljs/chestnut/dev.cljs" data)]
               ["env/prod/cljs/{{sanitized}}/prod.cljs"
                (render "env/prod/cljs/chestnut/prod.cljs" data)]
+              (when (speclj? opts)
+                ["bin/speclj"
+                 (render "bin/speclj" data)]
+                ["spec/clj/{{sanitized}}/server_spec.clj"
+                 (render "src/clj/chestnut/server_spec.clj" data)]
+                ["spec/cljs/{{sanitized}}/core_spec.clj"
+                 (render "src/cljs/chestnut/core_spec.clj" data)])
               ["LICENSE"
                (render "LICENSE" data)]
               ["README.md"
