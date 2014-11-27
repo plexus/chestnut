@@ -66,7 +66,7 @@ Clojure/ClojureScript apps effectively. It comes with
 * `--om-tools` Use Prismatic's [om-tools.dom](https://github.com/Prismatic/om-tools) instead of `om.dom`
 * `--cljx` Using [cljx](https://github.com/lynaghk/cljx) allows you to write code that is shared between Clojure and ClojureScript.
 * `--less` Use [less](https://github.com/montoux/lein-less) for compiling Less CSS files.
-* `--spec` Use [speclj](http://speclj.com) test runner for clj and cljs.
+* `--spec` Use [specljx](http://speclj.com) test runner for clj and cljs.
 
 Use `--` to separate these options from Leiningen's options, e.g. `lein new chestnut foo -- --om-tools --http-kit`
 

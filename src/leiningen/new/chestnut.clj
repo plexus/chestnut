@@ -125,13 +125,15 @@
                (render "env/dev/cljs/chestnut/dev.cljs" data)]
               ["env/prod/cljs/{{sanitized}}/prod.cljs"
                (render "env/prod/cljs/chestnut/prod.cljs" data)]
-              (when (speclj? opts)
+              (when (spec? opts)
                 ["bin/speclj"
-                 (render "bin/speclj" data)]
+                 (render "bin/speclj" data)])
+              (when (spec? opts)
                 ["spec/clj/{{sanitized}}/server_spec.clj"
-                 (render "src/clj/chestnut/server_spec.clj" data)]
-                ["spec/cljs/{{sanitized}}/core_spec.clj"
-                 (render "src/cljs/chestnut/core_spec.clj" data)])
+                 (render "spec/clj/chestnut/server_spec.clj" data)])
+              (when (spec? opts)
+                ["spec/cljs/{{sanitized}}/core_spec.cljs"
+                 (render "spec/cljs/chestnut/core_spec.cljs" data)])
               ["LICENSE"
                (render "LICENSE" data)]
               ["README.md"
