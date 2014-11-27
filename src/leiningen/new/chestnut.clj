@@ -56,7 +56,7 @@
 (defn project-clj-deps [opts]
   (cond-> []
           (http-kit? opts) (conj "http-kit \"2.1.19\"")
-          (om-tools? opts) (conj "prismatic/om-tools \"0.3.3\"")))
+          (om-tools? opts) (conj "prismatic/om-tools \"0.3.3\" :exclusions [org.clojure/clojure]")))
 
 (defn project-plugins [opts]
   (cond-> []
@@ -92,7 +92,6 @@
    ;; tests
    :spec? (fn [block] (if (spec? opts) (str "\n" block) ""))
    :spec-plugin (if (spec? opts) "\n            [speclj \"3.1.0\"]" "")
-   :spec-dep (if (spec? opts) "[speclj \"3.1.0\"]" "")
 
    ;; less stylesheets
    :less? (fn [block] (if (less? opts) (str "\n" block) ""))
