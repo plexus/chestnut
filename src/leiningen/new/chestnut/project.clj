@@ -5,6 +5,7 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
   :source-paths ["src/clj" "src/cljs"{{{cljx-source-paths}}}]
+  :test-paths ["spec/clj"]
 
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [org.clojure/clojurescript "0.0-2371" :scope "provided"]
@@ -20,7 +21,10 @@
                  [leiningen "2.5.0"]{{{project-clj-deps}}}]
 
   :plugins [[lein-cljsbuild "1.0.3"]
-            [lein-environ "1.0.0"]{{{less-plugin}}}]
+            [lein-environ "1.0.0"]
+            [speclj "3.1.0"]
+            [lein-ancient "0.5.4"]
+            {{{less-plugin}}}]
 
   :min-lein-version "2.5.0"
 
@@ -33,10 +37,20 @@
                                         :preamble      ["react/react.min.js"]
                                         :externs       ["react/externs/react.js"]
                                         :optimizations :none
-                                        :pretty-print  true}}}}
+                                        :pretty-print  true}}}
+                        :dev {:source-paths ["src/cljs"  "spec/cljs"]
+                             :compiler {:output-to     "resources/public/js/app_spec.js"
+                                        :output-dir    "resources/public/js/spec"
+                                        :source-map    "resources/public/js/spec.js.map"
+                                        :preamble      ["react/react.min.js"]
+                                        :externs       ["react/externs/react.js"]
+                                        :optimizations :whitespace
+                                        :pretty-print  false}
+                              :notify-command ["phantomjs"  "bin/speclj" "resources/public/js/app_spec.js"]}
+              :test-commands {"test" ["phantomjs" "bin/speclj" "resources/public/js/app_spec.js"]}}
   {{#less?}}
   :less {:source-paths ["src/less"]
-       :target-path "resources/public/css"}
+         :target-path "resources/public/css"}
   {{/less?}}
 
   :profiles {:dev {:repl-options {:init-ns {{project-ns}}.server
