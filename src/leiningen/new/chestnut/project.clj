@@ -5,7 +5,7 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
   :source-paths ["src/clj" "src/cljs"{{{cljx-source-paths}}}]
-  :test-paths ["spec/clj"]
+  :test-paths ["spec/clj" "spec/cljs" "test/clj" "test/cljs"]
 
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [org.clojure/clojurescript "0.0-2371" :scope "provided"]
@@ -22,7 +22,7 @@
 
   :plugins [[lein-cljsbuild "1.0.3"]
             [lein-environ "1.0.0"]
-            [speclj "3.1.0"]
+            {{{spec-plugin}}}
             [lein-ancient "0.5.4"]
             {{{less-plugin}}}]
 
@@ -38,6 +38,7 @@
                                         :externs       ["react/externs/react.js"]
                                         :optimizations :none
                                         :pretty-print  true}}}
+                        {{#spec?}}
                         :dev {:source-paths ["src/cljs"  "spec/cljs"]
                              :compiler {:output-to     "resources/public/js/app_spec.js"
                                         :output-dir    "resources/public/js/spec"
@@ -47,7 +48,10 @@
                                         :optimizations :whitespace
                                         :pretty-print  false}
                               :notify-command ["phantomjs"  "bin/speclj" "resources/public/js/app_spec.js"]}
-              :test-commands {"test" ["phantomjs" "bin/speclj" "resources/public/js/app_spec.js"]}}
+                        {{/spec?}}
+              {{#spec?}}
+              :test-commands {"test" ["phantomjs" "bin/speclj" "resources/public/js/app_spec.js"]}
+              {{/spec?}}}
   {{#less?}}
   :less {:source-paths ["src/less"]
          :target-path "resources/public/css"}
@@ -62,6 +66,9 @@
                               :server-port 3449
                               :css-dirs ["resources/public/css"]}
                    :env {:is-dev true}
+
+                   :dependencies [{{spec-dep}}]
+
                    :cljsbuild {:builds {:app {:source-paths ["env/dev/cljs"]}}}
 
                    {{#cljx-hook?}}
