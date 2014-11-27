@@ -81,6 +81,17 @@ lein with-profile -dev,+production uberjar && foreman start
 Now your app is running at
 [http://localhost:5000](http://localhost:5000) in production mode.
 
+## Testing
+
+
+To autotest Clojure code using speclj:
+
+    lein spec -a
+
+To autotest Clojurescript code using specljs:
+
+    lein cljsbuild auto dev
+
 ## License
 
 Copyright © 2014 FIXME

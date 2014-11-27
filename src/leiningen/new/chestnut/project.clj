@@ -4,8 +4,8 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
-  :source-paths ["src/clj" "src/cljs"{{{cljx-source-paths}}}]
-  :test-paths ["spec/clj" "spec/cljs" "test/clj" "test/cljs"]
+  :source-paths ["src/clj" "src/cljs" {{{cljx-source-paths}}}]
+  :test-paths ["spec/clj"]
 
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [org.clojure/clojurescript "0.0-2371" :scope "provided"]
@@ -21,10 +21,8 @@
                  [leiningen "2.5.0"]{{{project-clj-deps}}}]
 
   :plugins [[lein-cljsbuild "1.0.3"]
-            [lein-environ "1.0.0"]
-            {{{spec-plugin}}}
             [lein-ancient "0.5.4"]
-            {{{less-plugin}}}]
+            [lein-environ "1.0.0"] {{{spec-plugin}}} {{{less-plugin}}}]
 
   :min-lein-version "2.5.0"
 
@@ -67,7 +65,9 @@
                               :css-dirs ["resources/public/css"]}
                    :env {:is-dev true}
 
-                   :dependencies [{{spec-dep}}]
+                   {{#spec?}}
+                   :dependencies [[speclj "3.1.0"]]
+                   {{/spec?}}
 
                    {{#cljx-hook?}}
                    :hooks [cljx.hooks]
