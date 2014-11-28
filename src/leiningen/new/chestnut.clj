@@ -33,6 +33,12 @@
 (defn less? [opts]
   (some #{"--less"} opts))
 
+(defn sass? [opts]
+  (some #{"--sass"} opts))
+
+(defn spec? [opts]
+  (some #{"--spec"} opts))
+
 (def cljx-plugin
   "com.keminglabs/cljx \"0.4.0\" :exclusions [org.clojure/clojure]")
 
@@ -53,7 +59,7 @@
 (defn project-clj-deps [opts]
   (cond-> []
           (http-kit? opts) (conj "http-kit \"2.1.19\"")
-          (om-tools? opts) (conj "prismatic/om-tools \"0.3.3\"")))
+          (om-tools? opts) (conj "prismatic/om-tools \"0.3.3\" :exclusions [org.clojure/clojure]")))
 
 (defn project-plugins [opts]
   (cond-> []
@@ -86,10 +92,22 @@
    :cljx-build? (fn [block] (if (cljx? opts) (str block "\n") ""))
    :cljx-uberjar-hook (if (cljx? opts) "cljx.hooks " "")
 
+   ;; tests
+   :spec? (fn [block] (if (spec? opts) (str "\n" block) ""))
+   :spec-plugin (if (spec? opts) "\n            [speclj \"3.1.0\"]" "")
+
+   ;; sass stylesheets
+   :sass? (fn [block] (if (sass? opts) (str "\n" block) ""))
+   :sass-refer  (if (sass? opts) " start-sass" "")
+   :sass-start  (if (sass? opts) "\n        (start-sass)" "")
+   :sass-hook   (if (sass? opts) " leiningen.sassc" "")
+   :sass-plugin (if (sass? opts) "\n            [org.clojars.aew/lein-sassc \"0.10.0\"]\n               [lein-auto \"0.1.1\"]" "")
+
+   ;; less stylesheets
    :less? (fn [block] (if (less? opts) (str "\n" block) ""))
-   :less-refer (if (less? opts) " start-less" "")
-   :less-start (if (less? opts) "\n        (start-less)" "")
-   :less-hook (if (less? opts) " leiningen.less" "")
+   :less-refer  (if (less? opts) " start-less" "")
+   :less-start  (if (less? opts) "\n        (start-less)" "")
+   :less-hook   (if (less? opts) " leiningen.less" "")
    :less-plugin (if (less? opts) "\n            [lein-less \"1.7.2\"]" "")})
 
 (defn format-files-args [name opts]
@@ -99,11 +117,12 @@
                (render "project.clj" data)]
               ["resources/index.html"
                (render "resources/index.html" data)]
-              (if (less? opts)
-                ["src/less/style.less"
-                 (render "src/less/style.less" data)]
-                ["resources/public/css/style.css"
-                 (render "resources/public/css/style.css" data)])
+              (cond
+               (less? opts) ["src/less/style.less"            (render "src/less/style.less" data)]
+               (sass? opts) ["src/scss/style.scss"            (render "src/scss/style.scss" data)]
+               :else        ["resources/public/css/style.css" (render "resources/public/css/style.css" data)])
+              ["resources/public/js/polyfill.js"
+               (render "resources/public/js/polyfill.js" data)]
               ["src/clj/{{sanitized}}/server.clj"
                (render "src/clj/chestnut/server.clj" data)]
               ["src/clj/{{sanitized}}/dev.clj"
@@ -127,10 +146,15 @@
              ["Procfile"
               (render "Procfile" data)]]]
 
-    (if (cljx? opts)
-      (conj args ["src/cljx/{{sanitized}}/core.cljx"
-                  (render "src/cljx/chestnut/core.cljx" data)])
-      args)))
+    (cond-> args
+            (cljx? opts) (conj ["src/cljx/{{sanitized}}/core.cljx"
+                                (render "src/cljx/chestnut/core.cljx" data)])
+            (spec? opts) (conj ["bin/speclj"
+                                (render "bin/speclj" data)]
+                               ["spec/clj/{{sanitized}}/server_spec.clj"
+                                (render "spec/clj/chestnut/server_spec.clj" data)]
+                               ["spec/cljs/{{sanitized}}/core_spec.cljs"
+                                (render "spec/cljs/chestnut/core_spec.cljs" data)]))))
 
 (defn chestnut [name & opts]
   (main/info "Generating fresh 'lein new' chestnut project.")
