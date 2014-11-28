@@ -66,6 +66,7 @@ Clojure/ClojureScript apps effectively. It comes with
 * `--om-tools` Use Prismatic's [om-tools.dom](https://github.com/Prismatic/om-tools) instead of `om.dom`
 * `--cljx` Using [cljx](https://github.com/lynaghk/cljx) allows you to write code that is shared between Clojure and ClojureScript.
 * `--less` Use [less](https://github.com/montoux/lein-less) for compiling Less CSS files.
+* `--sass` Use [sass](https://bitbucket.org/apribase/lein-sassc) for compiling Sass CSS files.
 * `--spec` Use [specljx](http://speclj.com) test runner for clj and cljs.
 
 Use `--` to separate these options from Leiningen's options, e.g. `lein new chestnut foo -- --om-tools --http-kit`
@@ -107,6 +108,8 @@ Note that master may be partially or wholly broken. I try to do extensive manual
 ### v0.7.0
 
 * Add support for the LESS CSS pre-processor ([Denis Golovnev](https://github.com/teur))
+* Add support for the SASS CSS pre-processor
+* Add support for specljx tests
 * Make weasel print both to the REPL and the browser console ([Marcus Lewis](https://github.com/mrcslws))
 * Enable auto-reload of enlive templates in dev mode ([Ray H](https://github.com/rymndhng))
 * Add suport for Speclj/Specljs ([Edward Wible](https://github.com/aew)

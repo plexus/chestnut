@@ -22,7 +22,7 @@
 
   :plugins [[lein-cljsbuild "1.0.3"]
             [lein-ancient "0.5.4"]
-            [lein-environ "1.0.0"] {{{spec-plugin}}} {{{less-plugin}}}]
+            [lein-environ "1.0.0"] {{{spec-plugin}}} {{{less-plugin}}} {{{sass-plugin}}}]
 
   :min-lein-version "2.5.0"
 
@@ -55,6 +55,12 @@
          :target-path "resources/public/css"}
   {{/less?}}
 
+  {{#sass?}}
+  :sassc [{:src "src/scss/style.scss"
+           :output-to "resources/public/css/style.css"}]
+  :auto {"sassc"  {:file-pattern  #"\.(scss)$"}}
+  {{/sass?}}
+
   :profiles {:dev {:repl-options {:init-ns {{project-ns}}.server
                                   :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl{{{nrepl-middleware}}}]}
 
@@ -85,7 +91,7 @@
                    {{/cljx-build?}}
                    :cljsbuild {:builds {:app {:source-paths ["env/dev/cljs"]}}}}
 
-             :uberjar {:hooks [{{cljx-uberjar-hook}}leiningen.cljsbuild{{less-hook}}]
+             :uberjar {:hooks [{{cljx-uberjar-hook}}leiningen.cljsbuild{{less-hook}}{{sass-hook}}]
                        :env {:production true}
                        :omit-source true
                        :aot :all

@@ -1,6 +1,6 @@
 (ns {{project-ns}}.server
   (:require [clojure.java.io :as io]
-            [{{project-ns}}.dev :refer [is-dev? inject-devmode-html browser-repl start-figwheel{{less-refer}}]]
+            [{{project-ns}}.dev :refer [is-dev? inject-devmode-html browser-repl start-figwheel{{less-refer}}{{sass-refer}}]]
             [compojure.core :refer [GET defroutes]]
             [compojure.route :refer [resources]]
             [net.cgrand.enlive-html :refer [deftemplate]]
@@ -27,7 +27,7 @@
     (do
       (when is-dev?
         (auto-reload *ns*)
-        (start-figwheel){{less-start}})
+        (start-figwheel){{less-start}}{{sass-start}})
       (let [port (Integer. (or port (env :port) 10555))]
         (print "Starting web server on port" port ".\n")
         ({{server-command}} http-handler {:port port

@@ -33,6 +33,9 @@
 (defn less? [opts]
   (some #{"--less"} opts))
 
+(defn sass? [opts]
+  (some #{"--sass"} opts))
+
 (defn spec? [opts]
   (some #{"--spec"} opts))
 
@@ -93,6 +96,13 @@
    :spec? (fn [block] (if (spec? opts) (str "\n" block) ""))
    :spec-plugin (if (spec? opts) "\n            [speclj \"3.1.0\"]" "")
 
+   ;; sass stylesheets
+   :sass? (fn [block] (if (sass? opts) (str "\n" block) ""))
+   :sass-refer  (if (sass? opts) " start-sass" "")
+   :sass-start  (if (sass? opts) "\n        (start-sass)" "")
+   :sass-hook   (if (sass? opts) " leiningen.sassc" "")
+   :sass-plugin (if (sass? opts) "\n            [lein-sassc \"0.9.1\"]\n               [lein-auto \"0.1.1\"]" "")
+
    ;; less stylesheets
    :less? (fn [block] (if (less? opts) (str "\n" block) ""))
    :less-refer  (if (less? opts) " start-less" "")
@@ -107,11 +117,10 @@
                (render "project.clj" data)]
               ["resources/index.html"
                (render "resources/index.html" data)]
-              (if (less? opts)
-                ["src/less/style.less"
-                 (render "src/less/style.less" data)]
-                ["resources/public/css/style.css"
-                 (render "resources/public/css/style.css" data)])
+              (cond
+               (less? opts) ["src/less/style.less"            (render "src/less/style.less" data)]
+               (sass? opts) ["src/scss/style.scss"            (render "src/scss/style.scss" data)]
+               :else        ["resources/public/css/style.css" (render "resources/public/css/style.css" data)])
               ["resources/public/js/polyfill.js"
                (render "resources/public/js/polyfill.js" data)]
               ["src/clj/{{sanitized}}/server.clj"
