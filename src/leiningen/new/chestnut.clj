@@ -101,7 +101,7 @@
    :sass-refer  (if (sass? opts) " start-sass" "")
    :sass-start  (if (sass? opts) "\n        (start-sass)" "")
    :sass-hook   (if (sass? opts) " leiningen.sassc" "")
-   :sass-plugin (if (sass? opts) "\n            [lein-sassc \"0.9.1\"]\n               [lein-auto \"0.1.1\"]" "")
+   :sass-plugin (if (sass? opts) "\n            [lein-sassc \"0.10.0\"]\n               [lein-auto \"0.1.1\"]" "")
 
    ;; less stylesheets
    :less? (fn [block] (if (less? opts) (str "\n" block) ""))
