@@ -101,7 +101,7 @@
    :sass-refer  (if (sass? opts) " start-sass" "")
    :sass-start  (if (sass? opts) "\n        (start-sass)" "")
    :sass-hook   (if (sass? opts) " leiningen.sassc" "")
-   :sass-plugin (if (sass? opts) "\n            [lein-sassc \"0.10.0\"]\n               [lein-auto \"0.1.1\"]" "")
+   :sass-plugin (if (sass? opts) "\n            [org.clojars.aew/lein-sassc \"0.10.0\"]\n               [lein-auto \"0.1.1\"]" "")
 
    ;; less stylesheets
    :less? (fn [block] (if (less? opts) (str "\n" block) ""))
@@ -133,15 +133,6 @@
                (render "env/dev/cljs/chestnut/dev.cljs" data)]
               ["env/prod/cljs/{{sanitized}}/prod.cljs"
                (render "env/prod/cljs/chestnut/prod.cljs" data)]
-              (when (spec? opts)
-                ["bin/speclj"
-                 (render "bin/speclj" data)])
-              (when (spec? opts)
-                ["spec/clj/{{sanitized}}/server_spec.clj"
-                 (render "spec/clj/chestnut/server_spec.clj" data)])
-              (when (spec? opts)
-                ["spec/cljs/{{sanitized}}/core_spec.cljs"
-                 (render "spec/cljs/chestnut/core_spec.cljs" data)])
               ["LICENSE"
                (render "LICENSE" data)]
               ["README.md"
@@ -155,10 +146,15 @@
              ["Procfile"
               (render "Procfile" data)]]]
 
-    (if (cljx? opts)
-      (conj args ["src/cljx/{{sanitized}}/core.cljx"
-                  (render "src/cljx/chestnut/core.cljx" data)])
-      args)))
+    (cond-> args
+            (cljx? opts) (conj ["src/cljx/{{sanitized}}/core.cljx"
+                                (render "src/cljx/chestnut/core.cljx" data)])
+            (spec? opts) (conj ["bin/speclj"
+                                (render "bin/speclj" data)]
+                               ["spec/clj/{{sanitized}}/server_spec.clj"
+                                (render "spec/clj/chestnut/server_spec.clj" data)]
+                               ["spec/cljs/{{sanitized}}/core_spec.cljs"
+                                (render "spec/cljs/chestnut/core_spec.cljs" data)]))))
 
 (defn chestnut [name & opts]
   (main/info "Generating fresh 'lein new' chestnut project.")
