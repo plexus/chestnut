@@ -86,6 +86,8 @@ Note that master may be partially or wholly broken. I try to do extensive manual
 
 ## FAQ
 
+* **Q:** I opened `http://localhost:3499` / `http://localhost:9001` and it didn't work <br>
+  **A:** The correct port is [http://localhost:10555](http://localhost:10555). Figwheel uses 3499, Weasel uses 9001. <br>
 * **Q:** How can I get the features in the SNAPSHOT version? <br>
   **A:** Use leiningen's `--snapshot` flag, e.g. `lein new chestnut my-project --snapshot`
 * **Q:** I'm seeing warnings while compiling ClojureScript. <br>
