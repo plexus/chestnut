@@ -75,7 +75,7 @@
    :project-dev-plugins (dep-list 29 (project-plugins opts))
    :nrepl-middleware (indent 53 (project-nrepl-middleware opts))
    :server-command (if (http-kit? opts) "run-server" "run-jetty")
-   :compojure-handler (if (site-middleware? opts) "site" "api")
+   :ring-defaults (if (site-middleware? opts) "site-defaults" "api-defaults")
    :not-om-tools? (fn [block] (if (om-tools? opts) "" block))
 
    ;; cljx

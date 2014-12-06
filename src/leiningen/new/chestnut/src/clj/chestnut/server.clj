@@ -3,10 +3,10 @@
             [{{project-ns}}.dev :refer [is-dev? inject-devmode-html browser-repl start-figwheel{{less-refer}}]]
             [compojure.core :refer [GET defroutes]]
             [compojure.route :refer [resources]]
-            [compojure.handler :refer [{{compojure-handler}}]]
             [net.cgrand.enlive-html :refer [deftemplate]]
             [net.cgrand.reload :refer [auto-reload]]
             [ring.middleware.reload :as reload]
+            [ring.middleware.defaults :refer [wrap-defaults {{ring-defaults}}]]
             [environ.core :refer [env]]{{{server-clj-requires}}}))
 
 (deftemplate page
@@ -19,8 +19,8 @@
 
 (def http-handler
   (if is-dev?
-    (reload/wrap-reload ({{compojure-handler}} #'routes))
-    ({{compojure-handler}} routes)))
+    (reload/wrap-reload (wrap-defaults #'routes {{ring-defaults}}))
+    (wrap-defaults routes {{ring-defaults}})))
 
 (defn run [& [port]]
   (defonce ^:private server
