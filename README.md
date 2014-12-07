@@ -136,7 +136,7 @@ automatically. Do a `lein cljsbuild clean`, then start Figwheel again.
 
 ## Changelog
 
-### v0.7.0
+### v0.7.0-SNAPSHOT
 
 * Make weasel print both to the REPL and the browser console
   ([Marcus Lewis](https://github.com/mrcslws))
