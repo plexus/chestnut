@@ -134,15 +134,15 @@
               ["env/prod/cljs/{{sanitized}}/prod.cljs"
                (render "env/prod/cljs/chestnut/prod.cljs" data)]
               ["LICENSE"
-               (render "LICENSE" data)]
+               (render "LICENSE")]
               ["README.md"
                (render "README.md" data)]
               [".gitignore"
-               (render ".gitignore" data)]
+               (render ".gitignore")]
 
              ;; Heroku support
              ["system.properties"
-              (render "system.properties" data)]
+              (render "system.properties")]
              ["Procfile"
               (render "Procfile" data)]]]
 
