@@ -157,5 +157,6 @@
                                 (render "spec/cljs/chestnut/core_spec.cljs" data)]))))
 
 (defn chestnut [name & opts]
-  (main/info "Generating fresh 'lein new' chestnut project.")
+  (main/info "Generating fresh Chestnut project.")
+  (main/info "README.md contains instructions to get you started.")
   (apply ->files (format-files-args name opts)))
