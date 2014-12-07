@@ -67,7 +67,7 @@ Clojure/ClojureScript apps effectively. It comes with
 * `--cljx` Using [cljx](https://github.com/lynaghk/cljx) allows you to write code that is shared between Clojure and ClojureScript.
 * `--less` Use [less](https://github.com/montoux/lein-less) for compiling Less CSS files.
 * `--sass` Use [sass](https://github.com/aew/lein-sassc) for compiling Sass CSS files (requires sassc-3.0.2 to be installed).
-* `--spec` Use [specljx](http://speclj.com) test runner for clj and cljs.
+* `--speclj` Use [speclj](http://speclj.com) test runner for clj and cljs.
 
 Use `--` to separate these options from Leiningen's options, e.g. `lein new chestnut foo -- --om-tools --http-kit`
 
@@ -108,11 +108,13 @@ Note that master may be partially or wholly broken. I try to do extensive manual
 ### v0.7.0
 
 * Add support for the LESS CSS pre-processor ([Denis Golovnev](https://github.com/teur))
-* Add support for the SASS CSS pre-processor
-* Add support for specljx tests
 * Make weasel print both to the REPL and the browser console ([Marcus Lewis](https://github.com/mrcslws))
 * Enable auto-reload of enlive templates in dev mode ([Ray H](https://github.com/rymndhng))
-* Add suport for Speclj/Specljs ([Edward Wible](https://github.com/aew)
+* Add support for the SASS CSS pre-processor ([Edward Wible](https://github.com/aew)
+* Add suport for Speclj ([Edward Wible](https://github.com/aew)
+* Switch from the deprecated compojure.handler to ring-defaults [zakak](https://github.com/zakak)
+* Keep dev dependencies (Leiningen, Figwheel, Weasel, Speclj) out of the Uberjar
+* Automatically switch the browser-repl to the right namespace, instead of `cljs.user`
 
 ### v0.6.0
 

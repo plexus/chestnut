@@ -47,6 +47,22 @@ In the REPL, type
 ```
 
 Notice again how the browser updates.
+{{#speclj?}}
+
+## Running Tests
+
+To run the Clojure tests, do
+
+```
+lein spec
+```
+
+To run the Clojurescript tests, do
+
+```
+lein cljsbuild test
+```
+{{/speclj?}}
 
 ## Deploying to Heroku
 

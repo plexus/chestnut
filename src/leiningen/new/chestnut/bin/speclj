@@ -1,20 +1,20 @@
 #! /usr/bin/env phantomjs
 
 var fs = require("fs");
-var p = require('webpage').create();
-var sys = require('system');
+var webpage = require('webpage').create();
+var system = require('system');
 var url = phantom.args[0];
 
-p.onConsoleMessage = function (x) {
-    fs.write("/dev/stdout", x, "w");
+webpage.onConsoleMessage = function (x) {
+  system.stdout.write(x)
 };
 
-p.injectJs("resources/public/js/polyfill.js");
+webpage.injectJs("resources/public/js/polyfill.js");
 // note the polyfill file, this is added to play nice with React
 
-p.injectJs(phantom.args[0]);
+webpage.injectJs(url);
 
-var result = p.evaluate(function () {
+var result = webpage.evaluate(function () {
     speclj.run.standard.armed = true;
     return speclj.run.standard.run_specs(
         cljs.core.keyword("color"), true

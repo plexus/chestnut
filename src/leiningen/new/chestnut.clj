@@ -2,7 +2,7 @@
   (:require [leiningen.new.templates :refer [renderer name-to-path ->files
                                              sanitize sanitize-ns project-name]]
             [leiningen.core.main :as main]
-            [clojure.string :refer [join]]))
+            [clojure.string :as s]))
 
 (def render (renderer "chestnut"))
 
@@ -10,7 +10,7 @@
   (fn []
     (->> list
          (map #(str "\n" (apply str (repeat n " ")) (wrap %)))
-         (join ""))))
+         (s/join ""))))
 
 (defn dep-list [n list]
   (wrap-indent #(str "[" % "]") n list))
@@ -36,14 +36,11 @@
 (defn sass? [opts]
   (some #{"--sass"} opts))
 
-(defn spec? [opts]
-  (some #{"--spec"} opts))
-
-(def cljx-plugin
-  "com.keminglabs/cljx \"0.4.0\" :exclusions [org.clojure/clojure]")
+(defn speclj? [opts]
+  (some #{"--speclj"} opts))
 
 (def cljx-source-paths
-  " \"target/generated/clj\" \"target/generated/cljx\"")
+)
 
 (defn server-clj-requires [opts]
   (if (http-kit? opts)
@@ -61,9 +58,20 @@
           (http-kit? opts) (conj "http-kit \"2.1.19\"")
           (om-tools? opts) (conj "prismatic/om-tools \"0.3.3\" :exclusions [org.clojure/clojure]")))
 
+(defn project-dev-deps [opts]
+  (cond-> []
+          (speclj? opts) (conj "speclj \"3.1.0\"")))
+
 (defn project-plugins [opts]
   (cond-> []
-          (cljx? opts) (conj cljx-plugin)))
+          (sass? opts) (conj "org.clojars.aew/lein-sassc \"0.10.0\""
+                             "lein-auto \"0.1.1\"")
+          (less? opts) (conj "lein-less \"1.7.2\"")))
+
+(defn project-dev-plugins [opts]
+  (cond-> []
+          (speclj? opts) (conj "speclj \"3.1.0\"")
+          (cljx? opts) (conj "com.keminglabs/cljx \"0.4.0\" :exclusions [org.clojure/clojure]")))
 
 (defn project-nrepl-middleware [opts]
   (cond-> []
@@ -71,90 +79,73 @@
 
 (defn template-data [name opts]
   {:full-name name
-   :name (project-name name)
-   :project-goog-module (sanitize (sanitize-ns name))
-   :project-ns (sanitize-ns name)
-   :sanitized (name-to-path name)
-   :server-clj-requires (dep-list 12 (server-clj-requires opts))
-   :core-cljs-requires (dep-list 12 (core-cljs-requires opts))
-   :project-clj-deps (dep-list 17 (project-clj-deps opts))
-   :project-dev-plugins (dep-list 29 (project-plugins opts))
-   :nrepl-middleware (indent 53 (project-nrepl-middleware opts))
-   :server-command (if (http-kit? opts) "run-server" "run-jetty")
-   :ring-defaults (if (site-middleware? opts) "site-defaults" "api-defaults")
-   :not-om-tools? (fn [block] (if (om-tools? opts) "" block))
+   :name                 (project-name name)
+   :project-goog-module  (sanitize (sanitize-ns name))
+   :project-ns           (sanitize-ns name)
+   :sanitized            (name-to-path name)
+   :server-clj-requires  (dep-list 12 (server-clj-requires opts))
+   :core-cljs-requires   (dep-list 12 (core-cljs-requires opts))
+   :project-clj-deps     (dep-list 17 (project-clj-deps opts))
+   :project-plugins      (dep-list 12 (project-plugins opts))
+   :project-dev-plugins  (dep-list 29 (project-dev-plugins opts))
+   :project-dev-deps     (dep-list 34 (project-dev-deps opts))
+   :nrepl-middleware     (indent 53 (project-nrepl-middleware opts))
+   :server-command       (if (http-kit? opts) "run-server" "run-jetty")
+   :ring-defaults        (if (site-middleware? opts) "site-defaults" "api-defaults")
+   :not-om-tools?        (fn [block] (if (om-tools? opts) "" block))
 
    ;; cljx
-   :cljx-source-paths (if (cljx? opts) cljx-source-paths "")
-   :cljx-extension (if (cljx? opts) "|\\.cljx")
+   :project-source-paths (if (cljx? opts) " \"target/generated/clj\" \"target/generated/cljx\"" "")
+   :cljx-extension       (if (cljx? opts) "|\\.cljx")
    :cljx-cljsbuild-spath (if (cljx? opts) " \"target/generated/cljs\"" "")
-   :cljx-hook? (fn [block] (if (cljx? opts) (str block "\n") ""))
-   :cljx-build? (fn [block] (if (cljx? opts) (str block "\n") ""))
-   :cljx-uberjar-hook (if (cljx? opts) "cljx.hooks " "")
+   :cljx-hook?           (fn [block] (if (cljx? opts) (str block "\n") ""))
+   :cljx-build?          (fn [block] (if (cljx? opts) (str block "\n") ""))
+   :cljx-uberjar-hook    (if (cljx? opts) "cljx.hooks " "")
 
    ;; tests
-   :spec? (fn [block] (if (spec? opts) (str "\n" block) ""))
-   :spec-plugin (if (spec? opts) "\n            [speclj \"3.1.0\"]" "")
+   :speclj?              (fn [block] (if (speclj? opts) (str "\n" block) ""))
 
    ;; sass stylesheets
-   :sass? (fn [block] (if (sass? opts) (str "\n" block) ""))
-   :sass-refer  (if (sass? opts) " start-sass" "")
-   :sass-start  (if (sass? opts) "\n        (start-sass)" "")
-   :sass-hook   (if (sass? opts) " leiningen.sassc" "")
-   :sass-plugin (if (sass? opts) "\n            [org.clojars.aew/lein-sassc \"0.10.0\"]\n               [lein-auto \"0.1.1\"]" "")
+   :sass?                (fn [block] (if (sass? opts) (str "\n" block) ""))
+   :sass-refer           (if (sass? opts) " start-sass" "")
+   :sass-start           (if (sass? opts) "\n        (start-sass)" "")
+   :sass-hook            (if (sass? opts) " leiningen.sassc" "")
 
    ;; less stylesheets
-   :less? (fn [block] (if (less? opts) (str "\n" block) ""))
-   :less-refer  (if (less? opts) " start-less" "")
-   :less-start  (if (less? opts) "\n        (start-less)" "")
-   :less-hook   (if (less? opts) " leiningen.less" "")
-   :less-plugin (if (less? opts) "\n            [lein-less \"1.7.2\"]" "")})
+   :less?                (fn [block] (if (less? opts) (str "\n" block) ""))
+   :less-refer           (if (less? opts) " start-less" "")
+   :less-start           (if (less? opts) "\n        (start-less)" "")
+   :less-hook            (if (less? opts) " leiningen.less" "")})
+
+(defn files-to-render [opts]
+  (cond-> ["project.clj"
+           "resources/index.html"
+           "src/clj/chestnut/server.clj"
+           "src/cljs/chestnut/core.cljs"
+           "env/dev/clj/chestnut/dev.clj"
+           "env/dev/cljs/chestnut/dev.cljs"
+           "env/prod/clj/chestnut/dev.clj"
+           "env/prod/cljs/chestnut/prod.cljs"
+           "LICENSE"
+           "README.md"
+           ".gitignore"
+           "system.properties"
+           "Procfile"]
+          (less? opts) (conj "src/less/style.less")
+          (sass? opts) (conj "src/scss/style.scss")
+          (not (or (less? opts) (sass? opts))) (conj "resources/public/css/style.css")
+          (cljx? opts) (conj "src/cljx/{{sanitized}}/core.cljx")
+          (speclj? opts) (conj "bin/speclj"
+                             "spec/clj/chestnut/server_spec.clj"
+                             "spec/cljs/chestnut/core_spec.cljs"
+                             "resources/public/js/polyfill.js")))
 
 (defn format-files-args [name opts]
   (let [data (template-data name opts)
-        args [data
-              ["project.clj"
-               (render "project.clj" data)]
-              ["resources/index.html"
-               (render "resources/index.html" data)]
-              (cond
-               (less? opts) ["src/less/style.less"            (render "src/less/style.less" data)]
-               (sass? opts) ["src/scss/style.scss"            (render "src/scss/style.scss" data)]
-               :else        ["resources/public/css/style.css" (render "resources/public/css/style.css" data)])
-              ["resources/public/js/polyfill.js"
-               (render "resources/public/js/polyfill.js" data)]
-              ["src/clj/{{sanitized}}/server.clj"
-               (render "src/clj/chestnut/server.clj" data)]
-              ["src/clj/{{sanitized}}/dev.clj"
-               (render "src/clj/chestnut/dev.clj" data)]
-              ["src/cljs/{{sanitized}}/core.cljs"
-               (render "src/cljs/chestnut/core.cljs" data)]
-              ["env/dev/cljs/{{sanitized}}/dev.cljs"
-               (render "env/dev/cljs/chestnut/dev.cljs" data)]
-              ["env/prod/cljs/{{sanitized}}/prod.cljs"
-               (render "env/prod/cljs/chestnut/prod.cljs" data)]
-              ["LICENSE"
-               (render "LICENSE")]
-              ["README.md"
-               (render "README.md" data)]
-              [".gitignore"
-               (render ".gitignore")]
-
-             ;; Heroku support
-             ["system.properties"
-              (render "system.properties")]
-             ["Procfile"
-              (render "Procfile" data)]]]
-
-    (cond-> args
-            (cljx? opts) (conj ["src/cljx/{{sanitized}}/core.cljx"
-                                (render "src/cljx/chestnut/core.cljx" data)])
-            (spec? opts) (conj ["bin/speclj"
-                                (render "bin/speclj" data)]
-                               ["spec/clj/{{sanitized}}/server_spec.clj"
-                                (render "spec/clj/chestnut/server_spec.clj" data)]
-                               ["spec/cljs/{{sanitized}}/core_spec.cljs"
-                                (render "spec/cljs/chestnut/core_spec.cljs" data)]))))
+        render-file (fn [file]
+                      [(s/replace file "chestnut" "{{sanitized}}")
+                       (render file data)])]
+    (cons data (map render-file (files-to-render opts)))))
 
 (defn chestnut [name & opts]
   (main/info "Generating fresh Chestnut project.")
