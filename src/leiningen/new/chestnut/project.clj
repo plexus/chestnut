@@ -35,8 +35,7 @@
                                         :preamble      ["react/react.min.js"]
                                         :externs       ["react/externs/react.js"]
                                         :optimizations :none
-                                        :pretty-print  true}}
-                        {{#spec?}}
+                                        :pretty-print  true}}{{#spec?}}
                         :dev {:source-paths ["src/cljs"  "spec/cljs"]
                               :compiler {:output-to     "resources/public/js/app_spec.js"
                                          :output-dir    "resources/public/js/spec"
@@ -45,21 +44,14 @@
                                          :externs       ["react/externs/react.js"]
                                          :optimizations :whitespace
                                          :pretty-print  false}
-                               :notify-command ["phantomjs"  "bin/speclj" "resources/public/js/app_spec.js"]}
-                        {{/spec?}}}
-              {{#spec?}}
-              :test-commands {"test" ["phantomjs" "bin/speclj" "resources/public/js/app_spec.js"]}
-              {{/spec?}}}
-  {{#less?}}
+                               :notify-command ["phantomjs"  "bin/speclj" "resources/public/js/app_spec.js"]}{{/spec?}}}{{#spec?}}
+              :test-commands {"test" ["phantomjs" "bin/speclj" "resources/public/js/app_spec.js"]}{{/spec?}}}{{#less?}}
   :less {:source-paths ["src/less"]
          :target-path "resources/public/css"}
-  {{/less?}}
-
-  {{#sass?}}
+  {{/less?}}{{#sass?}}
   :sassc [{:src "src/scss/style.scss"
            :output-to "resources/public/css/style.css"}]
-  :auto {"sassc"  {:file-pattern  #"\.(scss)$"}}
-  {{/sass?}}
+  :auto {"sassc"  {:file-pattern  #"\.(scss)$"}}{{/sass?}}
 
   :profiles {:dev {:repl-options {:init-ns {{project-ns}}.server
                                   :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl{{{nrepl-middleware}}}]}
@@ -72,24 +64,18 @@
 
                    :env {:is-dev true}
 
-                   :cljsbuild {:builds {:app {:source-paths ["env/dev/cljs"]}}}
+                   :cljsbuild {:builds {:app {:source-paths ["env/dev/cljs"]}}}{{#spec?}}
 
-                   {{#spec?}}
-                   :dependencies [[speclj "3.1.0"]]
-                   {{/spec?}}
+                   :dependencies [[speclj "3.1.0"]]{{/spec?}}{{#cljx-hook?}}
 
-                   {{#cljx-hook?}}
-                   :hooks [cljx.hooks]
-                   {{/cljx-hook?}}
-                   {{#cljx-build?}}
+                   :hooks [cljx.hooks]{{/cljx-hook?}}{{#cljx-build?}}
+
                    :cljx {:builds [{:source-paths ["src/cljx"]
                                     :output-path "target/generated/clj"
                                     :rules :clj}
                                    {:source-paths ["src/cljx"]
                                     :output-path "target/generated/cljs"
-                                    :rules :cljs}]}
-                   {{/cljx-build?}}
-                   :cljsbuild {:builds {:app {:source-paths ["env/dev/cljs"]}}}}
+                                    :rules :cljs}]}{{/cljx-build?}}}
 
              :uberjar {:hooks [{{cljx-uberjar-hook}}leiningen.cljsbuild{{less-hook}}{{sass-hook}}]
                        :env {:production true}
