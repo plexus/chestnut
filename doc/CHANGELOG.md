@@ -2,9 +2,26 @@
 
 ## v0.7.0-SNAPSHOT
 
-* Add support for the LESS CSS pre-processor ([Denis Golovnev](https://github.com/teur))
-* Make weasel print both to the REPL and the browser console ([Marcus Lewis](https://github.com/mrcslws))
-* Enable auto-reload of enlive templates in dev mode ([Ray H](https://github.com/rymndhng))
+* Make weasel print both to the REPL and the browser console
+  ([Marcus Lewis](https://github.com/mrcslws))
+* Add support for the LESS CSS pre-processor
+  ([Denis Golovnev](https://github.com/teur))
+* Enable auto-reload of enlive templates in dev mode
+  ([Ray H](https://github.com/rymndhng))
+* Add support for the SASS CSS pre-processor
+  ([Edward Wible](https://github.com/aew)
+* Add suport for Speclj ([Edward Wible](https://github.com/aew)
+* Switch from the deprecated compojure.handler to ring-defaults
+  [zakak](https://github.com/zakak)
+* Keep dev dependencies (Leiningen, Figwheel, Weasel, Speclj) out of
+  the Uberjar
+* Automatically switch the browser-repl to the right namespace after
+  starting up, instead of `cljs.user`
+* No longer include lein-ancient, easy enough to add for those that
+  want it
+* Update Ring: 1.3.1 => 1.3.2
+* Update Figwheel: 0.1.4-SNAPSHOT => 0.1.6-SNAPSHOT
+* Update Weasel 0.4.0-SNAPSHOT => 0.4.2
 
 ## v0.6.0
 
