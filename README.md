@@ -25,7 +25,8 @@ in your generated project for instructions pertaining to your version.
 lein new chestnut <name>
 ```
 
-After that open the README of your generated project for detailed instructions.
+After that open the README of your generated project for detailed
+instructions.
 
 ## tl;dr
 
@@ -36,7 +37,8 @@ $ lein repl
 (browser-repl)
 ```
 
-Wait a bit, then browse to [http://localhost:10555](http://localhost:10555).
+Wait a bit, then browse to
+[http://localhost:10555](http://localhost:10555).
 
 ## List of Contents
 
@@ -44,10 +46,11 @@ This template gives you everything you need to start developing
 Clojure/ClojureScript apps effectively. It comes with
 
 * [Figwheel](https://github.com/bhauman/lein-figwheel) Automatically
-  reload your ClojureScript and CSS as soon as you save the file, no need
-  for browser refresh.
-* [Weasel](https://github.com/tomjakubowski/weasel) Next generation browser
-  connected REPL. Try things out and manipulate your running app.
+  reload your ClojureScript and CSS as soon as you save the file, no
+  need for browser refresh.
+* [Weasel](https://github.com/tomjakubowski/weasel) Next generation
+  browser connected REPL. Try things out and manipulate your running
+  app.
 * [Om](https://github.com/swannodette/om) ClojureScript interface to
   Facebook's React.
 * [Ring](https://github.com/ring-clojure/ring) Clojure's de facto HTTP
@@ -61,19 +64,30 @@ Clojure/ClojureScript apps effectively. It comes with
 
 ## Options
 
-* `--http-kit` Use [HTTP Kit](http://http-kit.org/server.html) instead of Jetty
-* `--site-middleware` Use the `compojure.handler.site` middleware (session, CSRF), instead of `compojure.handler.api` (see [compojure.handler documentation](http://weavejester.github.io/compojure/compojure.handler.html))
-* `--om-tools` Use Prismatic's [om-tools.dom](https://github.com/Prismatic/om-tools) instead of `om.dom`
-* `--cljx` Using [cljx](https://github.com/lynaghk/cljx) allows you to write code that is shared between Clojure and ClojureScript.
-* `--less` Use [less](https://github.com/montoux/lein-less) for compiling Less CSS files.
-* `--sass` Use [sass](https://github.com/aew/lein-sassc) for compiling Sass CSS files (requires sassc-3.0.2 to be installed).
-* `--speclj` Use [speclj](http://speclj.com) test runner for clj and cljs.
+* `--http-kit` Use [HTTP Kit](http://http-kit.org/server.html) instead
+  of Jetty
+* `--site-middleware` Use the `compojure.handler.site` middleware
+  (session, CSRF), instead of `compojure.handler.api` (see
+  [compojure.handler documentation](http://weavejester.github.io/compojure/compojure.handler.html))
+* `--om-tools` Use Prismatic's
+  [om-tools.dom](https://github.com/Prismatic/om-tools) instead of
+  `om.dom`
+* `--cljx` Using [cljx](https://github.com/lynaghk/cljx) allows you to
+  write code that is shared between Clojure and ClojureScript.
+* `--less` Use [less](https://github.com/montoux/lein-less) for
+  compiling Less CSS files.
+* `--sass` Use [sass](https://github.com/aew/lein-sassc) for compiling
+  Sass CSS files (requires sassc-3.0.2 to be installed).
+* `--speclj` Use [speclj](http://speclj.com) test runner for clj and
+  cljs.
 
-Use `--` to separate these options from Leiningen's options, e.g. `lein new chestnut foo -- --om-tools --http-kit`
+Use `--` to separate these options from Leiningen's options,
+e.g. `lein new chestnut foo -- --om-tools --http-kit`
 
 ## Local copy
 
-If you want to customize Chestnut, or try unreleased features, you can run directly from master like this:
+If you want to customize Chestnut, or try unreleased features, you can
+run directly from master like this:
 
 ``` sh
 git clone https://github.com/plexus/chestnut.git
@@ -81,7 +95,10 @@ cd chestnut
 lein install
 ```
 
-Note that master may be partially or wholly broken. I try to do extensive manual testing before releasing a new stable version, so if you don't like surprises then stick to the version on Clojars. Issue reports and pull requests are very welcome.
+Note that master may be partially or wholly broken. I try to do
+extensive manual testing before releasing a new stable version, so if
+you don't like surprises then stick to the version on Clojars. Issue
+reports and pull requests are very welcome.
 
 ## Requirements
 
@@ -91,40 +108,70 @@ Note that master may be partially or wholly broken. I try to do extensive manual
 ## FAQ
 
 * **Q:** How can I get the features in the SNAPSHOT version? <br>
-  **A:** Use leiningen's `--snapshot` flag, e.g. `lein new chestnut my-project --snapshot`
+**A:** Use leiningen's `--snapshot` flag, e.g. `lein new chestnut
+my-project --snapshot`
 * **Q:** I'm seeing warnings while compiling ClojureScript. <br>
-  **A:** There are a few known warnings, but they should not affect the functioning of your app.
-* **Q:** I changed the `{:text "Hello Chestnut!"}` portion and saved the file, but the changes don't show up. <br>
-  **A:** It's a feature. The `app-state` is defined with `defonce`, so your application state doesn't reset every time you save a file. If you do want to reset after every change, change `(defonce app-state ..)` to `(def app-state ...)`.
-* **Q:** I just want to compile ClojureScript to fully optimized JavaScript, so I can use it in a static HTML site. <br>
-  **A:** Invoke cljsbuild with the uberjar profile active, like this: `lein with-profile -dev,+uberjar cljsbuild once`, then look for `resources/public/js/app.js`.
-* **Q** I'm getting `CompilerException java.lang.IllegalAccessError: in-seconds does not exist` when using Spyscope 0.1.4 or earlier.<br>
-  **A** Upgrade to [Spyscope 0.1.5](https://github.com/dgrnbrg/spyscope/issues/15), this issue is caused by an outdated dependency on cljs-time.
-* **Q** I upgraded the version of Om in project.clj, but it seems I'm still using the old version, what's up?<br>
-  **A** If you already did a build before, cljsbuild/figwheel won't pick up on the updated version automatically. Do a `lein cljsbuild clean`, then start Figwheel again.
+**A:** There are a few known warnings, but they should not affect the
+functioning of your app.
+* **Q:** I changed the `{:text "Hello Chestnut!"}` portion and saved
+the file, but the changes don't show up. <br> **A:** It's a
+feature. The `app-state` is defined with `defonce`, so your
+application state doesn't reset every time you save a file. If you do
+want to reset after every change, change `(defonce app-state ..)` to
+`(def app-state ...)`.
+* **Q:** I just want to compile ClojureScript to fully optimized
+JavaScript, so I can use it in a static HTML site. <br> **A:** Invoke
+cljsbuild with the uberjar profile active, like this: `lein
+with-profile -dev,+uberjar cljsbuild once`, then look for
+`resources/public/js/app.js`.
+* **Q** I'm getting `CompilerException java.lang.IllegalAccessError:
+in-seconds does not exist` when using Spyscope 0.1.4 or earlier.<br>
+**A** Upgrade to
+[Spyscope 0.1.5](https://github.com/dgrnbrg/spyscope/issues/15), this
+issue is caused by an outdated dependency on cljs-time.
+* **Q** I upgraded the version of Om in project.clj, but it seems I'm
+still using the old version, what's up?<br> **A** If you already did a
+build before, cljsbuild/figwheel won't pick up on the updated version
+automatically. Do a `lein cljsbuild clean`, then start Figwheel again.
 
 ## Changelog
 
 ### v0.7.0
 
-* Add support for the LESS CSS pre-processor ([Denis Golovnev](https://github.com/teur))
-* Make weasel print both to the REPL and the browser console ([Marcus Lewis](https://github.com/mrcslws))
-* Enable auto-reload of enlive templates in dev mode ([Ray H](https://github.com/rymndhng))
-* Add support for the SASS CSS pre-processor ([Edward Wible](https://github.com/aew)
+* Make weasel print both to the REPL and the browser console
+  ([Marcus Lewis](https://github.com/mrcslws))
+* Add support for the LESS CSS pre-processor
+  ([Denis Golovnev](https://github.com/teur))
+* Enable auto-reload of enlive templates in dev mode
+  ([Ray H](https://github.com/rymndhng))
+* Add support for the SASS CSS pre-processor
+  ([Edward Wible](https://github.com/aew)
 * Add suport for Speclj ([Edward Wible](https://github.com/aew)
-* Switch from the deprecated compojure.handler to ring-defaults [zakak](https://github.com/zakak)
-* Keep dev dependencies (Leiningen, Figwheel, Weasel, Speclj) out of the Uberjar
-* Automatically switch the browser-repl to the right namespace, instead of `cljs.user`
+* Switch from the deprecated compojure.handler to ring-defaults
+  [zakak](https://github.com/zakak)
+* Keep dev dependencies (Leiningen, Figwheel, Weasel, Speclj) out of
+  the Uberjar
+* Automatically switch the browser-repl to the right namespace after
+  starting up, instead of `cljs.user`
+* No longer include lein-ancient, easy enough to add for those that
+want it
+* Update Ring: 1.3.1 => 1.3.2
+* Update Figwheel: 0.1.4-SNAPSHOT => 0.1.6-SNAPSHOT
+* Update Weasel 0.4.0-SNAPSHOT => 0.4.2
 
 ### v0.6.0
 
-* Add optional support for CLJX ([Olli Piepponen](https://github.com/luxbock))
-* Support generation of projects named using the groupId/artifactId convention (e.g. com.example/foo) ([Steeve Beliveau](https://github.com/stebel))
+* Add optional support for CLJX
+  ([Olli Piepponen](https://github.com/luxbock))
+* Support generation of projects named using the groupId/artifactId
+  convention (e.g. com.example/foo)
+  ([Steeve Beliveau](https://github.com/stebel))
 
 ### v0.5.0
 
 * Run figwheel inside `(run)` so we only need one process
-* Configure figwheel's CSS reloading and load a placeholder `style.css`
+* Configure figwheel's CSS reloading and load a placeholder
+  `style.css`
 * Refresh Om when Figwheel reloads
 * Update ClojureScript: 0.0-2342 => 0.0-2371
 * Update Compojure: 1.1.9 => 1.2.0
@@ -163,7 +210,12 @@ I used the
 that's included with [Austin](https://github.com/cemerick/austin) as a
 starting point, then pulled in bits from
 [cljs-liveedit-webapp](https://github.com/ejlo/cljs-liveedit-webapp)
-until things worked. Figwheel's [Flappy Bird Demo app](https://github.com/bhauman/flappy-bird-demo) also provided some ideas. The concept of refreshing Om when Figwheel reloads was taken from [this blog post](http://blog.michielborkent.nl/blog/2014/09/25/figwheel-keep-Om-turning/) by [Michiel Borkent](https://github.com/borkdude).
+until things worked. Figwheel's
+[Flappy Bird Demo app](https://github.com/bhauman/flappy-bird-demo)
+also provided some ideas. The concept of refreshing Om when Figwheel
+reloads was taken from
+[this blog post](http://blog.michielborkent.nl/blog/2014/09/25/figwheel-keep-Om-turning/)
+by [Michiel Borkent](https://github.com/borkdude).
 
 For Heroku support I looked at Heroku's
 [clojure-getting-started](https://github.com/heroku/clojure-getting-started)
