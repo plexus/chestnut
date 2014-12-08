@@ -57,7 +57,7 @@ Clojure/ClojureScript apps effectively. It comes with
 ## Options
 
 * `--http-kit` Use [HTTP Kit](http://http-kit.org/server.html) instead of Jetty
-* `--site-middleware` Use the `compojure.handler.site` middleware (session, CSRF), instead of `compojure.handler.api` (see [compojure.handler documentation](http://weavejester.github.io/compojure/compojure.handler.html))
+* `--site-middleware` Use the `ring.middleware.defaults.site-defaults` middleware (session, CSRF), instead of `ring.middleware.defaults.api-defaults` (see [ring-defaults documentation](https://github.com/ring-clojure/ring-defaults))
 * `--om-tools` Use Prismatic's [om-tools.dom](https://github.com/Prismatic/om-tools) instead of `om.dom`
 * `--cljx` Using [cljx](https://github.com/lynaghk/cljx) allows you to write code that is shared between Clojure and ClojureScript.
 * `--less` Use [less](https://github.com/montoux/lein-less) for compiling Less CSS files.
