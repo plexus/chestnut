@@ -2,6 +2,8 @@
 
 [![Clojars Project](http://clojars.org/chestnut/lein-template/latest-version.svg)](http://clojars.org/chestnut/lein-template)
 
+![Mr. Chestnut](resources/chestnut.png)
+
 A Leiningen template for a Clojure/ClojureScript app based on Om,
 featuring a great dev setup, and easy deployment.
 
