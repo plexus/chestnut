@@ -39,9 +39,6 @@
 (defn speclj? [opts]
   (some #{"--speclj"} opts))
 
-(def cljx-source-paths
-)
-
 (defn server-clj-requires [opts]
   (if (http-kit? opts)
     ["org.httpkit.server :refer [run-server]"]
