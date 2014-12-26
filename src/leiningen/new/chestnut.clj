@@ -125,6 +125,7 @@
            "env/prod/cljs/chestnut/prod.cljs"
            "LICENSE"
            "README.md"
+           "code_of_conduct.md"
            ".gitignore"
            "system.properties"
            "Procfile"]
