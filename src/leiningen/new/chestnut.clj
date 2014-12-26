@@ -2,7 +2,8 @@
   (:require [leiningen.new.templates :refer [renderer name-to-path ->files
                                              sanitize sanitize-ns project-name]]
             [leiningen.core.main :as main]
-            [clojure.string :as s]))
+            [clojure.string :as s]
+            [clojure.java.io :as io]))
 
 (def render (renderer "chestnut"))
 
@@ -74,9 +75,24 @@
   (cond-> []
           (cljx? opts) (conj "cljx.repl-middleware/wrap-cljx")))
 
+(defn load-props [file-name]
+  (with-open [^java.io.Reader reader (clojure.java.io/reader file-name)]
+    (let [props (java.util.Properties.)]
+      (.load props reader)
+      (into {} (for [[k v] props] [(keyword k) v])))))
+
+(defn chestnut-version []
+  (let [props (load-props (io/resource "META-INF/maven/chestnut/lein-template/pom.properties"))
+        version (:version props)
+        revision (:revision props)
+        snapshot? (re-find #"SNAPSHOT" version)]
+
+    (str version (if snapshot? (str " (" (s/join (take 8 revision)) ")")))))
+
 (defn template-data [name opts]
   {:full-name name
    :name                 (project-name name)
+   :chestnut-version     (chestnut-version)
    :project-goog-module  (sanitize (sanitize-ns name))
    :project-ns           (sanitize-ns name)
    :sanitized            (name-to-path name)
