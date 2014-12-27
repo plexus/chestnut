@@ -61,19 +61,19 @@
                    :cljsbuild {:builds
                                {:app
                                 {:source-paths ["env/dev/cljs"]}{{#speclj?}}
-                                :dev {:source-paths ["src/cljs"  "spec/cljs"]
-                                      :compiler {:output-to     "resources/public/js/app_spec.js"
-                                                 :output-dir    "resources/public/js/spec"
-                                                 :source-map    "resources/public/js/spec.js.map"
-                                                 :preamble      ["react/react.min.js"]
-                                                 :externs       ["react/externs/react.js"]
-                                                 :optimizations :whitespace
-                                                 :pretty-print  false}
-                                      :notify-command ["phantomjs"  "bin/speclj" "resources/public/js/app_spec.js"]}{{/speclj?}}}}{{#speclj?}}
+                                 :dev {:source-paths ["src/cljs"  "spec/cljs"]
+                                       :compiler {:output-to     "resources/public/js/app_spec.js"
+                                                  :output-dir    "resources/public/js/spec"
+                                                  :source-map    "resources/public/js/spec.js.map"
+                                                  :preamble      ["react/react.min.js"]
+                                                  :externs       ["react/externs/react.js"]
+                                                  :optimizations :whitespace
+                                                  :pretty-print  false}
+                                       :notify-command ["phantomjs"  "bin/speclj" "resources/public/js/app_spec.js"]}{{/speclj?}}}}{{#speclj?}}
 
-                   :test-commands {"spec" ["phantomjs" "bin/speclj" "resources/public/js/app_spec.js"]}{{/speclj?}}{{#cljx-hook?}}
+                   :test-commands {"spec" ["phantomjs" "bin/speclj" "resources/public/js/app_spec.js"]}{{/speclj?}}
 
-                   :hooks [cljx.hooks]{{/cljx-hook?}}{{#cljx-build?}}
+                   :hooks [{{{project-dev-hooks}}}]{{#cljx-build?}}
 
                    :cljx {:builds [{:source-paths ["src/cljx"]
                                     :output-path "target/generated/clj"
@@ -83,7 +83,7 @@
                                     :rules :cljs}]}{{/cljx-build?}}}
 
              :uberjar {:source-paths ["env/prod/clj"]
-                       :hooks [{{{cljx-uberjar-hook}}}leiningen.cljsbuild {{{less-hook}}} {{{sass-hook}}}]
+                       :hooks [{{{project-uberjar-hooks}}}]
                        :env {:production true}
                        :omit-source true
                        :aot :all
