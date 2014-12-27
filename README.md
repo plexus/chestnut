@@ -138,7 +138,19 @@ reports and pull requests are very welcome.
 
 ## Changelog
 
-### v0.7.0-SNAPSHOT
+### master
+
+* Validate command line arguments
+* Mention Chestnut version in the generated README
+
+### v0.7.0-SNAPSHOT-20141226
+
+* Update Clojurescript: 0.0-2371 =>  0.0-2496
+* Update Compojure: 1.2.0 =>  1.3.1
+* Update Om: 0.7.0 =>  0.8.0-beta3
+* Fixes for regressions [#65](https://github.com/plexus/chestnut/pull/65) [#57](https://github.com/plexus/chestnut/pull/57)
+
+### v0.7.0-SNAPSHOT-20141207
 
 * Make weasel print both to the REPL and the browser console
   ([Marcus Lewis](https://github.com/mrcslws))
@@ -159,7 +171,7 @@ reports and pull requests are very welcome.
   want it
 * Update Ring: 1.3.1 => 1.3.2
 * Update Figwheel: 0.1.4-SNAPSHOT => 0.1.6-SNAPSHOT
-* Update Weasel 0.4.0-SNAPSHOT => 0.4.2
+* Update Weasel: 0.4.0-SNAPSHOT => 0.4.2
 
 ### v0.6.0
 
