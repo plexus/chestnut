@@ -22,17 +22,19 @@
     (reload/wrap-reload (wrap-defaults #'routes {{ring-defaults}}))
     (wrap-defaults routes {{ring-defaults}})))
 
+(defn run-web-server [& [port]]
+  (let [port (Integer. (or port (env :port) 10555))]
+    (print "Starting web server on port" port ".\n")
+    ({{server-command}} http-handler {:port port :join? false})))
+
+(defn run-auto-reload [& [port]]
+  (auto-reload *ns*)
+  (start-figwheel){{less-sass-start}})
+
 (defn run [& [port]]
-  (defonce ^:private server
-    (do
-      (when is-dev?
-        (auto-reload *ns*)
-        (start-figwheel){{less-start}}{{sass-start}})
-      (let [port (Integer. (or port (env :port) 10555))]
-        (print "Starting web server on port" port ".\n")
-        ({{server-command}} http-handler {:port port
-                          :join? false}))))
-  server)
+  (when is-dev?
+    (run-auto-reload))
+  (run-web-server port))
 
 (defn -main [& [port]]
   (run port))
