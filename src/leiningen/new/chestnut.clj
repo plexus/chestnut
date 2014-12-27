@@ -19,26 +19,13 @@
 (defn indent [n list]
   (wrap-indent identity n list))
 
-(defn http-kit? [opts]
-  (some #{"--http-kit"} opts))
+(def valid-options
+  ["http-kit" "site-middleware" "om-tools" "cljx" "less" "sass" "speclj"])
 
-(defn site-middleware? [opts]
-  (some #{"--site-middleware"} opts))
-
-(defn om-tools? [opts]
-  (some #{"--om-tools"} opts))
-
-(defn cljx? [opts]
-  (some #{"--cljx"} opts))
-
-(defn less? [opts]
-  (some #{"--less"} opts))
-
-(defn sass? [opts]
-  (some #{"--sass"} opts))
-
-(defn speclj? [opts]
-  (some #{"--speclj"} opts))
+(doseq [opt valid-options]
+  (eval
+   `(defn ~(symbol (str opt "?")) [opts#]
+     (some #{~(str "--" opt)} opts#))))
 
 (defn server-clj-requires [opts]
   (if (http-kit? opts)
@@ -162,6 +149,10 @@
     (cons data (map render-file (files-to-render opts)))))
 
 (defn chestnut [name & opts]
+  (let [valid-opts (map (partial str "--") valid-options)]
+    (doseq [opt opts]
+      (if (not (some #{opt} valid-opts))
+        (apply main/abort "Unrecognized option:" opt ". Should be one of" valid-opts))))
   (main/info "Generating fresh Chestnut project.")
   (main/info "README.md contains instructions to get you started.")
   (apply ->files (format-files-args name opts)))
