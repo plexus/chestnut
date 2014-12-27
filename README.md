@@ -78,8 +78,6 @@ Clojure/ClojureScript apps effectively. It comes with
   write code that is shared between Clojure and ClojureScript.
 * `--less` Use [less](https://github.com/montoux/lein-less) for
   compiling Less CSS files.
-* `--sass` Use [sass](https://github.com/aew/lein-sassc) for compiling
-  Sass CSS files (requires sassc-3.0.2 to be installed).
 * `--speclj` Use [speclj](http://speclj.com) test runner for clj and
   cljs.
 
@@ -142,6 +140,8 @@ reports and pull requests are very welcome.
 
 * Validate command line arguments
 * Mention Chestnut version in the generated README
+* Fix om-tools support
+* SASSC support is now considered undocumented and unsupported
 
 ### v0.7.0-SNAPSHOT-20141226
 

@@ -105,6 +105,23 @@ To autotest Clojurescript code using specljs:
 
     lein cljsbuild auto dev
 {{/speclj?}}
+{{#sass?}}
+## SASS
+
+Currently SASS support in Chestnut depends on SASSC, a C-based SASS
+implementation. You will likely have to build the `sassc` binary from
+source. This is an advanced, undocumented Chestnut feature. See also
+
+https://github.com/plexus/chestnut/issues/70
+
+To compile your SCSS stylesheets to CSS, issue
+
+    lein sassc once
+
+To automatically recompile when files change, you can use
+
+    lein auto sassc
+{{/sass?}}
 
 ## License
 
