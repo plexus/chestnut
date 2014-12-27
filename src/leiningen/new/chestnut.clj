@@ -53,10 +53,6 @@
                              "lein-auto \"0.1.1\"")
           (less? opts) (conj "lein-less \"1.7.2\"")))
 
-(defn project-dev-hooks [opts]
-  (cond-> []
-          (cljx? opts) (conj "cljx.hooks")))
-
 (defn project-uberjar-hooks [opts]
   (cond-> ["leiningen.cljsbuild"]
           (cljx? opts) (conj "cljx.hooks")
@@ -66,7 +62,7 @@
 (defn project-dev-plugins [opts]
   (cond-> []
           (speclj? opts) (conj "speclj \"3.1.0\"")
-          (cljx? opts) (conj "com.keminglabs/cljx \"0.4.0\" :exclusions [org.clojure/clojure]")))
+          (cljx? opts) (conj "com.keminglabs/cljx \"0.5.0\" :exclusions [org.clojure/clojure]")))
 
 (defn project-nrepl-middleware [opts]
   (cond-> []
@@ -100,32 +96,29 @@
    :project-plugins      (dep-list 12 (project-plugins opts))
    :project-dev-plugins  (dep-list 29 (project-dev-plugins opts))
    :project-dev-deps     (dep-list 34 (project-dev-deps opts))
-   :project-dev-hooks    (s/join " " (project-dev-hooks opts))
    :project-uberjar-hooks (s/join " " (project-uberjar-hooks opts))
 
    :nrepl-middleware     (indent 53 (project-nrepl-middleware opts))
    :server-command       (if (http-kit? opts) "run-server" "run-jetty")
    :ring-defaults        (if (site-middleware? opts) "site-defaults" "api-defaults")
+
+   ;; features
    :not-om-tools?        (fn [block] (if (om-tools? opts) "" block))
+   :speclj?              (fn [block] (if (speclj? opts) (str "\n" block) ""))
+   :sass?                (fn [block] (if (sass? opts) (str "\n" block) ""))
+   :less?                (fn [block] (if (less? opts) (str "\n" block) ""))
+   :cljx?                (fn [block] (if (cljx? opts) (str "\n" block) ""))
+
+   ;; stylesheets
+   :less-sass-refer      (cond (sass? opts) " start-sass"
+                               (less? opts) " start-less")
+   :less-sass-start      (cond (sass? opts) "\n  (start-sass)"
+                               (less? opts) "\n  (start-less)")
 
    ;; cljx
    :project-source-paths (if (cljx? opts) " \"target/generated/clj\" \"target/generated/cljx\"" "")
    :cljx-extension       (if (cljx? opts) "|\\.cljx")
-   :cljx-cljsbuild-spath (if (cljx? opts) " \"target/generated/cljs\"" "")
-   :cljx-build?          (fn [block] (if (cljx? opts) (str block "\n") ""))
-
-   ;; tests
-   :speclj?              (fn [block] (if (speclj? opts) (str "\n" block) ""))
-
-   ;; sass stylesheets
-   :sass?                (fn [block] (if (sass? opts) (str "\n" block) ""))
-   :sass-refer           (if (sass? opts) " start-sass" "")
-   :sass-start           (if (sass? opts) "\n        (start-sass)" "")
-
-   ;; less stylesheets
-   :less?                (fn [block] (if (less? opts) (str "\n" block) ""))
-   :less-refer           (if (less? opts) " start-less" "")
-   :less-start           (if (less? opts) "\n        (start-less)" "")})
+   :cljx-cljsbuild-spath (if (cljx? opts) " \"target/generated/cljs\"" "")})
 
 (defn files-to-render [opts]
   (cond-> ["project.clj"

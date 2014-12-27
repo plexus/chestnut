@@ -71,16 +71,15 @@
                                                   :pretty-print  false}
                                        :notify-command ["phantomjs"  "bin/speclj" "resources/public/js/app_spec.js"]}{{/speclj?}}}}{{#speclj?}}
 
-                   :test-commands {"spec" ["phantomjs" "bin/speclj" "resources/public/js/app_spec.js"]}{{/speclj?}}
-
-                   :hooks [{{{project-dev-hooks}}}]{{#cljx-build?}}
+                   :test-commands {"spec" ["phantomjs" "bin/speclj" "resources/public/js/app_spec.js"]}{{/speclj?}}{{#cljx?}}
+                   :prep-tasks [["cljx" "once"] "javac" "compile"]
 
                    :cljx {:builds [{:source-paths ["src/cljx"]
                                     :output-path "target/generated/clj"
                                     :rules :clj}
                                    {:source-paths ["src/cljx"]
                                     :output-path "target/generated/cljs"
-                                    :rules :cljs}]}{{/cljx-build?}}}
+                                    :rules :cljs}]}{{/cljx?}}}
 
              :uberjar {:source-paths ["env/prod/clj"]
                        :hooks [{{{project-uberjar-hooks}}}]
