@@ -159,7 +159,7 @@
   (main/info "Generating fresh Chestnut project.")
   (main/info "README.md contains instructions to get you started.")
 
-  (if (sass? opts)
+  (when (sass? opts)
     (main/info "WARNING: You have enabled SASS support, which relies on the sassc binary")
     (main/info "WARNING: being available on your system. This is an advanced, undocumented")
     (main/info "WARNING: feature. In other words: you're on your own."))
