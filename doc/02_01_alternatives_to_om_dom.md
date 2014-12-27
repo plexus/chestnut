@@ -10,7 +10,7 @@ Prismatic to make writing Om components easier.
 First, in `project.clj`, add `om-tools` as a dependency
 
 ``` clojure
-  :dependencies [# ...
+  :dependencies [;; ...
                  [prismatic/om-tools "0.3.9" :exclusions [potemkin]]]
 ```
 
@@ -38,7 +38,7 @@ Have a look at the [om-tools.dom docs](https://github.com/Prismatic/om-tools#dom
 First, in `project.clj`, add `sablono` as a dependency
 
 ``` clojure
-  :dependencies [# ...
+  :dependencies [;; ...
                  [sablono "0.2.22"]]
 ```
 
