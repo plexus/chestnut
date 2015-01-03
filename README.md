@@ -136,7 +136,7 @@ reports and pull requests are very welcome.
 
 ## Changelog
 
-### master
+### v0.7.0-SNAPSHOT-20150103
 
 * Validate command line arguments
 * Mention Chestnut version in the generated README
