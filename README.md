@@ -141,14 +141,17 @@ reports and pull requests are very welcome.
 * Validate command line arguments
 * Mention Chestnut version in the generated README
 * Fix om-tools support
-* SASSC support is now considered undocumented and unsupported
+* SASSC support has been fixed, but is considered undocumented and unsupported
+* Update Om: 0.7.0 =>  0.8.0-beta5
+* Add Code of Conduct to generated projects
+* Update CLJX: 0.4.0 =>  0.5.0
 
 ### v0.7.0-SNAPSHOT-20141226
 
 * Update Clojurescript: 0.0-2371 =>  0.0-2496
 * Update Compojure: 1.2.0 =>  1.3.1
 * Update Om: 0.7.0 =>  0.8.0-beta3
-* Fixes for regressions [#65](https://github.com/plexus/chestnut/pull/65) [#57](https://github.com/plexus/chestnut/pull/57)
+* Fixes for regressions: [#65](https://github.com/plexus/chestnut/pull/65) [#57](https://github.com/plexus/chestnut/pull/57)
 
 ### v0.7.0-SNAPSHOT-20141207
 
@@ -159,10 +162,10 @@ reports and pull requests are very welcome.
 * Enable auto-reload of enlive templates in dev mode
   ([Ray H](https://github.com/rymndhng))
 * Add support for the SASS CSS pre-processor
-  ([Edward Wible](https://github.com/aew)
-* Add suport for Speclj ([Edward Wible](https://github.com/aew)
+  ([Edward Wible](https://github.com/aew))
+* Add suport for Speclj ([Edward Wible](https://github.com/aew))
 * Switch from the deprecated compojure.handler to ring-defaults
-  [zakak](https://github.com/zakak)
+  [zakak](https://github.com/zakak))
 * Keep dev dependencies (Leiningen, Figwheel, Weasel, Speclj) out of
   the Uberjar
 * Automatically switch the browser-repl to the right namespace after
