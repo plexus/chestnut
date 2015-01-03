@@ -9,7 +9,7 @@
   :test-paths ["spec/clj"]
 
   :dependencies [[org.clojure/clojure "1.6.0"]
-                 [org.clojure/clojurescript "0.0-2496" :scope "provided"]
+                 [org.clojure/clojurescript "0.0-2644" :scope "provided"]
                  [ring "1.3.2"]
                  [ring/ring-defaults "0.1.2"]
                  [compojure "1.3.1"]
