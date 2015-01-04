@@ -29,7 +29,6 @@
                                         :output-dir    "resources/public/js/out"
                                         :source-map    "resources/public/js/out.js.map"
                                         :preamble      ["react/react.min.js"]
-                                        :externs       ["react/externs/react.js"]
                                         :optimizations :none
                                         :pretty-print  true}}}}{{#less?}}
 
