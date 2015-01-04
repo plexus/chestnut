@@ -1,5 +1,17 @@
 # Changelog
 
+### v0.7.0-SNAPSHOT-20150103
+
+* Validate command line arguments
+* Mention Chestnut version in the generated README
+* Fix om-tools support
+* SASSC support has been fixed, but is considered undocumented and unsupported
+* Update Om: 0.7.0 =>  0.8.0-rc1
+* Add Code of Conduct to generated projects
+* Update CLJX: 0.4.0 =>  0.5.0
+* Update Clojurescript: 0.0-2496 => 0.0-2644
+* Fixes for regressions: [#71](https://github.com/plexus/chestnut/pull/71)
+
 ## v0.7.0-SNAPSHOT-20141226
 
 * Update Clojurescript: 0.0-2371 =>  0.0-2496
