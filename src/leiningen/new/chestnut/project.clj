@@ -37,7 +37,16 @@
 
   :sassc [{:src "src/scss/style.scss"
            :output-to "resources/public/css/style.css"}]
-  :auto {"sassc"  {:file-pattern  #"\.(scss)$"}}{{/sass?}}
+  :auto {"sassc"  {:file-pattern  #"\.(scss)$"}}{{/sass?}}{{#cljx?}}
+
+  :prep-tasks [["cljx" "once"] "javac" "compile"]
+
+  :cljx {:builds [{:source-paths ["src/cljx"]
+                   :output-path "target/generated/clj"
+                   :rules :clj}
+                  {:source-paths ["src/cljx"]
+                   :output-path "target/generated/cljs"
+                   :rules :cljs}]}{{/cljx?}}
 
   :profiles {:dev {:source-paths ["env/dev/clj"]
 
@@ -70,15 +79,7 @@
                                                   :pretty-print  false}
                                        :notify-command ["phantomjs"  "bin/speclj" "resources/public/js/app_spec.js"]}{{/speclj?}}}}{{#speclj?}}
 
-                   :test-commands {"spec" ["phantomjs" "bin/speclj" "resources/public/js/app_spec.js"]}{{/speclj?}}{{#cljx?}}
-                   :prep-tasks [["cljx" "once"] "javac" "compile"]
-
-                   :cljx {:builds [{:source-paths ["src/cljx"]
-                                    :output-path "target/generated/clj"
-                                    :rules :clj}
-                                   {:source-paths ["src/cljx"]
-                                    :output-path "target/generated/cljs"
-                                    :rules :cljs}]}{{/cljx?}}}
+                   :test-commands {"spec" ["phantomjs" "bin/speclj" "resources/public/js/app_spec.js"]}{{/speclj?}}}
 
              :uberjar {:source-paths ["env/prod/clj"]
                        :hooks [{{{project-uberjar-hooks}}}]

@@ -55,7 +55,6 @@
 
 (defn project-uberjar-hooks [opts]
   (cond-> ["leiningen.cljsbuild"]
-          (cljx? opts) (conj "cljx.hooks")
           (less? opts) (conj "leiningen.less")
           (sass? opts) (conj "leiningen.sassc")))
 
