@@ -1,10 +1,20 @@
 (ns chestnut.test.integration
-  (:import [java.lang ProcessBuilder]
+  (:refer-clojure :exclude [assert])
+  (:import [java.lang AssertionError]
            [java.io InputStream OutputStream Writer Reader]
-           [expect4j Expect4j])
-  (:require [clojure.test :refer [deftest is run-tests]]
-            [clojure.java.io :as io]
+           [java.nio.channels Channels Selector SelectionKey]
+           [java.nio ByteBuffer CharBuffer]
+           [expect4j Expect4j]
+           [jnr.posix POSIXFactory POSIX])
+  (:require [clojure.java.io :as io]
+            [clojure.string :as string]
             [expect4clj :refer [glob-match eof-match regex-match expect]]))
+
+(def pids (atom []))
+
+(defmacro assert [bool]
+  `(when (not ~bool)
+     (throw (AssertionError. (str "Assertion failed: " ~bool)))))
 
 (defn process-builder [& args]
   (ProcessBuilder. args))
@@ -15,15 +25,18 @@
 (defn set-dir! [process dir]
   (.directory process (io/file dir)))
 
+(defn make-process-map [process]
+  {:process process
+   :out (.getInputStream process)
+   :err (.getErrorStream process)
+   :in (.getOutputStream process)
+   :writer (io/writer (.getOutputStream process))})
+
 (defn start-process [pb]
-  (let [process (.start pb)]
-    {:out (-> process
-              (.getInputStream))
-     :err (-> process
-              (.getErrorStream))
-     :in (-> process
-             (.getOutputStream))
-     :process process}))
+  (let [process (.start pb)
+        pmap (make-process-map process)]
+    (swap! pids conj pmap)
+    pmap))
 
 (defn rm-rf [fname]
   (let [func (fn [func f]
@@ -33,17 +46,32 @@
                (io/delete-file f))]
     (func func (io/file fname))))
 
-(defn generate-app []
+(defn start-lein-new []
   (rm-rf "/tmp/sesame-seed")
   (-> (process-builder "lein" "new" "chestnut" "sesame-seed" "--snapshot")
       (set-dir! "/tmp")
       (start-process)
       ((juxt (comp slurp :out) (comp slurp :err)))))
 
-(deftest generating-app
-  (let [[out err] (generate-app)]
-    (is (= "Generating fresh Chestnut project.\nREADME.md contains instructions to get you started.\n" out))
-    (is (= "" err))))
+(defn start-repl []
+    (-> (process-builder "lein" "repl")
+        (set-dir! "/tmp/sesame-seed")
+        (start-process)))
+
+(defn do-repl-run [repl]
+  (expect (expect4j repl)
+       (regex-match "^.*$" [e]
+                    (println (str "> " (.getMatch e))))
+       (regex-match "app\\.js" [e]
+                    (println "go app.js!")
+                    (.write (:writer repl) "\u0004"))))
+
+(defn generate-app []
+  (let [[out err] (start-lein-new)]
+    (assert (= "Generating fresh Chestnut project.\nREADME.md contains instructions to get you started.\n" out))
+    (assert (= "" err))))
+
+
 
 #_(run-tests 'chestnut.test.integration)
 
@@ -76,3 +104,14 @@
          (let [res (.read stream bytes)]
            (println (String. bytes off len))
            res))))))
+
+(defn posix-spawn [args env pwd]
+  "Use jnr-posix to launch a subprocess
+
+   @example
+     (posix-spawn [\"ruby\" \"-e\" \"puts 'foo'\"] [\"RUBYOPT=-w\"] \"/tmp\")"
+  (-> (POSIXFactory/getPOSIX)
+      (.newProcessMaker (into-array String args))
+      (.environment (into-array String args))
+      (.directory (io/file pwd))
+      (.start)))
