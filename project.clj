@@ -7,5 +7,6 @@
 
   :dependencies [[com.github.cverges.expect4j/expect4j "1.2"]
                  [org.clojure/core.async "0.1.346.0-17112a-alpha"]
-                 [com.github.jnr/jnr-process "1.0-SNAPSHOT"]]
+                 [com.github.jnr/jnr-process "1.0-SNAPSHOT"]
+                 [clj-webdriver "0.7.0-SNAPSHOT"]]
   :repositories [["expect4j" "https://github.com/cverges/expect4j/raw/mvn-repo"]])

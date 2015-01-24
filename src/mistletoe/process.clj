@@ -1,28 +1,46 @@
 (ns mistletoe.process
-  (:import
-   [java.nio ByteBuffer])
-  (:require
-   [clojure.core.async :refer [go-loop <!! <! >! chan put! sliding-buffer timeout]]))
+  (:import [java.nio ByteBuffer])
+  (:require [clojure.core.async :refer [go-loop <!! <! >! chan put! sliding-buffer timeout]]))
 
 (defn process [& args]
-  (jnr.process.ProcessBuilder. (into-array String args)))
+  (let [argsAry (into-array String args)
+        process (jnr.process.ProcessBuilder. argsAry)]
+    {:processBuilder process
+     :inBuf (ByteBuffer/allocate 2048)
+     :outBuf (ByteBuffer/allocate 2048)}))
 
-(defn directory [process dir]
-  (.directory process dir))
+(defn directory [processMap dir]
+  (.directory (:processBuilder processMap) dir)
+  processMap)
 
-(defn start [process]
-  (.start process))
+(defn start [processMap]
+  (let [process (.start (:processBuilder processMap))]
+    (merge
+     processMap
+     {:process process
+      :in (.getIn process)
+      :err (.getErr process)
+      :out (.getOut process)})))
 
-(defn read-str [chan buf]
-  (.clear buf)
-  (.read chan buf)
-  (String. (into-array Character/TYPE (take (.position buf) (.array buf)))))
+(defn read-str [process & stream]
+  (let [buf (:inBuf process)
+        chan ((or stream :in) process)]
+    (.clear buf)
+    (.read chan buf)
+    (String. (into-array Character/TYPE (take (.position buf) (.array buf))))))
 
-(defn write-str [chan buf exp]
-  (.clear buf)
-  (.put buf (into-array Byte/TYPE (str exp)))
-  (.flip buf)
-  (.write chan buf))
+(defn read-err [process]
+  (read-str process :err))
+
+(defn write-str [process exp]
+  (let [buf (:outBuf process)
+        chan (:out process)]
+    (.clear buf)
+    (.put buf (into-array Byte/TYPE (str exp)))
+    (.flip buf)
+    (.write chan buf)))
+
+
 
 (comment
   (def c (chan))
@@ -40,6 +58,6 @@
 
   (go-loop []
     (println "Got" (<! c))
-    (recur)))
+    (recur))
 
-(write-str (.getOut repl-process) out-buf "(run)\n")
+  (write-str (.getOut repl-process) out-buf "(run)\n"))
