@@ -67,7 +67,7 @@
                    :env {:is-dev true}
 
                    :cljsbuild { {{#speclj?}}:test-commands {"spec" ["phantomjs" "bin/speclj" "resources/public/js/app_spec.js"]}{{/speclj?}}{{#cljstest?}}
-                                :test-commands {"test" ["phantomjs" "resources/public/js/unit-test.js" "resources/public/js/unit-test.html"]}{{/cljstest?}}
+                                :test-commands {"test" ["phantomjs" "resources/private/js/unit-test.js" "resources/private/unit-test.html"]}{{/cljstest?}}
                                :builds {
                                         :app {:source-paths ["env/dev/cljs"]}{{#speclj?}}
                                         :dev {

@@ -145,8 +145,8 @@
                              "spec/cljs/chestnut/core_spec.cljs"
                              "resources/public/js/polyfill.js")
           (cljstest? opts) (conj "resources/public/js/polyfill.js"
-                                 "resources/public/js/unit-test.js"
-                                 "resources/public/js/unit-test.html"
+                                 "resources/private/js/unit-test.js"
+                                 "resources/private/unit-test.html"
                                  "test/cljs/core.cljs"
                                  "test/cljs/common.cljs"
                                  "test/cljs/test-runner.cljs")))
