@@ -97,7 +97,9 @@ Clojure/ClojureScript apps effectively. It comes with
 * `--less` Use [less](https://github.com/montoux/lein-less) for
   compiling Less CSS files.
 * `--speclj` Use [speclj](http://speclj.com) test runner for clj and
-  cljs.
+cljs.
+* `--cljstest` Use [cljs.test](https://github.com/clojure/clojurescript/blob/master/src/cljs/cljs/test.cljs)
+test runner for CLJS tests (with PhantomJS, which must be installed).
 
 Use `--` to separate these options from Leiningen's options,
 e.g. `lein new chestnut foo -- --om-tools --http-kit`
