@@ -20,7 +20,7 @@
   (wrap-indent identity n list))
 
 (def valid-options
-  ["http-kit" "site-middleware" "om-tools" "cljx" "less" "sass" "speclj"])
+  ["http-kit" "site-middleware" "om-tools" "cljx" "less" "sass" "speclj" "cljstest"])
 
 (doseq [opt valid-options]
   (eval
@@ -61,6 +61,7 @@
 (defn project-dev-plugins [opts]
   (cond-> []
           (speclj? opts) (conj "speclj \"3.1.0\"")
+          (cljstest? opts) (conj "com.cemerick/clojurescript.test \"0.3.3\"")
           (cljx? opts) (conj "com.keminglabs/cljx \"0.5.0\" :exclusions [org.clojure/clojure]")))
 
 (defn project-nrepl-middleware [opts]
@@ -107,6 +108,7 @@
    :sass?                (fn [block] (if (sass? opts) (str "\n" block) ""))
    :less?                (fn [block] (if (less? opts) (str "\n" block) ""))
    :cljx?                (fn [block] (if (cljx? opts) (str "\n" block) ""))
+   :cljstest?            (fn [block] (if (cljstest? opts) (str "\n" block) ""))
 
    ;; stylesheets
    :less-sass-refer      (cond (sass? opts) " start-sass"
@@ -141,7 +143,13 @@
           (speclj? opts) (conj "bin/speclj"
                              "spec/clj/chestnut/server_spec.clj"
                              "spec/cljs/chestnut/core_spec.cljs"
-                             "resources/public/js/polyfill.js")))
+                             "resources/public/js/polyfill.js")
+          (cljstest? opts) (conj "resources/public/js/polyfill.js"
+                                 "resources/public/js/unit-test.js"
+                                 "resources/public/js/unit-test.html"
+                                 "test/cljs/core.cljs"
+                                 "test/cljs/common.cljs"
+                                 "test/cljs/test-runner.cljs")))
 
 (defn format-files-args [name opts]
   (let [data (template-data name opts)

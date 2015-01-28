@@ -66,20 +66,26 @@
 
                    :env {:is-dev true}
 
-                   :cljsbuild {:builds
-                               {:app
-                                {:source-paths ["env/dev/cljs"]}{{#speclj?}}
-                                 :dev {:source-paths ["src/cljs"  "spec/cljs"]
-                                       :compiler {:output-to     "resources/public/js/app_spec.js"
-                                                  :output-dir    "resources/public/js/spec"
-                                                  :source-map    "resources/public/js/spec.js.map"
-                                                  :preamble      ["react/react.min.js"]
-                                                  :externs       ["react/externs/react.js"]
-                                                  :optimizations :whitespace
-                                                  :pretty-print  false}
-                                       :notify-command ["phantomjs"  "bin/speclj" "resources/public/js/app_spec.js"]}{{/speclj?}}}}{{#speclj?}}
-
-                   :test-commands {"spec" ["phantomjs" "bin/speclj" "resources/public/js/app_spec.js"]}{{/speclj?}}}
+                   :cljsbuild { {{#speclj?}}:test-commands {"spec" ["phantomjs" "bin/speclj" "resources/public/js/app_spec.js"]}{{/speclj?}}{{#cljstest?}}
+                                :test-commands {"test" ["phantomjs" "resources/public/js/unit-test.js" "resources/public/js/unit-test.html"]}{{/cljstest?}}
+                               :builds {
+                                        :app {:source-paths ["env/dev/cljs"]}{{#speclj?}}
+                                        :dev {
+                                              :source-paths ["src/cljs"  "spec/cljs"]
+                                              :compiler {:output-to     "resources/public/js/app_spec.js"
+                                                         :output-dir    "resources/public/js/spec"
+                                                         :source-map    "resources/public/js/spec.js.map"
+                                                         :preamble      ["react/react.min.js"]
+                                                         :optimizations :whitespace
+                                                         :pretty-print  false}
+                                              :notify-command ["phantomjs"  "bin/speclj" "resources/public/js/app_spec.js"]}{{/speclj?}}{{#cljstest?}}
+                                        :test {:source-paths ["src/cljs" "test/cljs"]
+                                               :compiler {:output-to     "resources/public/js/app_test.js"
+                                                          :output-dir    "resources/public/js/test"
+                                                          :source-map    "resources/public/js/test.js.map"
+                                                          :preamble      ["react/react.min.js"]
+                                                          :optimizations :whitespace
+                                                          :pretty-print  true}}{{/cljstest?}}}}}
 
              :uberjar {:source-paths ["env/prod/clj"]
                        :hooks [{{{project-uberjar-hooks}}}]
