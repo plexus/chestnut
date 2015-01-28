@@ -1,4 +1,4 @@
-(ns foobar.test.core
+(ns {{sanitized}}.test.core
   (:require-macros [cljs.test :refer (is deftest testing)])
   (:require [cljs.test]))
 

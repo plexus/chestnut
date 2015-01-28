@@ -1,4 +1,4 @@
-(ns foobar.test.common)
+(ns {{sanitized}}.test.common)
 
 (defn insert-container! [container]
   (.appendChild container (.querySelector js/document "body")))
