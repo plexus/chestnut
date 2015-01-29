@@ -14,7 +14,7 @@
      (set-attr :class "is-dev")
      (prepend (html [:script {:type "text/javascript" :src "/js/out/goog/base.js"}]))
      (prepend (html [:script {:type "text/javascript" :src "/react/react.js"}]))
-     (append  (html [:script {:type "text/javascript"} "goog.require('{{project-goog-module}}.dev')"]))))
+     (append  (html [:script {:type "text/javascript"} "goog.require('{{project-goog-module}}.main')"]))))
 
 (defn browser-repl []
   (let [repl-env (weasel/repl-env :ip "0.0.0.0" :port 9001)]

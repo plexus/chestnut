@@ -1,4 +1,4 @@
-(ns {{project-ns}}.dev
+(ns {{project-ns}}.main
   (:require [{{project-ns}}.core :as core]
             [figwheel.client :as figwheel :include-macros true]
             [cljs.core.async :refer [put!]]
