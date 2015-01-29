@@ -51,9 +51,9 @@
   :profiles {:dev {:source-paths ["env/dev/clj"]
 
                    :dependencies [[figwheel "0.2.1-SNAPSHOT"]
+                                  [figwheel-sidecar "0.2.1-SNAPSHOT"]
                                   [com.cemerick/piggieback "0.1.3"]
-                                  [weasel "0.4.2"]
-                                  [leiningen "2.5.0"]{{{project-dev-deps}}}]
+                                  [weasel "0.4.2"]{{{project-dev-deps}}}]
 
                    :repl-options {:init-ns {{project-ns}}.server
                                   :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl{{{nrepl-middleware}}}]}
