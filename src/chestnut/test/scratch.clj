@@ -1,8 +1,5 @@
-(ns user)
-(def p
-  (-> (process "lein" "repl")
-      (directory "/tmp/sesame-seed")
-      (start)))
+
+
 
 (comment
   (ns chestnut.test.integration

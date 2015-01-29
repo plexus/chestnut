@@ -22,7 +22,7 @@
       :err (.getErr process)
       :out (.getOut process)})))
 
-(defn read-str [process & stream]
+(defn read-str [process & [stream]]
   (let [buf (:inBuf process)
         chan ((or stream :in) process)]
     (.clear buf)
@@ -40,7 +40,19 @@
     (.flip buf)
     (.write chan buf)))
 
+(defn start-pipe [process & [stream]]
+  (let [c (chan 10)
+        stream (or stream :in)]
+    (go-loop []
+      (>! c (read-str process stream))
+      (recur))
+    (assoc process (keyword (str stream "Chan")) c)))
 
+(defn kill [{:process process} & [signal]]
+  (.kill process (or signal 9)))
+
+(defn waitFor [{:process process}]
+  (.waitFor process))
 
 (comment
   (def c (chan))
