@@ -9,8 +9,8 @@
             [ring.middleware.defaults :refer [wrap-defaults {{ring-defaults}}]]
             [environ.core :refer [env]]{{{server-clj-requires}}}))
 
-(deftemplate page
-  (io/resource "index.html") [] [:body] (if is-dev? inject-devmode-html identity))
+(deftemplate page (io/resource "index.html") []
+  [:body] (if is-dev? inject-devmode-html identity))
 
 (defroutes routes
   (resources "/")
