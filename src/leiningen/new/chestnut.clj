@@ -154,9 +154,10 @@
           (not (speclj? opts)) (conj "resources/public/js/polyfill.js"
                                      "resources/private/js/unit-test.js"
                                      "resources/private/unit-test.html"
-                                     "test/cljs/core.cljs"
-                                     "test/cljs/common.cljs"
-                                     "test/cljs/test-runner.cljs")))
+                                     "test/clj/chestnut/example_test.clj"
+                                     "test/cljs/chestnut/core.cljs"
+                                     "test/cljs/chestnut/common.cljs"
+                                     "test/cljs/chestnut/test-runner.cljs")))
 
 (defn format-files-args [name opts]
   (let [data (template-data name opts)
