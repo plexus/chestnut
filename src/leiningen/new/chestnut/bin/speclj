@@ -9,7 +9,7 @@ webpage.onConsoleMessage = function (x) {
   system.stdout.write(x)
 };
 
-webpage.injectJs("resources/public/js/polyfill.js");
+webpage.injectJs("env/test/js/polyfill.js");
 // note the polyfill file, this is added to play nice with React
 
 webpage.injectJs(url);

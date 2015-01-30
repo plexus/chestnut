@@ -113,7 +113,7 @@
    :test-command-name    (if (speclj? opts) "\"spec\"" "\"test\"")
    :test-command         (if (speclj? opts)
                            "[\"phantomjs\" \"bin/speclj\" \"resources/public/js/app_test.js\"]"
-                           "[\"phantomjs\" \"resources/private/js/unit-test.js\" \"resources/private/unit-test.html\"]")
+                           "[\"phantomjs\" \"env/test/js/unit-test.js\" \"env/test/unit-test.html\"]")
 
 
    ;; stylesheets
@@ -136,6 +136,7 @@
            "env/dev/cljs/chestnut/dev.cljs"
            "env/prod/clj/chestnut/dev.clj"
            "env/prod/cljs/chestnut/prod.cljs"
+           "env/test/js/polyfill.js"
            "LICENSE"
            "README.md"
            "code_of_conduct.md"
@@ -148,11 +149,9 @@
           (cljx? opts) (conj "src/cljx/chestnut/core.cljx")
           (speclj? opts) (conj "bin/speclj"
                              "spec/clj/chestnut/server_spec.clj"
-                             "spec/cljs/chestnut/core_spec.cljs"
-                             "resources/public/js/polyfill.js")
-          (not (speclj? opts)) (conj "resources/public/js/polyfill.js"
-                                     "resources/private/js/unit-test.js"
-                                     "resources/private/unit-test.html"
+                             "spec/cljs/chestnut/core_spec.cljs")
+          (not (speclj? opts)) (conj "env/test/js/unit-test.js"
+                                     "env/test/unit-test.html"
                                      "test/clj/chestnut/example_test.clj"
                                      "test/cljs/chestnut/core.cljs"
                                      "test/cljs/chestnut/common.cljs"
