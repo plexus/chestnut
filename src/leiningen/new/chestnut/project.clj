@@ -66,26 +66,18 @@
 
                    :env {:is-dev true}
 
-                   :cljsbuild { {{#speclj?}}:test-commands {"spec" ["phantomjs" "bin/speclj" "resources/public/js/app_spec.js"]}{{/speclj?}}{{#cljstest?}}
-                                :test-commands {"test" ["phantomjs" "resources/private/js/unit-test.js" "resources/private/unit-test.html"]}{{/cljstest?}}
+                   :cljsbuild {:test-commands { {{{test-command-name}}} {{{test-command}}} }
                                :builds {
-                                        :app {:source-paths ["env/dev/cljs"]}{{#speclj?}}
-                                        :dev {
-                                              :source-paths ["src/cljs"  "spec/cljs"]
-                                              :compiler {:output-to     "resources/public/js/app_spec.js"
-                                                         :output-dir    "resources/public/js/spec"
-                                                         :source-map    "resources/public/js/spec.js.map"
-                                                         :preamble      ["react/react.min.js"]
-                                                         :optimizations :whitespace
-                                                         :pretty-print  false}
-                                              :notify-command ["phantomjs"  "bin/speclj" "resources/public/js/app_spec.js"]}{{/speclj?}}{{#cljstest?}}
-                                        :test {:source-paths ["src/cljs" "test/cljs"]
+                                        :app {:source-paths ["env/dev/cljs"]}
+                                        :test {
+                                               :notify-command {{{test-command}}}
+                                               :source-paths ["src/cljs" {{{test-src-path}}}]
                                                :compiler {:output-to     "resources/public/js/app_test.js"
                                                           :output-dir    "resources/public/js/test"
                                                           :source-map    "resources/public/js/test.js.map"
                                                           :preamble      ["react/react.min.js"]
                                                           :optimizations :whitespace
-                                                          :pretty-print  true}}{{/cljstest?}}}}}
+                                                          :pretty-print  false}}}}}
 
              :uberjar {:source-paths ["env/prod/clj"]
                        :hooks [{{{project-uberjar-hooks}}}]
