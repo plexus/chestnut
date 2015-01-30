@@ -1,7 +1,18 @@
 (ns chestnut.test.integration
   (:require [clojure.java.io :as io]
             [mistletoe.process :refer :all]
-            [mistletoe.test :refer :all]))
+            [mistletoe.test :refer :all]
+            [clj-webdriver.taxi :as browser]
+            [environ.core :refer [env]]))
+
+(def browser-type :chrome)
+
+;; The path to the driver executable must be set by the
+;; webdriver.chrome.driver system property; for more information, see
+;; http://code.google.com/p/selenium/wiki/ChromeDriver. The latest
+;; version can be downloaded from
+;; http://chromedriver.storage.googleapis.com/index.html
+(System/setProperty "webdriver.chrome.driver" (str (env :home) "/bin/chromedriver"))
 
 (defn rm-rf [fname]
   (if (= fname "/")
@@ -10,34 +21,39 @@
                (when (.isDirectory f)
                  (doseq [f2 (.listFiles f)]
                    (func func f2)))
-               (io/delete-file f))]
+               (when (.exists f)
+                 (io/delete-file f)))]
     (func func (io/file fname))))
 
+(defn spawn [name dir cmd]
+  (-> (process "sh" "-c" (str "cd " dir ";" cmd))
+      (start)
+      (start-pipe :in)
+      (start-pipe :err)
+      (log-chan (str name "       | "))
+      (log-chan (str name " (err) | ") :errChan)))
 
-(defn test-chestnut []
+(def generate-new-app []
+  (println "--> Generating app in /tmp/sesame-seed")
   (rm-rf "/tmp/sesame-seed")
+  (waitFor (spawn "LEIN NEW" "/tmp" "lein new chestnut sesame-seed --snapshot")))
 
-  (println "--> Generating app")
-
-  (-> (process "lein" "new" "chestnut" "sesame-seed" "--snapshot")
-      (directory "/tmp")
-      (start)
-      (start-pipe :in)
-      (start-pipe :err)
-      (log-chan "lein new       | ")
-      (log-chan "lein new (err) | ")
-      (waitFor))
-
+(defn spawn-repl []
   (println "--> Starting REPL")
+  (-> (spawn "REPL" "/tmp/sesame-seed" "lein repl")
+      (expect #"sesame-seed\.server=>" 60000)))
 
-  #_(-> (process "lein" "repl")
-      (directory "/tmp/sesame-seed")
-      (start)
-      (start-pipe :in)
-      (start-pipe :err)
-      (log-chan "REPL        | " (start-pipe repl))
-      (log-chan "REPL (err)  | " (start-pipe repl :err) :errChan)
+(defn test-basic []
+  (generate-new-app)
+  (let [repl (spawn-repl)]
+    (write-str repl "(run)\n")
+    (expect repl #"notifying browser that file changed")
 
-      (expect #"sesame-seed\.server=>" 60000)
-      (write-str "(run)\n")
-      (expect #"Starting Figwheel")))
+    (browser/set-driver! {:browser browser-type} "http://localhost:10555")
+
+    (write-str repl "(quit)\n")
+
+    ))
+
+(defn -main []
+  (test-basic))

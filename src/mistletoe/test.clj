@@ -4,7 +4,7 @@
 (defn log-chan [process prefix & [key]]
   (let [key (or key :inChan)
         in (key process)
-        out (chan 10)]
+        out (chan 2)]
     (go-loop []
       (let [v (<! in)]
         (when v
@@ -15,16 +15,18 @@
           (recur))))
     (assoc process key out)))
 
-(defn expect [{:inChan chan} regex & [ms]]
-  (loop []
-    (let [timeout-chan (timeout (or ms 5000))
-          [v ch] (alts!! [chan timeout-chan])]
-      (cond
-        (= ch timeout-chan) (throw
-                             (java.util.concurrent.TimeoutException.
-                              (str "Timeout waiting for " regex)))
-        (nil? v) (throw
-                  (Exception.
-                   (str "Input channel closed, expecting " regex)))
-        (re-seq regex v) (println "Got" v ", continuing.")
-        :default (recur)))))
+(defn expect [process regex & [ms]]
+  (let [chan (:inChan process)]
+    (loop []
+      (let [timeout-chan (timeout (or ms 5000))
+            [v ch] (alts!! [chan timeout-chan])]
+        (cond
+          (= ch timeout-chan) (throw
+                               (java.util.concurrent.TimeoutException.
+                                (str "Timeout waiting for " regex)))
+          (nil? v) (throw
+                    (Exception.
+                     (str "Input channel closed, expecting " regex)))
+          (re-seq regex v) (println "--> Got" v ", continuing.")
+          :default (recur)))))
+  process)

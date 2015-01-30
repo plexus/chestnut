@@ -27,7 +27,10 @@
         chan ((or stream :in) process)]
     (.clear buf)
     (.read chan buf)
-    (String. (into-array Character/TYPE (take (.position buf) (.array buf))))))
+    (let [len (.position buf)
+          bytes (.array buf)]
+      (if (> len 0)
+        (String. (into-array Byte/TYPE (take len bytes)))))))
 
 (defn read-err [process]
   (read-str process :err))
@@ -38,20 +41,22 @@
     (.clear buf)
     (.put buf (into-array Byte/TYPE (str exp)))
     (.flip buf)
-    (.write chan buf)))
+    (.write chan buf))
+  process)
 
 (defn start-pipe [process & [stream]]
-  (let [c (chan 10)
+  (let [c (chan 1)
         stream (or stream :in)]
     (go-loop []
-      (>! c (read-str process stream))
+      (if-let [str (read-str process stream)]
+        (>! c str))
       (recur))
-    (assoc process (keyword (str stream "Chan")) c)))
+    (assoc process (keyword (str (name stream) "Chan")) c)))
 
-(defn kill [{:process process} & [signal]]
+(defn kill [{process :process} & [signal]]
   (.kill process (or signal 9)))
 
-(defn waitFor [{:process process}]
+(defn waitFor [{process :process}]
   (.waitFor process))
 
 (comment
