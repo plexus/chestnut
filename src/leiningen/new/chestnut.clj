@@ -103,10 +103,18 @@
 
    ;; features
    :not-om-tools?        (fn [block] (if (om-tools? opts) "" block))
-   :speclj?              (fn [block] (if (speclj? opts) (str "\n" block) ""))
    :sass?                (fn [block] (if (sass? opts) (str "\n" block) ""))
    :less?                (fn [block] (if (less? opts) (str "\n" block) ""))
    :cljx?                (fn [block] (if (cljx? opts) (str "\n" block) ""))
+
+   ;; testing features
+   :speclj?              (fn [block] (if (speclj? opts) (str "\n" block) ""))
+   :test-src-path        (if (speclj? opts) "\"spec/cljs\"" "\"test/cljs\"")
+   :test-command-name    (if (speclj? opts) "\"spec\"" "\"test\"")
+   :test-command         (if (speclj? opts)
+                           "[\"phantomjs\" \"bin/speclj\" \"resources/public/js/app_test.js\"]"
+                           "[\"phantomjs\" \"env/test/js/unit-test.js\" \"env/test/unit-test.html\"]")
+
 
    ;; stylesheets
    :less-sass-refer      (cond (sass? opts) " start-sass"
@@ -128,6 +136,7 @@
            "env/dev/cljs/chestnut/main.cljs"
            "env/prod/clj/chestnut/dev.clj"
            "env/prod/cljs/chestnut/main.cljs"
+           "env/test/js/polyfill.js"
            "LICENSE"
            "README.md"
            "code_of_conduct.md"
@@ -140,8 +149,13 @@
           (cljx? opts) (conj "src/cljx/chestnut/core.cljx")
           (speclj? opts) (conj "bin/speclj"
                              "spec/clj/chestnut/server_spec.clj"
-                             "spec/cljs/chestnut/core_spec.cljs"
-                             "resources/public/js/polyfill.js")))
+                             "spec/cljs/chestnut/core_spec.cljs")
+          (not (speclj? opts)) (conj "env/test/js/unit-test.js"
+                                     "env/test/unit-test.html"
+                                     "test/clj/chestnut/example_test.clj"
+                                     "test/cljs/chestnut/core.cljs"
+                                     "test/cljs/chestnut/common.cljs"
+                                     "test/cljs/chestnut/test-runner.cljs")))
 
 (defn format-files-args [name opts]
   (let [data (template-data name opts)

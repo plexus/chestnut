@@ -81,6 +81,8 @@ Clojure/ClojureScript apps effectively. It comes with
 * Heroku support. Chestnut apps have all the bits and pieces to be
   deployable to Heroku. Getting your app on the web is as simple as
   `git push`.
+* Unit tests for both Clojure and CLJS. Or you can decide to use Speclj instead, both for CLJ and CLJS.
+  Both specs and CLJS tests can be run in "auto" mode.
 
 ## Options
 
@@ -97,7 +99,7 @@ Clojure/ClojureScript apps effectively. It comes with
 * `--less` Use [less](https://github.com/montoux/lein-less) for
   compiling Less CSS files.
 * `--speclj` Use [speclj](http://speclj.com) test runner for clj and
-  cljs.
+cljs, and disable the core cljs.test tests.
 
 Use `--` to separate these options from Leiningen's options,
 e.g. `lein new chestnut foo -- --om-tools --http-kit`
@@ -153,6 +155,10 @@ reports and pull requests are very welcome.
          automatically. Do a `lein cljsbuild clean`, then start Figwheel again.
 
 ## Changelog
+
+### v0.7.0-SNAPSHOT-20150130
+* Added Clojure{,script} unit testing support with Phantom JS.
+  ([Rory Gibson](http://github.com/rorygibson))
 
 ### v0.7.0-SNAPSHOT-20150103
 
