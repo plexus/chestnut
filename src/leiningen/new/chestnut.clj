@@ -109,7 +109,6 @@
 
    ;; testing features
    :speclj?              (fn [block] (if (speclj? opts) (str "\n" block) ""))
-   :cljstest?            (fn [block] (if (not (speclj? opts)) (str "\n" block) ""))
    :test-src-path        (if (speclj? opts) "\"spec/cljs\"" "\"test/cljs\"")
    :test-command-name    (if (speclj? opts) "\"spec\"" "\"test\"")
    :test-command         (if (speclj? opts)
