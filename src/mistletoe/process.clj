@@ -1,5 +1,6 @@
 (ns mistletoe.process
-  (:import [java.nio ByteBuffer])
+  (:import [java.nio ByteBuffer]
+           [jnr.constants.platform Signal])
   (:require [clojure.core.async :refer [go-loop <!! <! >! chan put! sliding-buffer timeout]]))
 
 (defn process [& args]
@@ -54,9 +55,9 @@
     (assoc process (keyword (str (name stream) "Chan")) c)))
 
 (defn kill [{process :process} & [signal]]
-  (.kill process (or signal 9)))
+  (.kill process (or signal Signal/SIGKILL)))
 
-(defn waitFor [{process :process}]
+(defn wait-for [{process :process}]
   (.waitFor process))
 
 (comment

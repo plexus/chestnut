@@ -33,27 +33,48 @@
       (log-chan (str name "       | "))
       (log-chan (str name " (err) | ") :errChan)))
 
-(def generate-new-app []
+(defmacro with-process
+  "Make sure we don't leave subprocess around when an exception bubbles out"
+  [[bind-var & spawn-args] & forms]
+  `(let [~bind-var (spawn ~@spawn-args)]
+     (try
+       ~@forms
+       (finally
+         (kill ~bind-var)
+         (wait-for ~bind-var) ; I want to notice if a process hangs
+         ))))
+
+(defmacro with-browser
+  "Make sure we close the browser when an exception bubbles out"
+  [address & forms]
+  `(try
+     (browser/set-driver! {:browser browser-type} ~address)
+     ~@forms
+     (finally
+       (browser/close))))
+
+(defn generate-new-app []
   (println "--> Generating app in /tmp/sesame-seed")
   (rm-rf "/tmp/sesame-seed")
-  (waitFor (spawn "LEIN NEW" "/tmp" "lein new chestnut sesame-seed --snapshot")))
+  (wait-for (spawn "LEIN NEW" "/tmp" "lein new chestnut sesame-seed --snapshot")))
 
-(defn spawn-repl []
-  (println "--> Starting REPL")
-  (-> (spawn "REPL" "/tmp/sesame-seed" "lein repl")
-      (expect #"sesame-seed\.server=>" 60000)))
+(defn first-element-text [selector]
+  (browser/text (first (browser/css-finder selector))))
 
 (defn test-basic []
   (generate-new-app)
-  (let [repl (spawn-repl)]
+  (println "--> Starting REPL")
+  (with-process [repl "REPL" "/tmp/sesame-seed" "lein repl"]
+    (expect repl #"sesame-seed\.server=>" 90)
     (write-str repl "(run)\n")
     (expect repl #"notifying browser that file changed")
+    (write-str repl "(browser-repl)\n")
+    (expect repl #"sesame-seed\.core=>")
 
-    (browser/set-driver! {:browser browser-type} "http://localhost:10555")
-
-    (write-str repl "(quit)\n")
-
-    ))
+    (with-browser "http://localhost:10555"
+      (browser/wait-until #(= (first-element-text "h1") "Hello Chestnut!"))
+      (write-str repl "(swap! app-state assoc :text \"Hello Test :)\")\n")
+      (browser/wait-until #(= (first-element-text "h1") "Hello Test :)")))))
 
 (defn -main []
   (test-basic))

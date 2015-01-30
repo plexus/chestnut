@@ -13,4 +13,4 @@
 
   :repositories [["expect4j" "https://github.com/cverges/expect4j/raw/mvn-repo"]]
 
-  :main chestnut.test.integration)
+  :aliases {"test" ["run" "-m" "chestnut.test.integration"] })
