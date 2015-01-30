@@ -1,5 +1,10 @@
 # Changelog
 
+### v0.7.0
+* Added Clojure{,script} unit testing support with Phantom JS.
+  ([Rory Gibson](http://github.com/rorygibson))
+
+
 ### v0.7.0-SNAPSHOT-20150103
 
 * Validate command line arguments
