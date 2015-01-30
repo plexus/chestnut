@@ -49,6 +49,7 @@
                    :rules :cljs}]}{{/cljx?}}
 
   :profiles {:dev {:source-paths ["env/dev/clj"]
+                   :test-paths ["test/clj"]
 
                    :dependencies [[figwheel "0.1.6-SNAPSHOT"]
                                   [com.cemerick/piggieback "0.1.3"]
