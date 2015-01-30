@@ -68,8 +68,7 @@
                    :env {:is-dev true}
 
                    :cljsbuild {:test-commands { {{{test-command-name}}} {{{test-command}}} }
-                               :builds {
-                                        :app {:source-paths ["env/dev/cljs"]}
+                               :builds {:app {:source-paths ["env/dev/cljs"]}
                                         :test {
                                                :notify-command {{{test-command}}}
                                                :source-paths ["src/cljs" {{{test-src-path}}}]
