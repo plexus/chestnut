@@ -82,7 +82,7 @@ Clojure/ClojureScript apps effectively. It comes with
   deployable to Heroku. Getting your app on the web is as simple as
   `git push`.
 * Unit tests for both Clojure and CLJS. Or you can decide to use Speclj instead, both for CLJ and CLJS.
-  Both specs and CLJS tests can be run in "auto" mode.
+  Both specs and CLJS tests can be run in "auto" mode. See [Testing](TESTING.md) for more information.
 
 ## Options
 
@@ -155,10 +155,6 @@ reports and pull requests are very welcome.
          automatically. Do a `lein cljsbuild clean`, then start Figwheel again.
 
 ## Changelog
-
-### v0.7.0-SNAPSHOT-20150130
-* Added Clojure{,script} unit testing support with Phantom JS.
-  ([Rory Gibson](http://github.com/rorygibson))
 
 ### v0.7.0-SNAPSHOT-20150103
 
