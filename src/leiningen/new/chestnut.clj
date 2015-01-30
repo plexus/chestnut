@@ -20,7 +20,7 @@
   (wrap-indent identity n list))
 
 (def valid-options
-  ["http-kit" "site-middleware" "om-tools" "cljx" "less" "sass" "speclj" ])
+  ["http-kit" "site-middleware" "om-tools" "cljx" "less" "sass" "speclj"])
 
 (doseq [opt valid-options]
   (eval
