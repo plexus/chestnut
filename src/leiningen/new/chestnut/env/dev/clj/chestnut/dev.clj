@@ -23,11 +23,13 @@
 
 (defn start-figwheel []
   (let [server (fig/start-server { :css-dirs ["resources/public/css"] })
-        config {:builds [{:source-paths ["env/dev/cljs" "src/cljs"]
-                          :compiler {:output-to     "resources/public/js/app.js"
-                                     :output-dir    "resources/public/js/out"
-                                     :source-map    "resources/public/js/out.js.map"
-                                     :preamble      ["react/react.min.js"]}}]
+        config {:builds [{:id "dev"
+                          :source-paths ["env/dev/cljs" "src/cljs"]
+                          :compiler {:output-to            "resources/public/js/app.js"
+                                     :output-dir           "resources/public/js/out"
+                                     :source-map           "resources/public/js/out.js.map"
+                                     :source-map-timestamp true
+                                     :preamble             ["react/react.min.js"]}}]
                 :figwheel-server server}]
     (fig-auto/autobuild* config)))
 {{#less?}}
