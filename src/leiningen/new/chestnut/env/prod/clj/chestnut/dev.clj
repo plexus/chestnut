@@ -12,3 +12,11 @@
   (throw (Exception. "Browser connected REPL is not available in prod mode")))
 (defn start-figwheel []
   (throw (Exception. "Figwheel is not available in prod mode")))
+{{#less?}}
+(defn start-less []
+  (throw (Exception. "less is not available in prod mode")))
+{{/less?}}
+{{#sass?}}
+(defn start-sass []
+  (throw (Exception. "sass is not available in prod mode")))
+{{/sass?}}
