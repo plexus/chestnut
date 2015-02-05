@@ -5,6 +5,7 @@
             [clj-webdriver.taxi :as browser]
             [leiningen.new.chestnut :as chestnut]))
 
+
 (def browser-type :chrome)
 
 ;; The path to the driver executable must be set by the
@@ -41,9 +42,11 @@
      (try
        ~@forms
        (finally
+         (println "--> killing" (.getPid (:process ~bind-var)))
          (kill ~bind-var)
-         (wait-for ~bind-var) ; I want to notice if a process hangs
-         ))))
+         (println "--> waiting for" (.getPid (:process ~bind-var)))
+         (wait-for ~bind-var)
+         (println "--> done!" (.getPid (:process ~bind-var)))))))
 
 (defmacro with-browser
   "Make sure we close the browser when an exception bubbles out"
@@ -75,14 +78,16 @@
 
       (expect repl #"sesame-seed\.server=>" 250)
       (write-str repl "(run)\n")
-      (expect repl #"notifying browser that file changed" 90)
+      (expect repl #"notifying browser that file changed" 120)
       (write-str repl "(browser-repl)\n")
       (expect repl #"sesame-seed\.core=>")
 
       (with-browser "http://localhost:10555"
         (browser/wait-until #(= (first-element-text "h1") "Hello Chestnut!"))
         (write-str repl "(swap! app-state assoc :text \"Hello Test :)\")\n")
-        (browser/wait-until #(= (first-element-text "h1") "Hello Test :)"))))))
+        (browser/wait-until #(= (first-element-text "h1") "Hello Test :)")))
+
+      (write-str repl "(quit)\n"))))
 
 (defn -main []
   (test-basic)

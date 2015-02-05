@@ -57,6 +57,11 @@
 (defn kill [{process :process} & [signal]]
   (.kill process (or signal Signal/SIGKILL)))
 
+(defn kill-process-group [{process :process} & [signal]]
+  (.kill (jnr.posix.POSIXFactory/getPOSIX)
+         (- (.getPid process))
+         (.intValue (or signal Signal/SIGKILL))))
+
 (defn wait-for [{process :process}]
   (.waitFor process))
 
