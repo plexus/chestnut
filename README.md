@@ -153,6 +153,9 @@ reports and pull requests are very welcome.
   **A:** If you already did a
          build before, cljsbuild/figwheel won't pick up on the updated version
          automatically. Do a `lein cljsbuild clean`, then start Figwheel again.
+* **Q:** The Figwheel output is cluttering up my REPL, can I get rid of it?<br>
+  **A:** Not as such, but instead of calling `(run)`, you can call `(run-web-server)`
+         and `(run-auto-reload)` in separate repls.
 
 ## Changelog
 
