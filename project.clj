@@ -5,12 +5,8 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :eval-in-leiningen true
 
-  :dependencies [[com.github.cverges.expect4j/expect4j "1.2"]
-                 [org.clojure/core.async "0.1.346.0-17112a-alpha"]
+  :dependencies [[org.clojure/core.async "0.1.346.0-17112a-alpha"]
                  [com.github.jnr/jnr-process "1.0-SNAPSHOT"]
-                 [clj-webdriver "0.7.0-SNAPSHOT"]
-                 [environ "1.0.0"]]
-
-  :repositories [["expect4j" "https://github.com/cverges/expect4j/raw/mvn-repo"]]
+                 [clj-webdriver "0.7.0-SNAPSHOT"]]
 
   :aliases {"test" ["run" "-m" "chestnut.test.integration"] })

@@ -2,8 +2,7 @@
   (:require [clojure.java.io :as io]
             [mistletoe.process :refer :all]
             [mistletoe.test :refer :all]
-            [clj-webdriver.taxi :as browser]
-            [environ.core :refer [env]]))
+            [clj-webdriver.taxi :as browser]))
 
 (def browser-type :chrome)
 
@@ -12,7 +11,8 @@
 ;; http://code.google.com/p/selenium/wiki/ChromeDriver. The latest
 ;; version can be downloaded from
 ;; http://chromedriver.storage.googleapis.com/index.html
-(System/setProperty "webdriver.chrome.driver" (str (env :home) "/bin/chromedriver"))
+(System/setProperty "webdriver.chrome.driver"
+                    (str (System/getProperty "user.dir") "/bin/chromedriver"))
 
 (defn rm-rf [fname]
   (if (= fname "/")
