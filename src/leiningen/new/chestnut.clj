@@ -41,7 +41,7 @@
 (defn project-clj-deps [opts]
   (cond-> []
           (http-kit? opts) (conj "http-kit \"2.1.19\"")
-          (om-tools? opts) (conj "prismatic/om-tools \"0.3.9\" :exclusions [potemkin]")))
+          (om-tools? opts) (conj "prismatic/om-tools \"0.3.10\"")))
 
 (defn project-dev-deps [opts]
   (cond-> []
