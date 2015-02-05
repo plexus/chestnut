@@ -13,7 +13,7 @@
 ;; version can be downloaded from
 ;; http://chromedriver.storage.googleapis.com/index.html
 (System/setProperty "webdriver.chrome.driver"
-                    (str (System/getProperty "user.dir") "/bin/chromedriver"))
+                    (str (System/getenv "HOME") "/bin/chromedriver"))
 
 (defn rm-rf [fname]
   (if (= fname "/")
@@ -52,7 +52,8 @@
      (browser/set-driver! {:browser browser-type} ~address)
      ~@forms
      (finally
-       (browser/close))))
+       (when browser/*driver*
+         (browser/close)))))
 
 (defn generate-new-app [& [flags]]
   (println "--> Generating app in /tmp/sesame-seed using" flags)
@@ -67,18 +68,28 @@
   (generate-new-app flags)
   (println "--> Starting REPL")
   (with-process [repl "REPL" "/tmp/sesame-seed" "lein repl"]
-    (expect repl #"sesame-seed\.server=>" 120)
-    (write-str repl "(run)\n")
-    (expect repl #"notifying browser that file changed" 90)
-    (write-str repl "(browser-repl)\n")
-    (expect repl #"sesame-seed\.core=>")
+    (let [repl (-> repl
+                   (guard-for #"(?i)error")
+                   (guard-for #"Exception")
+                   (guard-for #"(?i)exception|error" :errChan))]
 
-    (with-browser "http://localhost:10555"
-      (browser/wait-until #(= (first-element-text "h1") "Hello Chestnut!"))
-      (write-str repl "(swap! app-state assoc :text \"Hello Test :)\")\n")
-      (browser/wait-until #(= (first-element-text "h1") "Hello Test :)")))))
+      (expect repl #"sesame-seed\.server=>" 250)
+      (write-str repl "(run)\n")
+      (expect repl #"notifying browser that file changed" 90)
+      (write-str repl "(browser-repl)\n")
+      (expect repl #"sesame-seed\.core=>")
+
+      (with-browser "http://localhost:10555"
+        (browser/wait-until #(= (first-element-text "h1") "Hello Chestnut!"))
+        (write-str repl "(swap! app-state assoc :text \"Hello Test :)\")\n")
+        (browser/wait-until #(= (first-element-text "h1") "Hello Test :)"))))))
 
 (defn -main []
   (test-basic)
-  (doseq [opt chestnut/valid-options]
-    (test-basic opt)))
+  (test-basic  "--http-kit")
+  (test-basic  "--site-middleware")
+  (test-basic  "--om-tools")
+  ;;(test-basic  "--cljx")
+  ;;(test-basic  "--less")
+  ;;(test-basic  "--sass")
+  (test-basic  "--speclj"))

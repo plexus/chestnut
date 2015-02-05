@@ -18,6 +18,19 @@
           (recur))))
     (assoc process key out)))
 
+(defn guard-for [process regex & [key]]
+  (let [key (or key :inChan)
+        in (key process)
+        out (chan 2)]
+    (go-loop []
+      (let [v (<! in)]
+        (when v
+          (>! out v)
+          (when (re-seq regex v)
+            (throw (Exception. (str "Got unexpected input: " regex " in " v))))
+          (recur))))
+    (assoc process key out)))
+
 (defn expect [process regex & [timeout-sec]]
   (loop []
     (let [chan (:inChan process)
