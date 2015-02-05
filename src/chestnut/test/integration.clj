@@ -2,7 +2,8 @@
   (:require [clojure.java.io :as io]
             [mistletoe.process :refer :all]
             [mistletoe.test :refer :all]
-            [clj-webdriver.taxi :as browser]))
+            [clj-webdriver.taxi :as browser]
+            [leiningen.new.chestnut :as chestnut]))
 
 (def browser-type :chrome)
 
@@ -53,21 +54,22 @@
      (finally
        (browser/close))))
 
-(defn generate-new-app []
-  (println "--> Generating app in /tmp/sesame-seed")
+(defn generate-new-app [& [flags]]
+  (println "--> Generating app in /tmp/sesame-seed using" flags)
   (rm-rf "/tmp/sesame-seed")
-  (wait-for (spawn "LEIN NEW" "/tmp" "lein new chestnut sesame-seed --snapshot")))
+  (wait-for (spawn "LEIN NEW" "/tmp"
+                   (str "lein new chestnut sesame-seed --snapshot -- " flags))))
 
 (defn first-element-text [selector]
   (browser/text (first (browser/css-finder selector))))
 
-(defn test-basic []
-  (generate-new-app)
+(defn test-basic [& [flags]]
+  (generate-new-app flags)
   (println "--> Starting REPL")
   (with-process [repl "REPL" "/tmp/sesame-seed" "lein repl"]
-    (expect repl #"sesame-seed\.server=>" 90)
+    (expect repl #"sesame-seed\.server=>" 120)
     (write-str repl "(run)\n")
-    (expect repl #"notifying browser that file changed")
+    (expect repl #"notifying browser that file changed" 90)
     (write-str repl "(browser-repl)\n")
     (expect repl #"sesame-seed\.core=>")
 
@@ -77,4 +79,6 @@
       (browser/wait-until #(= (first-element-text "h1") "Hello Test :)")))))
 
 (defn -main []
-  (test-basic))
+  (test-basic)
+  (doseq [opt chestnut/valid-options]
+    (test-basic opt)))
