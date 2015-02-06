@@ -1,8 +1,10 @@
 (ns mistletoe.test
   (:import [java.util.concurrent TimeoutException])
-  (:require [clojure.core.async :refer [go go-loop <!! <! >! chan put!
-                                        alts!! timeout sliding-buffer]]))
+  (:require [clojure.core.async :refer [go-loop <! >! chan
+                                        alts!! timeout close!]]))
 
+
+(def ^:dynamic *expect-guard-for* #{})
 
 (defn log-chan [process prefix & [key]]
   (let [key (or key :inChan)
@@ -10,25 +12,14 @@
         out (chan 2)]
     (go-loop []
       (let [v (<! in)]
-        (when v
-          (>! out v)
-          (if (re-seq #"\n$" v)
-            (print prefix v)
-            (println prefix v))
-          (recur))))
-    (assoc process key out)))
-
-(defn guard-for [process regex & [key]]
-  (let [key (or key :inChan)
-        in (key process)
-        out (chan 2)]
-    (go-loop []
-      (let [v (<! in)]
-        (when v
-          (>! out v)
-          (when (re-seq regex v)
-            (throw (Exception. (str "Got unexpected input: " regex " in " v))))
-          (recur))))
+        (if v
+          (do
+            (>! out v)
+            (if (re-seq #"\n$" v)
+              (print prefix v)
+              (println prefix v))
+            (recur))
+          (close! out))))
     (assoc process key out)))
 
 (defn expect [process regex & [timeout-sec]]
@@ -44,6 +35,9 @@
           (throw (Exception. (str "Input channel closed, expecting " regex)))
         (re-seq regex v)
           (println "--> Got" v ", continuing.")
+        (first (filter #(re-seq % v) *expect-guard-for*))
+          (throw (Exception. (str "Got unexpected input: "
+                                  (first (filter #(re-seq % v) *expect-guard-for*)) " in " v)))
         :default
           (recur))))
   process)

@@ -1,7 +1,7 @@
 (ns mistletoe.process
   (:import [java.nio ByteBuffer]
            [jnr.constants.platform Signal])
-  (:require [clojure.core.async :refer [go-loop <!! <! >! chan put! sliding-buffer timeout]]))
+  (:require [clojure.core.async :refer [go-loop <! >! chan close!]]))
 
 (defn process [& args]
   (let [argsAry (into-array String args)
@@ -50,7 +50,8 @@
         stream (or stream :in)]
     (go-loop []
       (if-let [str (read-str process stream)]
-        (>! c str))
+        (>! c str)
+        (close! c))
       (recur))
     (assoc process (keyword (str (name stream) "Chan")) c)))
 
@@ -72,23 +73,3 @@
   "Change the working directory of the running process (the JVM)"
   [dir]
   (.chdir (posix) dir))
-
-(comment
-  (def c (chan))
-  (def buf (ByteBuffer/allocate 2048))
-  (def out-buf (ByteBuffer/allocate 2048))
-
-
-  (go-loop []
-    (>! c (read-str (.getIn repl-process) buf))
-    (recur))
-
-  (go-loop []
-    (>! c (read-str (.getErr repl-process) buf))
-    (recur))
-
-  (go-loop []
-    (println "Got" (<! c))
-    (recur))
-
-  (write-str (.getOut repl-process) out-buf "(run)\n"))

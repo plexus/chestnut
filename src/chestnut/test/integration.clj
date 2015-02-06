@@ -74,12 +74,9 @@
 (defn test-basic [& [flags]]
   (generate-new-app flags)
   (println "--> Starting REPL")
-  (with-process [repl "REPL" "/tmp/sesame-seed" "lein repl"]
-    (let [repl (-> repl
-                   (guard-for #"(?i)error")
-                   (guard-for #"Exception")
-                   (guard-for #"(?i)exception|error" :errChan))]
 
+  (binding [*expect-guard-for* #{#"(?i)error" #"Exception"}]
+    (with-process [repl "REPL" "/tmp/sesame-seed" "lein repl"]
       (expect repl #"sesame-seed\.server=>" 250)
       (write-str repl "(run)\n")
       (expect repl #"notifying browser that file changed" 120)
@@ -107,9 +104,7 @@
   (test-basic "--speclj --less --om-tools --site-middleware --http-kit")
 
   (comment
-    ;; SASS is not officially reported and requires a SASSC binary
+    ;; SASS is officially unsupported and requires a SASSC binary
     ;; CLJX does funny stuff and so seems to be incompatible with the current test
     (test-basic "--cljx")
-    (test-basic "--sass"))
-
-  )
+    (test-basic "--sass")))
