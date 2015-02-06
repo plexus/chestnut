@@ -153,8 +153,7 @@
           (not (speclj? opts)) (conj "env/test/js/unit-test.js"
                                      "env/test/unit-test.html"
                                      "test/clj/chestnut/example_test.clj"
-                                     "test/cljs/chestnut/core.cljs"
-                                     "test/cljs/chestnut/common.cljs"
+                                     "test/cljs/chestnut/core-test.cljs"
                                      "test/cljs/chestnut/test-runner.cljs")))
 
 (defn format-files-args [name opts]

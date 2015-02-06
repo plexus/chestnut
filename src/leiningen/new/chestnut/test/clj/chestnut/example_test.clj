@@ -1,6 +1,5 @@
 (ns {{sanitized}}.example-test
     (:require [clojure.test :refer :all]))
 
-
-(deftest dummy
+(deftest example-passing-test
   (is (= 1 1)))
