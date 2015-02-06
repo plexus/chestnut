@@ -3,6 +3,7 @@
             [mistletoe.process :refer :all]
             [mistletoe.test :refer :all]
             [clj-webdriver.taxi :as browser]
+            [clojure.string :as s]
             [leiningen.new.chestnut :as chestnut]))
 
 
@@ -28,7 +29,8 @@
     (func func (io/file fname))))
 
 (defn spawn [name dir cmd]
-  (-> (process "sh" "-c" (str "cd " dir ";" cmd))
+  (chdir dir)
+  (-> (apply process (s/split cmd #" "))
       (start)
       (start-pipe :in)
       (start-pipe :err)
@@ -80,21 +82,30 @@
       (write-str repl "(run)\n")
       (expect repl #"notifying browser that file changed" 120)
       (write-str repl "(browser-repl)\n")
-      (expect repl #"sesame-seed\.core=>")
+      (expect repl #"sesame-seed\.core=>" 120)
 
       (with-browser "http://localhost:10555"
         (browser/wait-until #(= (first-element-text "h1") "Hello Chestnut!"))
         (write-str repl "(swap! app-state assoc :text \"Hello Test :)\")\n")
         (browser/wait-until #(= (first-element-text "h1") "Hello Test :)")))
 
-      (write-str repl "(quit)\n"))))
+      (write-str repl "(quit)\n")
+      (expect repl #"Bye for now!"))))
 
 (defn -main []
   (test-basic)
-  (test-basic  "--http-kit")
-  (test-basic  "--site-middleware")
-  (test-basic  "--om-tools")
-  ;;(test-basic  "--cljx")
-  ;;(test-basic  "--less")
-  ;;(test-basic  "--sass")
-  (test-basic  "--speclj"))
+  (test-basic "--http-kit")
+  (test-basic "--site-middleware")
+  (test-basic "--om-tools")
+
+  (test-basic "--less")
+  (test-basic "--speclj")
+  (test-basic "--speclj --less --om-tools --site-middleware --http-kit")
+
+  (comment
+    ;; SASS is not officially reported and requires a SASSC binary
+    ;; CLJX does funny stuff and so seems to be incompatible with the current test
+    (test-basic "--cljx")
+    (test-basic "--sass"))
+
+  )

@@ -57,13 +57,21 @@
 (defn kill [{process :process} & [signal]]
   (.kill process (or signal Signal/SIGKILL)))
 
+(defn posix []
+  (jnr.posix.POSIXFactory/getPOSIX))
+
 (defn kill-process-group [{process :process} & [signal]]
-  (.kill (jnr.posix.POSIXFactory/getPOSIX)
+  (.kill (posix)
          (- (.getPid process))
          (.intValue (or signal Signal/SIGKILL))))
 
 (defn wait-for [{process :process}]
   (.waitFor process))
+
+(defn chdir
+  "Change the working directory of the running process (the JVM)"
+  [dir]
+  (.chdir (posix) dir))
 
 (comment
   (def c (chan))
