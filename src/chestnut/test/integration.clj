@@ -4,7 +4,8 @@
             [mistletoe.test :refer :all]
             [clj-webdriver.taxi :as browser]
             [clojure.string :as s]
-            [leiningen.new.chestnut :as chestnut]))
+            [leiningen.new.chestnut :as chestnut]
+            [clojure.java.shell :refer [sh]]))
 
 
 (def browser-type :chrome)
@@ -67,7 +68,8 @@
                    (str "lein new chestnut sesame-seed --snapshot -- " flags))))
 
 (defn first-element-text [selector]
-  (browser/text (first (browser/css-finder selector))))
+  (if-let [element (first (browser/css-finder selector))]
+    (browser/text element)))
 
 (defn test-basic [& [flags]]
   (generate-new-app flags)
@@ -87,7 +89,9 @@
       (with-browser "http://localhost:10555"
         (browser/wait-until #(= (first-element-text "h1") "Hello Chestnut!"))
         (write-str repl "(swap! app-state assoc :text \"Hello Test :)\")\n")
-        (browser/wait-until #(= (first-element-text "h1") "Hello Test :)")))
+        (browser/wait-until #(= (first-element-text "h1") "Hello Test :)"))
+        (sh "sed" "s/h1/h2/" "-i" "/tmp/sesame-seed/src/cljs/sesame_seed/core.cljs")
+        (browser/wait-until #(= (first-element-text "h2") "Hello Test :)")))
 
       (write-str repl "(quit)\n")
       (expect repl #"Bye for now!"))))
