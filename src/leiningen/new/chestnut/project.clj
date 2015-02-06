@@ -67,7 +67,7 @@
 
                    :env {:is-dev true}
 
-                   :cljsbuild {:test-commands {{{{test-command-name}}} {{{test-command}}}}
+                   :cljsbuild {:test-commands { {{{test-command-name}}} {{{test-command}}} }
                                :builds {:app {:source-paths ["env/dev/cljs"]}
                                         :test {:source-paths ["src/cljs" {{{test-src-path}}}]
                                                :compiler {:output-to     "resources/public/js/app_test.js"
