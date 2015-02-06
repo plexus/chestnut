@@ -5,7 +5,8 @@
             [weasel.repl.websocket :as weasel]
             [figwheel-sidecar.auto-builder :as fig-auto]
             [figwheel-sidecar.core :as fig]
-            [clojurescript-build.auto :as auto]))
+            [clojurescript-build.auto :as auto]
+            [clojure.java.shell :refer [sh]]))
 
 (def is-dev? (env :is-dev))
 
@@ -36,7 +37,7 @@
 (defn start-less []
   (future
     (println "Starting less.")
-    (lein/-main ["less" "auto"])))
+    (sh ["lein" "less" "auto"])))
 {{/less?}}
 {{#sass?}}
 (defn start-sass []
