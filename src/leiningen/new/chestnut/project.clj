@@ -14,7 +14,7 @@
                  [ring/ring-defaults "0.1.2"]
                  [compojure "1.3.1"]
                  [enlive "1.1.5"]
-                 [om "0.8.0-beta3"]
+                 [org.omcljs/om "0.8.8"]
                  [environ "1.0.0"]{{{project-clj-deps}}}]
 
   :plugins [[lein-cljsbuild "1.0.3"]
