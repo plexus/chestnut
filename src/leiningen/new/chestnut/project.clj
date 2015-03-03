@@ -9,15 +9,15 @@
   :test-paths ["spec/clj"]
 
   :dependencies [[org.clojure/clojure "1.6.0"]
-                 [org.clojure/clojurescript "0.0-2511" :scope "provided"]
+                 [org.clojure/clojurescript "0.0-2665" :scope "provided"]
                  [ring "1.3.2"]
                  [ring/ring-defaults "0.1.3"]
-                 [compojure "1.3.1"]
+                 [compojure "1.3.2"]
                  [enlive "1.1.5"]
                  [om "0.8.0-rc1"]
                  [environ "1.0.0"]{{{project-clj-deps}}}]
 
-  :plugins [[lein-cljsbuild "1.0.3"]
+  :plugins [[lein-cljsbuild "1.0.5"]
             [lein-environ "1.0.0"]{{{project-plugins}}}]
 
   :min-lein-version "2.5.0"
@@ -47,19 +47,20 @@
                   {:source-paths ["src/cljx"]
                    :output-path "target/generated/cljs"
                    :rules :cljs}]}{{/cljx?}}
+  :clean-targets ^{:protect false} ["resources/public/js/out"]
 
   :profiles {:dev {:source-paths ["env/dev/clj"]
                    :test-paths ["test/clj"]
 
-                   :dependencies [[figwheel "0.2.1-SNAPSHOT"]
-                                  [figwheel-sidecar "0.2.1-SNAPSHOT"]
-                                  [com.cemerick/piggieback "0.1.3"]
-                                  [weasel "0.4.2"]{{{project-dev-deps}}}]
+                   :dependencies [[figwheel "0.2.5-SNAPSHOT"]
+                                  [figwheel-sidecar "0.2.5-SNAPSHOT"]
+                                  [com.cemerick/piggieback "0.1.5"]
+                                  [weasel "0.6.0"]{{{project-dev-deps}}}]
 
                    :repl-options {:init-ns {{project-ns}}.server
                                   :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl{{{nrepl-middleware}}}]}
 
-                   :plugins [[lein-figwheel "0.2.1-SNAPSHOT"]{{{project-dev-plugins}}}]
+                   :plugins [[lein-figwheel "0.2.5-SNAPSHOT"]{{{project-dev-plugins}}}]
 
                    :figwheel {:http-server-root "public"
                               :server-port 3449
