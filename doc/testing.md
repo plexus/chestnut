@@ -4,6 +4,8 @@
 
 Because of the nature of Chestnut, testing it requires an interplay between terminal, repl, and browser. This is hard to automate, but we're trying anyway :) There are some basic tests available, but the test suite is not comprehensive.
 
+For process control the tests depend on unreleased features of [jnr-process](https://github.com/jnr/jnr-process), which in turn relies on unreleased code in [jnr-posix](https://github.com/jnr/jnr-posix). So clone those two repos and for each do `mvn install`. I *think* that's the only dependencies you need to set up. Leiningen will figure out the rest.
+
 To run the tests do `lein test`. This will start with executing `cd /tmp ; lein new chestnut --snapshot`, possibly with some options. So to run the tests against your local version, you have to first do a `lein install`. Also make sure that if the tests are using `--snapshot`
 , that the version you're installing ends with `-SNAPSHOT`.
 
