@@ -167,9 +167,15 @@ reports and pull requests are very welcome.
 
 ## Changelog
 
-### v0.7.0-SNAPSHOT-20150130
+### v0.7.0
+
 * Added Clojure{,script} unit testing support with Phantom JS.
   ([Rory Gibson](http://github.com/rorygibson))
+* Update om-tools: 0.3.9 => 0.3.10
+* Update ring-defaults: 0.1.2 => 0.1.3
+* Use figwheel-sidecar, drop the dependency on leiningen
+* renamed the per-env namespace from dev to main
+* give a proper error message when trying to invoke less in production
 
 ### v0.7.0-SNAPSHOT-20150103
 
