@@ -1,4 +1,4 @@
-# Testing
+# Testing Your App
 
 By default, a new project created with Chestnut will have regular Clojure and ClojureScript unit tests enabled,
 but you can choose to use Speclj for both CLJ and CLJS if you prefer the RSpec style of writing tests.
