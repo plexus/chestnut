@@ -23,6 +23,14 @@ This README may describe unreleased features. Please compare the
 version number on Clojars to the changelog below, and check the README
 in your generated project for instructions pertaining to your version.
 
+## HELP WANTED
+
+If you want to help out with Chestnut, please start by triaging
+[issues](https://github.com/plexus/chestnut/issues?q=is%3Aopen+is%3Aissue). Is
+it a real issue, or a user error? Is it clearly diagnosed?  Is it
+Chestnut's fault, or is it an upstream issue? If upstream, where's the
+tickets so we can track its progress. etc.
+
 ## Usage
 
 ```
