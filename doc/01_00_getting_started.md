@@ -45,7 +45,7 @@ server, and start the
 [Figwheel](https://github.com/bhauman/lein-figwheel) server to enable
 instant code reloading.
 
-`(broser-repl)` will change your Clojure REPL into a Clojurescript
+`(browser-repl)` will change your Clojure REPL into a Clojurescript
 REPL. It needs a connection with a browser to be able to evaluate
 Clojurescript, so at this point it's waiting for a browser to connect
 to it.
