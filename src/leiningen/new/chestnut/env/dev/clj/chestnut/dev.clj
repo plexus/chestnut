@@ -42,5 +42,5 @@
 (defn start-sass []
   (future
     (println "Starting sass.")
-    (lein/-main ["auto" "sassc" "once"])))
+    (sh "lein" "auto" "sassc" "once")))
 {{/sass?}}
