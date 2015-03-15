@@ -36,11 +36,11 @@
 (defn start-less []
   (future
     (println "Starting less.")
-    (sh ["lein" "less" "auto"])))
+    (sh "lein" "less" "auto")))
 {{/less?}}
 {{#sass?}}
 (defn start-sass []
   (future
     (println "Starting sass.")
-    (lein/-main ["auto" "sassc" "once"])))
+    (sh "lein" "auto" "sassc" "once")))
 {{/sass?}}
