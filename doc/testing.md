@@ -1,6 +1,6 @@
 # Testing Chestnut
 
-(This page is about testing Chestnut itself, *not* about how to do testing in your Chestnut app.)
+(This page is about testing Chestnut itself, *not* about how to do testing in your Chestnut app. For that see [Testing Your App](02_02_testing.md))
 
 Because of the nature of Chestnut, testing it requires an interplay between terminal, repl, and browser. This is hard to automate, but we're trying anyway :) There are some basic tests available, but the test suite is not comprehensive.
 
