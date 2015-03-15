@@ -74,12 +74,12 @@
       (into {} (for [[k v] props] [(keyword k) v])))))
 
 (defn chestnut-version []
-  (let [props (load-props (io/resource "META-INF/maven/chestnut/lein-template/pom.properties"))
+  (let [resource (io/resource "META-INF/maven/chestnut/lein-template/pom.properties")
+        props (load-props resource)
         version (:version props)
         revision (:revision props)
         snapshot? (re-find #"SNAPSHOT" version)]
-
-    (str version (if snapshot? (str " (" (s/join (take 8 revision)) ")")))))
+    (str version " (" (s/join (take 8 revision)) ")")))
 
 (defn template-data [name opts]
   {:full-name name
