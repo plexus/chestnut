@@ -1,6 +1,8 @@
 (ns {{project-ns}}.core
   (:require [om.core :as om :include-macros true]{{{core-cljs-requires}}}))
 
+(enable-console-print!)
+
 (defonce app-state (atom {:text "Hello Chestnut!"}))
 
 (defn main []
