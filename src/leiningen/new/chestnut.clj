@@ -41,17 +41,17 @@
 (defn project-clj-deps [opts]
   (cond-> []
           (http-kit? opts) (conj "http-kit \"2.1.19\"")
-          (om-tools? opts) (conj "prismatic/om-tools \"0.3.10\"")))
+          (om-tools? opts) (conj "prismatic/om-tools \"0.3.11\"")))
 
 (defn project-dev-deps [opts]
   (cond-> []
-          (speclj? opts) (conj "speclj \"3.1.0\"")))
+          (speclj? opts) (conj "speclj \"3.2.0\"")))
 
 (defn project-plugins [opts]
   (cond-> []
           (sass? opts) (conj "lein-sassc \"0.10.4\""
                              "lein-auto \"0.1.1\"")
-          (less? opts) (conj "lein-less \"1.7.2\"")))
+          (less? opts) (conj "lein-less \"1.7.3\"")))
 
 (defn project-uberjar-hooks [opts]
   (cond-> ["leiningen.cljsbuild"]
@@ -60,8 +60,8 @@
 
 (defn project-dev-plugins [opts]
   (cond-> []
-          (speclj? opts) (conj "speclj \"3.1.0\"")
-          (cljx? opts) (conj "com.keminglabs/cljx \"0.5.0\" :exclusions [org.clojure/clojure]")))
+          (speclj? opts) (conj "speclj \"3.2.0\"")
+          (cljx? opts) (conj "com.keminglabs/cljx \"0.6.0\" :exclusions [org.clojure/clojure]")))
 
 (defn project-nrepl-middleware [opts]
   (cond-> []
