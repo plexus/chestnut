@@ -24,7 +24,7 @@
 (defn start-figwheel []
   (let [server (fig/start-server { :css-dirs ["resources/public/css"] })
         config {:builds [{:id "dev"
-                          :source-paths ["env/dev/cljs" "src/cljs"]
+                          :source-paths ["src/cljs" "env/dev/cljs"]
                           :compiler {:output-to            "resources/public/js/app.js"
                                      :output-dir           "resources/public/js/out"
                                      :source-map           "resources/public/js/out.js.map"
