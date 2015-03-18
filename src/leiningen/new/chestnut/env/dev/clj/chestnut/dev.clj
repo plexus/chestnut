@@ -18,8 +18,7 @@
 
 (defn browser-repl []
   (let [repl-env (weasel/repl-env :ip "0.0.0.0" :port 9001)]
-    (piggieback/cljs-repl :repl-env repl-env)
-    (piggieback/cljs-eval repl-env '(in-ns '{{project-ns}}.core) {})))
+    (piggieback/cljs-repl :repl-env repl-env)))
 
 (defn start-figwheel []
   (let [server (fig/start-server { :css-dirs ["resources/public/css"] })
