@@ -8,8 +8,8 @@
 
 ![Mr. Chestnut](resources/chestnut.png)
 
-A Leiningen template for a Clojure/ClojureScript app based on Om,
-featuring a great dev setup, and easy deployment.
+Chestnut is a Leiningen template for a Clojure/ClojureScript app based
+on Om, featuring a great dev setup, and easy deployment.
 
 For smooth development you get instant reloading of Clojure,
 ClojureScript, and CSS. A browser-connected REPL is also included.
@@ -18,6 +18,11 @@ For deployment you get uberjar support, meaning you can get all your
 code compiled, optimized, and packaged in a single executable JAR
 file. It also contains the necessary artifacts to work on Heroku out
 of the box.
+
+
+**Need help?** Ask on the mailing list (please do not open an issue on
+GitHub): http://chestnut.aren.io/
+
 
 [Go to the documentation](http://plexus.github.io/chestnut/)
 
