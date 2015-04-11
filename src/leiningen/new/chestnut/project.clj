@@ -6,7 +6,7 @@
 
   :source-paths ["src/clj"{{{project-source-paths}}}]
 
-  :test-paths ["spec/clj"]
+  :test-paths [{{{clj-test-src-path}}}]
 
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [org.clojure/clojurescript "0.0-3058" :scope "provided"]
@@ -69,7 +69,7 @@
 
                    :cljsbuild {:test-commands { {{{test-command-name}}} {{{test-command}}} }
                                :builds {:app {:source-paths ["env/dev/cljs"]}
-                                        :test {:source-paths ["src/cljs" {{{test-src-path}}}]
+                                        :test {:source-paths ["src/cljs" {{{cljs-test-src-path}}}]
                                                :compiler {:output-to     "resources/public/js/app_test.js"
                                                           :output-dir    "resources/public/js/test"
                                                           :source-map    "resources/public/js/test.js.map"
