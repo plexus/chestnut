@@ -1,5 +1,11 @@
 var page = require('webpage').create();
-var url = phantom.args[0];
+var url;
+
+if (phantom.args) {
+  url = phantom.args[0];
+} else {
+  url = require('system').args[1];
+}
 
 page.onConsoleMessage = function (message) {
   console.log(message);
