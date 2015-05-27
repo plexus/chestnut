@@ -7,7 +7,8 @@
             [net.cgrand.reload :refer [auto-reload]]
             [ring.middleware.reload :as reload]
             [ring.middleware.defaults :refer [wrap-defaults {{ring-defaults}}]]
-            [environ.core :refer [env]]{{{server-clj-requires}}}))
+            [environ.core :refer [env]]{{{server-clj-requires}}})
+  (:gen-class))
 
 (deftemplate page (io/resource "index.html") []
   [:body] (if is-dev? inject-devmode-html identity))
@@ -24,7 +25,7 @@
 
 (defn run-web-server [& [port]]
   (let [port (Integer. (or port (env :port) 10555))]
-    (print "Starting web server on port" port ".\n")
+    (println (format "Starting web server on port %d." port))
     ({{server-command}} http-handler {:port port :join? false})))
 
 (defn run-auto-reload [& [port]]

@@ -82,6 +82,7 @@
                        :env {:production true}
                        :omit-source true
                        :aot :all
+                       :main {{project-ns}}.server
                        :cljsbuild {:builds {:app
                                             {:source-paths ["env/prod/cljs"]
                                              :compiler
