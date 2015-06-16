@@ -27,10 +27,9 @@
                           :compiler {:output-to            "resources/public/js/app.js"
                                      :output-dir           "resources/public/js/out"
                                      :source-map           true
-				     :optimizations        :none
+                                     :optimizations        :none
                                      :source-map-timestamp true
-                                     :preamble             ["react/react.min.js"]
-                                     :optimizations        :whitespace}}]
+                                     :preamble             ["react/react.min.js"]}}]
                 :figwheel-server server}]
     (fig-auto/autobuild* config)))
 {{#less?}}
