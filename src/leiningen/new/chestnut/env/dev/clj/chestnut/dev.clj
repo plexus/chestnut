@@ -28,7 +28,8 @@
                                      :output-dir           "resources/public/js/out"
                                      :source-map           "resources/public/js/out.js.map"
                                      :source-map-timestamp true
-                                     :preamble             ["react/react.min.js"]}}]
+                                     :preamble             ["react/react.min.js"]
+                                     :optimizations        :whitespace}}]
                 :figwheel-server server}]
     (fig-auto/autobuild* config)))
 {{#less?}}
