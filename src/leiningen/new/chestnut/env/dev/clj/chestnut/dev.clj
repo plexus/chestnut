@@ -26,7 +26,8 @@
                           :source-paths ["src/cljs" "env/dev/cljs"]
                           :compiler {:output-to            "resources/public/js/app.js"
                                      :output-dir           "resources/public/js/out"
-                                     :source-map           "resources/public/js/out.js.map"
+                                     :source-map           true
+				     :optimizations        :none
                                      :source-map-timestamp true
                                      :preamble             ["react/react.min.js"]
                                      :optimizations        :whitespace}}]
