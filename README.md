@@ -174,10 +174,21 @@ reports and pull requests are very welcome.
 
 ## Changelog
 
+### v0.8.0
+
+* Update Om: 0.8.0-rc1 => 0.8.8 ([Anna Pawlicka](https://github.com/annapawlicka))
+* Make Uberjar executable ([Børge Svingen](https://github.com/bsvingen))
+* Remove react.js injection in dev html ([Jamie English](https://github.com/english))
+* Fix how Less and Sassc are invoked ([Daryl Lau](https://github.com/dlau))
+* Fix in figwheel config ([Tim Gilbert](https://github.com/timgilbert)), ([Philip Joseph](https://github.com/lambdahands)), ([Antony Woods](https://github.com/acron0))
+* Fix in test setup ([Geoff Shannon](https://github.com/RadicalZephyr))
+* Doc fixes ([Anthony Rosequist](https://github.com/arosequist))
+* Version upgrades: clojurescript: 0.0-2511 => 0.0-3058 ; figwheel: 0.2.1-SNAPSHOT => 0.2.5 ; weasel: 0.4.2 => 0.6.0 and more
+
 ### v0.7.0
 
 * Added Clojure{,script} unit testing support with Phantom JS.
-  ([Rory Gibson](http://github.com/rorygibson))
+  ([Rory Gibson](https://github.com/rorygibson))
 * Update om-tools: 0.3.9 => 0.3.10
 * Update ring-defaults: 0.1.2 => 0.1.3
 * Use figwheel-sidecar, drop the dependency on leiningen
