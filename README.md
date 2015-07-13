@@ -174,6 +174,11 @@ reports and pull requests are very welcome.
 
 ## Changelog
 
+### v0.8.1
+
+* Restore working lein repl for cljx projects ([Josh Daghlian](https://github.com/jcdcodes))
+* Use latest version of enlive to fix windows issue ([Justin Squirek](https://github.com/AdaDoom3))
+
 ### v0.8.0
 
 * Update Om: 0.8.0-rc1 => 0.8.8 ([Anna Pawlicka](https://github.com/annapawlicka))
