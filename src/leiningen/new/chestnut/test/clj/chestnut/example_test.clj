@@ -1,4 +1,4 @@
-(ns {{sanitized}}.example-test
+(ns {{project-ns}}.example-test
     (:require [clojure.test :refer :all]))
 
 (deftest example-passing-test

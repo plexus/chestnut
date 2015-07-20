@@ -1,4 +1,4 @@
-(ns {{sanitized}}.test-runner
+(ns {{project-ns}}.test-runner
   (:require
    [cljs.test :refer-macros [run-tests]]
    [{{sanitized}}.core-test]))

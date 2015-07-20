@@ -1,4 +1,4 @@
-(ns {{sanitized}}.core-test
+(ns {{project-ns}}.core-test
   (:require-macros [cljs.test :refer (is deftest testing)])
   (:require [cljs.test]))
 
