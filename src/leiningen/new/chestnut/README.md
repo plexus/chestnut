@@ -119,7 +119,7 @@ To autotest Clojure code using speclj:
 
 To autotest Clojurescript code using specljs:
 
-    lein cljsbuild auto dev
+    lein cljsbuild auto test
 {{/speclj?}}
 {{#sass?}}
 ## SASS
