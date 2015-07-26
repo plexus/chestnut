@@ -12,6 +12,7 @@
                  [org.clojure/clojurescript "0.0-3308" :scope "provided"]
                  [ring "1.4.0"]
                  [ring/ring-defaults "0.1.5"]
+                 [slester/ring-browser-caching "0.1.0"]
                  [bk/ring-gzip "0.1.1"]
                  [compojure "1.4.0"]
                  [enlive "1.1.6"]
@@ -68,7 +69,9 @@
                               :css-dirs ["resources/public/css"]
                               :ring-handler {{project-ns}}.server/http-handler}
 
-                   :env {:is-dev true}
+                   :env {:is-dev true
+                         :browser-caching {"text/javascript" 0
+                                           "text/html" 0}}
 
                    :cljsbuild {:test-commands { {{{test-command-name}}} {{{test-command}}} }
                                :builds {:app {:source-paths ["env/dev/cljs"]}
@@ -84,7 +87,9 @@
 
              :uberjar {:source-paths ["env/prod/clj"]
                        :hooks [{{{project-uberjar-hooks}}}]
-                       :env {:production true}
+                       :env {:production true
+                             :browser-caching {"text/javascript" 604800
+                                               "text/html" 0}}
                        :omit-source true
                        :aot :all
                        :main {{project-ns}}.server
