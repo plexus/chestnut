@@ -24,7 +24,7 @@
 
 (def http-handler
   (if is-dev?
-    (wrap-gzip (wrap-browser-caching-opts (reload/wrap-reload (wrap-defaults #'routes {{ring-defaults}}))))
+    (wrap-browser-caching-opts (reload/wrap-reload (wrap-defaults #'routes {{ring-defaults}})))
     (wrap-gzip (wrap-browser-caching-opts (wrap-defaults routes {{ring-defaults}})))))
 
 (defn run-web-server [& [port]]
