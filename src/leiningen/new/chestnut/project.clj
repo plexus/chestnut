@@ -12,7 +12,7 @@
                  [org.clojure/clojurescript "0.0-3308" :scope "provided"]
                  [ring "1.4.0"]
                  [ring/ring-defaults "0.1.5"]
-                 [slester/ring-browser-caching "0.1.0"]
+                 [slester/ring-browser-caching "0.1.1"]
                  [bk/ring-gzip "0.1.1"]
                  [compojure "1.4.0"]
                  [enlive "1.1.6"]
