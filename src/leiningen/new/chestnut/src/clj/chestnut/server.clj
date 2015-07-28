@@ -23,11 +23,11 @@
 (defn- wrap-browser-caching-opts [handler] (wrap-browser-caching handler (or (env :browser-caching) {})))
 
 (def http-handler
-    (-> routes
-        (wrap-defaults {{ring-defaults}})
-        (if is-dev? reload/wrap-reload identity)
-        wrap-browser-caching-opts
-        wrap-gzip))
+  (cond-> routes
+    true (wrap-defaults {{ring-defaults}})
+    is-dev? reload/wrap-reload
+    true wrap-browser-caching-opts
+    true wrap-gzip))
 
 (defn run-web-server [& [port]]
   (let [port (Integer. (or port (env :port) 10555))]
