@@ -8,8 +8,8 @@
 
   :test-paths [{{{clj-test-src-path}}}]
 
-  :dependencies [[org.clojure/clojure "1.6.0"]
-                 [org.clojure/clojurescript "0.0-3058" :scope "provided"]
+  :dependencies [[org.clojure/clojure "1.6.0"]                 
+                 [org.clojure/clojurescript "1.7.28" :scope "provided"]
                  [ring "1.3.2"]
                  [ring/ring-defaults "0.1.4"]
                  [compojure "1.3.2"]
