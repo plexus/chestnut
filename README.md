@@ -174,6 +174,15 @@ reports and pull requests are very welcome.
 
 ## Changelog
 
+### Master
+* Fix allowing projects to have - in their names.
+* Fix allowing groupID/artifactID naming convention.
+* Fix "No such namespace" when using om via the REPL.
+* Fix specljs auto testing.
+* Added gzip compression using [ring.middleware.gzip](https://github.com/bertrandk/ring-gzip).
+* Added browser cache-control hinting using [ring.middleware.browser-caching](https://github.com/slester/browser-caching).
+* Version upgrades: clojure: 1.6.0 => 1.7.0, clojurescript: 0.0-3058 => 1.7.48, ring: 1.3.2 => 1.4.0, ring-defaults: 0.1.4 => 0.1.5, compojure: 1.3.2 => 1.4.0, om: 0.8.8 => 0.9.0, figwheel: 0.2.5 => 0.3.7, piggieback: 0.1.5 => 0.2.1, weasel: 0.6.0 => 0.7.0
+
 ### v0.8.1
 
 * Restore working lein repl for cljx projects ([Josh Daghlian](https://github.com/jcdcodes))
