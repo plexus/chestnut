@@ -9,14 +9,14 @@
   :test-paths [{{{clj-test-src-path}}}]
 
   :dependencies [[org.clojure/clojure "1.7.0"]
-                 [org.clojure/clojurescript "1.7.122" :scope "provided"]
+                 [org.clojure/clojurescript "1.7.145" :scope "provided"]
                  [ring "1.4.0"]
                  [ring/ring-defaults "0.1.5"]
                  [slester/ring-browser-caching "0.1.1"]
                  [bk/ring-gzip "0.1.1"]
                  [compojure "1.4.0"]
                  [enlive "1.1.6"]
-                 [org.omcljs/om "0.9.0"]
+                 [org.omcljs/om "1.0.0-alpha14"]
                  [environ "1.0.0"]{{{project-clj-deps}}}]
 
   :plugins [[lein-cljsbuild "1.0.5"]
