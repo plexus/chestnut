@@ -175,7 +175,7 @@ reports and pull requests are very welcome.
 ## Changelog
 
 ### Master
-* Version upgrades: clojurescript: 1.7.122 => 1.7.145, om: 0.9.0 => 1.0.0-alpha14
+* Version upgrades: clojurescript: 1.7.122 => 1.7.145, om: 0.9.0 => 1.0.0-alpha15, tools.nrepl => 0.2.12, figwheel => 0.4.1, figwheel-sidecar => 0.4.1, lein-figwheel => 0.4.1
 * Fix allowing projects to have - in their names.
 * Fix allowing groupID/artifactID naming convention.
 * Fix "No such namespace" when using om via the REPL.
