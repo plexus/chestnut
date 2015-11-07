@@ -16,8 +16,8 @@
                  [bk/ring-gzip "0.1.1"]
                  [compojure "1.4.0"]
                  [enlive "1.1.6"]
-                 [org.omcljs/om "1.0.0-alpha14"]
-                 [environ "1.0.0"]{{{project-clj-deps}}}]
+                 [org.omcljs/om "1.0.0-alpha15"]
+                 [environ "1.0.1"]{{{project-clj-deps}}}]
 
   :plugins [[lein-cljsbuild "1.0.5"]
             [lein-environ "1.0.0"]{{{project-plugins}}}]
@@ -53,16 +53,16 @@
   :profiles {:dev {:source-paths ["env/dev/clj"]
                    :test-paths ["test/clj"]
 
-                   :dependencies [[figwheel "0.3.9"]
-                                  [figwheel-sidecar "0.3.9"]
+                   :dependencies [[figwheel "0.4.1"]
+                                  [figwheel-sidecar "0.4.1"]
                                   [com.cemerick/piggieback "0.2.1"]
-                                  [org.clojure/tools.nrepl "0.2.10"]
+                                  [org.clojure/tools.nrepl "0.2.12"]
                                   [weasel "0.7.0"]{{{project-dev-deps}}}]
 
                    :repl-options {:init-ns {{project-ns}}.server
                                   :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl{{{nrepl-middleware}}}]}
 
-                   :plugins [[lein-figwheel "0.3.9"]{{{project-dev-plugins}}}]
+                   :plugins [[lein-figwheel "0.4.1"]{{{project-dev-plugins}}}]
 
                    :figwheel {:http-server-root "public"
                               :server-port 3449
