@@ -20,7 +20,7 @@
                  [environ "1.0.1"]{{{project-clj-deps}}}]
 
   :plugins [[lein-cljsbuild "1.0.5"]
-            [lein-environ "1.0.0"]{{{project-plugins}}}]
+            [lein-environ "1.0.1"]{{{project-plugins}}}]
 
   :min-lein-version "2.5.0"
 
