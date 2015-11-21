@@ -8,6 +8,8 @@
 
   :test-paths [{{{clj-test-src-path}}}]
 
+  :clean-targets ^{:protect false} [:target-path :compile-path "resources/public/js"]
+
   :dependencies [[org.clojure/clojure "1.7.0"]
                  [org.clojure/clojurescript "1.7.145" :scope "provided"]
                  [ring "1.4.0"]
