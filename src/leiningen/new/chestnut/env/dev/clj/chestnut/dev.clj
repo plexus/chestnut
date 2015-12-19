@@ -4,7 +4,6 @@
             [cemerick.piggieback :as piggieback]
             [weasel.repl.websocket :as weasel]
             [figwheel-sidecar.auto-builder :as fig-auto]
-            [figwheel-sidecar.core :as fig]
             [clojurescript-build.auto :as auto]
             [clojure.java.shell :refer [sh]]))
 
@@ -21,7 +20,8 @@
     (piggieback/cljs-repl repl-env)))
 
 (defn start-figwheel []
-  (let [server (fig/start-server { :css-dirs ["resources/public/css"] })
+  (let [server
+        (figwheel-sidecar.components.figwheel-server/start-server {:css-dirs ["resources/public/css"] })        
         config {:builds [{:id "dev"
                           :source-paths ["src/cljs" "env/dev/cljs"]
                           :compiler {:output-to            "resources/public/js/app.js"

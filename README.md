@@ -175,6 +175,7 @@ reports and pull requests are very welcome.
 ## Changelog
 
 ### Master
+* Version upgrades: clojurescript: 1.7.145 => 1.7.189, om: 1.0.0-alpha15 => 1.0.0-alpha28, figwheel => 0.4.1, figwheel-sidecar 0.4.1 => 0.5.0-2, lein-figwheel 0.4.1 =>  0.5.0-2
 * Version upgrades: clojurescript: 1.7.122 => 1.7.145, om: 0.9.0 => 1.0.0-alpha15, tools.nrepl => 0.2.12, figwheel => 0.4.1, figwheel-sidecar => 0.4.1, lein-figwheel => 0.4.1,environ => 1.0.1, lein-environ => 1.0.1
 * Fix allowing projects to have - in their names.
 * Fix allowing groupID/artifactID naming convention.
