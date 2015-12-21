@@ -58,8 +58,7 @@
                    :dependencies [[figwheel "0.5.0-2"]
                                   [figwheel-sidecar "0.5.0-2"]
                                   [com.cemerick/piggieback "0.2.1"]
-                                  [org.clojure/tools.nrepl "0.2.12"]
-                                  [weasel "0.7.0"]{{{project-dev-deps}}}]
+                                  [org.clojure/tools.nrepl "0.2.12"]{{{project-dev-deps}}}]
 
                    :repl-options {:init-ns {{project-ns}}.server
                                   :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl{{{nrepl-middleware}}}]}
