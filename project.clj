@@ -1,4 +1,4 @@
-(defproject chestnut/lein-template "0.8.1"
+(defproject chestnut/lein-template "0.8.2-SNAPSHOT"
   :description "A Leiningen template for a ClojureScript setup with Figwheel, Austin, Om."
   :url "https://github.com/plexus/chestnut"
   :license {:name "Eclipse Public License"
