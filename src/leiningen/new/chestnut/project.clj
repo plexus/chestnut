@@ -11,14 +11,14 @@
   :clean-targets ^{:protect false} [:target-path :compile-path "resources/public/js"]
 
   :dependencies [[org.clojure/clojure "1.7.0"]
-                 [org.clojure/clojurescript "1.7.145" :scope "provided"]
+                 [org.clojure/clojurescript "1.7.189" :scope "provided"]
                  [ring "1.4.0"]
                  [ring/ring-defaults "0.1.5"]
                  [slester/ring-browser-caching "0.1.1"]
                  [bk/ring-gzip "0.1.1"]
                  [compojure "1.4.0"]
                  [enlive "1.1.6"]
-                 [org.omcljs/om "1.0.0-alpha15"]
+                 [org.omcljs/om "1.0.0-alpha28"]
                  [environ "1.0.1"]{{{project-clj-deps}}}]
 
   :plugins [[lein-cljsbuild "1.0.5"]
@@ -55,8 +55,8 @@
   :profiles {:dev {:source-paths ["env/dev/clj"]
                    :test-paths ["test/clj"]
 
-                   :dependencies [[figwheel "0.4.1"]
-                                  [figwheel-sidecar "0.4.1"]
+                   :dependencies [[figwheel "0.5.0-2"]
+                                  [figwheel-sidecar "0.5.0-2"]
                                   [com.cemerick/piggieback "0.2.1"]
                                   [org.clojure/tools.nrepl "0.2.12"]
                                   [weasel "0.7.0"]{{{project-dev-deps}}}]
@@ -64,7 +64,7 @@
                    :repl-options {:init-ns {{project-ns}}.server
                                   :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl{{{nrepl-middleware}}}]}
 
-                   :plugins [[lein-figwheel "0.4.1"]{{{project-dev-plugins}}}]
+                   :plugins [[lein-figwheel "0.5.0-2"]{{{project-dev-plugins}}}]
 
                    :figwheel {:http-server-root "public"
                               :server-port 3449
