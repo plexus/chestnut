@@ -1,6 +1,6 @@
 (ns {{project-ns}}.server
   (:require [clojure.java.io :as io]
-            [{{project-ns}}.dev :refer [is-dev? inject-devmode-html browser-repl start-figwheel{{less-sass-refer}}]]
+            [{{project-ns}}.server-impl :as impl :refer [is-dev?]]
             [compojure.core :refer [GET defroutes]]
             [compojure.route :refer [resources]]
             [net.cgrand.enlive-html :refer [deftemplate]]
@@ -13,14 +13,15 @@
   (:gen-class))
 
 (deftemplate page (io/resource "index.html") []
-  [:body] (if is-dev? inject-devmode-html identity))
+  [:body] impl/inject-devmode-html)
 
 (defroutes routes
   (resources "/")
   (resources "/react" {:root "react"})
   (GET "/*" req (page)))
 
-(defn- wrap-browser-caching-opts [handler] (wrap-browser-caching handler (or (env :browser-caching) {})))
+(defn- wrap-browser-caching-opts [handler]
+  (wrap-browser-caching handler (or (env :browser-caching) {})))
 
 (def http-handler
   (cond-> routes
@@ -34,15 +35,6 @@
     (println (format "Starting web server on port %d." port))
     ({{server-command}} http-handler {:port port :join? false})))
 
-(defn run-auto-reload [& [port]]
-  (auto-reload *ns*)
-  (start-figwheel){{less-sass-start}})
-
-(defn run [& [port]]
-  (when is-dev?
-    (run-auto-reload))
-  (run-web-server port))
-
-(defn -main [& [port]]
-  (run port))
-
+(def run impl/run)
+(def browser-repl impl/browser-repl)
+(def -main run-web-server)
