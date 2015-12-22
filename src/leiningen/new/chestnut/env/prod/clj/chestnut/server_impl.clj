@@ -1,4 +1,4 @@
-(ns {{project-ns}}.dev
+(ns {{project-ns}}.server-impl
     (:require [environ.core :refer [env]]))
 
 (if (env :is-dev)
@@ -10,7 +10,7 @@
 (def inject-devmode-html identity)
 (defn browser-repl []
   (throw (Exception. "Browser connected REPL is not available in prod mode")))
-(defn start-figwheel []
+(defn run []
   (throw (Exception. "Figwheel is not available in prod mode")))
 {{#less?}}
 (defn start-less []

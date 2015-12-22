@@ -4,7 +4,7 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
-  :source-paths ["src/clj"{{{project-source-paths}}}]
+  :source-paths ["src/clj" "src/cljs" "env/dev/clj"{{{project-source-paths}}}]
 
   :test-paths [{{{clj-test-src-path}}}]
 
@@ -21,20 +21,32 @@
                  [org.omcljs/om "1.0.0-alpha28"]
                  [environ "1.0.1"]{{{project-clj-deps}}}]
 
-  :plugins [[lein-cljsbuild "1.0.5"]
+  :plugins [[lein-cljsbuild "1.1.1"]
             [lein-environ "1.0.1"]{{{project-plugins}}}]
 
   :min-lein-version "2.5.3"
 
   :uberjar-name "{{{name}}}.jar"
 
-  :cljsbuild {:builds {:app {:source-paths ["src/cljs"{{{cljx-cljsbuild-spath}}}]
+  :main {{project-ns}}.server
+
+  :repl-options {:init-ns {{project-ns}}.server}
+
+  :cljsbuild {:builds {:app {:source-paths ["src/cljs" "env/dev/cljs"{{{cljx-cljsbuild-spath}}}]
                              :compiler {:output-to     "resources/public/js/app.js"
                                         :output-dir    "resources/public/js/out"
                                         :source-map    "resources/public/js/out.js.map"
                                         :preamble      ["react/react.min.js"]
                                         :optimizations :none
-                                        :pretty-print  true}}}}{{#less?}}
+                                        :pretty-print  true}}}}
+
+  :figwheel {:http-server-root "public"
+             :css-dirs ["resources/public/css"]
+             :ring-handler {{project-ns}}.server/http-handler}{{#less?}}
+
+  :env {:is-dev true
+        :browser-caching {"text/javascript" 0
+                          "text/html" 0}}
 
   :less {:source-paths ["src/less"]
          :target-path "resources/public/css"}{{/less?}}{{#sass?}}
@@ -52,50 +64,22 @@
                    :output-path "target/generated/cljs"
                    :rules :cljs}]}{{/cljx?}}
 
-  :profiles {:dev {:source-paths ["env/dev/clj"]
-                   :test-paths ["test/clj"]
-
-                   :dependencies [[figwheel "0.5.0-2"]
+  :profiles {:dev {:dependencies [[figwheel "0.5.0-2"]
                                   [figwheel-sidecar "0.5.0-2"]
                                   [com.cemerick/piggieback "0.2.1"]
                                   [org.clojure/tools.nrepl "0.2.12"]{{{project-dev-deps}}}]
 
-                   :repl-options {:init-ns {{project-ns}}.server
-                                  :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl{{{nrepl-middleware}}}]}
+                   :plugins [[lein-figwheel "0.5.0-2"]{{{project-dev-plugins}}}]}
 
-                   :plugins [[lein-figwheel "0.5.0-2"]{{{project-dev-plugins}}}]
-
-                   :figwheel {:http-server-root "public"
-                              :server-port 3449
-                              :css-dirs ["resources/public/css"]
-                              :ring-handler {{project-ns}}.server/http-handler}
-
-                   :env {:is-dev true
-                         :browser-caching {"text/javascript" 0
-                                           "text/html" 0}}
-
-                   :cljsbuild {:test-commands { {{{test-command-name}}} {{{test-command}}} }
-                               :builds {:app {:source-paths ["env/dev/cljs"]}
-                                        :test {:source-paths ["src/cljs" {{{cljs-test-src-path}}}]
-                                               :compiler {:output-to     "resources/public/js/app_test.js"
-                                                          :output-dir    "resources/public/js/test"
-                                                          :source-map    "resources/public/js/test.js.map"
-                                                          :preamble      ["react/react.min.js"]
-                                                          :optimizations :whitespace
-                                                          :pretty-print  false}
-                                               :notify-command  ["phantomjs" "bin/speclj" "resources/public/js/app_test.js"]
-                                               }}}}
-
-             :uberjar {:source-paths ["env/prod/clj"]
+             :uberjar {:source-paths ^:replace ["src/clj" "env/prod/clj"]
                        :hooks [{{{project-uberjar-hooks}}}]
                        :env {:production true
                              :browser-caching {"text/javascript" 604800
                                                "text/html" 0}}
                        :omit-source true
                        :aot :all
-                       :main {{project-ns}}.server
                        :cljsbuild {:builds {:app
-                                            {:source-paths ["env/prod/cljs"]
+                                            {:source-paths ^:replace ["src/cljs" "env/prod/cljs"]
                                              :compiler
                                              {:optimizations :advanced
                                               :pretty-print false}}}}}})
