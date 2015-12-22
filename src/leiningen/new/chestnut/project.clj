@@ -24,7 +24,7 @@
   :plugins [[lein-cljsbuild "1.0.5"]
             [lein-environ "1.0.1"]{{{project-plugins}}}]
 
-  :min-lein-version "2.5.0"
+  :min-lein-version "2.5.3"
 
   :uberjar-name "{{{name}}}.jar"
 
