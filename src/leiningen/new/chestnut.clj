@@ -3,7 +3,8 @@
                                              sanitize sanitize-ns project-name]]
             [leiningen.core.main :as main]
             [clojure.string :as s]
-            [clojure.java.io :as io]))
+            [clojure.java.io :as io]
+            [clj-jgit.porcelain :refer :all]))
 
 (def render (renderer "chestnut"))
 
@@ -178,4 +179,9 @@
     (main/info "WARNING: being available on your system. This is an advanced, undocumented")
     (main/info "WARNING: feature. In other words: you're on your own."))
 
-  (apply ->files (format-files-args name opts)))
+  (apply ->files (format-files-args name opts))
+
+  (git-init name)
+  (let [repo (load-repo name)]
+    (git-add repo ".")
+    (git-commit repo (str "lein new chestnut " name (s/join " " opts)))))
