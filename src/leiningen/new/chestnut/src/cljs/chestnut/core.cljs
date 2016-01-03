@@ -5,12 +5,13 @@
 
 (defonce app-state (atom {:text "Hello Chestnut!"}))
 
-(defn main []
-  (om/root
-    (fn [app owner]
-      (reify
-        om/IRender
-        (render [_]
-          (dom/h1 {{#not-om-tools?}}nil {{/not-om-tools?}}(:text app)))))
-    app-state
-    {:target (. js/document (getElementById "app"))}))
+(defn root-component [app owner]
+  (reify
+    om/IRender
+    (render [_]
+      (dom/div nil (dom/h1 {{#not-om-tools?}}nil {{/not-om-tools?}}(:text app))))))
+
+(om/root
+ root-component
+ app-state
+ {:target (. js/document (getElementById "app"))})
