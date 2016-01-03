@@ -11,7 +11,6 @@
                  [slester/ring-browser-caching "0.1.1"]
                  [bk/ring-gzip "0.1.1"]
                  [compojure "1.4.0"]
-                 [enlive "1.1.6"]
                  [org.omcljs/om "1.0.0-alpha28"]
                  [environ "1.0.1"]{{{project-clj-deps}}}]
 
@@ -20,7 +19,7 @@
 
   :min-lein-version "2.5.3"
 
-  :source-paths ["src/clj" "src/cljs" "env/dev/clj"]
+  :source-paths ["src/clj" "src/cljs" "dev"]
 
   :test-paths [{{{clj-test-src-path}}}]
 
