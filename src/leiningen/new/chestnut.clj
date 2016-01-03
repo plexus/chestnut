@@ -81,7 +81,6 @@
   {:full-name name
    :name                 (project-name name)
    :chestnut-version     (chestnut-version)
-   :project-goog-module  (sanitize (sanitize-ns name))
    :project-ns           (sanitize-ns name)
    :sanitized            (name-to-path name)
    :server-clj-requires  (dep-list 12 (server-clj-requires opts))
@@ -93,7 +92,6 @@
    :project-dev-deps     (dep-list 34 (project-dev-deps opts))
    :project-uberjar-hooks (s/join " " (project-uberjar-hooks opts))
 
-   :nrepl-middleware     (indent 53 (project-nrepl-middleware opts))
    :server-command       (if (http-kit? opts) "run-server" "run-jetty")
    :ring-defaults        (if (site-middleware? opts) "site-defaults" "api-defaults")
 
@@ -138,8 +136,8 @@
           (sass? opts) (conj "src/scss/style.scss")
           (not (or (less? opts) (sass? opts))) (conj "resources/public/css/style.css")
           (speclj? opts) (conj "bin/speclj"
-                             "spec/clj/chestnut/server_spec.clj"
-                             "spec/cljs/chestnut/core_spec.cljs")
+                               "spec/clj/chestnut/server_spec.clj"
+                               "spec/cljs/chestnut/core_spec.cljs")
           (not (speclj? opts)) (conj "env/test/js/unit-test.js"
                                      "env/test/unit-test.html"
                                      "test/clj/chestnut/example_test.clj"
