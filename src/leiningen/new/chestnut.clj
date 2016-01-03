@@ -120,7 +120,7 @@
 
 (defn files-to-render [opts]
   (cond-> ["project.clj"
-           "resources/index.html"
+           "resources/public/index.html"
            "src/clj/chestnut/server.clj"
            "src/cljs/chestnut/core.cljs"
            "env/dev/clj/chestnut/server_impl.clj"
