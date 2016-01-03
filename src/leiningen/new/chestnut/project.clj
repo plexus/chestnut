@@ -4,12 +4,6 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
-  :source-paths ["src/clj" "src/cljs" "env/dev/clj"{{{project-source-paths}}}]
-
-  :test-paths [{{{clj-test-src-path}}}]
-
-  :clean-targets ^{:protect false} [:target-path :compile-path "resources/public/js"]
-
   :dependencies [[org.clojure/clojure "1.7.0"]
                  [org.clojure/clojurescript "1.7.189" :scope "provided"]
                  [ring "1.4.0"]
@@ -26,27 +20,36 @@
 
   :min-lein-version "2.5.3"
 
+  :source-paths ["src/clj" "src/cljs" "env/dev/clj"]
+
+  :test-paths [{{{clj-test-src-path}}}]
+
+  :clean-targets ^{:protect false} [:target-path :compile-path "resources/public/js"]
+
   :uberjar-name "{{{name}}}.jar"
 
-  :main {{project-ns}}.server
+  :main {{{project-ns}}}.server
 
-  :repl-options {:init-ns {{project-ns}}.server}
+  :repl-options {:init-ns {{{project-ns}}}.server}
 
-  :cljsbuild {:builds {:app {:source-paths ["src/cljs" "env/dev/cljs"{{{cljx-cljsbuild-spath}}}]
-                             :compiler {:output-to     "resources/public/js/app.js"
-                                        :output-dir    "resources/public/js/out"
-                                        :source-map    "resources/public/js/out.js.map"
-                                        :preamble      ["react/react.min.js"]
-                                        :optimizations :none
-                                        :pretty-print  true}}}}
+  :cljsbuild {:builds
+              [{:id "app"
+                :source-paths ["src/cljs"]
 
-  :figwheel {:http-server-root "public"
-             :css-dirs ["resources/public/css"]
-             :ring-handler {{project-ns}}.server/http-handler}{{#less?}}
+                :figwheel {:on-jsload "{{{project-ns}}}.core/main"}
+
+                :compiler {:main {{{project-ns}}}.core
+                           :asset-path "js/compiled/out"
+                           :output-to "resources/public/js/compiled/{{{sanitized}}}.js"
+                           :output-dir "resources/public/js/compiled/out"
+                           :source-map-timestamp true}}]}
+
+  :figwheel {:css-dirs ["resources/public/css"]
+             :ring-handler {{{project-ns}}}.server/http-handler}
 
   :env {:is-dev true
         :browser-caching {"text/javascript" 0
-                          "text/html" 0}}
+                          "text/html" 0}}{{#less?}}
 
   :less {:source-paths ["src/less"]
          :target-path "resources/public/css"}{{/less?}}{{#sass?}}
@@ -65,8 +68,7 @@
 
              :uberjar {:source-paths ^:replace ["src/clj" "env/prod/clj"]
                        :hooks [{{{project-uberjar-hooks}}}]
-                       :env {:production true
-                             :browser-caching {"text/javascript" 604800
+                       :env {:browser-caching {"text/javascript" 604800
                                                "text/html" 0}}
                        :omit-source true
                        :aot :all
