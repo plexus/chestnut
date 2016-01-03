@@ -45,16 +45,6 @@ For writing Om components, some people prefer to use Prismatic's
 `om.dom`. This flag switches out one for the other so you don't have
 to.
 
-### `--cljx`
-
-Add the necessary configuration to be able to share code between
-Clojure and Clojurescript Using
-[cljx](https://github.com/lynaghk/cljx).
-
-Note that the Clojure community is working on a more standard
-alternative using
-[Feature Expressions](http://dev.clojure.org/display/design/Feature+Expressions)
-
 ### `--less`
 
 Add support for the [less](https://github.com/montoux/lein-less) CSS preprocessor.

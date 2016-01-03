@@ -51,6 +51,5 @@ This needs to be done for each of the feature flags.
 These are features, some hidden behind feature flags, that should be verified manually
 
 * Clojure and Clojurescript unit test support
-* CLJX
 * speclj / specljs
 * LESS

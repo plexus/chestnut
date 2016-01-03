@@ -105,6 +105,4 @@
 
   (comment
     ;; SASS is officially unsupported and requires a SASSC binary
-    ;; CLJX does funny stuff and so seems to be incompatible with the current test
-    (test-basic "--cljx")
     (test-basic "--sass")))
