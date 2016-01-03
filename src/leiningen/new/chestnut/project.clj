@@ -53,16 +53,8 @@
 
   :sassc [{:src "src/scss/style.scss"
            :output-to "resources/public/css/style.css"}]
-  :auto {"sassc"  {:file-pattern  #"\.(scss)$"}}{{/sass?}}{{#cljx?}}
 
-  :prep-tasks [["cljx" "once"] "javac" "compile"]
-
-  :cljx {:builds [{:source-paths ["src/cljx"]
-                   :output-path "target/generated/clj"
-                   :rules :clj}
-                  {:source-paths ["src/cljx"]
-                   :output-path "target/generated/cljs"
-                   :rules :cljs}]}{{/cljx?}}
+  :auto {"sassc"  {:file-pattern  #"\.(scss)$"}}{{/sass?}}
 
   :profiles {:dev {:dependencies [[figwheel "0.5.0-2"]
                                   [figwheel-sidecar "0.5.0-2"]

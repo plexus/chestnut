@@ -21,7 +21,7 @@
   (wrap-indent identity n list))
 
 (def valid-options
-  ["http-kit" "site-middleware" "om-tools" "cljx" "less" "sass" "speclj"])
+  ["http-kit" "site-middleware" "om-tools" "less" "sass" "speclj"])
 
 (doseq [opt valid-options]
   (eval
@@ -46,8 +46,7 @@
 
 (defn project-dev-deps [opts]
   (cond-> []
-          (speclj? opts) (conj "speclj \"3.2.0\"")
-          (cljx? opts) (conj "com.keminglabs/cljx \"0.6.0\" :exclusions [org.clojure/clojure]")))
+          (speclj? opts) (conj "speclj \"3.2.0\"")))
 
 (defn project-plugins [opts]
   (cond-> []
@@ -62,12 +61,7 @@
 
 (defn project-dev-plugins [opts]
   (cond-> []
-          (speclj? opts) (conj "speclj \"3.2.0\"")
-          (cljx? opts) (conj "com.keminglabs/cljx \"0.6.0\" :exclusions [org.clojure/clojure]")))
-
-(defn project-nrepl-middleware [opts]
-  (cond-> []
-          (cljx? opts) (conj "cljx.repl-middleware/wrap-cljx")))
+          (speclj? opts) (conj "speclj \"3.2.0\"")))
 
 (defn load-props [file-name]
   (with-open [^java.io.Reader reader (clojure.java.io/reader file-name)]
@@ -107,7 +101,6 @@
    :not-om-tools?        (fn [block] (if (om-tools? opts) "" block))
    :sass?                (fn [block] (if (sass? opts) (str "\n" block) ""))
    :less?                (fn [block] (if (less? opts) (str "\n" block) ""))
-   :cljx?                (fn [block] (if (cljx? opts) (str "\n" block) ""))
 
    ;; testing features
    :speclj?              (fn [block] (if (speclj? opts) (str "\n" block) ""))
@@ -123,12 +116,7 @@
    :less-sass-refer      (cond (sass? opts) " start-sass"
                                (less? opts) " start-less")
    :less-sass-start      (cond (sass? opts) "\n  (start-sass)"
-                               (less? opts) "\n  (start-less)")
-
-   ;; cljx
-   :project-source-paths (if (cljx? opts) " \"target/generated/clj\" \"target/generated/cljx\"" "")
-   :cljx-extension       (if (cljx? opts) "|\\.cljx")
-   :cljx-cljsbuild-spath (if (cljx? opts) " \"target/generated/cljs\"" "")})
+                               (less? opts) "\n  (start-less)")})
 
 (defn files-to-render [opts]
   (cond-> ["project.clj"
@@ -149,7 +137,6 @@
           (less? opts) (conj "src/less/style.less")
           (sass? opts) (conj "src/scss/style.scss")
           (not (or (less? opts) (sass? opts))) (conj "resources/public/css/style.css")
-          (cljx? opts) (conj "src/cljx/chestnut/core.cljx")
           (speclj? opts) (conj "bin/speclj"
                              "spec/clj/chestnut/server_spec.clj"
                              "spec/cljs/chestnut/core_spec.cljs")
