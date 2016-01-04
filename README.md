@@ -19,10 +19,8 @@ code compiled, optimized, and packaged in a single executable JAR
 file. It also contains the necessary artifacts to work on Heroku out
 of the box.
 
-
 **Need help?** Ask on the mailing list (please do not open an issue on
 GitHub): http://chestnut.aren.io/
-
 
 [Go to the documentation](http://plexus.github.io/chestnut/)
 
@@ -30,13 +28,15 @@ This README may describe unreleased features. Please compare the
 version number on Clojars to the changelog below, and check the README
 in your generated project for instructions pertaining to your version.
 
-## HELP WANTED
+## Chestnut 0.9.0-SNAPSHOT
 
-If you want to help out with Chestnut, please start by triaging
-[issues](https://github.com/plexus/chestnut/issues?q=is%3Aopen+is%3Aissue). Is
-it a real issue, or a user error? Is it clearly diagnosed?  Is it
-Chestnut's fault, or is it an upstream issue? If upstream, where's the
-tickets so we can track its progress. etc.
+A major update is in the works. To try it out, use `lein new chestnut my-project --snapshot`.
+
+* Use Figwheel for REPL and Ring server
+* Remove boilerplate that's no longer needed
+* Drop Enlive and simplify the dev setup
+* Drop CLJX support
+* Better inline documentation
 
 ## Usage
 
@@ -83,9 +83,6 @@ Clojure/ClojureScript apps effectively. It comes with
 * [Figwheel](https://github.com/bhauman/lein-figwheel) Automatically
   reload your ClojureScript and CSS as soon as you save the file, no
   need for browser refresh.
-* [Weasel](https://github.com/tomjakubowski/weasel) Next generation
-  browser connected REPL. Try things out and manipulate your running
-  app.
 * [Om](https://github.com/swannodette/om) ClojureScript interface to
   Facebook's React.
 * [Ring](https://github.com/ring-clojure/ring) Clojure's de facto HTTP
@@ -109,8 +106,6 @@ Clojure/ClojureScript apps effectively. It comes with
 * `--om-tools` Use Prismatic's
   [om-tools.dom](https://github.com/Prismatic/om-tools) instead of
   `om.dom`
-* `--cljx` Using [cljx](https://github.com/lynaghk/cljx) allows you to
-  write code that is shared between Clojure and ClojureScript.
 * `--less` Use [less](https://github.com/montoux/lein-less) for
   compiling Less CSS files.
 * `--speclj` Use [speclj](http://speclj.com) test runner for clj and
