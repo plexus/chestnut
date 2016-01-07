@@ -1,7 +1,8 @@
 (ns user
   (:require [{{project-ns}}.server]
             [ring.middleware.reload :refer [wrap-reload]]
-            [figwheel-sidecar.repl-api :as figwheel]))
+            [figwheel-sidecar.repl-api :as figwheel]
+            [clojure.java.shell]))
 
 {{#less?}}
 (defn start-less []
