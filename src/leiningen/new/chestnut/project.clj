@@ -38,7 +38,8 @@
               [{:id "app"
                 :source-paths ["src/cljs"]
 
-                ;; You can configure a function to run every time figwheel reloads.
+                :figwheel true
+                ;; Alternatively, you can configure a function to run every time figwheel reloads.
                 ;; :figwheel {:on-jsload "{{{project-ns}}}.core/on-figwheel-reload"}
 
                 :compiler {:main {{{project-ns}}}.core
