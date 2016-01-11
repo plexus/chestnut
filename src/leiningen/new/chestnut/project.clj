@@ -92,8 +92,8 @@
   :auto {"sassc"  {:file-pattern  #"\.(scss)$"}}{{/sass?}}
 
   :profiles {:dev
-             {:dependencies [[figwheel "0.5.0-2"]
-                             [figwheel-sidecar "0.5.0-2"]
+             {:dependencies [[figwheel "0.5.0-3"]
+                             [figwheel-sidecar "0.5.0-3"]
                              [com.cemerick/piggieback "0.2.1"]
                              [org.clojure/tools.nrepl "0.2.12"]{{{project-dev-deps}}}]
 
