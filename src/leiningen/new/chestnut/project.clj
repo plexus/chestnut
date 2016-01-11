@@ -9,6 +9,7 @@
                  [ring "1.4.0"]
                  [ring/ring-defaults "0.1.5"]
                  [bk/ring-gzip "0.1.1"]
+                 [ring.middleware.logger "0.5.0"]
                  [compojure "1.4.0"]
                  [org.omcljs/om "1.0.0-alpha28"]
                  [environ "1.0.1"]{{{project-clj-deps}}}]

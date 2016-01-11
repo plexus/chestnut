@@ -4,6 +4,7 @@
             [compojure.route :refer [resources]]
             [ring.middleware.defaults :refer [wrap-defaults {{ring-defaults}}]]
             [ring.middleware.gzip :refer [wrap-gzip]]
+            [ring.middleware.logger :refer [wrap-with-logger]]
             [environ.core :refer [env]]{{{server-clj-requires}}})
   (:gen-class))
 
@@ -13,6 +14,7 @@
 (def http-handler
   (-> routes
       (wrap-defaults {{ring-defaults}})
+      wrap-with-logger
       wrap-gzip))
 
 (defn -main [& [port]]
