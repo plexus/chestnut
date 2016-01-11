@@ -80,8 +80,7 @@
              ;;
              ;; :open-file-command "myfile-opener"
 
-             ;; to configure a different figwheel logfile path
-             ;; :server-logfile "tmp/logs/figwheel-logfile.log"
+             :server-logfile "log/figwheel.log"
              }{{#less?}}
 
   :less {:source-paths ["src/less"]

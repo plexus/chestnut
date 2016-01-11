@@ -119,6 +119,7 @@
 (defn files-to-render [opts]
   (cond-> ["project.clj"
            "resources/public/index.html"
+           "src/log4j.properties"
            "src/clj/chestnut/server.clj"
            "src/cljs/chestnut/core.cljs"
            "dev/user.clj"
