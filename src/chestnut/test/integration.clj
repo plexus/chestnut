@@ -97,7 +97,6 @@
   (test-basic)
   (test-basic "--http-kit")
   (test-basic "--site-middleware")
-  (test-basic "--om-tools")
 
   (test-basic "--less")
   (test-basic "--speclj")

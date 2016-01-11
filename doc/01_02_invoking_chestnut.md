@@ -37,14 +37,6 @@ pages, you will want to use `--site-middleware`, which will also set
 up middleware for sessions, cookies, xss protection, frame options
 headers, static resources, etc.
 
-
-### `--om-tools`
-
-For writing Om components, some people prefer to use Prismatic's
-[om-tools.dom](https://github.com/Prismatic/om-tools) instead of
-`om.dom`. This flag switches out one for the other so you don't have
-to.
-
 ### `--less`
 
 Add support for the [less](https://github.com/montoux/lein-less) CSS preprocessor.

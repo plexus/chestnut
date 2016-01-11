@@ -21,7 +21,7 @@
   (wrap-indent identity n list))
 
 (def valid-options
-  ["http-kit" "site-middleware" "om-tools" "less" "sass" "speclj"])
+  ["http-kit" "site-middleware" "less" "sass" "speclj"])
 
 (doseq [opt valid-options]
   (eval
@@ -33,20 +33,15 @@
     ["org.httpkit.server :refer [run-server]"]
     ["ring.adapter.jetty :refer [run-jetty]"]))
 
-(defn core-cljs-requires [opts]
-  (if (om-tools? opts)
-    ["om-tools.dom :as dom :include-macros true"
-     "om-tools.core :refer-macros [defcomponent]"]
-    ["om.dom :as dom :include-macros true"]))
-
 (defn project-clj-deps [opts]
-  (cond-> []
-          (http-kit? opts) (conj "http-kit \"2.1.19\"")
-          (om-tools? opts) (conj "prismatic/om-tools \"0.3.11\"")))
+  (if (http-kit? opts)
+    ["http-kit \"2.1.19\""]
+    []))
 
 (defn project-dev-deps [opts]
-  (cond-> []
-          (speclj? opts) (conj "speclj \"3.2.0\"")))
+  (if (speclj? opts)
+    ["speclj \"3.2.0\""]
+    []))
 
 (defn project-plugins [opts]
   (cond-> []
@@ -60,8 +55,9 @@
           (sass? opts) (conj "leiningen.sassc")))
 
 (defn project-dev-plugins [opts]
-  (cond-> []
-          (speclj? opts) (conj "speclj \"3.2.0\"")))
+  (if (speclj? opts)
+    ["speclj \"3.2.0\""]
+    []))
 
 (defn load-props [file-name]
   (with-open [^java.io.Reader reader (clojure.java.io/reader file-name)]
@@ -84,7 +80,6 @@
    :project-ns           (sanitize-ns name)
    :sanitized            (name-to-path name)
    :server-clj-requires  (dep-list 12 (server-clj-requires opts))
-   :core-cljs-requires   (dep-list 12 (core-cljs-requires opts))
 
    :project-clj-deps     (dep-list 17 (project-clj-deps opts))
    :project-plugins      (dep-list 12 (project-plugins opts))
@@ -96,7 +91,6 @@
    :ring-defaults        (if (site-middleware? opts) "site-defaults" "api-defaults")
 
    ;; features
-   :not-om-tools?        (fn [block] (if (om-tools? opts) "" block))
    :sass?                (fn [block] (if (sass? opts) (str "\n" block) ""))
    :less?                (fn [block] (if (less? opts) (str "\n" block) ""))
 
