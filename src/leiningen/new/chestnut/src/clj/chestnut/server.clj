@@ -1,6 +1,6 @@
 (ns {{project-ns}}.server
   (:require [clojure.java.io :as io]
-            [compojure.core :refer [GET defroutes]]
+            [compojure.core :refer [ANY GET PUT POST DELETE defroutes]]
             [compojure.route :refer [resources]]
             [ring.middleware.defaults :refer [wrap-defaults {{ring-defaults}}]]
             [ring.middleware.gzip :refer [wrap-gzip]]
@@ -9,6 +9,10 @@
   (:gen-class))
 
 (defroutes routes
+  (GET "/" _
+    {:status 200
+     :headers {"Content-Type" "text/html; charset=utf-8"}
+     :body (io/input-stream (io/resource "public/index.html"))})
   (resources "/"))
 
 (def http-handler
