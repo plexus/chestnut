@@ -12,8 +12,8 @@
 
 (def http-handler
   (-> routes
-    (wrap-defaults {{ring-defaults}})
-    wrap-gzip))
+      (wrap-defaults {{ring-defaults}})
+      wrap-gzip))
 
 (defn -main [& [port]]
   (let [port (Integer. (or port (env :port) 10555))]
