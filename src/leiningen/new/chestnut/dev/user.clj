@@ -1,16 +1,16 @@
 (ns user
   (:require [{{project-ns}}.server]
             [ring.middleware.reload :refer [wrap-reload]]
-            [figwheel-sidecar.repl-api :as figwheel]
-            [clojure.java.shell]))
+            [figwheel-sidecar.repl-api :as figwheel]{{#less?}}
+            [clojure.java.shell]{{/less?}}{{#sass?}}
+            [clojure.java.shell]{{/sass?}}))
 
 {{#less?}}
 (defn start-less []
   (future
     (println "Starting less.")
     (clojure.java.shell/sh "lein" "less" "auto")))
-{{/less?}}
-{{#sass?}}
+{{/less?}}{{#sass?}}
 (defn start-sass []
   (future
     (println "Starting sass.")
