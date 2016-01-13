@@ -8,8 +8,8 @@
   :dependencies [[clj-jgit "0.8.8"]
                  [org.slf4j/slf4j-nop "1.7.13"]]
 
-  :profiles { :test { :dependencies [[org.clojure/core.async "0.1.346.0-17112a-alpha"]
-                                     [com.github.jnr/jnr-process "1.0-SNAPSHOT"]
-                                     [clj-webdriver "0.7.0-SNAPSHOT"]]}}
+  :profiles {:test {:dependencies [[org.clojure/core.async "0.1.346.0-17112a-alpha"]
+                                   [com.github.jnr/jnr-process "1.0-SNAPSHOT"]
+                                   [clj-webdriver "0.7.0-SNAPSHOT"]]}}
 
   :aliases {"test" ["with-profile" "+test" "run" "-m" "chestnut.test.integration"] })
