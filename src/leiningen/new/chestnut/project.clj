@@ -81,8 +81,7 @@
              ;;
              ;; :open-file-command "myfile-opener"
 
-             :server-logfile "log/figwheel.log"
-             }
+             :server-logfile "log/figwheel.log"}
 
   :doo {:build "test"}{{#less?}}
 
