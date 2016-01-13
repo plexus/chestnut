@@ -9,14 +9,14 @@
 ;; on unboxed numbers. In both cases you should add type annotations to prevent
 ;; degraded performance.
 (set! *warn-on-reflection* true)
-(set! *unchecked-math* :warn-on-boxed)
+(set! *unchecked-math* :warn-on-boxed){{#less?}}
 
-{{#less?}}
 (defn start-less []
   (future
     (println "Starting less.")
     (clojure.java.shell/sh "lein" "less" "auto")))
 {{/less?}}{{#sass?}}
+
 (defn start-sass []
   (future
     (println "Starting sass.")

@@ -21,7 +21,7 @@
   (wrap-indent identity n list))
 
 (def valid-options
-  ["http-kit" "site-middleware" "less" "sass" "speclj"])
+  ["http-kit" "site-middleware" "less" "sass"])
 
 (doseq [opt valid-options]
   (eval
@@ -38,11 +38,6 @@
     ["http-kit \"2.1.19\""]
     []))
 
-(defn project-dev-deps [opts]
-  (if (speclj? opts)
-    ["speclj \"3.2.0\""]
-    []))
-
 (defn project-plugins [opts]
   (cond-> []
           (sass? opts) (conj "lein-sassc \"0.10.4\""
@@ -53,11 +48,6 @@
   (cond-> ["leiningen.cljsbuild"]
           (less? opts) (conj "leiningen.less")
           (sass? opts) (conj "leiningen.sassc")))
-
-(defn project-dev-plugins [opts]
-  (if (speclj? opts)
-    ["speclj \"3.2.0\""]
-    []))
 
 (defn load-props [file-name]
   (with-open [^java.io.Reader reader (clojure.java.io/reader file-name)]
@@ -83,8 +73,6 @@
 
    :project-clj-deps     (dep-list 17 (project-clj-deps opts))
    :project-plugins      (dep-list 12 (project-plugins opts))
-   :project-dev-plugins  (dep-list 29 (project-dev-plugins opts))
-   :project-dev-deps     (dep-list 34 (project-dev-deps opts))
    :project-uberjar-hooks (s/join " " (project-uberjar-hooks opts))
 
    :server-command       (if (http-kit? opts) "run-server" "run-jetty")
@@ -93,16 +81,6 @@
    ;; features
    :sass?                (fn [block] (if (sass? opts) (str "\n" block) ""))
    :less?                (fn [block] (if (less? opts) (str "\n" block) ""))
-
-   ;; testing features
-   :speclj?              (fn [block] (if (speclj? opts) (str "\n" block) ""))
-   :clj-test-src-path    (if (speclj? opts) "\"spec/clj\"" "\"test/clj\"")
-   :cljs-test-src-path   (if (speclj? opts) "\"spec/cljs\"" "\"test/cljs\"")
-   :test-command-name    (if (speclj? opts) "\"spec\"" "\"test\"")
-   :test-command         (if (speclj? opts)
-                           "[\"phantomjs\" \"bin/speclj\" \"resources/public/js/app_test.js\"]"
-                           "[\"phantomjs\" \"env/test/js/unit-test.js\" \"env/test/unit-test.html\"]")
-
 
    ;; stylesheets
    :less-sass-refer      (cond (sass? opts) " start-sass"
@@ -122,18 +100,13 @@
            "code_of_conduct.md"
            ".gitignore"
            "system.properties"
-           "Procfile"]
+           "Procfile"
+           "test/clj/chestnut/example_test.clj"
+           "test/cljs/chestnut/core_test.cljs"
+           "test/cljs/chestnut/test_runner.cljs"]
           (less? opts) (conj "src/less/style.less")
           (sass? opts) (conj "src/scss/style.scss")
-          (not (or (less? opts) (sass? opts))) (conj "resources/public/css/style.css")
-          (speclj? opts) (conj "bin/speclj"
-                               "spec/clj/chestnut/server_spec.clj"
-                               "spec/cljs/chestnut/core_spec.cljs")
-          (not (speclj? opts)) (conj "env/test/js/unit-test.js"
-                                     "env/test/unit-test.html"
-                                     "test/clj/chestnut/example_test.clj"
-                                     "test/cljs/chestnut/core_test.cljs"
-                                     "test/cljs/chestnut/test_runner.cljs")))
+          (not (or (less? opts) (sass? opts))) (conj "resources/public/css/style.css")))
 
 (defn format-files-args [name opts]
   (let [data (template-data name opts)

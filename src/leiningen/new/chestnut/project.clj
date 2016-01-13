@@ -21,7 +21,7 @@
 
   :source-paths ["src/clj" "src/cljs" "dev"]
 
-  :test-paths [{{{clj-test-src-path}}}]
+  :test-paths ["test/clj"]
 
   :clean-targets ^{:protect false} [:target-path :compile-path "resources/public/js"]
 
@@ -36,8 +36,8 @@
   :repl-options {:init-ns user}
 
   :cljsbuild {:builds
-              [{:id "app"
-                :source-paths ["src/cljs"]
+              {:app
+               {:source-paths ["src/cljs"]
 
                 :figwheel true
                 ;; Alternatively, you can configure a function to run every time figwheel reloads.
@@ -47,7 +47,7 @@
                            :asset-path "js/compiled/out"
                            :output-to "resources/public/js/compiled/{{{sanitized}}}.js"
                            :output-dir "resources/public/js/compiled/out"
-                           :source-map-timestamp true}}]}
+                           :source-map-timestamp true}}}}
 
   ;; When running figwheel from nREPL, figwheel will read this configuration
   ;; stanza, but it will read it without passing through leiningen's profile
@@ -82,7 +82,9 @@
              ;; :open-file-command "myfile-opener"
 
              :server-logfile "log/figwheel.log"
-             }{{#less?}}
+             }
+
+  :doo {:build "test"}{{#less?}}
 
   :less {:source-paths ["src/less"]
          :target-path "resources/public/css"}{{/less?}}{{#sass?}}
@@ -90,15 +92,23 @@
   :sassc [{:src "src/scss/style.scss"
            :output-to "resources/public/css/style.css"}]
 
-  :auto {"sassc"  {:file-pattern  #"\.(scss)$"}}{{/sass?}}
+  :auto {"sassc" {:file-pattern  #"\.(scss)$"}}{{/sass?}}
 
   :profiles {:dev
              {:dependencies [[figwheel "0.5.0-3"]
                              [figwheel-sidecar "0.5.0-3"]
                              [com.cemerick/piggieback "0.2.1"]
-                             [org.clojure/tools.nrepl "0.2.12"]{{{project-dev-deps}}}]
+                             [org.clojure/tools.nrepl "0.2.12"]]
 
-              :plugins [[lein-figwheel "0.5.0-2"]{{{project-dev-plugins}}}]}
+              :plugins [[lein-figwheel "0.5.0-2"]
+                        [lein-doo "0.1.6"]]
+
+              :cljsbuild {:builds
+                          {:test
+                           {:source-paths ["src/cljs" "test/cljs"]
+                            :compiler {:output-to "resources/public/js/compiled/testable.js"
+                                       :main {{{project-ns}}}.test-runner
+                                       :optimizations :none}}}}}
 
              :uberjar
              {:source-paths ^:replace ["src/clj"]
@@ -106,8 +116,8 @@
               :omit-source true
               :aot :all
               :cljsbuild {:builds
-                          [{:id "app"
-                            :source-paths ^:replace ["src/cljs"]
+                          {:app
+                           {:source-paths ^:replace ["src/cljs"]
                             :compiler
                             {:optimizations :advanced
-                             :pretty-print false}}]}}})
+                             :pretty-print false}}}}}})

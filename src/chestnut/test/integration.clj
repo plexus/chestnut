@@ -99,8 +99,7 @@
   (test-basic "--site-middleware")
 
   (test-basic "--less")
-  (test-basic "--speclj")
-  (test-basic "--speclj --less --om-tools --site-middleware --http-kit")
+  (test-basic "--less --om-tools --site-middleware --http-kit")
 
   (comment
     ;; SASS is officially unsupported and requires a SASSC binary
