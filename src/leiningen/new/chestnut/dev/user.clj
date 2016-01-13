@@ -24,7 +24,7 @@
 {{/sass?}}
 
 (def http-handler
-  (wrap-reload {{project-ns}}.server/http-handler))
+  (wrap-reload #'{{project-ns}}.server/http-handler))
 
 (defn run []
   (figwheel/start-figwheel!){{less-sass-start}})
