@@ -4,7 +4,7 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
-  :dependencies [[org.clojure/clojure "1.7.0"]
+  :dependencies [[org.clojure/clojure "1.8.0-RC5"]
                  [org.clojure/clojurescript "1.7.228" :scope "provided"]
                  [ring "1.4.0"]
                  [ring/ring-defaults "0.1.5"]
@@ -94,8 +94,8 @@
   :auto {"sassc" {:file-pattern  #"\.(scss)$"}}{{/sass?}}
 
   :profiles {:dev
-             {:dependencies [[figwheel "0.5.0-3"]
-                             [figwheel-sidecar "0.5.0-3"]
+             {:dependencies [[figwheel "0.5.0-4"]
+                             [figwheel-sidecar "0.5.0-4"]
                              [com.cemerick/piggieback "0.2.1"]
                              [org.clojure/tools.nrepl "0.2.12"]]
 
