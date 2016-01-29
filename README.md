@@ -156,9 +156,7 @@ reports and pull requests are very welcome.
 
 ## Changelog
 
-### Master
-
-## Chestnut 0.9.0
+### Chestnut 0.9.0
 
 * Use Figwheel for REPL and Ring server
 * Remove boilerplate that's no longer needed

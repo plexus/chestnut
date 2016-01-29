@@ -1,5 +1,25 @@
 # Changelog
 
+### Chestnut 0.9.0
+
+* Use Figwheel for REPL and Ring server
+* Remove boilerplate that's no longer needed
+* Drop Enlive and simplify the dev setup
+* Drop CLJX support
+* Better inline documentation
+* Upgrade all dependencies
+
+### v0.8.2-SNAPSHOT
+* Version upgrades: clojurescript: 1.7.145 => 1.7.189, om: 1.0.0-alpha15 => 1.0.0-alpha28, figwheel => 0.4.1, figwheel-sidecar 0.4.1 => 0.5.0-2, lein-figwheel 0.4.1 =>  0.5.0-2
+* Version upgrades: clojurescript: 1.7.122 => 1.7.145, om: 0.9.0 => 1.0.0-alpha15, tools.nrepl => 0.2.12, figwheel => 0.4.1, figwheel-sidecar => 0.4.1, lein-figwheel => 0.4.1,environ => 1.0.1, lein-environ => 1.0.1
+* Fix allowing projects to have - in their names.
+* Fix allowing groupID/artifactID naming convention.
+* Fix "No such namespace" when using om via the REPL.
+* Fix specljs auto testing.
+* Added gzip compression using [ring.middleware.gzip](https://github.com/bertrandk/ring-gzip).
+* Added browser cache-control hinting using [ring.middleware.browser-caching](https://github.com/slester/browser-caching).
+* Version upgrades: clojure: 1.6.0 => 1.7.0, clojurescript: 0.0-3058 => 1.7.48, ring: 1.3.2 => 1.4.0, ring-defaults: 0.1.4 => 0.1.5, compojure: 1.3.2 => 1.4.0, om: 0.8.8 => 0.9.0, figwheel: 0.2.5 => 0.3.7, piggieback: 0.1.5 => 0.2.1, weasel: 0.6.0 => 0.7.0
+
 ### v0.8.1
 
 * Restore working lein repl for cljx projects ([Josh Daghlian](https://github.com/jcdcodes))
