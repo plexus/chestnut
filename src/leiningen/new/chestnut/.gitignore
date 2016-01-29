@@ -10,3 +10,4 @@ pom.xml.asc
 /resources/public/js
 /out
 /.repl
+/log

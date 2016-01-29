@@ -93,7 +93,7 @@ Clojure/ClojureScript apps effectively. It comes with
 * Heroku support. Chestnut apps have all the bits and pieces to be
   deployable to Heroku. Getting your app on the web is as simple as
   `git push`.
-* Unit tests for both Clojure and CLJS. Or you can decide to use Speclj instead, both for CLJ and CLJS.
+* Unit tests for both Clojure and CLJS.
   Both specs and CLJS tests can be run in "auto" mode.
 
 ## Options
@@ -108,8 +108,6 @@ Clojure/ClojureScript apps effectively. It comes with
   `om.dom`
 * `--less` Use [less](https://github.com/montoux/lein-less) for
   compiling Less CSS files.
-* `--speclj` Use [speclj](http://speclj.com) test runner for clj and
-cljs, and disable the core cljs.test tests.
 
 Use `--` to separate these options from Leiningen's options,
 e.g. `lein new chestnut foo -- --om-tools --http-kit`
@@ -318,7 +316,7 @@ example app.
 
 ## License
 
-Copyright © 2014 Arne Brasseur
+Copyright © 2014-2016 Arne Brasseur
 
 Distributed under the Eclipse Public License either version 1.0 or (at
 your option) any later version.

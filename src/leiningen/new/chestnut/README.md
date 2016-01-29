@@ -47,7 +47,6 @@ In the REPL, type
 ```
 
 Notice again how the browser updates.
-{{#speclj?}}
 
 ### Lighttable
 
@@ -65,20 +64,11 @@ Start a repl in the context of your project with `M-x cider-jack-in`.
 
 Switch to repl-buffer with `C-c C-z` and start web and figwheel servers with `(run)`, and weasel server with `(browser-repl`). Load [http://localhost:10555](http://localhost:10555) on an external browser, which connects to weasel, and start evaluating cljs inside Cider.
 
-## Running Tests
-
-To run the Clojure tests, do
-
-```
-lein spec
-```
-
 To run the Clojurescript tests, do
 
 ```
-lein cljsbuild test
+lein doo phantom
 ```
-{{/speclj?}}
 
 ## Deploying to Heroku
 
@@ -109,19 +99,8 @@ lein with-profile -dev,+production uberjar && foreman start
 ```
 
 Now your app is running at
-[http://localhost:5000](http://localhost:5000) in production mode.
-{{#speclj?}}
-## Testing
+[http://localhost:5000](http://localhost:5000) in production mode.{{#sass?}}
 
-To autotest Clojure code using speclj:
-
-    lein spec -a
-
-To autotest Clojurescript code using specljs:
-
-    lein cljsbuild auto test
-{{/speclj?}}
-{{#sass?}}
 ## SASS
 
 Currently SASS support in Chestnut depends on SASSC, a C-based SASS
@@ -141,7 +120,7 @@ To automatically recompile when files change, you can use
 
 ## License
 
-Copyright © 2014 FIXME
+Copyright © 2016 FIXME
 
 Distributed under the Eclipse Public License either version 1.0 or (at
 your option) any later version.

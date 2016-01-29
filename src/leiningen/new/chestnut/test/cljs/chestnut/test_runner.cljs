@@ -1,13 +1,8 @@
 (ns {{project-ns}}.test-runner
   (:require
-   [cljs.test :refer-macros [run-tests]]
+   [doo.runner :refer-macros [doo-tests]]
    [{{project-ns}}.core-test]))
 
 (enable-console-print!)
 
-(defn runner []
-  (if (cljs.test/successful?
-       (run-tests
-        '{{project-ns}}.core-test))
-    0
-    1))
+(doo-tests '{{project-ns}}.core-test)
