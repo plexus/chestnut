@@ -1,9 +1,0 @@
-{
-  "name": "chestnut-docs",
-  "version": "0.0.0",
-  "dependencies": {
-    "gitbook": "1.3.4",
-    "gitbook-plugin-ga": "*",
-    "gitbook-plugin-anchors": "*"
-  }
-}
