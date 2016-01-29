@@ -5,11 +5,12 @@ early_exit() {
 
 git diff-index --quiet --cached HEAD && git diff-files --quiet || early_exit
 
+
 cd doc/ && \
     echo "Installing gitbook" && \
-    npm install && \
+    npm -g install gitbook-cli && \
     echo "Building the book" && \
-    node_modules/.bin/gitbook build && \
+    gitbook build && \
     rm -rf /tmp/_book && \
     mv _book /tmp && \
     cd .. && \
