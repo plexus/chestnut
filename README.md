@@ -28,15 +28,9 @@ This README may describe unreleased features. Please compare the
 version number on Clojars to the changelog below, and check the README
 in your generated project for instructions pertaining to your version.
 
-## Chestnut 0.9.0-SNAPSHOT
+## Documentation
 
-A major update is in the works. To try it out, use `lein new chestnut my-project --snapshot`.
-
-* Use Figwheel for REPL and Ring server
-* Remove boilerplate that's no longer needed
-* Drop Enlive and simplify the dev setup
-* Drop CLJX support
-* Better inline documentation
+[Go to the documentation](http://plexus.github.io/chestnut/)
 
 ## Usage
 
@@ -45,35 +39,33 @@ lein new chestnut <name>
 ```
 
 After that open the README of your generated project for detailed
-instructions.
-
-## Command line
-
-```
-$ lein repl
-
-(run)
-(browser-repl)
-```
-
-Wait a bit, then browse to
-[http://localhost:10555](http://localhost:10555).
+instructions, or consult the [Documentation](http://plexus.github.io/chestnut/)
 
 ### Lighttable
 
-Lighttable provides a tighter integration for live coding with an inline browser-tab. Rather than evaluating cljs on the command line with weasel repl, evaluate code and preview pages inside Lighttable.
+Lighttable provides a tighter integration for live coding with an inline
+browser-tab. Rather than evaluating cljs on the command line with weasel repl,
+evaluate code and preview pages inside Lighttable.
 
-Steps: After running `(run)`, open a browser tab in Lighttable. Open a cljs file from within a project, go to the end of an s-expression and hit Cmd-ENT. Lighttable will ask you which client to connect. Click 'Connect a client' and select 'Browser'. Browse to [http://localhost:10555](http://localhost:10555)
+Steps: After running `(run)`, open a browser tab in Lighttable. Open a cljs file
+from within a project, go to the end of an s-expression and hit Cmd-ENT.
+Lighttable will ask you which client to connect. Click 'Connect a client' and
+select 'Browser'. Browse to [http://localhost:3449](http://localhost:3449)
 
 View LT's console to see a Chrome js console.
 
-Hereafter, you can save a file and see changes or evaluate cljs code (without saving a file). Note that running a weasel server is not required to evaluate code in Lighttable.
+Hereafter, you can save a file and see changes or evaluate cljs code (without
+saving a file). Note that running a weasel server is not required to evaluate
+code in Lighttable.
 
 ### Emacs/Cider
 
 Start a repl in the context of your project with `M-x cider-jack-in`.
 
-Switch to repl-buffer with `C-c C-z` and start web and figwheel servers with `(run)`, and weasel server with `(browser-repl`). Load [http://localhost:10555](http://localhost:10555) on an external browser, which connects to weasel, and start evaluating cljs inside Cider.
+Switch to repl-buffer with `C-c C-z` and start web and figwheel servers with
+`(run)`, and weasel server with `(browser-repl`). Load
+[http://localhost:3449](http://localhost:3449) on an external browser, which
+connects to weasel, and start evaluating cljs inside Cider.
 
 ## List of Contents
 
@@ -103,14 +95,11 @@ Clojure/ClojureScript apps effectively. It comes with
 * `--site-middleware` Use the `ring.middleware.defaults.site-defaults` middleware
   (session, CSRF), instead of `ring.middleware.defaults.api-defaults` (see
   [ring.defaults documentation](https://github.com/ring-clojure/ring-defaults))
-* `--om-tools` Use Prismatic's
-  [om-tools.dom](https://github.com/Prismatic/om-tools) instead of
-  `om.dom`
 * `--less` Use [less](https://github.com/montoux/lein-less) for
   compiling Less CSS files.
 
 Use `--` to separate these options from Leiningen's options,
-e.g. `lein new chestnut foo -- --om-tools --http-kit`
+e.g. `lein new chestnut foo --snapshot -- --http-kit`
 
 ## Local copy
 
@@ -168,6 +157,15 @@ reports and pull requests are very welcome.
 ## Changelog
 
 ### Master
+
+## Chestnut 0.9.0
+
+* Use Figwheel for REPL and Ring server
+* Remove boilerplate that's no longer needed
+* Drop Enlive and simplify the dev setup
+* Drop CLJX support
+* Better inline documentation
+* Upgrade all dependencies
 
 ### v0.8.2-SNAPSHOT
 * Version upgrades: clojurescript: 1.7.145 => 1.7.189, om: 1.0.0-alpha15 => 1.0.0-alpha28, figwheel => 0.4.1, figwheel-sidecar 0.4.1 => 0.5.0-2, lein-figwheel 0.4.1 =>  0.5.0-2
@@ -309,10 +307,6 @@ by [Michiel Borkent](https://github.com/borkdude).
 For Heroku support I looked at Heroku's
 [clojure-getting-started](https://github.com/heroku/clojure-getting-started)
 example app.
-
-## Documentation
-
-[Go to the documentation](http://plexus.github.io/chestnut/)
 
 ## License
 

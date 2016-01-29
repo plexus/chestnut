@@ -13,20 +13,20 @@ In the REPL, type
 (browser-repl)
 ```
 
-The call to `(run)` does two things, it starts the webserver at port
-10555, and also the Figwheel server which takes care of live reloading
-ClojureScript code and CSS. Give them some time to start.
+The call to `(run)` starts the Figwheel server at port 3449, which takes care of
+live reloading ClojureScript code and CSS. Figwheel's server will also act as
+your app server, so requests are correctly forwarded to the http-handler you
+define.
 
-Running `(browser-repl)` starts the Weasel REPL server, and drops you
-into a ClojureScript REPL. Evaluating expressions here will only work
-once you've loaded the page, so the browser can connect to Weasel.
+Running `(browser-repl)` starts the Weasel REPL server, and drops you into a
+ClojureScript REPL. Evaluating expressions here will only work once you've
+loaded the page, so the browser can connect to Weasel.
 
-When you see the line `Successfully compiled "resources/public/app.js"
-in 21.36 seconds.`, you're ready to go. Browse to
-`http://localhost:10555` and enjoy.
+When you see the line `Successfully compiled "resources/public/app.js" in 21.36
+seconds.`, you're ready to go. Browse to `http://localhost:3449` and enjoy.
 
-**Attention: It is not longer needed to run `lein figwheel`
-  separately. This is now taken care of behind the scenes**
+**Attention: It is not needed to run `lein figwheel` separately. Instead we
+launch Figwheel directly from the REPL**
 
 ## Trying it out
 
@@ -50,9 +50,14 @@ Notice again how the browser updates.
 
 ### Lighttable
 
-Lighttable provides a tighter integration for live coding with an inline browser-tab. Rather than evaluating cljs on the command line with weasel repl, evaluate code and preview pages inside Lighttable.
+Lighttable provides a tighter integration for live coding with an inline
+browser-tab. Rather than evaluating cljs on the command line with weasel repl,
+evaluate code and preview pages inside Lighttable.
 
-Steps: After running `(run)`, open a browser tab in Lighttable. Open a cljs file from within a project, go to the end of an s-expression and hit Cmd-ENT. Lighttable will ask you which client to connect. Click 'Connect a client' and select 'Browser'. Browse to [http://localhost:10555](http://localhost:10555)
+Steps: After running `(run)`, open a browser tab in Lighttable. Open a cljs file
+from within a project, go to the end of an s-expression and hit Cmd-ENT.
+Lighttable will ask you which client to connect. Click 'Connect a client' and
+select 'Browser'. Browse to [http://localhost:3449](http://localhost:3449)
 
 View LT's console to see a Chrome js console.
 
@@ -62,7 +67,10 @@ Hereafter, you can save a file and see changes or evaluate cljs code (without sa
 
 Start a repl in the context of your project with `M-x cider-jack-in`.
 
-Switch to repl-buffer with `C-c C-z` and start web and figwheel servers with `(run)`, and weasel server with `(browser-repl`). Load [http://localhost:10555](http://localhost:10555) on an external browser, which connects to weasel, and start evaluating cljs inside Cider.
+Switch to repl-buffer with `C-c C-z` and start web and figwheel servers with
+`(run)`, and weasel server with `(browser-repl`). Load
+[http://localhost:3449](http://localhost:3449) on an external browser, which
+connects to weasel, and start evaluating cljs inside Cider.
 
 To run the Clojurescript tests, do
 
