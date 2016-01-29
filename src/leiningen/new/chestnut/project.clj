@@ -105,9 +105,10 @@
               :cljsbuild {:builds
                           {:test
                            {:source-paths ["src/cljs" "test/cljs"]
-                            :compiler {:output-to "resources/public/js/compiled/testable.js"
-                                       :main {{{project-ns}}}.test-runner
-                                       :optimizations :none}}}}}
+                            :compiler
+                            {:output-to "resources/public/js/compiled/testable.js"
+                             :main {{{project-ns}}}.test-runner
+                             :optimizations :none}}}}}
 
              :uberjar
              {:source-paths ^:replace ["src/clj"]
