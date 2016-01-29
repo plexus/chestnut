@@ -15,7 +15,7 @@ setup.
 * Browser-connected REPL, inspect and interact with your app running
   in the browser
 
-### Sane Choices Across the Stack
+### Solid Choices Across the Stack
 
 * Om, build data driven, component based UIs
 * Ring, Compojure, get server side routing and request handling
