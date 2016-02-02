@@ -156,7 +156,13 @@ reports and pull requests are very welcome.
 
 ## Changelog
 
-### Chestnut 0.9.0
+### v0.9.1
+
+* Upgrade Figwheel to 0.5.0-6
+* Upgrade Environ to 1.0.2
+* Upgrade internal dependencies to play better with Boot
+
+### v0.9.0
 
 * Use Figwheel for REPL and Ring server
 * Remove boilerplate that's no longer needed
