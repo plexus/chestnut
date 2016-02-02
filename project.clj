@@ -5,11 +5,13 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :eval-in-leiningen true
 
-  :dependencies [[clj-jgit "0.8.8"]
-                 [org.slf4j/slf4j-nop "1.7.13"]]
+  :dependencies [[com.github.plexus/clj-jgit "v0.8.9-preview"]
+                 [org.slf4j/slf4j-nop "1.7.14"]]
 
-  :profiles {:test {:dependencies [[org.clojure/core.async "0.1.346.0-17112a-alpha"]
+  :profiles {:test {:dependencies [[org.clojure/core.async "0.2.374"]
                                    [com.github.jnr/jnr-process "1.0-SNAPSHOT"]
-                                   [clj-webdriver "0.7.0-SNAPSHOT"]]}}
+                                   [clj-webdriver "0.7.2"]]}}
 
-  :aliases {"test" ["with-profile" "+test" "run" "-m" "chestnut.test.integration"] })
+  :aliases {"test" ["with-profile" "+test" "run" "-m" "chestnut.test.integration"] }
+
+  :repositories [["jitpack" "https://jitpack.io"]])
