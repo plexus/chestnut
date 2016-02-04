@@ -153,6 +153,11 @@ reports and pull requests are very welcome.
 * **Q:** The Figwheel output is cluttering up my REPL, can I get rid of it?<br>
   **A:** Not as such, but instead of calling `(run)`, you can call `(run-web-server)`
          and `(run-auto-reload)` in separate repls.
+* **Q:** I gave my project a very generic name like `cljs` or `clojure` and now
+         it's not working. <br>
+  **A:** This is due to namespace clashes. Try picking
+         a more unique name. In particular avoid namespace prefixes used by
+         Clojure, Clojurescript, or existing libraries.
 
 ## Changelog
 
