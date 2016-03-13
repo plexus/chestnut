@@ -90,6 +90,8 @@ Clojure/ClojureScript apps effectively. It comes with
 
 ## Options
 
+* `--reagent` Use Reagent instead of Om
+* `--vanilla` Don't include Om, use this if you intend to use some other view library
 * `--http-kit` Use [HTTP Kit](http://http-kit.org/server.html) instead
   of Jetty
 * `--site-middleware` Use the `ring.middleware.defaults.site-defaults` middleware

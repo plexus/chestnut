@@ -11,13 +11,12 @@
                  [bk/ring-gzip "0.1.1"]
                  [ring.middleware.logger "0.5.0"]
                  [compojure "1.5.0"]
-                 [org.omcljs/om "1.0.0-alpha31"]
                  [environ "1.0.2"]{{{project-clj-deps}}}]
 
   :plugins [[lein-cljsbuild "1.1.1"]
             [lein-environ "1.0.1"]{{{project-plugins}}}]
 
-  :min-lein-version "2.5.3"
+  :min-lein-version "2.6.1"
 
   :source-paths ["src/clj" "src/cljs" "dev"]
 

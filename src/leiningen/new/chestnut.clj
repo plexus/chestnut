@@ -21,12 +21,15 @@
   (wrap-indent identity n list))
 
 (def valid-options
-  ["http-kit" "site-middleware" "less" "sass"])
+  ["http-kit" "site-middleware" "less" "sass" "reagent" "vanilla"])
 
 (doseq [opt valid-options]
   (eval
    `(defn ~(symbol (str opt "?")) [opts#]
      (some #{~(str "--" opt)} opts#))))
+
+(defn om? [props]
+  (and (not (reagent? props)) (not (vanilla? props))))
 
 (defn server-clj-requires [opts]
   (if (http-kit? opts)
@@ -34,9 +37,11 @@
     ["ring.adapter.jetty :refer [run-jetty]"]))
 
 (defn project-clj-deps [opts]
-  (if (http-kit? opts)
-    ["http-kit \"2.1.19\""]
-    []))
+  (cond
+    (http-kit? opts) ["http-kit \"2.1.19\""]
+    (reagent? opts)  ["reagent \"0.5.1\""]
+    (om? opts)       ["org.omcljs/om \"1.0.0-alpha31\""]
+    :else            []))
 
 (defn project-plugins [opts]
   (cond-> []
@@ -93,7 +98,6 @@
            "resources/public/index.html"
            "resources/log4j.properties"
            "src/clj/chestnut/server.clj"
-           "src/cljs/chestnut/core.cljs"
            "dev/user.clj"
            "LICENSE"
            "README.md"
@@ -108,12 +112,21 @@
           (sass? opts) (conj "src/scss/style.scss")
           (not (or (less? opts) (sass? opts))) (conj "resources/public/css/style.css")))
 
-(defn format-files-args [name opts]
-  (let [data (template-data name opts)
-        render-file (fn [file]
-                      [(s/replace file "chestnut" "{{sanitized}}")
-                       (render file data)])]
-    (cons data (map render-file (files-to-render opts)))))
+(defn format-files-args
+  "Returns a list of pairs (vectors). The first element is the file name to
+render, the second is the file contents."
+  [{:keys [name] :as data} opts]
+  (letfn [(render-file [file]
+            [(s/replace file "chestnut" "{{sanitized}}")
+             (render file data)])]
+    (conj
+     (map render-file (files-to-render opts))
+     ["src/cljs/{{sanitized}}/core.cljs"
+      (render (cond
+                (om? opts) "src/cljs/chestnut/core_om.cljs"
+                (reagent? opts) "src/cljs/chestnut/core_reagent.cljs"
+                (vanilla? opts) "src/cljs/chestnut/core_vanilla.cljs")
+              data)])))
 
 (defn chestnut [name & opts]
   (let [valid-opts (map (partial str "--") valid-options)]
@@ -125,10 +138,10 @@
 
   (when (sass? opts)
     (main/info "WARNING: You have enabled SASS support, which relies on the sassc binary")
-    (main/info "WARNING: being available on your system. This is an advanced, undocumented")
-    (main/info "WARNING: feature. In other words: you're on your own."))
+    (main/info "WARNING: being available on your system."))
 
-  (apply ->files (format-files-args name opts))
+  (let [data (template-data name opts)]
+    (apply ->files data (format-files-args data opts)))
 
   (git-init name)
   (let [repo (load-repo name)]

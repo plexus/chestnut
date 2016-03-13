@@ -15,4 +15,4 @@
 (om/root
  root-component
  app-state
- {:target (. js/document (getElementById "app"))})
+ {:target (js/document.getElementById "app")})
