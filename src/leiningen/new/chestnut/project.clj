@@ -4,14 +4,14 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
-  :dependencies [[org.clojure/clojure "1.8.0-RC5"]
+  :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.clojure/clojurescript "1.7.228" :scope "provided"]
                  [ring "1.4.0"]
-                 [ring/ring-defaults "0.1.5"]
+                 [ring/ring-defaults "0.2.0"]
                  [bk/ring-gzip "0.1.1"]
                  [ring.middleware.logger "0.5.0"]
-                 [compojure "1.4.0"]
-                 [org.omcljs/om "1.0.0-alpha28"]
+                 [compojure "1.5.0"]
+                 [org.omcljs/om "1.0.0-alpha31"]
                  [environ "1.0.2"]{{{project-clj-deps}}}]
 
   :plugins [[lein-cljsbuild "1.1.1"]

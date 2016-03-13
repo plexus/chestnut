@@ -161,6 +161,10 @@ reports and pull requests are very welcome.
 
 ## Changelog
 
+### master
+
+* Upgrade to Clojure 1.8.0, Om 1.1.0-alpha31, ring-defaults 0.2.0, compojure 1.5.0
+
 ### v0.9.1
 
 * Upgrade Figwheel to 0.5.0-6
