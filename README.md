@@ -9,7 +9,7 @@
 ![Mr. Chestnut](resources/chestnut.png)
 
 Chestnut is a Leiningen template for a Clojure/ClojureScript app based
-on Om, featuring a great dev setup, and easy deployment.
+on Om or Reagent, featuring a great dev setup, and easy deployment.
 
 For smooth development you get instant reloading of Clojure,
 ClojureScript, and CSS. A browser-connected REPL is also included.
@@ -75,8 +75,9 @@ Clojure/ClojureScript apps effectively. It comes with
 * [Figwheel](https://github.com/bhauman/lein-figwheel) Automatically
   reload your ClojureScript and CSS as soon as you save the file, no
   need for browser refresh.
-* [Om](https://github.com/swannodette/om) ClojureScript interface to
-  Facebook's React.
+* [Om](https://github.com/swannodette/om) ClojureScript interface to Facebook's
+  React. Alternatively you can use Reagent (`--reagent`), or use `--vanilla` to
+  do without a React wrapper.
 * [Ring](https://github.com/ring-clojure/ring) Clojure's de facto HTTP
   interface. Chestnut uses a Jetty or HttpKit server to serve the
   Clojurescript app. This way you already have an HTTP server running
@@ -165,6 +166,7 @@ reports and pull requests are very welcome.
 
 ### 0.10.0
 
+* Add switches for --reagent and --vanilla
 * Upgrade Figwheel to 0.5.1
 * Upgrade to Clojure 1.8.0, Om 1.1.0-alpha31, ring-defaults 0.2.0, compojure 1.5.0
 
