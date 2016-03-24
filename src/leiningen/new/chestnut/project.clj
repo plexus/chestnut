@@ -93,12 +93,12 @@
   :auto {"sassc" {:file-pattern  #"\.(scss)$"}}{{/sass?}}
 
   :profiles {:dev
-             {:dependencies [[figwheel "0.5.0-6"]
-                             [figwheel-sidecar "0.5.0-6"]
+             {:dependencies [[figwheel "0.5.1"]
+                             [figwheel-sidecar "0.5.1"]
                              [com.cemerick/piggieback "0.2.1"]
                              [org.clojure/tools.nrepl "0.2.12"]]
 
-              :plugins [[lein-figwheel "0.5.0-6"]
+              :plugins [[lein-figwheel "0.5.1"]
                         [lein-doo "0.1.6"]]
 
               :cljsbuild {:builds
