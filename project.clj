@@ -6,7 +6,7 @@
   :eval-in-leiningen true
 
   :dependencies [[com.github.plexus/clj-jgit "v0.8.9-preview"]
-                 [org.slf4j/slf4j-nop "1.7.14"]]
+                 [org.slf4j/slf4j-nop "1.7.19"]]
 
   :profiles {:test {:dependencies [[org.clojure/core.async "0.2.374"]
                                    [com.github.jnr/jnr-process "1.0-SNAPSHOT"]
