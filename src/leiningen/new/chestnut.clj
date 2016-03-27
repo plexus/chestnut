@@ -37,11 +37,10 @@
     ["ring.adapter.jetty :refer [run-jetty]"]))
 
 (defn project-clj-deps [opts]
-  (cond
-    (http-kit? opts) ["http-kit \"2.1.19\""]
-    (reagent? opts)  ["reagent \"0.5.1\""]
-    (om? opts)       ["org.omcljs/om \"1.0.0-alpha31\""]
-    :else            []))
+  (cond-> []
+    (http-kit? opts) (conj "http-kit \"2.1.19\"")
+    (reagent? opts)  (conj "reagent \"0.5.1\"")
+    (om? opts)       (conj "org.omcljs/om \"1.0.0-alpha31\"")))
 
 (defn project-plugins [opts]
   (cond-> []
