@@ -164,6 +164,10 @@ reports and pull requests are very welcome.
 
 ## Changelog
 
+### 0.10.1
+
+* Fix missing dependency when using `--http-kit`
+
 ### 0.10.0
 
 * Add switches for --reagent and --vanilla
