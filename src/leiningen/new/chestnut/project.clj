@@ -5,7 +5,7 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
   :dependencies [[org.clojure/clojure "1.8.0"]
-                 [org.clojure/clojurescript "1.7.228" :scope "provided"]
+                 [org.clojure/clojurescript "1.8.40" :scope "provided"]
                  [ring "1.4.0"]
                  [ring/ring-defaults "0.2.0"]
                  [bk/ring-gzip "0.1.1"]
@@ -93,12 +93,12 @@
   :auto {"sassc" {:file-pattern  #"\.(scss)$"}}{{/sass?}}
 
   :profiles {:dev
-             {:dependencies [[figwheel "0.5.1"]
-                             [figwheel-sidecar "0.5.1"]
+             {:dependencies [[figwheel "0.5.2"]
+                             [figwheel-sidecar "0.5.2"]
                              [com.cemerick/piggieback "0.2.1"]
                              [org.clojure/tools.nrepl "0.2.12"]]
 
-              :plugins [[lein-figwheel "0.5.1"]
+              :plugins [[lein-figwheel "0.5.2"]
                         [lein-doo "0.1.6"]]
 
               :cljsbuild {:builds

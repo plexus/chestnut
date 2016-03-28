@@ -164,6 +164,11 @@ reports and pull requests are very welcome.
 
 ## Changelog
 
+### 0.11.0
+
+* Upgrade ClojureScript 1.7.228 => 1.8.40
+* Upgrade Figwheel 0.5.1 => 0.5.2
+
 ### 0.10.1
 
 * Fix missing dependency when using `--http-kit`
