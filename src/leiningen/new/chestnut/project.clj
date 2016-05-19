@@ -18,7 +18,7 @@
 
   :min-lein-version "2.6.1"
 
-  :source-paths ["src/clj" "src/cljs" "dev"]
+  :source-paths ["src/clj" "src/cljs"]
 
   :test-paths ["test/clj"]
 
@@ -100,6 +100,8 @@
 
               :plugins [[lein-figwheel "0.5.1"]
                         [lein-doo "0.1.6"]]
+
+              :source-paths ["dev"]
 
               :cljsbuild {:builds
                           {:test
