@@ -40,13 +40,13 @@
   (cond-> []
     (http-kit? opts) (conj "http-kit \"2.1.19\"")
     (reagent? opts)  (conj "reagent \"0.5.1\"")
-    (om? opts)       (conj "org.omcljs/om \"1.0.0-alpha31\"")))
+    (om? opts)       (conj "org.omcljs/om \"1.0.0-alpha35\"")))
 
 (defn project-plugins [opts]
   (cond-> []
           (sass? opts) (conj "lein-sassc \"0.10.4\""
-                             "lein-auto \"0.1.1\"")
-          (less? opts) (conj "lein-less \"1.7.3\"")))
+                             "lein-auto \"0.1.2\"")
+          (less? opts) (conj "lein-less \"1.7.5\"")))
 
 (defn project-uberjar-hooks [opts]
   (cond-> ["leiningen.cljsbuild"]

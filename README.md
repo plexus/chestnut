@@ -164,6 +164,19 @@ reports and pull requests are very welcome.
 
 ## Changelog
 
+### 0.12.0
+
+* Upgrades
+  * org.omcljs/om 1.0.0-alpha31 => 1.0.0-alpha35
+  * lein-auto 0.1.1 => 0.1.2
+  * lein-less 1.7.3 => 1.7.5
+  * org.clojure/clojurescript 1.8.40 => 1.8.51
+  * environ 1.0.2 => 1.0.3
+  * lein-cljsbuild 1.1.1 => 1.1.3
+  * lein-environ 1.0.1 => 1.0.3
+  * figwheel 0.5.2 => 0.5.3-2
+* Only add "dev" to the classpath in dev mode, fixes an issue with `lein jar`
+
 ### 0.11.0
 
 * Upgrade ClojureScript 1.7.228 => 1.8.40
