@@ -164,6 +164,10 @@ reports and pull requests are very welcome.
 
 ## Changelog
 
+### master
+
+* Avoid using Leiningen profile merging for `:cljsbuild` configs
+
 ### 0.12.0
 
 * Upgrades

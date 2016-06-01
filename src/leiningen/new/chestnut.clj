@@ -49,7 +49,7 @@
           (less? opts) (conj "lein-less \"1.7.5\"")))
 
 (defn project-uberjar-hooks [opts]
-  (cond-> ["leiningen.cljsbuild"]
+  (cond-> []
           (less? opts) (conj "leiningen.less")
           (sass? opts) (conj "leiningen.sassc")))
 

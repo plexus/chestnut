@@ -35,8 +35,8 @@
   :repl-options {:init-ns user}
 
   :cljsbuild {:builds
-              {:app
-               {:source-paths ["src/cljs"]
+              [{:id "app"
+                :source-paths ["src/cljs"]
 
                 :figwheel true
                 ;; Alternatively, you can configure a function to run every time figwheel reloads.
@@ -46,7 +46,23 @@
                            :asset-path "js/compiled/out"
                            :output-to "resources/public/js/compiled/{{{sanitized}}}.js"
                            :output-dir "resources/public/js/compiled/out"
-                           :source-map-timestamp true}}}}
+                           :source-map-timestamp true}}
+
+               {:id "test"
+                :source-paths ["src/cljs" "test/cljs"]
+                :compiler {:output-to "resources/public/js/compiled/testable.js"
+                           :main {{{project-ns}}}.test-runner
+                           :optimizations :none}}
+
+               {:id "min"
+                :source-paths ["src/cljs"]
+                :jar true
+                :compiler {:main {{{project-ns}}}.core
+                           :output-to "resources/public/js/compiled/{{{sanitized}}}.js"
+                           :output-dir "target"
+                           :source-map-timestamp true
+                           :optimizations :advanced
+                           :pretty-print false}}]}
 
   ;; When running figwheel from nREPL, figwheel will read this configuration
   ;; stanza, but it will read it without passing through leiningen's profile
@@ -101,24 +117,11 @@
               :plugins [[lein-figwheel "0.5.3-2"]
                         [lein-doo "0.1.6"]]
 
-              :source-paths ["dev"]
-
-              :cljsbuild {:builds
-                          {:test
-                           {:source-paths ["src/cljs" "test/cljs"]
-                            :compiler
-                            {:output-to "resources/public/js/compiled/testable.js"
-                             :main {{{project-ns}}}.test-runner
-                             :optimizations :none}}}}}
+              :source-paths ["dev"]}
 
              :uberjar
              {:source-paths ^:replace ["src/clj"]
+              :prep-tasks ["compile" ["cljsbuild" "once" "min"]]
               :hooks [{{{project-uberjar-hooks}}}]
               :omit-source true
-              :aot :all
-              :cljsbuild {:builds
-                          {:app
-                           {:source-paths ^:replace ["src/cljs"]
-                            :compiler
-                            {:optimizations :advanced
-                             :pretty-print false}}}}}})
+              :aot :all}})
