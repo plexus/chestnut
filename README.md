@@ -164,6 +164,14 @@ reports and pull requests are very welcome.
 
 ## Changelog
 
+### 0.13.0
+
+- Clojurescript 1.9.36
+- Include Transit for faster ClojureScript compilation
+- Figwheel 0.5.4-2
+- Reagent 0.6.0-rc
+- Om 1.0.0-alpha36
+
 ### 0.13.0-SNAPSHOT
 
 * Avoid using Leiningen profile merging for `:cljsbuild` configs
