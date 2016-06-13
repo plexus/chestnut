@@ -164,7 +164,7 @@ reports and pull requests are very welcome.
 
 ## Changelog
 
-### master
+### 0.13.0-SNAPSHOT
 
 * Avoid using Leiningen profile merging for `:cljsbuild` configs
 
