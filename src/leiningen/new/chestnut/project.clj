@@ -19,9 +19,9 @@
 
   :min-lein-version "2.6.1"
 
-  :source-paths ["src/clj" "src/cljs"]
+  :source-paths ["src/clj" "src/cljs"{{#cljc?}} "src/cljc"{{/cljc?}}]
 
-  :test-paths ["test/clj"]
+  :test-paths ["test/clj"{{#cljc?}} "test/cljc"{{/cljc?}}]
 
   :clean-targets ^{:protect false} [:target-path :compile-path "resources/public/js"]
 
@@ -37,7 +37,7 @@
 
   :cljsbuild {:builds
               [{:id "app"
-                :source-paths ["src/cljs"]
+                :source-paths ["src/cljs"{{#cljc?}} "src/cljc"{{/cljc?}}]
 
                 :figwheel true
                 ;; Alternatively, you can configure a function to run every time figwheel reloads.
@@ -50,13 +50,13 @@
                            :source-map-timestamp true}}
 
                {:id "test"
-                :source-paths ["src/cljs" "test/cljs"]
+                :source-paths ["src/cljs" "test/cljs"{{#cljc?}} "src/cljc" "test/cljc"{{/cljc?}}]
                 :compiler {:output-to "resources/public/js/compiled/testable.js"
                            :main {{{project-ns}}}.test-runner
                            :optimizations :none}}
 
                {:id "min"
-                :source-paths ["src/cljs"]
+                :source-paths ["src/cljs"{{#cljc?}} "src/cljc"{{/cljc?}}]
                 :jar true
                 :compiler {:main {{{project-ns}}}.core
                            :output-to "resources/public/js/compiled/{{{sanitized}}}.js"
@@ -122,7 +122,7 @@
               :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}}
 
              :uberjar
-             {:source-paths ^:replace ["src/clj"]
+             {:source-paths ^:replace ["src/clj"{{#cljc?}} "src/cljc"{{/cljc?}}]
               :prep-tasks ["compile" ["cljsbuild" "once" "min"]]
               :hooks [{{{project-uberjar-hooks}}}]
               :omit-source true
