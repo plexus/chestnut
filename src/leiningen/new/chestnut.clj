@@ -97,6 +97,7 @@
            "resources/public/index.html"
            "resources/log4j.properties"
            "src/clj/chestnut/server.clj"
+           "src/cljc/chestnut/common.cljc"
            "dev/user.clj"
            "LICENSE"
            "README.md"
@@ -106,7 +107,8 @@
            "Procfile"
            "test/clj/chestnut/example_test.clj"
            "test/cljs/chestnut/core_test.cljs"
-           "test/cljs/chestnut/test_runner.cljs"]
+           "test/cljs/chestnut/test_runner.cljs"
+           "test/cljc/chestnut/common_test.cljc"]
           (less? opts) (conj "src/less/style.less")
           (sass? opts) (conj "src/scss/style.scss")
           (not (or (less? opts) (sass? opts))) (conj "resources/public/css/style.css")))
