@@ -1,5 +1,9 @@
 # Changelog
 
+## master
+
+* Add cljc support
+
 ## 0.12.0
 
 * Upgrades
