@@ -100,6 +100,7 @@ Clojure/ClojureScript apps effectively. It comes with
   [ring.defaults documentation](https://github.com/ring-clojure/ring-defaults))
 * `--less` Use [less](https://github.com/montoux/lein-less) for
   compiling Less CSS files.
+* `--cljc` Generate source and test cljc files for cross compiling to both clojure and clojurescript (see [Clojure reader conditionals](https://clojure.org/guides/reader_conditionals))
 
 Use `--` to separate these options from Leiningen's options,
 e.g. `lein new chestnut foo --snapshot -- --http-kit`
@@ -163,6 +164,10 @@ reports and pull requests are very welcome.
          Clojure, Clojurescript, or existing libraries.
 
 ## Changelog
+
+## master
+
+* Add `--cljc` flag
 
 ### 0.13.0
 
