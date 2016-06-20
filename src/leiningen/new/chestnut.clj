@@ -21,7 +21,7 @@
   (wrap-indent identity n list))
 
 (def valid-options
-  ["http-kit" "site-middleware" "less" "sass" "reagent" "vanilla"])
+  ["http-kit" "site-middleware" "less" "sass" "reagent" "vanilla" "cljc"])
 
 (doseq [opt valid-options]
   (eval
@@ -86,6 +86,8 @@
    :sass?                (fn [block] (if (sass? opts) (str "\n" block) ""))
    :less?                (fn [block] (if (less? opts) (str "\n" block) ""))
 
+   :cljc?                (fn [block] (if (cljc? opts) (str block) ""))
+
    ;; stylesheets
    :less-sass-refer      (cond (sass? opts) " start-sass"
                                (less? opts) " start-less")
@@ -109,7 +111,8 @@
            "test/cljs/chestnut/test_runner.cljs"]
           (less? opts) (conj "src/less/style.less")
           (sass? opts) (conj "src/scss/style.scss")
-          (not (or (less? opts) (sass? opts))) (conj "resources/public/css/style.css")))
+          (not (or (less? opts) (sass? opts))) (conj "resources/public/css/style.css")
+          (cljc? opts) (conj "src/cljc/chestnut/common.cljc" "test/cljc/chestnut/common_test.cljc")))
 
 (defn format-files-args
   "Returns a list of pairs (vectors). The first element is the file name to

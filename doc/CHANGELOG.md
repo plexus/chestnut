@@ -1,5 +1,9 @@
 # Changelog
 
+## master
+
+* Add `--cljc` flag
+
 ## 0.12.0
 
 * Upgrades
