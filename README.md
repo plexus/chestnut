@@ -164,6 +164,9 @@ reports and pull requests are very welcome.
 
 ## Changelog
 
+### master
+* Add cljc support
+
 ### 0.13.0
 
 - Clojurescript 1.9.36
