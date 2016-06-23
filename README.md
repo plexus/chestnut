@@ -164,8 +164,11 @@ reports and pull requests are very welcome.
 
 ## Changelog
 
-### master
-* Add cljc support
+### 0.14.0
+
+- Add cljc support
+- ClojureScript 1.9.89
+- Figwheel 0.5.4-4
 
 ### 0.13.0
 
