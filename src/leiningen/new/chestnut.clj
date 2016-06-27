@@ -147,4 +147,4 @@ render, the second is the file contents."
   (git-init name)
   (let [repo (load-repo name)]
     (git-add repo ".")
-    (git-commit repo (str "lein new chestnut " name (s/join " " opts)))))
+    (git-commit repo (str "lein new chestnut " name " " (s/join " " opts)))))
