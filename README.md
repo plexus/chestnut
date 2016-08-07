@@ -1,12 +1,15 @@
 # chestnut
 
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/plexus/chestnut?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 [![Clojureverse](https://rawgit.com/clojureverse/clojureverse-assets/master/clojureverse-org-green.svg)](http://clojureverse.org/c/chestnut)
 
 [![Clojars Project](http://clojars.org/chestnut/lein-template/latest-version.svg)](http://clojars.org/chestnut/lein-template)
 
-![Mr. Chestnut](resources/chestnut.png)
+<img align="left" alt="Mr. Chestnut" src="resources/chestnut.png">
+
+
+**Getting value out of Chestnut? Consider making [a small donation](https://patreon.com/plexus).**
+
 
 Chestnut is a Leiningen template for a Clojure/ClojureScript app based
 on Om or Reagent, featuring a great dev setup, and easy deployment.
@@ -19,10 +22,8 @@ code compiled, optimized, and packaged in a single executable JAR
 file. It also contains the necessary artifacts to work on Heroku out
 of the box.
 
-**Need help?** Ask on the mailing list (please do not open an issue on
-GitHub): http://chestnut.aren.io/
-
-[Go to the documentation](http://plexus.github.io/chestnut/)
+**Need help?** Ask [on the mailing list](http://clojureverse.org/c/chestnut) (please do not open an issue on
+GitHub)
 
 This README may describe unreleased features. Please compare the
 version number on Clojars to the changelog below, and check the README
