@@ -140,11 +140,10 @@ reports and pull requests are very welcome.
          application state doesn't reset every time you save a file. If you do
          want to reset after every change, change `(defonce app-state ..)` to
          `(def app-state ...)`.
-* **Q:** I just want to compile ClojureScript to fully optimized
-         JavaScript, so I can use it in a static HTML site. <br>
-  **A:** Invoke cljsbuild with the uberjar profile active, like this: `lein
-         with-profile -dev,+uberjar cljsbuild once`, then look for
-         `resources/public/js/app.js`.
+* **Q:** I just want to compile ClojureScript to fully optimized JavaScript, so
+         I can use it in a static HTML site. <br> 
+  **A:** Compile the "min" ClojureScript build, like this: `lein cljsbuild once min`, then look
+         for `resources/public/js/app.js`.
 * **Q:** I'm getting `CompilerException java.lang.IllegalAccessError:
          in-seconds does not exist` when using Spyscope 0.1.4 or earlier.<br>
   **A:** Upgrade to [Spyscope 0.1.5](https://github.com/dgrnbrg/spyscope/issues/15), this
