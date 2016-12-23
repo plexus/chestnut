@@ -12,6 +12,10 @@
                  [bk/ring-gzip "0.1.1"]
                  [ring.middleware.logger "0.5.0"]
                  [compojure "1.5.0"]
+                 [com.stuartsierra/component "0.3.1"]
+                 [org.danielsz/system "0.3.1"]
+                 [org.clojure/tools.namespace "0.2.11"]
+                 [reloaded.repl "0.2.3"]
                  [environ "1.0.3"]{{{project-clj-deps}}}]
 
   :plugins [[lein-cljsbuild "1.1.3"]
@@ -75,13 +79,6 @@
              ;; :server-ip "127.0.0.1"           ;; default
              :css-dirs ["resources/public/css"]  ;; watch and update CSS
 
-             ;; Instead of booting a separate server on its own port, we embed
-             ;; the server ring handler inside figwheel's http-kit server, so
-             ;; assets and API endpoints can all be accessed on the same host
-             ;; and port. If you prefer a separate server process then take this
-             ;; out and start the server with `lein run`.
-             :ring-handler user/http-handler
-
              ;; Start an nREPL server into the running figwheel process. We
              ;; don't do this, instead we do the opposite, running figwheel from
              ;; an nREPL process, see
@@ -110,13 +107,14 @@
   :auto {"sassc" {:file-pattern  #"\.(scss)$"}}{{/sass?}}
 
   :profiles {:dev
-             {:dependencies [[figwheel "0.5.4-4"]
-                             [figwheel-sidecar "0.5.4-4"]
+             {:dependencies [[figwheel "0.5.8"]
+                             [figwheel-sidecar "0.5.8"]
                              [com.cemerick/piggieback "0.2.1"]
-                             [org.clojure/tools.nrepl "0.2.12"]]
+                             [org.clojure/tools.nrepl "0.2.12"]
+                             [lein-doo "0.1.7"]]
 
-              :plugins [[lein-figwheel "0.5.4-4"]
-                        [lein-doo "0.1.6"]]
+              :plugins [[lein-figwheel "0.5.8"]
+                        [lein-doo "0.1.7"]]
 
               :source-paths ["dev"]
               :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}}

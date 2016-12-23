@@ -33,8 +33,8 @@
 
 (defn server-clj-requires [opts]
   (if (http-kit? opts)
-    ["org.httpkit.server :refer [run-server]"]
-    ["ring.adapter.jetty :refer [run-jetty]"]))
+    ["system.components.http-kit :refer [new-web-server]"]
+    ["system.components.jetty :refer [new-web-server]"]))
 
 (defn project-clj-deps [opts]
   (cond-> []
