@@ -13,7 +13,7 @@
    ({{project-ns}}.server/prod-system)
    (component/system-map
     :figwheel-system (sys/figwheel-system (config/fetch-config))
-    :css-watcher (sys/css-watcher {:watch-paths ["resources/public/css"]})))){{#less?}}
+    :css-watcher (sys/css-watcher {:watch-paths ["resources/public/css"]}))))
 {{#less?}}
 (defn start-less []
   (future
