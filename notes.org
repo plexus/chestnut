@@ -1,0 +1,3 @@
+* warn-on-reflection
+
+  warn-on-reflection is per-file, so it doesn't do what I thought it did, better to take it out
