@@ -8,10 +8,9 @@
             [environ.core :refer [env]]
             [com.stuartsierra.component :as component]
             [reloaded.repl]
-            (system.components
-             [endpoint :refer [new-endpoint]]
-             [handler :refer [new-handler]]
-             [middleware :refer [new-middleware]]){{{server-clj-requires}}})
+            [system.components.endpoint :refer [new-endpoint]]
+            [system.components.handler :refer [new-handler]]
+            [system.components.middleware :refer [new-middleware]]{{{server-clj-requires}}})
   (:gen-class))
 
 (defroutes routes
