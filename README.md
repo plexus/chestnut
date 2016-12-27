@@ -161,6 +161,13 @@ reports and pull requests are very welcome.
 
 ## Changelog
 
+### 0.15.0-SNAPSHOT
+
+- Options now use `+` as a prefix instead of `--`. This is more in line with
+  other popular templates like Luminus, and it stops Leiningen from eating our
+  options. The `--` variants still work.
+- Bump versions: clojurescript 1.9.293, transit-clj 0.8.297, ring 1.5.0, ring-defaults 0.2.1, compojure 1.5.1, environ 1.1.0, reagent 0.6.0, figwheel 0.5.8, http-kit 2.2.0, om 1.0.0-alpha47, doo 0.1.7, lein-cljsbuild 1.1.5, lein-environ 1.1.0
+
 ### 0.14.0
 
 - Add cljc support

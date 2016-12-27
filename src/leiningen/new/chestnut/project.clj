@@ -6,16 +6,16 @@
 
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.clojure/clojurescript "1.9.293" :scope "provided"]
-                 [com.cognitect/transit-clj "0.8.285"]
-                 [ring "1.4.0"]
-                 [ring/ring-defaults "0.2.0"]
+                 [com.cognitect/transit-clj "0.8.297"]
+                 [ring "1.5.0"]
+                 [ring/ring-defaults "0.2.1"]
                  [bk/ring-gzip "0.1.1"]
                  [ring.middleware.logger "0.5.0"]
-                 [compojure "1.5.0"]
-                 [environ "1.0.3"]{{{project-clj-deps}}}]
+                 [compojure "1.5.1"]
+                 [environ "1.1.0"]{{{project-clj-deps}}}]
 
-  :plugins [[lein-cljsbuild "1.1.3"]
-            [lein-environ "1.0.3"]{{{project-plugins}}}]
+  :plugins [[lein-cljsbuild "1.1.5"]
+            [lein-environ "1.1.0"]{{{project-plugins}}}]
 
   :min-lein-version "2.6.1"
 
@@ -112,13 +112,13 @@
 {{/sass?}}
 
   :profiles {:dev
-             {:dependencies [[figwheel "0.5.4-4"]
-                             [figwheel-sidecar "0.5.4-4"]
+             {:dependencies [[figwheel "0.5.8"]
+                             [figwheel-sidecar "0.5.8"]
                              [com.cemerick/piggieback "0.2.1"]
                              [org.clojure/tools.nrepl "0.2.12"]]
 
-              :plugins [[lein-figwheel "0.5.4-4"]
-                        [lein-doo "0.1.6"]]
+              :plugins [[lein-figwheel "0.5.8"]
+                        [lein-doo "0.1.7"]]
 
               :source-paths ["dev"]
               :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}}

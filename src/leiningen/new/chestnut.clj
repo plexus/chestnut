@@ -38,14 +38,14 @@
 
 (defn project-clj-deps [opts]
   (cond-> []
-    (http-kit? opts) (conj "http-kit \"2.1.19\"")
-    (reagent? opts)  (conj "reagent \"0.6.0-rc\"")
-    (om? opts)       (conj "org.omcljs/om \"1.0.0-alpha36\"")))
+    (http-kit? opts) (conj "http-kit \"2.2.0\"")
+    (reagent? opts)  (conj "reagent \"0.6.0\"")
+    (om? opts)       (conj "org.omcljs/om \"1.0.0-alpha47\"")))
 
 (defn project-plugins [opts]
   (cond-> []
           (sass? opts) (conj "lein-sassc \"0.10.4\""
-                             "lein-auto \"0.1.2\"")
+                             "lein-auto \"0.1.3\"")
           (less? opts) (conj "lein-less \"1.7.5\"")))
 
 (defn project-uberjar-hooks [opts]
