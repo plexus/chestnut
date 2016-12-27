@@ -131,8 +131,8 @@ lein with-profile -dev,+production uberjar && foreman start
 ```
 
 Now your app is running at
-[http://localhost:5000](http://localhost:5000) in production mode.{{#sass?}}
-
+[http://localhost:5000](http://localhost:5000) in production mode.
+{{#sass?}}
 ## SASS
 
 Currently SASS support in Chestnut depends on SASSC, a C-based SASS

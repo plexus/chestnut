@@ -5,7 +5,7 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
   :dependencies [[org.clojure/clojure "1.8.0"]
-                 [org.clojure/clojurescript "1.9.89" :scope "provided"]
+                 [org.clojure/clojurescript "1.9.293" :scope "provided"]
                  [com.cognitect/transit-clj "0.8.285"]
                  [ring "1.4.0"]
                  [ring/ring-defaults "0.2.0"]
@@ -99,15 +99,17 @@
 
              :server-logfile "log/figwheel.log"}
 
-  :doo {:build "test"}{{#less?}}
-
+  :doo {:build "test"}
+{{#less?}}
   :less {:source-paths ["src/less"]
-         :target-path "resources/public/css"}{{/less?}}{{#sass?}}
-
+         :target-path "resources/public/css"}
+{{/less?}}
+{{#sass?}}
   :sassc [{:src "src/scss/style.scss"
            :output-to "resources/public/css/style.css"}]
 
-  :auto {"sassc" {:file-pattern  #"\.(scss)$"}}{{/sass?}}
+  :auto {"sassc" {:file-pattern  #"\.(scss)$"}}
+{{/sass?}}
 
   :profiles {:dev
              {:dependencies [[figwheel "0.5.4-4"]
