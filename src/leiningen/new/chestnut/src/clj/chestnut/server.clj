@@ -7,7 +7,6 @@
             [ring.middleware.logger :refer [wrap-with-logger]]
             [environ.core :refer [env]]
             [com.stuartsierra.component :as component]
-            [reloaded.repl]
             [system.components.endpoint :refer [new-endpoint]]
             [system.components.handler :refer [new-handler]]
             [system.components.middleware :refer [new-middleware]]{{{server-clj-requires}}})
@@ -37,9 +36,5 @@
           (new-web-server (Integer. (or (env :port) 10555)))
           [:handler])))
 
-(defn run-prod []
-  (reloaded.repl/set-init! prod-system)
-  (reloaded.repl/go))
-
 (defn -main [& [port]]
-  (run-prod))
+  (component/start (prod-system)))

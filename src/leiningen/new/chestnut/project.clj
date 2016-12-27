@@ -15,8 +15,7 @@
                  [environ "1.1.0"]
                  [com.stuartsierra/component "0.3.1"]
                  [org.danielsz/system "0.3.1"]
-                 [org.clojure/tools.namespace "0.2.11"]
-                 [reloaded.repl "0.2.3"] {{{project-clj-deps}}}]
+                 [org.clojure/tools.namespace "0.2.11"] {{{project-clj-deps}}}]
 
   :plugins [[lein-cljsbuild "1.1.5"]
             [lein-environ "1.1.0"]{{{project-plugins}}}]
@@ -113,7 +112,8 @@
                              [figwheel-sidecar "0.5.8"]
                              [com.cemerick/piggieback "0.2.1"]
                              [org.clojure/tools.nrepl "0.2.12"]
-                             [lein-doo "0.1.7"]]
+                             [lein-doo "0.1.7"]
+                             [reloaded.repl "0.2.3"]]
 
               :plugins [[lein-figwheel "0.5.8"]
                         [lein-doo "0.1.7"]]
