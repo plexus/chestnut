@@ -26,7 +26,7 @@
 (doseq [opt valid-options]
   (eval
    `(defn ~(symbol (str opt "?")) [opts#]
-     (some #{~(str "--" opt)} opts#))))
+     (some #{~(str "--" opt) ~(str "+" opt)} opts#))))
 
 (defn om? [props]
   (and (not (reagent? props)) (not (vanilla? props))))
@@ -130,10 +130,11 @@ render, the second is the file contents."
               data)])))
 
 (defn chestnut [name & opts]
-  (let [valid-opts (map (partial str "--") valid-options)]
+  (let [dash-opts (map (partial str "--") valid-options)
+        plus-opts (map (partial str "+") valid-options)]
     (doseq [opt opts]
-      (if (not (some #{opt} valid-opts))
-        (apply main/abort "Unrecognized option:" opt ". Should be one of" valid-opts))))
+      (if (not (some #{opt} (concat dash-opts plus-opts)))
+        (apply main/abort "Unrecognized option:" opt ". Should be one of" plus-opts))))
   (main/info "Generating fresh Chestnut project.")
   (main/info "README.md contains instructions to get you started.")
 

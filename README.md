@@ -77,7 +77,7 @@ Clojure/ClojureScript apps effectively. It comes with
   reload your ClojureScript and CSS as soon as you save the file, no
   need for browser refresh.
 * [Om](https://github.com/swannodette/om) ClojureScript interface to Facebook's
-  React. Alternatively you can use Reagent (`--reagent`), or use `--vanilla` to
+  React. Alternatively you can use Reagent (`+reagent`), or use `+vanilla` to
   do without a React wrapper.
 * [Ring](https://github.com/ring-clojure/ring) Clojure's de facto HTTP
   interface. Chestnut uses a Jetty or HttpKit server to serve the
@@ -92,18 +92,15 @@ Clojure/ClojureScript apps effectively. It comes with
 
 ## Options
 
-* `--reagent` Use Reagent instead of Om
-* `--vanilla` Don't include Om, use this if you intend to use some other view library
-* `--http-kit` Use [HTTP Kit](http://http-kit.org/server.html) instead
+* `+reagent` Use Reagent instead of Om
+* `+vanilla` Don't include Om, use this if you intend to use some other view library
+* `+http-kit` Use [HTTP Kit](http://http-kit.org/server.html) instead
   of Jetty
-* `--site-middleware` Use the `ring.middleware.defaults.site-defaults` middleware
+* `+site-middleware` Use the `ring.middleware.defaults.site-defaults` middleware
   (session, CSRF), instead of `ring.middleware.defaults.api-defaults` (see
   [ring.defaults documentation](https://github.com/ring-clojure/ring-defaults))
-* `--less` Use [less](https://github.com/montoux/lein-less) for
+* `+less` Use [less](https://github.com/montoux/lein-less) for
   compiling Less CSS files.
-
-Use `--` to separate these options from Leiningen's options,
-e.g. `lein new chestnut foo --snapshot -- --http-kit`
 
 ## Local copy
 
@@ -141,7 +138,7 @@ reports and pull requests are very welcome.
          want to reset after every change, change `(defonce app-state ..)` to
          `(def app-state ...)`.
 * **Q:** I just want to compile ClojureScript to fully optimized JavaScript, so
-         I can use it in a static HTML site. <br> 
+         I can use it in a static HTML site. <br>
   **A:** Compile the "min" ClojureScript build, like this: `lein cljsbuild once min`, then look
          for `resources/public/js/app.js`.
 * **Q:** I'm getting `CompilerException java.lang.IllegalAccessError:
