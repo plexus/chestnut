@@ -1,7 +1,19 @@
 (ns user
   (:require [{{project-ns}}.server]
+            [com.stuartsierra.component :as component]
+            [figwheel-sidecar.config :as config]
+            [figwheel-sidecar.system :as sys]
+            [clojure.tools.namespace.repl :refer [set-refresh-dirs]]
+            [reloaded.repl :refer [system init start stop go reset reset-all]]
             [ring.middleware.reload :refer [wrap-reload]]
             [figwheel-sidecar.repl-api :as figwheel]{{#less?}}            [clojure.java.shell]{{/less?}}{{#sass?}}            [clojure.java.shell]{{/sass?}}))
+
+(defn dev-system []
+  (merge
+   ({{project-ns}}.server/prod-system)
+   (component/system-map
+    :figwheel-system (sys/figwheel-system (config/fetch-config))
+    :css-watcher (sys/css-watcher {:watch-paths ["resources/public/css"]})))){{#less?}}
 {{#less?}}
 (defn start-less []
   (future
@@ -15,10 +27,11 @@
     (clojure.java.shell/sh "lein" "auto" "sassc" "once")))
 {{/sass?}}
 
-(def http-handler
-  (wrap-reload #'{{project-ns}}.server/http-handler))
+(set-refresh-dirs "src" "dev")
+(reloaded.repl/set-init! #(dev-system))
 
 (defn run []
-  (figwheel/start-figwheel!){{less-sass-start}})
+  (go){{less-sass-start}})
 
-(def browser-repl figwheel/cljs-repl)
+(defn browser-repl []
+  (sys/cljs-repl (:figwheel-system system)))
