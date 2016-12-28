@@ -1,8 +1,8 @@
 (ns user
   (:require [{{project-ns}}.server]
             [com.stuartsierra.component :as component]
-            [figwheel-sidecar.config :as config]
-            [figwheel-sidecar.system :as sys]
+            [figwheel-sidecar.config :as fw-config]
+            [figwheel-sidecar.system :as fw-sys]
             [clojure.tools.namespace.repl :refer [set-refresh-dirs]]
             [reloaded.repl :refer [system init start stop go reset reset-all]]
             [ring.middleware.reload :refer [wrap-reload]]
@@ -12,8 +12,8 @@
   (merge
    ({{project-ns}}.server/prod-system)
    (component/system-map
-    :figwheel-system (sys/figwheel-system (config/fetch-config))
-    :css-watcher (sys/css-watcher {:watch-paths ["resources/public/css"]}))))
+    :figwheel-system (fw-sys/figwheel-system (fw-config/fetch-config))
+    :css-watcher (fw-sys/css-watcher {:watch-paths ["resources/public/css"]}))))
 {{#less?}}
 (defn start-less []
   (future
@@ -34,4 +34,4 @@
   (go){{less-sass-start}})
 
 (defn browser-repl []
-  (sys/cljs-repl (:figwheel-system system)))
+  (fw-sys/cljs-repl (:figwheel-system system)))
