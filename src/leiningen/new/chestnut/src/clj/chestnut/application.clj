@@ -12,7 +12,7 @@
 
 (defn app-system []
   (component/system-map
-   :routes (new-endpoint routes)
+   :routes (new-endpoint (fn [_] routes))
    :middleware (new-middleware  {:middleware [[wrap-defaults :defaults]
                                               wrap-with-logger
                                               wrap-gzip]

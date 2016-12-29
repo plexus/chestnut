@@ -15,7 +15,7 @@
                  [environ "1.1.0"]
                  [com.stuartsierra/component "0.3.1"]
                  [org.danielsz/system "0.3.1"]
-                 [org.clojure/tools.namespace "0.2.11"] {{{project-clj-deps}}}]
+                 [org.clojure/tools.namespace "0.2.11"]{{{project-clj-deps}}}]
 
   :plugins [[lein-cljsbuild "1.1.5"]
             [lein-environ "1.1.0"]{{{project-plugins}}}]
@@ -123,7 +123,7 @@
 
              :uberjar
              {:source-paths ^:replace ["src/clj" "src/cljc"]
-              :prep-tasks ["compile" ["cljsbuild" "once" "min"]]
+              :prep-tasks [{{{project-prep-tasks}}}]
               :hooks [{{{project-uberjar-hooks}}}]
               :omit-source true
               :aot :all}})

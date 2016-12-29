@@ -6,14 +6,14 @@
             [clojure.tools.namespace.repl :refer [set-refresh-dirs]]
             [reloaded.repl :refer [system init start stop go reset reset-all]]
             [ring.middleware.reload :refer [wrap-reload]]
-            [figwheel-sidecar.repl-api :as figwheel]{{#less?}}            [clojure.java.shell]{{/less?}}{{#sass?}}            [clojure.java.shell]{{/sass?}}))
+            [figwheel-sidecar.repl-api :as figwheel]{{user-clj-requires}}))
 
 (defn dev-system []
   (merge
    ({{project-ns}}.application/app-system)
    (component/system-map
     :figwheel-system (fw-sys/figwheel-system (fw-config/fetch-config))
-    :css-watcher (fw-sys/css-watcher {:watch-paths ["resources/public/css"]}))))
+    :css-watcher (fw-sys/css-watcher {:watch-paths ["resources/public/css"]}){{extra-dev-components}})))
 {{#less?}}
 (defn start-less []
   (future

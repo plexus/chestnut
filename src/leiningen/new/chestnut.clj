@@ -1,10 +1,19 @@
 (ns leiningen.new.chestnut
-  (:require [leiningen.new.templates :refer [renderer name-to-path ->files
-                                             sanitize sanitize-ns project-name]]
-            [leiningen.core.main :as main]
-            [clojure.string :as s]
+  (:require [clj-jgit.porcelain :refer :all]
             [clojure.java.io :as io]
-            [clj-jgit.porcelain :refer :all]))
+            [clojure.string :as str]
+            [leiningen.core.main :as main]
+            [leiningen.new.templates :refer [->files name-to-path project-name renderer sanitize-ns]])
+  (:import java.io.Writer))
+
+;; When using `pr`, output quoted forms as 'foo, and not as (quote foo)
+(defmethod clojure.core/print-method clojure.lang.ISeq [o ^Writer w]
+  (#'clojure.core/print-meta o w)
+  (if (= (first o) 'quote)
+    (do
+      (.write w "'")
+      (print-method (second o) w))
+    (#'clojure.core/print-sequential "(" #'clojure.core/pr-on " " ")" o w)))
 
 (def render (renderer "chestnut"))
 
@@ -12,7 +21,7 @@
   (fn []
     (->> list
          (map #(str "\n" (apply str (repeat n " ")) (wrap %)))
-         (s/join ""))))
+         (str/join ""))))
 
 (defn dep-list [n list]
   (wrap-indent #(str "[" % "]") n list))
@@ -20,8 +29,12 @@
 (defn indent [n list]
   (wrap-indent identity n list))
 
+(defn indent-next [n list]
+  (str (first list)
+       ((indent n (next list)))))
+
 (def valid-options
-  ["http-kit" "site-middleware" "less" "sass" "reagent" "vanilla"])
+  ["http-kit" "site-middleware" "less" "sass" "reagent" "vanilla" "garden"])
 
 (doseq [opt valid-options]
   (eval
@@ -36,11 +49,18 @@
     ["system.components.http-kit :refer [new-web-server]"]
     ["system.components.jetty :refer [new-web-server]"]))
 
+(defn user-clj-requires [opts]
+  (cond-> []
+    (or (sass? opts) (less? opts)) (conj '[clojure.java.io :as io])
+    (garden? opts)                 (conj '[garden-watcher.core :refer [new-garden-watcher]])))
+
+
 (defn project-clj-deps [opts]
   (cond-> []
-    (http-kit? opts) (conj "http-kit \"2.2.0\"")
-    (reagent? opts)  (conj "reagent \"0.6.0\"")
-    (om? opts)       (conj "org.omcljs/om \"1.0.0-alpha47\"")))
+    (http-kit? opts) (conj '[http-kit "2.2.0"])
+    (reagent? opts)  (conj '[reagent "0.6.0"])
+    (om? opts)       (conj '[org.omcljs/om "1.0.0-alpha47"])
+    (garden? opts)   (conj '[lambdaisland/garden-watcher "0.2.0"])))
 
 (defn project-plugins [opts]
   (cond-> []
@@ -48,10 +68,19 @@
                              "lein-auto \"0.1.3\"")
           (less? opts) (conj "lein-less \"1.7.5\"")))
 
+(defn project-prep-tasks [name opts]
+  (cond-> ["compile" ["cljsbuild" "once" "min"]]
+    (garden? opts) (conj ["run" "-m" "garden-reloader.main" (str (sanitize-ns name) ".styles")])))
+
 (defn project-uberjar-hooks [opts]
   (cond-> []
           (less? opts) (conj "leiningen.less")
           (sass? opts) (conj "leiningen.sassc")))
+
+(defn extra-dev-components [name opts]
+  (cond-> []
+    (garden? opts)
+    (into [:garden-watcher (list 'new-garden-watcher [(list 'quote (symbol (str (sanitize-ns name) ".styles")))])])))
 
 (defn load-props [file-name]
   (with-open [^java.io.Reader reader (clojure.java.io/reader file-name)]
@@ -65,7 +94,7 @@
         version (:version props)
         revision (:revision props)
         snapshot? (re-find #"SNAPSHOT" version)]
-    (str version " (" (s/join (take 8 revision)) ")")))
+    (str version " (" (str/join (take 8 revision)) ")")))
 
 (defn template-data [name opts]
   {:full-name name
@@ -73,14 +102,22 @@
    :chestnut-version     (chestnut-version)
    :project-ns           (sanitize-ns name)
    :sanitized            (name-to-path name)
+
+   :user-clj-requires    (indent 12 (map pr-str (user-clj-requires opts)))
    :server-clj-requires  (dep-list 12 (server-clj-requires opts))
 
-   :project-clj-deps     (dep-list 17 (project-clj-deps opts))
+   :project-clj-deps     (indent 17 (map pr-str (project-clj-deps opts)))
    :project-plugins      (dep-list 12 (project-plugins opts))
-   :project-uberjar-hooks (s/join " " (project-uberjar-hooks opts))
+   :project-prep-tasks   (indent-next 27 (map pr-str (project-prep-tasks name opts)))
+   :project-uberjar-hooks (str/join " " (project-uberjar-hooks opts))
 
    :server-command       (if (http-kit? opts) "run-server" "run-jetty")
    :ring-defaults        (if (site-middleware? opts) "site-defaults" "api-defaults")
+
+   :extra-dev-components (indent 4 (->> (extra-dev-components name opts)
+                                        (map pr-str)
+                                        (partition 2)
+                                        (map #(str/join " " %))))
 
    ;; features
    :sass?                (fn [block] (if (sass? opts) (str "\n" block) ""))
@@ -105,13 +142,14 @@
            "code_of_conduct.md"
            ".gitignore"
            "system.properties"
-           "Procfile"
+           ".dir-locals.el"
            "test/clj/chestnut/example_test.clj"
            "test/cljs/chestnut/core_test.cljs"
            "test/cljs/chestnut/test_runner.cljs"
            "test/cljc/chestnut/common_test.cljc"]
           (less? opts) (conj "src/less/style.less")
           (sass? opts) (conj "src/scss/style.scss")
+          (garden? opts) (conj "src/clj/chestnut/styles.clj")
           (not (or (less? opts) (sass? opts))) (conj "resources/public/css/style.css")))
 
 (defn format-files-args
@@ -119,7 +157,7 @@
 render, the second is the file contents."
   [{:keys [name] :as data} opts]
   (letfn [(render-file [file]
-            [(s/replace file "chestnut" "{{sanitized}}")
+            [(str/replace file "chestnut" "{{sanitized}}")
              (render file data)])]
     (conj
      (map render-file (files-to-render opts))
@@ -149,4 +187,4 @@ render, the second is the file contents."
   (git-init name)
   (let [repo (load-repo name)]
     (git-add repo ".")
-    (git-commit repo (str "lein new chestnut " name " " (s/join " " opts)))))
+    (git-commit repo (str "lein new chestnut " name " " (str/join " " opts)))))
