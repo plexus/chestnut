@@ -1,5 +1,5 @@
 (ns user
-  (:require [{{project-ns}}.server]
+  (:require [{{project-ns}}.application]
             [com.stuartsierra.component :as component]
             [figwheel-sidecar.config :as fw-config]
             [figwheel-sidecar.system :as fw-sys]
@@ -10,7 +10,7 @@
 
 (defn dev-system []
   (merge
-   ({{project-ns}}.server/prod-system)
+   ({{project-ns}}.application/app-system)
    (component/system-map
     :figwheel-system (fw-sys/figwheel-system (fw-config/fetch-config))
     :css-watcher (fw-sys/css-watcher {:watch-paths ["resources/public/css"]}))))

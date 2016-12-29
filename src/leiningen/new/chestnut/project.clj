@@ -31,7 +31,7 @@
   :uberjar-name "{{{name}}}.jar"
 
   ;; Use `lein run` if you just want to start a HTTP server, without figwheel
-  :main {{{project-ns}}}.server
+  :main {{{project-ns}}}.application
 
   ;; nREPL by default starts in the :main namespace, we want to start in `user`
   ;; because that's where our development helper functions like (run) and
