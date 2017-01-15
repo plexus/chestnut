@@ -104,7 +104,8 @@
   :sassc [{:src "src/scss/style.scss"
            :output-to "resources/public/css/style.css"}]
 
-  :auto {"sassc" {:file-pattern  #"\.(scss)$"}}
+  :auto {"sassc" {:file-pattern  #"\.(scss)$"
+                  :paths ["src/scss"]}}
 {{/sass?}}
 
   :profiles {:dev
