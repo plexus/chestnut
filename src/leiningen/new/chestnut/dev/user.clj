@@ -10,7 +10,7 @@
 
 (defn dev-system []
   (merge
-   ({{project-ns}}.application/app-system)
+   (dissoc ({{project-ns}}.application/app-system) :web)
    (component/system-map
     :figwheel-system (fw-sys/figwheel-system (fw-config/fetch-config))
     :css-watcher (fw-sys/css-watcher {:watch-paths ["resources/public/css"]}){{extra-dev-components}})))
@@ -27,11 +27,16 @@
     (clojure.java.shell/sh "lein" "auto" "sassc" "once")))
 {{/sass?}}
 
-(set-refresh-dirs "src" "dev")
-(reloaded.repl/set-init! #(dev-system))
+(defn dev-ring-handler
+  "Passed to Figwheel so it can pass on requests"
+  [req]
+  ((get-in reloaded.repl/system [:handler :handler]) req))
 
 (defn run []
   (go){{less-sass-start}})
 
 (defn browser-repl []
   (fw-sys/cljs-repl (:figwheel-system system)))
+
+(set-refresh-dirs "src" "dev")
+(reloaded.repl/set-init! #(dev-system))

@@ -8,21 +8,18 @@
             [system.components.endpoint :refer [new-endpoint]]
             [system.components.handler :refer [new-handler]]
             [system.components.middleware :refer [new-middleware]]{{{server-clj-requires}}}
-            [{{project-ns}}.routes :refer [routes]]))
+            [{{project-ns}}.routes :refer [new-routes]]))
 
 (defn app-system []
   (component/system-map
-   :routes (new-endpoint (fn [_] routes))
-   :middleware (new-middleware  {:middleware [[wrap-defaults :defaults]
-                                              wrap-with-logger
-                                              wrap-gzip]
-                                 :defaults {{ring-defaults}}})
-   :handler (component/using
-             (new-handler)
-             [:routes :middleware])
-   :http (component/using
-          (new-web-server (Integer. (or (env :port) 10555)))
-          [:handler])))
+   :routes (new-endpoint new-routes)
+   :middleware (new-middleware {:middleware [[wrap-defaults {{ring-defaults}}]
+                                             wrap-with-logger
+                                             wrap-gzip]})
+   :handler (-> (new-handler)
+                (component/using [:routes :middleware]))
+   :http (-> (new-web-server (Integer. (or (env :port) 10555)))
+             (component/using [:handler]))))
 
 (defn -main [& _]
   (component/start (app-system)))
