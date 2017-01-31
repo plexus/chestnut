@@ -3,6 +3,7 @@
 ## master
 
 * Add cljc support
+* Add rum support
 
 ## 0.12.0
 

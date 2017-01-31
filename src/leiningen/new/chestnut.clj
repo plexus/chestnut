@@ -34,7 +34,7 @@
        ((indent n (next list)))))
 
 (def valid-options
-  ["http-kit" "site-middleware" "less" "sass" "reagent" "vanilla" "garden"])
+  ["http-kit" "site-middleware" "less" "sass" "reagent" "vanilla" "garden" "rum"])
 
 (doseq [opt valid-options]
   (eval
@@ -42,7 +42,9 @@
      (some #{~(str "--" opt) ~(str "+" opt)} opts#))))
 
 (defn om? [props]
-  (and (not (reagent? props)) (not (vanilla? props))))
+  (and (not (reagent? props))
+       (not (rum? props))
+       (not (vanilla? props))))
 
 (defn server-clj-requires [opts]
   (if (http-kit? opts)
@@ -60,6 +62,7 @@
     (http-kit? opts) (conj '[http-kit "2.2.0"])
     (reagent? opts)  (conj '[reagent "0.6.0"])
     (om? opts)       (conj '[org.omcljs/om "1.0.0-alpha47"])
+    (rum? opts)      (conj '[rum "0.10.8"])
     (garden? opts)   (conj '[lambdaisland/garden-watcher "0.2.0"])))
 
 (defn project-plugins [opts]
@@ -165,6 +168,7 @@ render, the second is the file contents."
       (render (cond
                 (om? opts) "src/cljs/chestnut/core_om.cljs"
                 (reagent? opts) "src/cljs/chestnut/core_reagent.cljs"
+                (rum? opts) "src/cljs/chestnut/core_rum.cljs"
                 (vanilla? opts) "src/cljs/chestnut/core_vanilla.cljs")
               data)])))
 
