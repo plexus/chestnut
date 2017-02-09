@@ -37,6 +37,7 @@ in your generated project for instructions pertaining to your version.
 
 ```
 lein new chestnut <name>
+lein new chestnut <name> -- <options>  # see below
 ```
 
 After that open the README of your generated project for detailed
