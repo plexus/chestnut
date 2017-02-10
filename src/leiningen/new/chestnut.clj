@@ -34,7 +34,7 @@
        ((indent n (next list)))))
 
 (def valid-options
-  ["http-kit" "site-middleware" "less" "sass" "reagent" "vanilla" "garden" "rum"])
+  ["http-kit" "site-middleware" "less" "sass" "reagent" "vanilla" "garden" "rum" "om-next"])
 
 (doseq [opt valid-options]
   (eval
@@ -44,7 +44,8 @@
 (defn om? [props]
   (and (not (reagent? props))
        (not (rum? props))
-       (not (vanilla? props))))
+       (not (vanilla? props))
+       (not (om-next? props))))
 
 (defn server-clj-requires [opts]
   (if (http-kit? opts)
@@ -62,6 +63,7 @@
     (http-kit? opts) (conj '[http-kit "2.2.0"])
     (reagent? opts)  (conj '[reagent "0.6.0"])
     (om? opts)       (conj '[org.omcljs/om "1.0.0-alpha47"])
+    (om-next? opts)  (conj '[org.omcljs/om "1.0.0-alpha47"])
     (rum? opts)      (conj '[rum "0.10.8"])
     (garden? opts)   (conj '[lambdaisland/garden-watcher "0.2.0"])))
 
@@ -167,6 +169,7 @@ render, the second is the file contents."
      ["src/cljs/{{sanitized}}/core.cljs"
       (render (cond
                 (om? opts) "src/cljs/chestnut/core_om.cljs"
+                (om-next? opts) "src/cljs/chestnut/core_om_next.cljs"
                 (reagent? opts) "src/cljs/chestnut/core_reagent.cljs"
                 (rum? opts) "src/cljs/chestnut/core_rum.cljs"
                 (vanilla? opts) "src/cljs/chestnut/core_vanilla.cljs")
