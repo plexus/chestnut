@@ -65,7 +65,7 @@
     (om? opts)       (conj '[org.omcljs/om "1.0.0-alpha47"])
     (om-next? opts)  (conj '[org.omcljs/om "1.0.0-alpha47"])
     (rum? opts)      (conj '[rum "0.10.8"])
-    (garden? opts)   (conj '[lambdaisland/garden-watcher "0.2.0"])))
+    (garden? opts)   (conj '[lambdaisland/garden-watcher "0.3.0"])))
 
 (defn project-plugins [opts]
   (cond-> []
