@@ -93,7 +93,8 @@
              ;;
              ;; :open-file-command "myfile-opener"
 
-             :server-logfile "log/figwheel.log"}
+             :server-logfile "log/figwheel.log"
+             :ring-handler user/dev-ring-handler}
 
   :doo {:build "test"}
 {{#less?}}
