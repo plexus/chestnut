@@ -13,10 +13,9 @@
 (defn app-system []
   (component/system-map
    :routes (new-endpoint (fn [_] routes))
-   :middleware (new-middleware  {:middleware [[wrap-defaults :defaults]
+   :middleware (new-middleware  {:middleware [[wrap-defaults {{ring-defaults}}]
                                               wrap-with-logger
-                                              wrap-gzip]
-                                 :defaults {{ring-defaults}}})
+                                              wrap-gzip]})
    :handler (component/using
              (new-handler)
              [:routes :middleware])
