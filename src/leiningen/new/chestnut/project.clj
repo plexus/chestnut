@@ -13,7 +13,7 @@
                  [ring.middleware.logger "0.5.0"]
                  [compojure "1.5.1"]
                  [environ "1.1.0"]
-                 [com.stuartsierra/component "0.3.1"]
+                 [com.stuartsierra/component "0.4.0"]
                  [org.danielsz/system "0.3.1"]
                  [org.clojure/tools.namespace "0.2.11"]{{{project-clj-deps}}}]
 
