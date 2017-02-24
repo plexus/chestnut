@@ -15,7 +15,8 @@
                  [environ "1.1.0"]
                  [com.stuartsierra/component "0.3.2"]
                  [org.danielsz/system "0.4.0"]
-                 [org.clojure/tools.namespace "0.2.11"]{{{project-clj-deps}}}]
+                 [org.clojure/tools.namespace "0.2.11"]
+                 [org.clojars.featheredtoast/reloaded-repl-cljs "0.1.0"]{{{project-clj-deps}}}]
 
   :plugins [[lein-cljsbuild "1.1.5"]
             [lein-environ "1.1.0"]{{{project-plugins}}}]
@@ -36,17 +37,16 @@
   ;; nREPL by default starts in the :main namespace, we want to start in `user`
   ;; because that's where our development helper functions like (run) and
   ;; (browser-repl) live.
-  :repl-options {:init-ns user}
+  :repl-options {:init-ns user
+                 :init (go)}
 
   :cljsbuild {:builds
               [{:id "app"
-                :source-paths ["src/cljs" "src/cljc"]
+                :source-paths ["src/cljs" "src/cljc" "dev"]
 
-                :figwheel true
-                ;; Alternatively, you can configure a function to run every time figwheel reloads.
-                ;; :figwheel {:on-jsload "{{{project-ns}}}.core/on-figwheel-reload"}
+                :figwheel {:on-jsload "org.clojars.featheredtoast.reloaded-repl-cljs/go"}
 
-                :compiler {:main {{{project-ns}}}.core
+                :compiler {:main cljs.user
                            :asset-path "js/compiled/out"
                            :output-to "resources/public/js/compiled/{{{sanitized}}}.js"
                            :output-dir "resources/public/js/compiled/out"

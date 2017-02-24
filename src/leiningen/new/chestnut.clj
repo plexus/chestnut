@@ -142,6 +142,7 @@
            "src/clj/chestnut/routes.clj"
            "src/cljc/chestnut/common.cljc"
            "dev/user.clj"
+           "dev/cljs/user.cljs"
            "LICENSE"
            "README.md"
            "code_of_conduct.md"
