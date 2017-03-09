@@ -75,7 +75,7 @@
 
 (defn project-prep-tasks [name opts]
   (cond-> ["compile" ["cljsbuild" "once" "min"]]
-    (garden? opts) (conj ["run" "-m" "garden-reloader.main" (str (sanitize-ns name) ".styles")])))
+    (garden? opts) (conj ["run" "-m" "garden-watcher.main" (str (sanitize-ns name) ".styles")])))
 
 (defn project-uberjar-hooks [opts]
   (cond-> []
