@@ -39,7 +39,7 @@
 (doseq [opt valid-options]
   (eval
    `(defn ~(symbol (str opt "?")) [opts#]
-     (some #{~(str "--" opt) ~(str "+" opt)} opts#))))
+      (some #{~(str "--" opt) ~(str "+" opt)} opts#))))
 
 (defn om? [props]
   (and (not (reagent? props))
@@ -65,13 +65,13 @@
     (om? opts)       (conj '[org.omcljs/om "1.0.0-alpha47"])
     (om-next? opts)  (conj '[org.omcljs/om "1.0.0-alpha47"])
     (rum? opts)      (conj '[rum "0.10.8"])
-    (garden? opts)   (conj '[lambdaisland/garden-watcher "0.3.0"])))
+    (garden? opts)   (conj '[lambdaisland/garden-watcher "0.3.1"])))
 
 (defn project-plugins [opts]
   (cond-> []
-          (sass? opts) (conj "lein-sassc \"0.10.4\""
-                             "lein-auto \"0.1.3\"")
-          (less? opts) (conj "lein-less \"1.7.5\"")))
+    (sass? opts) (conj "lein-sassc \"0.10.4\""
+                       "lein-auto \"0.1.3\"")
+    (less? opts) (conj "lein-less \"1.7.5\"")))
 
 (defn project-prep-tasks [name opts]
   (cond-> ["compile" ["cljsbuild" "once" "min"]]
@@ -79,8 +79,8 @@
 
 (defn project-uberjar-hooks [opts]
   (cond-> []
-          (less? opts) (conj "leiningen.less")
-          (sass? opts) (conj "leiningen.sassc")))
+    (less? opts) (conj "leiningen.less")
+    (sass? opts) (conj "leiningen.sassc")))
 
 (defn extra-dev-components [name opts]
   (cond-> []
@@ -152,10 +152,10 @@
            "test/cljs/chestnut/core_test.cljs"
            "test/cljs/chestnut/test_runner.cljs"
            "test/cljc/chestnut/common_test.cljc"]
-          (less? opts) (conj "src/less/style.less")
-          (sass? opts) (conj "src/scss/style.scss")
-          (garden? opts) (conj "src/clj/chestnut/styles.clj")
-          (not (or (less? opts) (sass? opts))) (conj "resources/public/css/style.css")))
+    (less? opts) (conj "src/less/style.less")
+    (sass? opts) (conj "src/scss/style.scss")
+    (garden? opts) (conj "src/clj/chestnut/styles.clj")
+    (not (or (less? opts) (sass? opts))) (conj "resources/public/css/style.css")))
 
 (defn format-files-args
   "Returns a list of pairs (vectors). The first element is the file name to
