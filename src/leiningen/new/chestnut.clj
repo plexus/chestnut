@@ -141,6 +141,8 @@
            "src/clj/chestnut/application.clj"
            "src/clj/chestnut/routes.clj"
            "src/cljc/chestnut/common.cljc"
+           "src/cljs/chestnut/system.cljs"
+           "src/cljs/chestnut/components/render.cljs"
            "dev/user.clj"
            "dev/cljs/user.cljs"
            "LICENSE"

@@ -1,8 +1,8 @@
 (ns cljs.user
   (:require [{{project-ns}}.core]
-            [org.clojars.featheredtoast.reloaded-repl-cljs :as reloaded]))
+            [{{project-ns}}.system :as system]))
 
-(def go reloaded/go)
-(def reset reloaded/reset)
-(def stop reloaded/stop)
-(def start reloaded/start)
+(def go system/go)
+(def reset system/reset)
+(def stop system/stop)
+(def start system/start)

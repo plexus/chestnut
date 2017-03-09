@@ -15,8 +15,7 @@
                  [environ "1.1.0"]
                  [com.stuartsierra/component "0.3.2"]
                  [org.danielsz/system "0.4.0"]
-                 [org.clojure/tools.namespace "0.2.11"]
-                 [org.clojars.featheredtoast/reloaded-repl-cljs "0.1.0"]{{{project-clj-deps}}}]
+                 [org.clojure/tools.namespace "0.2.11"]{{{project-clj-deps}}}]
 
   :plugins [[lein-cljsbuild "1.1.5"]
             [lein-environ "1.1.0"]{{{project-plugins}}}]
@@ -44,7 +43,7 @@
               [{:id "app"
                 :source-paths ["src/cljs" "src/cljc" "dev"]
 
-                :figwheel {:on-jsload "org.clojars.featheredtoast.reloaded-repl-cljs/go"}
+                :figwheel {:on-jsload "{{project-ns}}.system/reset"}
 
                 :compiler {:main cljs.user
                            :asset-path "js/compiled/out"
@@ -61,7 +60,7 @@
                {:id "min"
                 :source-paths ["src/cljs" "src/cljc"]
                 :jar true
-                :compiler {:main {{{project-ns}}}.core
+                :compiler {:main {{{project-ns}}}.system
                            :output-to "resources/public/js/compiled/{{{sanitized}}}.js"
                            :output-dir "target"
                            :source-map-timestamp true
