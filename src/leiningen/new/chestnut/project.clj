@@ -5,12 +5,12 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
   :dependencies [[org.clojure/clojure "1.8.0"]
-                 [org.clojure/clojurescript "1.9.293" :scope "provided"]
+                 [org.clojure/clojurescript "1.9.495" :scope "provided"]
                  [com.cognitect/transit-clj "0.8.297"]
-                 [ring "1.5.0"]
-                 [ring/ring-defaults "0.2.1"]
-                 [bk/ring-gzip "0.1.1"]
-                 [ring.middleware.logger "0.5.0"]
+                 [ring "1.5.1"]
+                 [ring/ring-defaults "0.2.3"]
+                 [bk/ring-gzip "0.2.1"]
+                 [lambdaisland/ring.middleware.logger "0.5.1"]
                  [compojure "1.5.1"]
                  [environ "1.1.0"]
                  [com.stuartsierra/component "0.3.2"]
@@ -109,14 +109,14 @@
 {{/sass?}}
 
   :profiles {:dev
-             {:dependencies [[figwheel "0.5.8"]
-                             [figwheel-sidecar "0.5.8"]
+             {:dependencies [[figwheel "0.5.9"]
+                             [figwheel-sidecar "0.5.9"]
                              [com.cemerick/piggieback "0.2.1"]
                              [org.clojure/tools.nrepl "0.2.12"]
                              [lein-doo "0.1.7"]
                              [reloaded.repl "0.2.3"]]
 
-              :plugins [[lein-figwheel "0.5.8"]
+              :plugins [[lein-figwheel "0.5.9"]
                         [lein-doo "0.1.7"]]
 
               :source-paths ["dev"]
