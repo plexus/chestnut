@@ -28,8 +28,10 @@ of the box.
 mailing list or on Github.)
 
 This README may describe unreleased features. Please compare the
-version number on Clojars to the changelog below, and check the README
-in your generated project for instructions pertaining to your version.
+[version number on Clojars](https://clojars.org/chestnut/lein-template) to the
+[changelog below](https://github.com/plexus/chestnut/blob/master/README.md#changelog),
+and check the README in your generated project for instructions pertaining to
+your version.
 
 ## Documentation
 
