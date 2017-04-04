@@ -10,8 +10,6 @@
 
 **Getting value out of Chestnut? Consider making [a small donation](https://patreon.com/plexus).**
 
-**This README may describe unreleased features, instead you can check the [README for the latest stable release](https://github.com/plexus/chestnut/blob/66af6f409a54bee49550e3de28dde24def8cc672/README.md)**
-
 Chestnut is a Leiningen template for a Clojure/ClojureScript app based
 on Om, Reagent, or Rum, featuring a great dev setup, and easy deployment.
 
@@ -39,9 +37,20 @@ your version.
 
 ## Usage
 
+**This README may describe unreleased features, instead you can check the [README for the latest stable release](https://github.com/plexus/chestnut/tree/v0.14.0/README.md)**
+
 ```
-lein new chestnut <name>
-lein new chestnut <name> -- <options>  # see below
+lein new chestnut <name> <options>
+
+e.g.
+
+lein new chesnut my-app +garden +reagent +http-kit
+```
+
+If you're using the snapshot version, then make sure to add a `--` to separate Leiningen's and Chestnut's arguments
+
+```
+lein new chesnut my-app --snapshot -- +garden +reagent +http-kit
 ```
 
 After that open the README of your generated project for detailed
@@ -148,18 +157,6 @@ reports and pull requests are very welcome.
          I can use it in a static HTML site. <br>
   **A:** Compile the "min" ClojureScript build, like this: `lein cljsbuild once min`, then look
          for `resources/public/js/app.js`.
-* **Q:** I'm getting `CompilerException java.lang.IllegalAccessError:
-         in-seconds does not exist` when using Spyscope 0.1.4 or earlier.<br>
-  **A:** Upgrade to [Spyscope 0.1.5](https://github.com/dgrnbrg/spyscope/issues/15), this
-         issue is caused by an outdated dependency on cljs-time.
-* **Q:** I upgraded the version of Om in project.clj, but it seems I'm
-         still using the old version, what's up?<br>
-  **A:** If you already did a
-         build before, cljsbuild/figwheel won't pick up on the updated version
-         automatically. Do a `lein cljsbuild clean`, then start Figwheel again.
-* **Q:** The Figwheel output is cluttering up my REPL, can I get rid of it?<br>
-  **A:** Not as such, but instead of calling `(run)`, you can call `(run-web-server)`
-         and `(run-auto-reload)` in separate repls.
 * **Q:** I gave my project a very generic name like `cljs` or `clojure` and now
          it's not working. <br>
   **A:** This is due to namespace clashes. Try picking
