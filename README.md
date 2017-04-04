@@ -10,6 +10,7 @@
 
 **Getting value out of Chestnut? Consider making [a small donation](https://patreon.com/plexus).**
 
+**This README may describe unreleased features, instead you can check the [README for the latest stable release](https://github.com/plexus/chestnut/blob/66af6f409a54bee49550e3de28dde24def8cc672/README.md)**
 
 Chestnut is a Leiningen template for a Clojure/ClojureScript app based
 on Om, Reagent, or Rum, featuring a great dev setup, and easy deployment.
@@ -22,8 +23,9 @@ code compiled, optimized, and packaged in a single executable JAR
 file. It also contains the necessary artifacts to work on Heroku out
 of the box.
 
-**Need help?** Ask [on the mailing list](http://clojureverse.org/c/chestnut) (please do not open an issue on
-GitHub)
+**Need help?** Ask [on the mailing list](http://clojureverse.org/c/chestnut)
+(issues on GitHub are for bugs. Feature requests can be done either on the
+mailing list or on Github.)
 
 This README may describe unreleased features. Please compare the
 version number on Clojars to the changelog below, and check the README
