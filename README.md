@@ -44,7 +44,7 @@ lein new chestnut <name> <options>
 
 e.g.
 
-lein new chesnut my-app +garden +reagent +http-kit
+lein new chestnut my-app +garden +reagent +http-kit
 ```
 
 If you're using the snapshot version, then make sure to add a `--` to separate Leiningen's and Chestnut's arguments
