@@ -62,8 +62,8 @@
   (cond-> []
     (http-kit? opts) (conj '[http-kit "2.2.0"])
     (reagent? opts)  (conj '[reagent "0.6.0"])
-    (om? opts)       (conj '[org.omcljs/om "1.0.0-alpha47"])
-    (om-next? opts)  (conj '[org.omcljs/om "1.0.0-alpha47"])
+    (om? opts)       (conj '[org.omcljs/om "1.0.0-alpha48"])
+    (om-next? opts)  (conj '[org.omcljs/om "1.0.0-alpha48"])
     (rum? opts)      (conj '[rum "0.10.8"])
     (re-frame? opts) (conj '[re-frame "0.9.2"])
     (garden? opts)   (conj '[lambdaisland/garden-watcher "0.3.1"])))
