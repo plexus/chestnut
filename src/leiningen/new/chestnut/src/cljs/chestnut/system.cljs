@@ -1,6 +1,6 @@
 (ns {{project-ns}}.system
-    (:require [com.stuartsierra.component :as component]
-              [{{project-ns}}.components.render :refer [new-render-component]]))
+  (:require [com.stuartsierra.component :as component]
+            [{{project-ns}}.components.render :refer [new-render-component]]))
 
 (declare system)
 

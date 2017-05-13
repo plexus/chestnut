@@ -1,5 +1,5 @@
 (ns {{project-ns}}.core
-    (:require [rum.core :as rum]))
+  (:require [rum.core :as rum]))
 
 (enable-console-print!)
 

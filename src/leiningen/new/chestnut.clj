@@ -142,7 +142,7 @@
            "src/clj/chestnut/routes.clj"
            "src/cljc/chestnut/common.cljc"
            "src/cljs/chestnut/system.cljs"
-           "src/cljs/chestnut/components/render.cljs"
+           "src/cljs/chestnut/components/ui.cljs"
            "dev/user.clj"
            "dev/cljs/user.cljs"
            "LICENSE"
@@ -162,7 +162,7 @@
 
 (defn format-files-args
   "Returns a list of pairs (vectors). The first element is the file name to
-render, the second is the file contents."
+  render, the second is the file contents."
   [{:keys [name] :as data} opts]
   (letfn [(render-file [file]
             [(str/replace file "chestnut" "{{sanitized}}")

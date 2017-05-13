@@ -1,5 +1,5 @@
 (ns {{project-ns}}.core
-    (:require [reagent.core :as reagent :refer [atom]]))
+  (:require [reagent.core :as reagent :refer [atom]]))
 
 (enable-console-print!)
 
