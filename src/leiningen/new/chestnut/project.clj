@@ -36,17 +36,16 @@
   ;; nREPL by default starts in the :main namespace, we want to start in `user`
   ;; because that's where our development helper functions like (run) and
   ;; (browser-repl) live.
-  :repl-options {:init-ns user}
+  :repl-options {:init-ns user
+                 :init (go)}
 
   :cljsbuild {:builds
               [{:id "app"
-                :source-paths ["src/cljs" "src/cljc"]
+                :source-paths ["src/cljs" "src/cljc" "dev"]
 
-                :figwheel true
-                ;; Alternatively, you can configure a function to run every time figwheel reloads.
-                ;; :figwheel {:on-jsload "{{{project-ns}}}.core/on-figwheel-reload"}
+                :figwheel {:on-jsload "{{project-ns}}.system/reset"}
 
-                :compiler {:main {{{project-ns}}}.core
+                :compiler {:main cljs.user
                            :asset-path "js/compiled/out"
                            :output-to "resources/public/js/compiled/{{{sanitized}}}.js"
                            :output-dir "resources/public/js/compiled/out"
@@ -61,7 +60,7 @@
                {:id "min"
                 :source-paths ["src/cljs" "src/cljc"]
                 :jar true
-                :compiler {:main {{{project-ns}}}.core
+                :compiler {:main {{{project-ns}}}.system
                            :output-to "resources/public/js/compiled/{{{sanitized}}}.js"
                            :output-dir "target"
                            :source-map-timestamp true

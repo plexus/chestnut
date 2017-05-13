@@ -2,5 +2,6 @@
 
 (enable-console-print!)
 
-(set! (.-innerHTML (js/document.getElementById "app"))
-      "<h1>Hello Chestnut!</h1>")
+(defn render []
+  (set! (.-innerHTML (js/document.getElementById "app"))
+        "<h1>Hello Chestnut!</h1>"))

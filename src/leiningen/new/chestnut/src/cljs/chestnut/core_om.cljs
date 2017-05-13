@@ -12,7 +12,8 @@
     (render [_]
       (dom/div nil (dom/h1 nil (:text app))))))
 
-(om/root
- root-component
- app-state
- {:target (js/document.getElementById "app")})
+(defn render []
+  (om/root
+   root-component
+   app-state
+   {:target (js/document.getElementById "app")}))

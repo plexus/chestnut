@@ -1,5 +1,5 @@
 (ns {{project-ns}}.core
-  (:require [reagent.core :as reagent :refer [atom]]))
+    (:require [reagent.core :as reagent :refer [atom]]))
 
 (enable-console-print!)
 
@@ -8,4 +8,5 @@
 (defn greeting []
   [:h1 (:text @app-state)])
 
-(reagent/render [greeting] (js/document.getElementById "app"))
+(defn render []
+  (reagent/render [greeting] (js/document.getElementById "app")))

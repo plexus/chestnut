@@ -13,4 +13,5 @@
 
 (def root (om/factory RootComponent))
 
-(js/ReactDOM.render (root) (js/document.getElementById "app"))
+(defn render []
+  (js/ReactDOM.render (root) (js/document.getElementById "app")))
