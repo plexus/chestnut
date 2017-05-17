@@ -34,7 +34,7 @@
        ((indent n (next list)))))
 
 (def valid-options
-  ["http-kit" "site-middleware" "less" "sass" "reagent" "vanilla" "garden" "rum" "om-next" "re-frame"])
+  ["http-kit" "site-middleware" "less" "sass" "reagent" "vanilla" "garden" "rum" "om-next" "re-frame" "code-of-conduct" "coc"])
 
 (doseq [opt valid-options]
   (eval
@@ -148,7 +148,6 @@
            "dev/cljs/user.cljs"
            "LICENSE"
            "README.md"
-           "code_of_conduct.md"
            ".gitignore"
            "system.properties"
            ".dir-locals.el"
@@ -156,6 +155,7 @@
            "test/cljs/chestnut/core_test.cljs"
            "test/cljs/chestnut/test_runner.cljs"
            "test/cljc/chestnut/common_test.cljc"]
+    (or (coc? opts) (code-of-conduct? opts)) (conj "code_of_conduct.md")
     (less? opts) (conj "src/less/style.less")
     (sass? opts) (conj "src/scss/style.scss")
     (garden? opts) (conj "src/clj/chestnut/styles.clj")
