@@ -112,6 +112,7 @@ General options:
 - `+http-kit` Use [HTTP Kit](http://http-kit.org/server.html) instead of Jetty
 - `+site-middleware` Use the `ring.middleware.defaults.site-defaults` middleware (session, CSRF), instead of `ring.middleware.defaults.api-defaults` (see
   [ring.defaults documentation](https://github.com/ring-clojure/ring-defaults))
+- `+code-of-conduct` / `+coc` Add the [contributor covenant](http://contributor-covenant.org/) Code of Conduct
 
 Choice of UI library:
 
@@ -126,10 +127,6 @@ Choice of CSS style:
 - `+less` Use [less](https://github.com/montoux/lein-less) for compiling Less CSS files.
 - `+sass` Use SASS for generating CSS
 - `+garden` Use Garden for generating CSS
-
-Other
-
-- `+code-of-conduct` / `+coc` Add the [contributor covenant](http://contributor-covenant.org/) Code of Conduct
 
 ## Local copy
 
