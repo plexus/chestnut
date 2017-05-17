@@ -53,10 +53,13 @@
     ["system.components.http-kit :refer [new-web-server]"]
     ["system.components.jetty :refer [new-web-server]"]))
 
-(defn user-clj-requires [opts]
+(defn user-clj-requires [name opts]
   (cond-> []
-    (or (sass? opts) (less? opts)) (conj '[clojure.java.io :as io])
-    (garden? opts)                 (conj '[garden-watcher.core :refer [new-garden-watcher]])))
+    (or (sass? opts) (less? opts))
+    (conj [(symbol (str (sanitize-ns name) ".components.shell-component :refer [shell-component]"))])
+
+    (garden? opts)
+    (conj '[garden-watcher.core :refer [new-garden-watcher]])))
 
 (defn project-clj-deps [opts]
   (cond-> []
@@ -86,7 +89,13 @@
 (defn extra-dev-components [name opts]
   (cond-> []
     (garden? opts)
-    (into [:garden-watcher (list 'new-garden-watcher [(list 'quote (symbol (str (sanitize-ns name) ".styles")))])])))
+    (into [:garden-watcher (list 'new-garden-watcher [(list 'quote (symbol (str (sanitize-ns name) ".styles")))])])
+
+    (less? opts)
+    (into [:less (list 'shell-component "lein" "less" "auto")])
+
+    (sass? opts)
+    (into [:sass (list 'shell-component "lein" "auto" "sassc" "once")])))
 
 (defn load-props [file-name]
   (with-open [^java.io.Reader reader (clojure.java.io/reader file-name)]
@@ -103,13 +112,13 @@
     (str version " (" (str/join (take 8 revision)) ")")))
 
 (defn template-data [name opts]
-  {:full-name name
+  {:full-name            name
    :name                 (project-name name)
    :chestnut-version     (chestnut-version)
    :project-ns           (sanitize-ns name)
    :sanitized            (name-to-path name)
 
-   :user-clj-requires    (indent 12 (map pr-str (user-clj-requires opts)))
+   :user-clj-requires    (indent 12 (map pr-str (user-clj-requires name opts)))
    :server-clj-requires  (dep-list 12 (server-clj-requires opts))
 
    :project-clj-deps     (indent 17 (map pr-str (project-clj-deps opts)))
@@ -123,17 +132,7 @@
    :extra-dev-components (indent 4 (->> (extra-dev-components name opts)
                                         (map pr-str)
                                         (partition 2)
-                                        (map #(str/join " " %))))
-
-   ;; features
-   :sass?                (fn [block] (if (sass? opts) (str "\n" block) ""))
-   :less?                (fn [block] (if (less? opts) (str "\n" block) ""))
-
-   ;; stylesheets
-   :less-sass-refer      (cond (sass? opts) " start-sass"
-                               (less? opts) " start-less")
-   :less-sass-start      (cond (sass? opts) "\n  (start-sass)"
-                               (less? opts) "\n  (start-less)")})
+                                        (map #(str/join " " %))))})
 
 (defn files-to-render [opts]
   (cond-> ["project.clj"
@@ -159,6 +158,7 @@
     (or (coc? opts) (code-of-conduct? opts)) (conj "code_of_conduct.md")
     (less? opts) (conj "src/less/style.less")
     (sass? opts) (conj "src/scss/style.scss")
+    (or (less? opts) (sass? opts)) (conj "src/clj/chestnut/components/shell_component.clj")
     (garden? opts) (conj "src/clj/chestnut/styles.clj")
     (not (or (less? opts) (sass? opts))) (conj "resources/public/css/style.css")))
 
@@ -201,10 +201,6 @@
         (apply main/abort "Unrecognized option:" opt ". Should be one of" plus-opts))))
   (main/info "Generating fresh Chestnut project.")
   (main/info "README.md contains instructions to get you started.")
-
-  (when (sass? opts)
-    (main/info "WARNING: You have enabled SASS support, which relies on the sassc binary")
-    (main/info "WARNING: being available on your system."))
 
   (let [data (template-data name opts)]
     (apply ->files data (format-files-args data opts))
