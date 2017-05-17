@@ -127,6 +127,10 @@ Choice of CSS style:
 - `+sass` Use SASS for generating CSS
 - `+garden` Use Garden for generating CSS
 
+Other
+
+- `+code-of-conduct` / `+coc` Add the [contributor covenant](http://contributor-covenant.org/) Code of Conduct
+
 ## Local copy
 
 If you want to customize Chestnut, or try unreleased features, you can
