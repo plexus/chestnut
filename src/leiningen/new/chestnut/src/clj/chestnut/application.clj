@@ -1,27 +1,20 @@
 (ns {{project-ns}}.application
   (:gen-class)
-  (:require [ring.middleware.defaults :refer [wrap-defaults {{ring-defaults}}]]
-            [ring.middleware.gzip :refer [wrap-gzip]]
-            [ring.middleware.logger :refer [wrap-with-logger]]
-            [environ.core :refer [env]]
-            [com.stuartsierra.component :as component]
+  (:require [com.stuartsierra.component :as component]
             [system.components.endpoint :refer [new-endpoint]]
             [system.components.handler :refer [new-handler]]
             [system.components.middleware :refer [new-middleware]]{{{server-clj-requires}}}
-            [{{project-ns}}.routes :refer [routes]]))
+            [{{project-ns}}.config :refer [config]]
+            [{{project-ns}}.routes :refer [home-routes]]))
 
-(defn app-system []
+(defn app-system [config]
   (component/system-map
-   :routes (new-endpoint (fn [_] routes))
-   :middleware (new-middleware  {:middleware [[wrap-defaults {{ring-defaults}}]
-                                              wrap-with-logger
-                                              wrap-gzip]})
-   :handler (component/using
-             (new-handler)
-             [:routes :middleware])
-   :http (component/using
-          (new-web-server (Integer. (or (env :port) 10555)))
-          [:handler])))
+   :routes     (new-endpoint home-routes)
+   :middleware (new-middleware {:middleware (:middleware config)})
+   :handler    (-> (new-handler)
+                   (component/using [:routes :middleware]))
+   :http       (-> (new-web-server (:http-port config))
+                   (component/using [:handler]))))
 
 (defn -main [& _]
-  (component/start (app-system)))
+  (component/start (app-system (config))))
