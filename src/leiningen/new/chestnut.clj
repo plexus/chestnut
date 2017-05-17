@@ -3,7 +3,7 @@
             [clojure.java.io :as io]
             [clojure.string :as str]
             [leiningen.core.main :as main]
-            [leiningen.new.templates :refer [->files name-to-path project-name renderer sanitize-ns]])
+            [leiningen.new.templates :refer [->files name-to-path project-name render-text renderer sanitize-ns slurp-resource]])
   (:import java.io.Writer))
 
 ;; When using `pr`, output quoted forms as 'foo, and not as (quote foo)
@@ -34,7 +34,7 @@
        ((indent n (next list)))))
 
 (def valid-options
-  ["http-kit" "site-middleware" "less" "sass" "reagent" "vanilla" "garden" "rum" "om-next"])
+  ["http-kit" "site-middleware" "less" "sass" "reagent" "vanilla" "garden" "rum" "om-next" "re-frame"])
 
 (doseq [opt valid-options]
   (eval
@@ -45,7 +45,8 @@
   (and (not (reagent? props))
        (not (rum? props))
        (not (vanilla? props))
-       (not (om-next? props))))
+       (not (om-next? props))
+       (not (re-frame? props))))
 
 (defn server-clj-requires [opts]
   (if (http-kit? opts)
@@ -57,14 +58,14 @@
     (or (sass? opts) (less? opts)) (conj '[clojure.java.io :as io])
     (garden? opts)                 (conj '[garden-watcher.core :refer [new-garden-watcher]])))
 
-
 (defn project-clj-deps [opts]
   (cond-> []
     (http-kit? opts) (conj '[http-kit "2.2.0"])
     (reagent? opts)  (conj '[reagent "0.6.0"])
-    (om? opts)       (conj '[org.omcljs/om "1.0.0-alpha47"])
-    (om-next? opts)  (conj '[org.omcljs/om "1.0.0-alpha47"])
+    (om? opts)       (conj '[org.omcljs/om "1.0.0-alpha48"])
+    (om-next? opts)  (conj '[org.omcljs/om "1.0.0-alpha48"])
     (rum? opts)      (conj '[rum "0.10.8"])
+    (re-frame? opts) (conj '[re-frame "0.9.2"])
     (garden? opts)   (conj '[lambdaisland/garden-watcher "0.3.1"])))
 
 (defn project-plugins [opts]
@@ -175,8 +176,21 @@
                 (om-next? opts) "src/cljs/chestnut/core_om_next.cljs"
                 (reagent? opts) "src/cljs/chestnut/core_reagent.cljs"
                 (rum? opts) "src/cljs/chestnut/core_rum.cljs"
-                (vanilla? opts) "src/cljs/chestnut/core_vanilla.cljs")
+                (vanilla? opts) "src/cljs/chestnut/core_vanilla.cljs"
+                (re-frame? opts) "src/cljs/chestnut/core_re_frame.cljs")
               data)])))
+
+(defn re-frame-render
+  [resource-path data]
+  (-> (str "leiningen/new/re_frame/" resource-path)
+      io/resource
+      slurp-resource
+      (render-text data)))
+
+(defn re-frame-files [data]
+  (for [f ["config" "db" "subs" "events" "views"]]
+    [(str "src/cljs/{{sanitized}}/" f ".cljs")
+     (re-frame-render (str "src/cljs/" f ".cljs") data)]))
 
 (defn chestnut [name & opts]
   (let [dash-opts (map (partial str "--") valid-options)
@@ -192,7 +206,10 @@
     (main/info "WARNING: being available on your system."))
 
   (let [data (template-data name opts)]
-    (apply ->files data (format-files-args data opts)))
+    (apply ->files data (format-files-args data opts))
+
+    (when (re-frame? opts)
+      (apply ->files data (re-frame-files (assoc data :ns-name (:project-ns data))))))
 
   (git-init name)
   (let [repo (load-repo name)]

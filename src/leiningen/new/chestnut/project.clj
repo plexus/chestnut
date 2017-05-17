@@ -5,13 +5,13 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
   :dependencies [[org.clojure/clojure "1.8.0"]
-                 [org.clojure/clojurescript "1.9.495" :scope "provided"]
-                 [com.cognitect/transit-clj "0.8.297"]
-                 [ring "1.5.1"]
-                 [ring/ring-defaults "0.2.3"]
+                 [org.clojure/clojurescript "1.9.542" :scope "provided"]
+                 [com.cognitect/transit-clj "0.8.300"]
+                 [ring "1.6.1"]
+                 [ring/ring-defaults "0.3.0"]
                  [bk/ring-gzip "0.2.1"]
                  [lambdaisland/ring.middleware.logger "0.5.1"]
-                 [compojure "1.5.1"]
+                 [compojure "1.6.0"]
                  [environ "1.1.0"]
                  [com.stuartsierra/component "0.3.2"]
                  [org.danielsz/system "0.4.0"]
@@ -95,27 +95,27 @@
              :server-logfile "log/figwheel.log"}
 
   :doo {:build "test"}
-{{#less?}}
+  {{#less?}}
   :less {:source-paths ["src/less"]
          :target-path "resources/public/css"}
-{{/less?}}
-{{#sass?}}
+  {{/less?}}
+  {{#sass?}}
   :sassc [{:src "src/scss/style.scss"
            :output-to "resources/public/css/style.css"}]
 
   :auto {"sassc" {:file-pattern  #"\.(scss)$"
                   :paths ["src/scss"]}}
-{{/sass?}}
+  {{/sass?}}
 
   :profiles {:dev
-             {:dependencies [[figwheel "0.5.9"]
-                             [figwheel-sidecar "0.5.9"]
+             {:dependencies [[figwheel "0.5.10"]
+                             [figwheel-sidecar "0.5.10"]
                              [com.cemerick/piggieback "0.2.1"]
-                             [org.clojure/tools.nrepl "0.2.12"]
+                             [org.clojure/tools.nrepl "0.2.13"]
                              [lein-doo "0.1.7"]
                              [reloaded.repl "0.2.3"]]
 
-              :plugins [[lein-figwheel "0.5.9"]
+              :plugins [[lein-figwheel "0.5.10"]
                         [lein-doo "0.1.7"]]
 
               :source-paths ["dev"]

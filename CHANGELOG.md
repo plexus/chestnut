@@ -3,6 +3,8 @@
 ### [Unreleased]
 
 - Add Component support, both backend and frontend
+- Add a `+re-frame` flag, for [re-frame](https://github.com/Day8/re-frame) projects
+- Bump versions: clojurescript 1.9.542, transit-clj 0.8.300, ring 1.6.1, ring-defaults 0.3.0, compojure 1.6.0, figwheel 0.5.10, figwheel-sidecar 0.5.10, org.clojure/tools.nrepl 0.2.13, om 1.0.0-alpha48
 
 ### 0.15.0-SNAPSHOT
 
