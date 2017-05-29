@@ -4,7 +4,9 @@
             [clojure.string :as str]
             [leiningen.core.main :as main]
             [leiningen.new.templates :refer [->files name-to-path project-name render-text renderer sanitize-ns slurp-resource]])
-  (:import java.io.Writer))
+  (:import [java.io Writer]
+           [org.apache.http.impl.client HttpClients]
+           [org.apache.http.client.methods HttpPost]))
 
 ;; When using `pr`, output quoted forms as 'foo, and not as (quote foo)
 (defmethod clojure.core/print-method clojure.lang.ISeq [o ^Writer w]
@@ -34,7 +36,7 @@
        ((indent n (next list)))))
 
 (def valid-options
-  ["http-kit" "site-middleware" "less" "sass" "reagent" "vanilla" "garden" "rum" "om-next" "re-frame" "code-of-conduct" "coc"])
+  ["http-kit" "site-middleware" "less" "sass" "reagent" "vanilla" "garden" "rum" "om-next" "re-frame" "code-of-conduct" "coc" "no-poll"])
 
 (doseq [opt valid-options]
   (eval
@@ -193,6 +195,36 @@
     [(str "src/cljs/{{sanitized}}/" f ".cljs")
      (re-frame-render (str "src/cljs/" f ".cljs") data)]))
 
+;; borrowed from ring
+(defn- double-escape [^String x]
+  (.replace (.replace x "\\" "\\\\") "$" "\\$"))
+
+(defn percent-encode
+  "Percent-encode every character in the given string using either the specified
+  encoding, or UTF-8 by default."
+  [^String unencoded & [^String encoding]]
+  (->> (.getBytes unencoded (or encoding "UTF-8"))
+       (map (partial format "%%%02X"))
+       (str/join)))
+
+(defn url-encode
+  "Returns the url-encoded version of the given string, using either a specified
+  encoding or UTF-8 by default."
+  [unencoded & [encoding]]
+  (str/replace
+    unencoded
+    #"[^A-Za-z0-9_~.+-]+"
+    #(double-escape (percent-encode % encoding))))
+;;/borrowed from ring
+
+(defn do-pop-poll [version flags]
+  (let [client (HttpClients/createDefault)
+        post   (HttpPost. (str "https://lambdaisland.com/chestnut-poll?version="
+                               (url-encode version)
+                               "&flags="
+                               (url-encode (str/join " " flags))))]
+    (.execute client post)))
+
 (defn chestnut [name & opts]
   (let [dash-opts (map (partial str "--") valid-options)
         plus-opts (map (partial str "+") valid-options)]
@@ -202,11 +234,15 @@
   (main/info "Generating fresh Chestnut project.")
   (main/info "README.md contains instructions to get you started.")
 
-  (let [data (template-data name opts)]
-    (apply ->files data (format-files-args data opts))
+  (let [data (template-data name opts)
+        files (cond-> (format-files-args data opts)
+                (re-frame? opts) (concat (re-frame-files data)))]
+    (apply ->files data files))
 
-    (when (re-frame? opts)
-      (apply ->files data (re-frame-files (assoc data :ns-name (:project-ns data))))))
+  (try
+    (when-not (no-poll? opts)
+      (do-pop-poll (chestnut-version) (map #(str/replace % #"^[-\+]+" "") opts)))
+    (catch Throwable e))
 
   (git-init name)
   (let [repo (load-repo name)]

@@ -109,6 +109,7 @@ Clojure/ClojureScript apps effectively. It comes with
 
 General options:
 
+- `+no-poll` Opt out of usage statistics poll
 - `+http-kit` Use [HTTP Kit](http://http-kit.org/server.html) instead of Jetty
 - `+site-middleware` Use the `ring.middleware.defaults.site-defaults` middleware (session, CSRF), instead of `ring.middleware.defaults.api-defaults` (see
   [ring.defaults documentation](https://github.com/ring-clojure/ring-defaults))
