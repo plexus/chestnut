@@ -8,14 +8,14 @@
   :eval-in-leiningen true
 
   :dependencies [[com.github.plexus/clj-jgit "v0.8.9-preview"]
-                 [org.slf4j/slf4j-nop "1.7.22"]
-                 [org.apache.httpcomponents/httpclient "4.3.6"]
+                 [org.slf4j/slf4j-nop "1.7.25"]
+                 [org.apache.httpcomponents/httpclient "4.5.3"]
                  [re-frame/lein-template "0.2.7-1"]
                  ;;[com.github.plexus/re-frame-template "v0.2.7-1+indent-fix"]
                  ]
 
 
-  :profiles {:test {:dependencies [[org.clojure/core.async "0.2.395"]
+  :profiles {:test {:dependencies [[org.clojure/core.async "0.3.443"]
                                    [com.github.jnr/jnr-process "1.0-SNAPSHOT"]
                                    [clj-webdriver "0.7.2"]]}}
 
