@@ -37,7 +37,7 @@ your version.
 
 ## Usage
 
-**This README may describe unreleased features, instead you can check the [README for the latest stable release](https://github.com/plexus/chestnut/tree/v0.15.0/README.md)**
+**This README may describe unreleased features, instead you can check the [README for the latest stable release](https://github.com/plexus/chestnut/tree/v0.15.1/README.md)**
 
 ```
 lein new chestnut <name> <options>
