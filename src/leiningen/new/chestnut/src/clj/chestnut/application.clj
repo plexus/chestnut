@@ -17,4 +17,8 @@
                    (component/using [:handler]))))
 
 (defn -main [& _]
-  (component/start (app-system (config))))
+  (let [config (config)]
+    (-> config
+        app-system
+        component/start)
+    (println "Started {{project-ns}} on" (str "http://localhost:" (:http-port config)))))
