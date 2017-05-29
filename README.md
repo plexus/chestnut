@@ -31,10 +31,6 @@ This README may describe unreleased features. Please compare the
 and check the README in your generated project for instructions pertaining to
 your version.
 
-## Documentation
-
-[Go to the documentation](http://plexus.github.io/chestnut/)
-
 ## Usage
 
 **This README may describe unreleased features, instead you can check the [README for the latest stable release](https://github.com/plexus/chestnut/tree/v0.15.1/README.md)**
@@ -53,8 +49,7 @@ If you're using the snapshot version, then make sure to add a `--` to separate L
 lein new chesnut my-app --snapshot -- +garden +reagent +http-kit
 ```
 
-After that open the README of your generated project for detailed
-instructions, or consult the [Documentation](http://plexus.github.io/chestnut/)
+After that open the README of your generated project for detailed instructions.
 
 ### Lighttable
 
