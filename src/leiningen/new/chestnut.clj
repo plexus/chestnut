@@ -70,7 +70,7 @@
     (om? opts)       (conj '[org.omcljs/om "1.0.0-alpha48"])
     (om-next? opts)  (conj '[org.omcljs/om "1.0.0-alpha48"])
     (rum? opts)      (conj '[rum "0.10.8"])
-    (re-frame? opts) (conj '[re-frame "0.9.2"])
+    (re-frame? opts) (conj '[re-frame "0.9.3"])
     (garden? opts)   (conj '[lambdaisland/garden-watcher "0.3.1"])))
 
 (defn project-plugins [opts]
@@ -118,6 +118,7 @@
    :name                 (project-name name)
    :chestnut-version     (chestnut-version)
    :project-ns           (sanitize-ns name)
+   :ns-name              (sanitize-ns name) ;; used by re-frame template
    :sanitized            (name-to-path name)
 
    :user-clj-requires    (indent 12 (map pr-str (user-clj-requires name opts)))
