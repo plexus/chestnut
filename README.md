@@ -57,7 +57,7 @@ Lighttable provides a tighter integration for live coding with an inline
 browser-tab. Rather than evaluating cljs on the command line with weasel repl,
 evaluate code and preview pages inside Lighttable.
 
-Steps: After running `(run)`, open a browser tab in Lighttable. Open a cljs file
+Steps: After running `(go)`, open a browser tab in Lighttable. Open a cljs file
 from within a project, go to the end of an s-expression and hit Cmd-ENT.
 Lighttable will ask you which client to connect. Click 'Connect a client' and
 select 'Browser'. Browse to [http://localhost:3449](http://localhost:3449)
@@ -72,33 +72,35 @@ code in Lighttable.
 
 Start a repl in the context of your project with `M-x cider-jack-in`.
 
-Switch to repl-buffer with `C-c C-z` and start web and figwheel servers with
-`(run)`, and weasel server with `(browser-repl`). Load
-[http://localhost:3449](http://localhost:3449) on an external browser, which
-connects to weasel, and start evaluating cljs inside Cider.
+After that it's the regular
+
+```
+(go)
+(cljs-repl)
+```
+
+as described above/
 
 ## List of Contents
 
 This template gives you everything you need to start developing
 Clojure/ClojureScript apps effectively. It comes with
 
-* [Figwheel](https://github.com/bhauman/lein-figwheel) Automatically
-  reload your ClojureScript and CSS as soon as you save the file, no
-  need for browser refresh.
-* [Om](https://github.com/swannodette/om) ClojureScript interface to Facebook's
-  React. Alternatively you can use Reagent (`+reagent`), use Rum (`+rum`), or use `+vanilla` to
-  do without a React wrapper.
-* [Om-Next](https://github.com/swannodette/om) Next version of the ClojureScript interface to Facebook's React. Specify (`+om-next`).
-* [Ring](https://github.com/ring-clojure/ring) Clojure's de facto HTTP
-  interface. Chestnut uses a Jetty or HttpKit server to serve the
-  Clojurescript app. This way you already have an HTTP server running
-  in case you want to add server-side functionality. Chestnut also
-  inserts a Ring middleware to reload server-side Clojure files.
-* Heroku support. Chestnut apps have all the bits and pieces to be
-  deployable to Heroku. Getting your app on the web is as simple as
-  `git push`.
-* Unit tests for both Clojure and CLJS.
-  Both specs and CLJS tests can be run in "auto" mode.
+* [Figwheel](https://github.com/bhauman/lein-figwheel) Automatically reload your
+  ClojureScript and CSS as soon as you save the file, no need for browser
+  refresh.
+* A ClojureScript interface to Facebook's React. You can choose between Om
+  (`+om`), Om-next (`+om-next`), Reagent (`+reagent`), re-frame (`+re-frame`),
+  Rum (`+rum`), or use `+vanilla` to do without a React wrapper.
+* [Ring](https://github.com/ring-clojure/ring) + Compojure. Clojure's de facto
+  HTTP interface. Chestnut uses a Jetty or HttpKit server to serve the
+  Clojurescript app. This way you already have an HTTP server running in case
+  you want to add server-side functionality. Chestnut also inserts a Ring
+  middleware to reload server-side Clojure files.
+* Heroku support. Chestnut apps have all the bits and pieces to be deployable to
+  Heroku. Getting your app on the web is as simple as `git push`.
+* Unit tests for both Clojure and CLJS. Both specs and CLJS tests can be run in
+  "auto" mode.
 
 ## Options
 

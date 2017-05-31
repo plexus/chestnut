@@ -132,6 +132,10 @@
    :server-command       (if (http-kit? opts) "run-server" "run-jetty")
    :ring-defaults        (if (site-middleware? opts) "site-defaults" "api-defaults")
 
+   ;; TODO: get rid of these, instead use something like :project-clj-extras
+   :less?                (less? opts)
+   :sass?                (sass? opts)
+
    :extra-dev-components (indent 4 (->> (extra-dev-components name opts)
                                         (map pr-str)
                                         (partition 2)

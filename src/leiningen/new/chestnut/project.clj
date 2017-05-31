@@ -95,10 +95,12 @@
 
   :doo {:build "test"}
   {{#less?}}
+
   :less {:source-paths ["src/less"]
          :target-path "resources/public/css"}
   {{/less?}}
   {{#sass?}}
+
   :sassc [{:src "src/scss/style.scss"
            :output-to "resources/public/css/style.css"}]
 

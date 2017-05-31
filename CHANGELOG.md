@@ -1,5 +1,10 @@
 ## Changelog
 
+### Unreleased
+
+- Update more docs to refer to `(go)` and `(cljs-repl)` instead of `(run)` and `(browser-repl)`
+- Fix less and sass support
+
 ### [0.15.1] - 2017-05-29
 
 - Make the pop-poll work by shelling out to curl

@@ -10,8 +10,8 @@
   :dependencies [[com.github.plexus/clj-jgit "v0.8.9-preview"]
                  [org.slf4j/slf4j-nop "1.7.25"]
                  [org.apache.httpcomponents/httpclient "4.5.3"]
-                 [re-frame/lein-template "0.2.7-1"]
-                 ;;[com.github.plexus/re-frame-template "v0.2.7-1+indent-fix"]
+                 ;;[re-frame/lein-template "0.2.7-1"]
+                 [com.github.plexus/re-frame-template "v0.2.7-1-indent-fix"]
                  ]
 
 

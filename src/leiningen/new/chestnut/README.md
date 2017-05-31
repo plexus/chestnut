@@ -9,24 +9,24 @@ Open a terminal and type `lein repl` to start a Clojure REPL
 In the REPL, type
 
 ```clojure
-(run)
-(browser-repl)
+(go)
+(cljs-repl)
 ```
 
-The call to `(run)` starts the Figwheel server at port 3449, which takes care of
+The call to `(go)` starts the Figwheel server at port 3449, which takes care of
 live reloading ClojureScript code and CSS. Figwheel's server will also act as
 your app server, so requests are correctly forwarded to the http-handler you
 define.
 
-Running `(browser-repl)` starts the Figwheel ClojureScript REPL. Evaluating
+Running `(cljs-repl)` starts the Figwheel ClojureScript REPL. Evaluating
 expressions here will only work once you've loaded the page, so the browser can
 connect to Figwheel.
 
 When you see the line `Successfully compiled "resources/public/app.js" in 21.36
 seconds.`, you're ready to go. Browse to `http://localhost:3449` and enjoy.
 
-**Attention: It is not needed to run `lein figwheel` separately. Instead we
-launch Figwheel directly from the REPL**
+**Attention: It is not needed to run `lein figwheel` separately. Instead `(go)`
+launches Figwheel directly from the REPL**
 
 ## Trying it out
 
@@ -54,7 +54,7 @@ Lighttable provides a tighter integration for live coding with an inline
 browser-tab. Rather than evaluating cljs on the command line with the Figwheel
 REPL, you can evaluate code and preview pages inside Lighttable.
 
-Steps: After running `(run)`, open a browser tab in Lighttable. Open a cljs file
+Steps: After running `(go)`, open a browser tab in Lighttable. Open a cljs file
 from within a project, go to the end of an s-expression and hit Cmd-ENT.
 Lighttable will ask you which client to connect. Click 'Connect a client' and
 select 'Browser'. Browse to [http://localhost:3449](http://localhost:3449)
@@ -78,8 +78,8 @@ Put this in your Emacs configuration (`~/.emacs.d/init.el` or `~/.emacs`)
 
 ``` emacs-lisp
 (setq cider-cljs-lein-repl
-      "(do (user/run)
-           (user/browser-repl))")
+      "(do (user/go)
+           (user/cljs-repl))")
 ```
 
 Now `M-x cider-jack-in-clojurescript` (shortcut: `C-c M-J`, that's a capital

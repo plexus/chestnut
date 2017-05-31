@@ -5,7 +5,7 @@
 (defrecord ShellComponent [command]
   component/Lifecycle
   (start [this]
-    (if-not (:running this)
+    (when-not (:running this)
       (println "Shell command:" (str/join " " command))
       (future (apply clojure.java.shell/sh command)))
     (assoc this :running true)))
