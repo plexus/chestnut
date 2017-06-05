@@ -46,7 +46,7 @@ lein new chestnut my-app +garden +reagent +http-kit
 If you're using the snapshot version, then make sure to add a `--` to separate Leiningen's and Chestnut's arguments
 
 ```
-lein new chesnut my-app --snapshot -- +garden +reagent +http-kit
+lein new chestnut my-app --snapshot -- +garden +reagent +http-kit
 ```
 
 After that open the README of your generated project for detailed instructions.
@@ -79,7 +79,7 @@ After that it's the regular
 (cljs-repl)
 ```
 
-as described above/
+as described above.
 
 ## List of Contents
 
