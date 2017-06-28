@@ -14,9 +14,8 @@ In the REPL, type
 ```
 
 The call to `(go)` starts the Figwheel server at port 3449, which takes care of
-live reloading ClojureScript code and CSS. Figwheel's server will also act as
-your app server, so requests are correctly forwarded to the http-handler you
-define.
+live reloading ClojureScript code and CSS, and the app server at port 10555 
+which forwards requests to the http-handler you define.
 
 Running `(cljs-repl)` starts the Figwheel ClojureScript REPL. Evaluating
 expressions here will only work once you've loaded the page, so the browser can
