@@ -148,6 +148,7 @@
            "src/clj/chestnut/application.clj"
            "src/clj/chestnut/routes.clj"
            "src/clj/chestnut/config.clj"
+           "src/clj/chestnut/components/server_info.clj"
            "src/cljc/chestnut/common.cljc"
            "src/cljs/chestnut/system.cljs"
            "src/cljs/chestnut/components/ui.cljs"
