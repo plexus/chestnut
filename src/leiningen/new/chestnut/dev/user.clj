@@ -3,18 +3,22 @@
             [com.stuartsierra.component :as component]
             [figwheel-sidecar.config :as fw-config]
             [figwheel-sidecar.system :as fw-sys]
-            [clojure.tools.namespace.repl :refer [set-refresh-dirs]]
             [reloaded.repl :refer [system init]]
             [ring.middleware.reload :refer [wrap-reload]]
+            [ring.middleware.file :refer [wrap-file]]
+            [system.components.middleware :refer [new-middleware]]
             [figwheel-sidecar.repl-api :as figwheel]{{user-clj-requires}}
             [{{project-ns}}.config :refer [config]]))
 
 (defn dev-system []
-  (assoc ({{project-ns}}.application/app-system (config))
-    :figwheel-system (fw-sys/figwheel-system (fw-config/fetch-config))
-    :css-watcher (fw-sys/css-watcher {:watch-paths ["resources/public/css"]}){{{extra-dev-components}}}))
+  (let [config (config)]
+    (assoc ({{project-ns}}.application/app-system config)
+           :middleware (new-middleware
+                        {:middleware
+                         (conj (:middleware config) [wrap-file "dev-target/public"])})
+           :figwheel-system (fw-sys/figwheel-system (fw-config/fetch-config))
+           :css-watcher (fw-sys/css-watcher {:watch-paths ["resources/public/css"]}){{{extra-dev-components}}})))
 
-(set-refresh-dirs "src" "dev")
 (reloaded.repl/set-init! #(dev-system))
 
 (defn cljs-repl []
