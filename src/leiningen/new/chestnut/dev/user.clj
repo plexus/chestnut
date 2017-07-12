@@ -1,13 +1,23 @@
 (ns user
   (:require [{{project-ns}}.application]
             [com.stuartsierra.component :as component]
+            [suspendable.core :refer [Suspendable]]
             [figwheel-sidecar.config :as fw-config]
             [figwheel-sidecar.system :as fw-sys]
             [clojure.tools.namespace.repl :refer [set-refresh-dirs]]
             [reloaded.repl :refer [system init]]
             [ring.middleware.reload :refer [wrap-reload]]
             [figwheel-sidecar.repl-api :as figwheel]{{user-clj-requires}}
-            [{{project-ns}}.config :refer [config]]))
+            [{{project-ns}}.config :refer [config]])
+  (:import [figwheel_sidecar.system FigwheelSystem]))
+
+(extend-type FigwheelSystem
+  Suspendable
+  (suspend [c] c)
+  (resume [c old-c]
+    (-> c
+        (assoc :system-running (:system-running old-c))
+        (assoc :system (:system old-c)))))
 
 (defn dev-system []
   (assoc ({{project-ns}}.application/app-system (config))
