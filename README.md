@@ -60,7 +60,7 @@ evaluate code and preview pages inside Lighttable.
 Steps: After running `(go)`, open a browser tab in Lighttable. Open a cljs file
 from within a project, go to the end of an s-expression and hit Cmd-ENT.
 Lighttable will ask you which client to connect. Click 'Connect a client' and
-select 'Browser'. Browse to [http://localhost:3449](http://localhost:3449)
+select 'Browser'. Browse to [http://localhost:10555](http://localhost:10555)
 
 View LT's console to see a Chrome js console.
 
