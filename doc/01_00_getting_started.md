@@ -51,7 +51,7 @@ Clojurescript, so at this point it's waiting for a browser to connect
 to it.
 
 Once it seems everything has finished starting up and compiling, point
-your browser at [http://localhost:3449](http://localhost:3449). You
+your browser at [http://localhost:10555](http://localhost:10555). You
 should be seeing something like this:
 
 ![Screenshot: Hello Chestnut](img/hello_chestnut.png)
