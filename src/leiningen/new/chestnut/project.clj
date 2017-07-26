@@ -109,14 +109,14 @@
   {{/sass?}}
 
   :profiles {:dev
-             {:dependencies [[figwheel "0.5.10"]
-                             [figwheel-sidecar "0.5.10"]
+             {:dependencies [[figwheel "0.5.11"]
+                             [figwheel-sidecar "0.5.11"]
                              [com.cemerick/piggieback "0.2.1"]
                              [org.clojure/tools.nrepl "0.2.13"]
                              [lein-doo "0.1.7"]
                              [reloaded.repl "0.2.3"]]
 
-              :plugins [[lein-figwheel "0.5.10"]
+              :plugins [[lein-figwheel "0.5.11"]
                         [lein-doo "0.1.7"]]
 
               :source-paths ["dev"]
