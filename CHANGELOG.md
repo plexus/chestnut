@@ -1,9 +1,11 @@
 ## Changelog
 
-### Unreleased
+### [0.15.2] - 2017-07-30
 
 - Update more docs to refer to `(go)` and `(cljs-repl)` instead of `(run)` and `(browser-repl)`
 - Fix less and sass support
+- Fix `index.html` generation when project name contains an underscore
+- Upgrade several versions (ClojureScript, Ring, lein-cljsbuild, re-frame, piggieback, ring.middleware.logger)
 
 ### [0.15.1] - 2017-05-29
 
@@ -210,7 +212,8 @@
 
 * First release, containing Austin, Figwheel, Om
 
-[Unreleased]: https://github.com/plexus/chestnut/compare/v0.15.1...HEAD
+[Unreleased]: https://github.com/plexus/chestnut/compare/v0.15.2...HEAD
+[0.15.2]: https://github.com/plexus/chestnut/compare/v0.15.1...v0.15.2
 [0.15.1]: https://github.com/plexus/chestnut/compare/v0.15.0...v0.15.1
 [0.15.0]: https://github.com/plexus/chestnut/compare/v0.14.0...v0.15.0
 [0.14.0]: https://github.com/plexus/chestnut/compare/v0.13.0...v0.14.0
