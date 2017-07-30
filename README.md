@@ -10,16 +10,30 @@
 
 **Getting value out of Chestnut? Consider making [a small donation](https://patreon.com/plexus).**
 
-Chestnut is a Leiningen template for a Clojure/ClojureScript app based
-on Om, Reagent, or Rum, featuring a great dev setup, and easy deployment.
+Chestnut is a Clojure/ClojureScript application template. It takes the pain out
+of getting a working ClojureScript setup with live reloading plus a browser
+connected REPL.
 
-For smooth development you get instant reloading of Clojure,
-ClojureScript, and CSS. A browser-connected REPL is also included.
+It provides a solid default configuration for a REPL driven workflow, a
+ClojureScript setup with separate dev/prod/test builds, Figwheel integration,
+and a basic setup for running CLJ and CLJS unit tests. It provides a basic web
+backend setup with Compojure, and a frontend based on one of the React wrappers
+(your choice of Om, Reagent, Rum, re-frame, or Vanilla JS). It works out of the
+box on popular cloud providers like Heroku.
 
-For deployment you get uberjar support, meaning you can get all your
-code compiled, optimized, and packaged in a single executable JAR
-file. It also contains the necessary artifacts to work on Heroku out
-of the box.
+While Chestnut it's quite "complete" in a sense, it also tries to be minimal.
+Boilerplate code is kept to a minimum, and there is only just enough structure
+to get you started. How you build and structure your app from there is up to
+you.
+
+Chestnut should appeal to beginners because it allows you to get started quickly
+and with minimal baggage, it should appeal to more seasoned developers because
+it provides all the "obvious" configuration for a comfortable setup, without
+being so opinionated that it becomes a straight jacket.
+
+For deployment you get uberjar support, meaning you can get all your code
+compiled, optimized, and packaged in a single executable JAR file. It also
+contains the necessary artifacts to work on Heroku out of the box.
 
 **Need help?** Ask [on the mailing list](http://clojureverse.org/c/chestnut)
 (issues on GitHub are for bugs. Feature requests can be done either on the
