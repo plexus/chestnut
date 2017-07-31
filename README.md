@@ -120,25 +120,27 @@ Clojure/ClojureScript apps effectively. It comes with
 
 General options:
 
-- `+no-poll` Opt out of usage statistics poll
-- `+http-kit` Use [HTTP Kit](http://http-kit.org/server.html) instead of Jetty
+- `+no-poll` Opt out of usage statistics poll.
+- `+http-kit` Use [HTTP Kit](http://http-kit.org/server.html) instead of Jetty.
 - `+site-middleware` Use the `ring.middleware.defaults.site-defaults` middleware (session, CSRF), instead of `ring.middleware.defaults.api-defaults` (see
-  [ring.defaults documentation](https://github.com/ring-clojure/ring-defaults))
-- `+code-of-conduct` / `+coc` Add the [contributor covenant](http://contributor-covenant.org/) Code of Conduct
+  [ring.defaults documentation](https://github.com/ring-clojure/ring-defaults)).
+- `+code-of-conduct` / `+coc` Add the [contributor covenant](http://contributor-covenant.org/) Code of Conduct.
+- `+edge` Use the latest available version of all libraries/plugins. This includes alpha/beta versions, but does not include SNAPSHOT versions.
+- `+bleeding-edge` Like `+edge`, but also use SNAPSHOT versions when available.
 
 Choice of UI library:
 
-- `+vanilla` Don't include Om, use this if you intend to use some other view library
-- `+om-next` Use om.next, instead of legacy Om
-- `+reagent` Use Reagent instead of Om
-- `+re-frame` Use Reagent and re-frame
-- `+rum` Use Rum instead of Om
+- `+vanilla` Don't include Om, use this if you intend to use some other view library.
+- `+om-next` Use om.next, instead of legacy Om.
+- `+reagent` Use Reagent instead of Om.
+- `+re-frame` Use Reagent and re-frame.
+- `+rum` Use Rum instead of Om.
 
 Choice of CSS style:
 
 - `+less` Use [less](https://github.com/montoux/lein-less) for compiling Less CSS files.
-- `+sass` Use SASS for generating CSS
-- `+garden` Use Garden for generating CSS
+- `+sass` Use SASS for generating CSS.
+- `+garden` Use Garden for generating CSS.
 
 ## Local copy
 

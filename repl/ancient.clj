@@ -24,7 +24,7 @@ ancient/default-repositories
         "])"
         "\n\n"
         "(def optional-project-deps '{"
-        (chestnut/indent-next 29 (map #(str (pr-str (first %)) " " (pr-str (second %))) optional-deps))
+        (chestnut/indent-next 29 (sort (map #(str (pr-str (first %)) " " (pr-str (second %))) optional-deps)))
         "})"
         "\n\n"
         "(def default-project-plugins '["
@@ -37,17 +37,4 @@ ancient/default-repositories
         "\n\n"
         "(def project-clj-dev-plugins '["
         (chestnut/indent-next 31 (map pr-str dev-plugins))
-        "])"
-        ))
-  )
-
-(def optional-project-deps '{:http-kit   [http-kit "2.2.0"]
-                             :reagent    [reagent "0.6.0"]
-                             :om         [org.omcljs/om "1.0.0-alpha48"]
-                             :om-next    [org.omcljs/om "1.0.0-alpha48"]
-                             :rum        [rum "0.10.8"]
-                             :re-frame   [re-frame "0.9.4"]
-                             :garden     [lambdaisland/garden-watcher "0.3.1"]
-                             :lein-sassc [lein-sassc "0.10.4"]
-                             :lein-auto  [lein-auto "0.1.3"]
-                             :lein-less  [lein-less "1.7.5"]})
+        "])")))
