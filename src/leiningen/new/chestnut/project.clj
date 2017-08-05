@@ -4,21 +4,9 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
-  :dependencies [[org.clojure/clojure "1.8.0"]
-                 [org.clojure/clojurescript "1.9.671" :scope "provided"]
-                 [com.cognitect/transit-clj "0.8.300"]
-                 [ring "1.6.2"]
-                 [ring/ring-defaults "0.3.1"]
-                 [bk/ring-gzip "0.2.1"]
-                 [radicalzephyr/ring.middleware.logger "0.6.0"]
-                 [compojure "1.6.0"]
-                 [environ "1.1.0"]
-                 [com.stuartsierra/component "0.3.2"]
-                 [org.danielsz/system "0.4.0"]
-                 [org.clojure/tools.namespace "0.2.11"]{{{project-clj-deps}}}]
+  :dependencies [{{{project-clj-deps}}}]
 
-  :plugins [[lein-cljsbuild "1.1.6"]
-            [lein-environ "1.1.0"]{{{project-plugins}}}]
+  :plugins [{{{project-plugins}}}]
 
   :min-lein-version "2.6.1"
 
@@ -109,15 +97,9 @@
   {{/sass?}}
 
   :profiles {:dev
-             {:dependencies [[figwheel "0.5.11"]
-                             [figwheel-sidecar "0.5.11"]
-                             [com.cemerick/piggieback "0.2.2"]
-                             [org.clojure/tools.nrepl "0.2.13"]
-                             [lein-doo "0.1.7"]
-                             [reloaded.repl "0.2.3"]]
+             {:dependencies [{{{project-clj-dev-deps}}}]
 
-              :plugins [[lein-figwheel "0.5.11"]
-                        [lein-doo "0.1.7"]]
+              :plugins [{{{project-clj-dev-plugins}}}]
 
               :source-paths ["dev"]
               :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}}

@@ -12,7 +12,7 @@
                  [org.apache.httpcomponents/httpclient "4.5.3"]
                  ;;[re-frame/lein-template "0.2.7-1"]
                  [com.github.plexus/re-frame-template "v0.2.7-1-indent-fix"]
-                 ]
+                 [ancient-clj "0.3.14"]]
 
 
   :profiles {:test {:dependencies [[org.clojure/core.async "0.3.443"]

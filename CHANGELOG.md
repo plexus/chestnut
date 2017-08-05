@@ -1,5 +1,9 @@
 ## Changelog
 
+### master (unreleased)
+
+- Add `+edge` and `+bleeding-edge` options for automatically using the latest version of dependencies.
+
 ### [0.15.2] - 2017-07-30
 
 - Update more docs to refer to `(go)` and `(cljs-repl)` instead of `(run)` and `(browser-repl)`

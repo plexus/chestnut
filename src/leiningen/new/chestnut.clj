@@ -5,8 +5,46 @@
             [clojure.string :as str]
             [leiningen.core.main :as main]
             [leiningen.new.templates :refer [->files name-to-path project-name
-                                             render-text renderer sanitize-ns slurp-resource]])
+                                             render-text renderer sanitize-ns slurp-resource]]
+            [ancient-clj.core :as ancient])
   (:import java.io.Writer))
+
+(def default-project-deps '[[org.clojure/clojure "1.8.0"]
+                            [org.clojure/clojurescript "1.9.671" :scope "provided"]
+                            [com.cognitect/transit-clj "0.8.300"]
+                            [ring "1.6.2"]
+                            [ring/ring-defaults "0.3.1"]
+                            [bk/ring-gzip "0.2.1"]
+                            [radicalzephyr/ring.middleware.logger "0.6.0"]
+                            [compojure "1.6.0"]
+                            [environ "1.1.0"]
+                            [com.stuartsierra/component "0.3.2"]
+                            [org.danielsz/system "0.4.0"]
+                            [org.clojure/tools.namespace "0.2.11"]])
+
+(def optional-project-deps '{:http-kit [http-kit "2.2.0"]
+                             :reagent [reagent "0.6.0"]
+                             :om [org.omcljs/om "1.0.0-alpha48"]
+                             :om-next [org.omcljs/om "1.0.0-alpha48"]
+                             :rum [rum "0.10.8"]
+                             :re-frame [re-frame "0.9.4"]
+                             :garden [lambdaisland/garden-watcher "0.3.1"]
+                             :lein-sassc [lein-sassc "0.10.4"]
+                             :lein-auto [lein-auto "0.1.3"]
+                             :lein-less [lein-less "1.7.5"]})
+
+(def default-project-plugins '[[lein-cljsbuild "1.1.6"]
+                               [lein-environ "1.1.0"]])
+
+(def project-clj-dev-deps '[[figwheel "0.5.11"]
+                            [figwheel-sidecar "0.5.11"]
+                            [com.cemerick/piggieback "0.2.2"]
+                            [org.clojure/tools.nrepl "0.2.13"]
+                            [lein-doo "0.1.7"]
+                            [reloaded.repl "0.2.3"]])
+
+(def project-clj-dev-plugins '[[lein-figwheel "0.5.11"]
+                               [lein-doo "0.1.7"]])
 
 ;; When using `pr`, output quoted forms as 'foo, and not as (quote foo)
 (defmethod clojure.core/print-method clojure.lang.ISeq [o ^Writer w]
@@ -36,19 +74,22 @@
        ((indent n (next list)))))
 
 (def valid-options
-  ["http-kit" "site-middleware" "less" "sass" "reagent" "vanilla" "garden" "rum" "om-next" "re-frame" "code-of-conduct" "coc" "no-poll"])
+  ["http-kit" "site-middleware" "less" "sass" "reagent" "vanilla" "garden" "rum" "om-next" "re-frame" "code-of-conduct" "coc" "no-poll" "edge" "bleeding-edge"])
 
 (doseq [opt valid-options]
   (eval
    `(defn ~(symbol (str opt "?")) [opts#]
       (some #{~(str "--" opt) ~(str "+" opt)} opts#))))
 
-(defn om? [props]
-  (and (not (reagent? props))
-       (not (rum? props))
-       (not (vanilla? props))
-       (not (om-next? props))
-       (not (re-frame? props))))
+(defn om? [opts]
+  (and (not (reagent? opts))
+       (not (rum? opts))
+       (not (vanilla? opts))
+       (not (om-next? opts))
+       (not (re-frame? opts))))
+
+(defn some-edge? [opts]
+  (or (edge? opts) (bleeding-edge? opts)))
 
 (defn server-clj-requires [opts]
   (if (http-kit? opts)
@@ -63,21 +104,33 @@
     (garden? opts)
     (conj '[garden-watcher.core :refer [new-garden-watcher]])))
 
+(defn update-dep [dep opts]
+  (cond-> dep
+    (some-edge? opts)
+    (assoc 1 (ancient/latest-version-string! dep {:snapshots? (bleeding-edge? opts)}))))
+
+(defn update-deps [deps opts]
+  (map #(update-dep % opts) deps))
+
 (defn project-clj-deps [opts]
-  (cond-> []
-    (http-kit? opts) (conj '[http-kit "2.2.0"])
-    (reagent? opts)  (conj '[reagent "0.6.0"])
-    (om? opts)       (conj '[org.omcljs/om "1.0.0-alpha48"])
-    (om-next? opts)  (conj '[org.omcljs/om "1.0.0-alpha48"])
-    (rum? opts)      (conj '[rum "0.10.8"])
-    (re-frame? opts) (conj '[re-frame "0.9.4"])
-    (garden? opts)   (conj '[lambdaisland/garden-watcher "0.3.1"])))
+  (update-deps
+   (cond-> default-project-deps
+     (http-kit? opts) (conj (get optional-project-deps :http-kit))
+     (reagent? opts)  (conj (get optional-project-deps :reagent))
+     (om? opts)       (conj (get optional-project-deps :om))
+     (om-next? opts)  (conj (get optional-project-deps :om-next))
+     (rum? opts)      (conj (get optional-project-deps :rum))
+     (re-frame? opts) (conj (get optional-project-deps :re-frame))
+     (garden? opts)   (conj (get optional-project-deps :garden)))
+   opts))
 
 (defn project-plugins [opts]
-  (cond-> []
-    (sass? opts) (conj "lein-sassc \"0.10.4\""
-                       "lein-auto \"0.1.3\"")
-    (less? opts) (conj "lein-less \"1.7.5\"")))
+  (update-deps
+   (cond-> default-project-plugins
+     (sass? opts) (conj (get optional-project-deps :lein-sassc)
+                        (get optional-project-deps :lein-auto))
+     (less? opts) (conj (get optional-project-deps :lein-less)))
+   opts))
 
 (defn project-prep-tasks [name opts]
   (cond-> ["compile" ["cljsbuild" "once" "min"]]
@@ -124,8 +177,10 @@
    :user-clj-requires    (indent 12 (map pr-str (user-clj-requires name opts)))
    :server-clj-requires  (dep-list 12 (server-clj-requires opts))
 
-   :project-clj-deps     (indent 17 (map pr-str (project-clj-deps opts)))
-   :project-plugins      (dep-list 12 (project-plugins opts))
+   :project-clj-deps     (indent-next 17 (map pr-str (project-clj-deps opts)))
+   :project-plugins      (indent-next 12 (map pr-str (project-plugins opts)))
+   :project-clj-dev-deps (indent-next 29 (map pr-str (update-deps project-clj-dev-deps opts)))
+   :project-clj-dev-plugins (indent-next 24 (map pr-str (update-deps project-clj-dev-plugins opts)))
    :project-prep-tasks   (indent-next 27 (map pr-str (project-prep-tasks name opts)))
    :project-uberjar-hooks (str/join " " (project-uberjar-hooks opts))
 
@@ -222,7 +277,6 @@
 
   (when-not (no-poll? opts)
     (do-pop-poll (chestnut-version) (map #(str/replace % #"^[-\+]+" "") opts)))
-
 
   (git-init name)
   (let [repo (load-repo name)]
