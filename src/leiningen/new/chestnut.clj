@@ -10,7 +10,7 @@
   (:import java.io.Writer))
 
 (def default-project-deps '[[org.clojure/clojure "1.8.0"]
-                            [org.clojure/clojurescript "1.9.671" :scope "provided"]
+                            [org.clojure/clojurescript "1.9.854" :scope "provided"]
                             [com.cognitect/transit-clj "0.8.300"]
                             [ring "1.6.2"]
                             [ring/ring-defaults "0.3.1"]
@@ -22,28 +22,28 @@
                             [org.danielsz/system "0.4.0"]
                             [org.clojure/tools.namespace "0.2.11"]])
 
-(def optional-project-deps '{:http-kit [http-kit "2.2.0"]
-                             :reagent [reagent "0.6.0"]
-                             :om [org.omcljs/om "1.0.0-alpha48"]
-                             :om-next [org.omcljs/om "1.0.0-alpha48"]
-                             :rum [rum "0.10.8"]
-                             :re-frame [re-frame "0.9.4"]
-                             :garden [lambdaisland/garden-watcher "0.3.1"]
-                             :lein-sassc [lein-sassc "0.10.4"]
+(def optional-project-deps '{:garden [lambdaisland/garden-watcher "0.3.1"]
+                             :http-kit [http-kit "2.2.0"]
                              :lein-auto [lein-auto "0.1.3"]
-                             :lein-less [lein-less "1.7.5"]})
+                             :lein-less [lein-less "1.7.5"]
+                             :lein-sassc [lein-sassc "0.10.4"]
+                             :om [org.omcljs/om "1.0.0-beta1"]
+                             :om-next [org.omcljs/om "1.0.0-beta1"]
+                             :re-frame [re-frame "0.9.4"]
+                             :reagent [reagent "0.7.0"]
+                             :rum [rum "0.10.8"]})
 
-(def default-project-plugins '[[lein-cljsbuild "1.1.6"]
+(def default-project-plugins '[[lein-cljsbuild "1.1.7"]
                                [lein-environ "1.1.0"]])
 
-(def project-clj-dev-deps '[[figwheel "0.5.11"]
-                            [figwheel-sidecar "0.5.11"]
+(def project-clj-dev-deps '[[figwheel "0.5.12"]
+                            [figwheel-sidecar "0.5.12"]
                             [com.cemerick/piggieback "0.2.2"]
                             [org.clojure/tools.nrepl "0.2.13"]
                             [lein-doo "0.1.7"]
                             [reloaded.repl "0.2.3"]])
 
-(def project-clj-dev-plugins '[[lein-figwheel "0.5.11"]
+(def project-clj-dev-plugins '[[lein-figwheel "0.5.12"]
                                [lein-doo "0.1.7"]])
 
 ;; When using `pr`, output quoted forms as 'foo, and not as (quote foo)

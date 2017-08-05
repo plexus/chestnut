@@ -3,6 +3,7 @@
 ### master (unreleased)
 
 - Add `+edge` and `+bleeding-edge` options for automatically using the latest version of dependencies.
+- Upgrade ClojureScript, Om, Reagent, lein-cljsbuild, Figwheel
 
 ### [0.15.2] - 2017-07-30
 
