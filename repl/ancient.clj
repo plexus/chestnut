@@ -1,11 +1,11 @@
-(ns repl.ancient)
+(ns repl.ancient
+  (:require [ancient-clj.core :as ancient]
+            [leiningen.new.chestnut :as chestnut]))
 
-(require '[ancient-clj.core :as ancient]
-         '[leiningen.new.chestnut :as chestnut])
+(comment
+  ancient/default-repositories
 
-ancient/default-repositories
-
-(ancient/latest-version-string! 'ancient-clj)
+  (ancient/latest-version-string! 'ancient-clj))
 
 (defn update-dep [dep]
   (assoc dep 1 (ancient/latest-version-string! dep {:snapshots? false})))

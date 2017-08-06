@@ -10,3 +10,4 @@ pom.xml.asc
 /.repl
 /out
 resources/public
+.swp
