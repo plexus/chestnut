@@ -205,6 +205,21 @@ For Heroku support I looked at Heroku's
 [clojure-getting-started](https://github.com/heroku/clojure-getting-started)
 example app.
 
+
+## Other Templates
+
+* [luminus](https://github.com/luminus-framework/luminus-template)
+* [pedestal](https://github.com/pedestal/pedestal)
+* [re-frame-template](https://github.com/Day8/re-frame-template)
+* [reagent-figwheel](https://github.com/gadfly361/reagent-figwheel)
+* [reagent-seed](https://github.com/gadfly361/reagent-seed)
+* [reagent-template](https://github.com/reagent-project/reagent-template)
+* [vase](https://github.com/cognitect-labs/vase)
+
+
+There is also a public [comparison chart](https://goo.gl/ZZH8fm) of the common templates.
+
+
 ## License
 
 Copyright © 2014-2016 Arne Brasseur
