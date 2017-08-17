@@ -4,6 +4,7 @@
 
 - Add `+edge` and `+bleeding-edge` options for automatically using the latest version of dependencies.
 - Upgrade ClojureScript, Om, Reagent, lein-cljsbuild, Figwheel
+- Fix middleware order so static files correctly have their media type set
 
 ### [0.15.2] - 2017-07-30
 

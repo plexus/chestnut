@@ -14,8 +14,8 @@
   (let [config (config)]
     (assoc ({{project-ns}}.application/app-system config)
            :middleware (new-middleware
-                        {:middleware
-                         (vec (concat [[wrap-file "dev-target/public"]] (:middleware config)))})
+                        {:middleware (into [[wrap-file "dev-target/public"]]
+                                           (:middleware config))})
            :figwheel-system (fw-sys/figwheel-system (fw-config/fetch-config))
            :css-watcher (fw-sys/css-watcher {:watch-paths ["resources/public/css"]}){{{extra-dev-components}}})))
 
