@@ -208,16 +208,10 @@ example app.
 
 ## Other Templates
 
-* [luminus](https://github.com/luminus-framework/luminus-template)
-* [pedestal](https://github.com/pedestal/pedestal)
-* [re-frame-template](https://github.com/Day8/re-frame-template)
-* [reagent-figwheel](https://github.com/gadfly361/reagent-figwheel)
-* [reagent-seed](https://github.com/gadfly361/reagent-seed)
-* [reagent-template](https://github.com/reagent-project/reagent-template)
-* [vase](https://github.com/cognitect-labs/vase)
-
-
-There is also a public [comparison chart](https://goo.gl/ZZH8fm) of the common templates.
+We hope Chestnut is great for you, but there are also many other templates that tackle
+similar tasks.. Each has a slightly differentperspective, so it is worth taking a look
+at a few. Here is a [comparison chart](https://goo.gl/ZZH8fm) of many interesting
+Clojure/ClojureScript templates.
 
 
 ## License
