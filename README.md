@@ -209,7 +209,7 @@ example app.
 ## Other Templates
 
 We hope Chestnut is great for you, but there are also many other templates that tackle
-similar tasks.. Each has a slightly differentperspective, so it is worth taking a look
+similar tasks.. Each has a slightly different perspective, so it is worth taking a look
 at a few. Here is a [comparison chart](https://goo.gl/ZZH8fm) of many interesting
 Clojure/ClojureScript templates.
 
