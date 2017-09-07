@@ -63,6 +63,12 @@ If you're using the snapshot version, then make sure to add a `--` to separate L
 lein new chestnut my-app --snapshot -- +garden +reagent +http-kit
 ```
 
+You can get an overview of all recognized options with
+
+```
+lein new chestnut +help
+```
+
 After that open the README of your generated project for detailed instructions.
 
 ### Lighttable
@@ -120,6 +126,7 @@ Clojure/ClojureScript apps effectively. It comes with
 
 General options:
 
+- `+help` Show an overview of all recognized options, then exit.
 - `+no-poll` Opt out of usage statistics poll.
 - `+http-kit` Use [HTTP Kit](http://http-kit.org/server.html) instead of Jetty.
 - `+site-middleware` Use the `ring.middleware.defaults.site-defaults` middleware (session, CSRF), instead of `ring.middleware.defaults.api-defaults` (see

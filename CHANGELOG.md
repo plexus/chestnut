@@ -5,6 +5,8 @@
 - Add `+edge` and `+bleeding-edge` options for automatically using the latest version of dependencies.
 - Upgrade ClojureScript, Om, Reagent, lein-cljsbuild, Figwheel
 - Fix middleware order so static files correctly have their media type set
+- Bring back logging to file, using [clj-logging-config](https://github.com/malcolmsparks/clj-logging-config)
+- Add a help screen (`+help` or when using any unrecognized options)
 
 ### [0.15.2] - 2017-07-30
 

@@ -74,10 +74,43 @@
   (str (first list)
        ((indent n (next list)))))
 
-(def valid-options
-  ["http-kit" "site-middleware" "less" "sass" "reagent" "vanilla" "garden" "rum" "om-next" "re-frame" "code-of-conduct" "coc" "no-poll" "edge" "bleeding-edge"])
+(def options-descriptions
+  {"help"            "Show this help information and exit."
+   "http-kit"        "Use the http-kit web server, instead of Jetty."
+   "site-middleware" "Use Ring's site-middleware, instead of the api-middleware. (session support)"
+   "less"            "Use the LESS CSS pre-processor."
+   "sass"            "Use the SASS CSS pre-processor."
+   "reagent"         "Use Reagent as UI library."
+   "vanilla"         "Don't use a UI library (vanilla Javascript)"
+   "garden"          "Use Garden for writing CSS in Clojure"
+   "rum"             "Use Rum as UI library"
+   "om-next"         "Use om-next as UI library"
+   "re-frame"        "Use re-frame as UI framework"
+   "code-of-conduct" "Add a Code of Conduct to the project (Contributor Covenant)"
+   "coc"             "Add a Code of Conduct to the project (Contributor Covenant)"
+   "no-poll"         "Don't submit usage information"
+   "edge"            "Automatically upgrade all libraries to the latest non-SNAPSHOT version."
+   "bleeding-edge"   "Automatically upgrade all libraries to the latest non versions, inclusing SNAPSHOT releases."})
 
-(doseq [opt valid-options]
+(def all-options
+  ["http-kit"
+   "site-middleware"
+   "less"
+   "sass"
+   "garden"
+   "reagent"
+   "re-frame"
+   "rum"
+   "om-next"
+   "vanilla"
+   "code-of-conduct"
+   "coc"
+   "edge"
+   "bleeding-edge"
+   "no-poll"
+   "help"])
+
+(doseq [opt all-options]
   (eval
    `(defn ~(symbol (str opt "?")) [opts#]
       (some #{~(str "--" opt) ~(str "+" opt)} opts#))))
@@ -262,12 +295,29 @@
     (http/http-post! "https://lambdaisland.com/chestnut-poll" {:version version, :flags (str/join " " flags)})
     (catch Throwable e)))
 
+(defn print-help! []
+  (main/info "Chestnut: friendly Clojure/ClojureScript application template")
+  (main/info "")
+  (main/info "Usage: lein new chestnut <app-name> <options>")
+  (main/info " e.g.: lein new chestnut dating-for-hamsters +http-kit +re-frame +code-of-conduct")
+  (main/info "")
+  (doseq [opt all-options]
+    (main/info (format "  +%-20s %s" opt (options-descriptions opt))))
+  (main/info "")
+  (main/info "Please consult the Chestnut README (https://github.com/plexus/chestnut) as well as the README in the generated project."))
+
 (defn chestnut [name & opts]
-  (let [dash-opts (map (partial str "--") valid-options)
-        plus-opts (map (partial str "+") valid-options)]
+  (when (some #{"+help" "--help"} (cons name opts))
+    (print-help!)
+    (System/exit 0))
+
+  (let [dash-opts (map (partial str "--") all-options)
+        plus-opts (map (partial str "+") all-options)]
     (doseq [opt opts]
-      (if (not (some #{opt} (concat dash-opts plus-opts)))
+      (when (not (some #{opt} (concat dash-opts plus-opts)))
+        (print-help!)
         (apply main/abort "Unrecognized option:" opt ". Should be one of" plus-opts))))
+
   (main/info "Generating fresh Chestnut project.")
   (main/info "README.md contains instructions to get you started.")
 
