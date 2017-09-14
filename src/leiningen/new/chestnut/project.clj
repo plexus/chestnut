@@ -52,6 +52,7 @@
                            :output-dir "target"
                            :source-map-timestamp true
                            :optimizations :advanced
+                           :closure-defines {:goog.DEBUG false}
                            :pretty-print false}}]}
 
   ;; When running figwheel from nREPL, figwheel will read this configuration
