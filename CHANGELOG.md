@@ -7,6 +7,7 @@
 - Fix middleware order so static files correctly have their media type set
 - Bring back logging to file, using [clj-logging-config](https://github.com/malcolmsparks/clj-logging-config)
 - Add a help screen (`+help` or when using any unrecognized options)
+- Set `goog.DEBUG` to `false` in the production ClojureScript build
 
 ### [0.15.2] - 2017-07-30
 
