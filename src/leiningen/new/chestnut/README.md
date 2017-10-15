@@ -146,7 +146,7 @@ To compile your SCSS stylesheets to CSS, issue
 
 To automatically recompile when files change, you can use
 
-    lein auto sassc
+    lein auto sassc once
 {{/sass?}}
 
 ## License
