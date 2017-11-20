@@ -12,8 +12,8 @@
                  [org.apache.httpcomponents/httpclient "4.5.3"]
                  ;;[re-frame/lein-template "0.2.7-1"]
                  [com.github.plexus/re-frame-template "v0.2.7-1-indent-fix"]
-                 [lein-ancient "0.6.14"]
-                 [ancient-clj "0.6.14"]]
+                 [ancient-clj "0.6.14"]
+                 [clj-http "3.7.0"]]
 
 
   :profiles {:test {:dependencies [[org.clojure/core.async "0.3.443"]
