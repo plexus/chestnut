@@ -245,6 +245,7 @@
            "dev/cljs/user.cljs"
            "LICENSE"
            "README.md"
+           "Procfile"
            ".gitignore"
            "system.properties"
            ".dir-locals.el"
