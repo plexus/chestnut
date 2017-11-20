@@ -1,4 +1,4 @@
-(defproject chestnut/lein-template "0.15.2"
+(defproject chestnut/lein-template "0.15.3-SNAPSHOT"
   :description "A Leiningen template for a minimal but complete Clojure/ClojureScript setup."
   :url "https://github.com/plexus/chestnut"
 
@@ -12,7 +12,8 @@
                  [org.apache.httpcomponents/httpclient "4.5.3"]
                  ;;[re-frame/lein-template "0.2.7-1"]
                  [com.github.plexus/re-frame-template "v0.2.7-1-indent-fix"]
-                 [ancient-clj "0.3.14"]]
+                 [lein-ancient "0.6.14"]
+                 [ancient-clj "0.6.14"]]
 
 
   :profiles {:test {:dependencies [[org.clojure/core.async "0.3.443"]

@@ -1,6 +1,6 @@
 ## Changelog
 
-### master (unreleased)
+### [0.15.3] (unreleased)
 
 - Add `+edge` and `+bleeding-edge` options for automatically using the latest version of dependencies.
 - Upgrade ClojureScript, Om, Reagent, lein-cljsbuild, Figwheel
@@ -8,6 +8,7 @@
 - Bring back logging to file, using [clj-logging-config](https://github.com/malcolmsparks/clj-logging-config)
 - Add a help screen (`+help` or when using any unrecognized options)
 - Set `goog.DEBUG` to `false` in the production ClojureScript build
+- Fix lein 1.8 compatability
 
 ### [0.15.2] - 2017-07-30
 
