@@ -21,6 +21,9 @@
   ;; Use `lein run` if you just want to start a HTTP server, without figwheel
   :main {{{project-ns}}}.application
 
+  ;; Workaround for figwheel Java 9 incompatibility
+  :jvm-opts ["--add-modules" "java.xml.bind"]
+
   ;; nREPL by default starts in the :main namespace, we want to start in `user`
   ;; because that's where our development helper functions like (go) and
   ;; (browser-repl) live.
