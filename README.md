@@ -1,7 +1,7 @@
 # chestnut
 
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/plexus/chestnut?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![Clojureverse](https://rawgit.com/clojureverse/clojureverse-assets/master/clojureverse-org-green.svg)](http://clojureverse.org/c/chestnut)
+[![Clojureverse](https://rawgit.com/clojureverse/clojureverse-assets/master/clojureverse-org-green.svg)](https://clojureverse.org/c/projects/chestnut)
 
 [![Clojars Project](http://clojars.org/chestnut/lein-template/latest-version.svg)](http://clojars.org/chestnut/lein-template)
 
