@@ -17,7 +17,6 @@
                             [bk/ring-gzip "0.2.1"]
                             [radicalzephyr/ring.middleware.logger "0.6.0"]
                             [clj-logging-config "1.9.12"]
-                            [compojure "1.6.0"]
                             [environ "1.1.0"]
                             [com.stuartsierra/component "0.3.2"]
                             [org.danielsz/system "0.4.0"]
@@ -25,6 +24,8 @@
 
 (def optional-project-deps '{:garden [lambdaisland/garden-watcher "0.3.1"]
                              :http-kit [http-kit "2.2.0"]
+                             :compojure [compojure "1.6.0"]
+                             :bidi [bidi "2.1.3"]
                              :lein-auto [lein-auto "0.1.3"]
                              :lein-less [lein-less "1.7.5"]
                              :lein-sassc [lein-sassc "0.10.4"]
@@ -77,6 +78,7 @@
 (def options-descriptions
   {"help"            "Show this help information and exit."
    "http-kit"        "Use the http-kit web server, instead of Jetty."
+   "bidi"            "Use bidi for server side routing library instead of compojure."
    "site-middleware" "Use Ring's site-middleware, instead of the api-middleware. (session support)"
    "less"            "Use the LESS CSS pre-processor."
    "sass"            "Use the SASS CSS pre-processor."
@@ -94,6 +96,7 @@
 
 (def all-options
   ["http-kit"
+   "bidi"
    "site-middleware"
    "less"
    "sass"
@@ -114,6 +117,9 @@
   (eval
    `(defn ~(symbol (str opt "?")) [opts#]
       (some #{~(str "--" opt) ~(str "+" opt)} opts#))))
+
+(defn compojure? [opts]
+  (not (bidi? opts)))
 
 (defn om? [opts]
   (and (not (reagent? opts))
@@ -150,6 +156,8 @@
   (update-deps
    (cond-> default-project-deps
      (http-kit? opts) (conj (get optional-project-deps :http-kit))
+     (compojure? opts) (conj (get optional-project-deps :compojure))
+     (bidi? opts)     (conj (get optional-project-deps :bidi))
      (reagent? opts)  (conj (get optional-project-deps :reagent))
      (om? opts)       (conj (get optional-project-deps :om))
      (om-next? opts)  (conj (get optional-project-deps :om-next))
@@ -224,6 +232,9 @@
    ;; TODO: get rid of these, instead use something like :project-clj-extras
    :less?                (less? opts)
    :sass?                (sass? opts)
+
+   :compojure?           (compojure? opts)
+   :bidi?                (bidi? opts)
 
    :extra-dev-components (indent 4 (->> (extra-dev-components name opts)
                                         (map pr-str)
