@@ -129,6 +129,7 @@ General options:
 - `+help` Show an overview of all recognized options, then exit.
 - `+no-poll` Opt out of usage statistics poll.
 - `+http-kit` Use [HTTP Kit](http://http-kit.org/server.html) instead of Jetty.
+- `+bidi` Use [bidi](https://github.com/juxt/bidi) instead of Compojure.
 - `+site-middleware` Use the `ring.middleware.defaults.site-defaults` middleware (session, CSRF), instead of `ring.middleware.defaults.api-defaults` (see
   [ring.defaults documentation](https://github.com/ring-clojure/ring-defaults)).
 - `+code-of-conduct` / `+coc` Add the [contributor covenant](http://contributor-covenant.org/) Code of Conduct.
