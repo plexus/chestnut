@@ -1,1 +1,1 @@
-web: java $JVM_OPTS -cp target/{{name}}.jar clojure.main -m {{project-ns}}.server
+web: java $JVM_OPTS -cp target/{{name}}.jar clojure.main -m {{project-ns}}.application
