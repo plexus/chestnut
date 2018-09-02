@@ -1,6 +1,6 @@
 ## Changelog
 
-### [0.17.0] - 2018-05-06
+### [0.17.0] (unreleased)
 
 - Drop Om, replace Reagent as the default UI library
 
