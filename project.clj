@@ -1,4 +1,4 @@
-(defproject chestnut/lein-template "0.15.3-SNAPSHOT"
+(defproject chestnut/lein-template "0.17.0-SNAPSHOT"
   :description "A Leiningen template for a minimal but complete Clojure/ClojureScript setup."
   :url "https://github.com/plexus/chestnut"
 

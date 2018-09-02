@@ -1,6 +1,10 @@
 ## Changelog
 
-### [0.15.3] (unreleased)
+### [0.17.0] - 2018-05-06
+
+- Drop Om, replace Reagent as the default UI library
+
+### [0.16.0] - 2018-05-06
 
 - Add `+edge` and `+bleeding-edge` options for automatically using the latest version of dependencies.
 - Upgrade ClojureScript, Om, Reagent, lein-cljsbuild, Figwheel

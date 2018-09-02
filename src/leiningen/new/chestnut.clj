@@ -29,7 +29,6 @@
                              :lein-auto [lein-auto "0.1.3"]
                              :lein-less [lein-less "1.7.5"]
                              :lein-sassc [lein-sassc "0.10.4"]
-                             :om [org.omcljs/om "1.0.0-beta1"]
                              :om-next [org.omcljs/om "1.0.0-beta1"]
                              :re-frame [re-frame "0.9.4"]
                              :reagent [reagent "0.7.0"]
@@ -82,7 +81,6 @@
    "site-middleware" "Use Ring's site-middleware, instead of the api-middleware. (session support)"
    "less"            "Use the LESS CSS pre-processor."
    "sass"            "Use the SASS CSS pre-processor."
-   "reagent"         "Use Reagent as UI library."
    "vanilla"         "Don't use a UI library (vanilla Javascript)"
    "garden"          "Use Garden for writing CSS in Clojure"
    "rum"             "Use Rum as UI library"
@@ -101,7 +99,6 @@
    "less"
    "sass"
    "garden"
-   "reagent"
    "re-frame"
    "rum"
    "om-next"
@@ -121,9 +118,8 @@
 (defn compojure? [opts]
   (not (bidi? opts)))
 
-(defn om? [opts]
-  (and (not (reagent? opts))
-       (not (rum? opts))
+(defn reagent? [opts]
+  (and (not (rum? opts))
        (not (vanilla? opts))
        (not (om-next? opts))
        (not (re-frame? opts))))
@@ -159,7 +155,6 @@
      (compojure? opts) (conj (get optional-project-deps :compojure))
      (bidi? opts)     (conj (get optional-project-deps :bidi))
      (reagent? opts)  (conj (get optional-project-deps :reagent))
-     (om? opts)       (conj (get optional-project-deps :om))
      (om-next? opts)  (conj (get optional-project-deps :om-next))
      (rum? opts)      (conj (get optional-project-deps :rum))
      (re-frame? opts) (conj (get optional-project-deps :re-frame))
@@ -282,9 +277,8 @@
      (map render-file (files-to-render opts))
      ["src/cljs/{{sanitized}}/core.cljs"
       (render (cond
-                (om? opts) "src/cljs/chestnut/core_om.cljs"
-                (om-next? opts) "src/cljs/chestnut/core_om_next.cljs"
                 (reagent? opts) "src/cljs/chestnut/core_reagent.cljs"
+                (om-next? opts) "src/cljs/chestnut/core_om_next.cljs"
                 (rum? opts) "src/cljs/chestnut/core_rum.cljs"
                 (vanilla? opts) "src/cljs/chestnut/core_vanilla.cljs"
                 (re-frame? opts) "src/cljs/chestnut/core_re_frame.cljs")
