@@ -13,6 +13,7 @@
                             [org.clojure/clojurescript "1.9.854" :scope "provided"]
                             [com.cognitect/transit-clj "0.8.300"]
                             [ring "1.6.2"]
+                            [javax.xml.bind/jaxb-api "2.3.1"]
                             [ring/ring-defaults "0.3.1"]
                             [bk/ring-gzip "0.2.1"]
                             [radicalzephyr/ring.middleware.logger "0.6.0"]
@@ -23,7 +24,7 @@
                             [org.clojure/tools.namespace "0.2.11"]])
 
 (def optional-project-deps '{:garden [lambdaisland/garden-watcher "0.3.1"]
-                             :http-kit [http-kit "2.2.0"]
+                             :http-kit [http-kit "2.3.0"]
                              :compojure [compojure "1.6.0"]
                              :bidi [bidi "2.1.3"]
                              :lein-auto [lein-auto "0.1.3"]
@@ -37,14 +38,14 @@
 (def default-project-plugins '[[lein-cljsbuild "1.1.7"]
                                [lein-environ "1.1.0"]])
 
-(def project-clj-dev-deps '[[figwheel "0.5.12"]
-                            [figwheel-sidecar "0.5.12"]
-                            [com.cemerick/piggieback "0.2.2"]
-                            [org.clojure/tools.nrepl "0.2.13"]
+(def project-clj-dev-deps '[[figwheel "0.5.18"]
+                            [figwheel-sidecar "0.5.18"]
+                            [cider/piggieback "0.3.10"]
+                            [cider/cider-nrepl "0.18.0"]
                             [lein-doo "0.1.7"]
-                            [reloaded.repl "0.2.3"]])
+                            [reloaded.repl "0.2.4"]])
 
-(def project-clj-dev-plugins '[[lein-figwheel "0.5.12"]
+(def project-clj-dev-plugins '[[lein-figwheel "0.5.18"]
                                [lein-doo "0.1.7"]])
 
 ;; When using `pr`, output quoted forms as 'foo, and not as (quote foo)
@@ -239,6 +240,7 @@
 (defn files-to-render [opts]
   (cond-> ["project.clj"
            "resources/public/index.html"
+           "resources/public/favicon.ico"
            "resources/log4j.properties"
            "src/clj/chestnut/application.clj"
            "src/clj/chestnut/routes.clj"
