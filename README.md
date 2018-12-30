@@ -18,7 +18,7 @@ It provides a solid default configuration for a REPL driven workflow, a
 ClojureScript setup with separate dev/prod/test builds, Figwheel integration,
 and a basic setup for running CLJ and CLJS unit tests. It provides a basic web
 backend setup with Compojure, and a frontend based on one of the React wrappers
-(your choice of Om, Reagent, Rum, re-frame, or Vanilla JS). It works out of the
+(your choice of Reagent, Rum, om-next, re-frame, or Vanilla JS). It works out of the
 box on popular cloud providers like Heroku.
 
 While Chestnut it's quite "complete" in a sense, it also tries to be minimal.
@@ -109,8 +109,8 @@ Clojure/ClojureScript apps effectively. It comes with
 * [Figwheel](https://github.com/bhauman/lein-figwheel) Automatically reload your
   ClojureScript and CSS as soon as you save the file, no need for browser
   refresh.
-* A ClojureScript interface to Facebook's React. You can choose between Om
-  (`+om`), Om-next (`+om-next`), Reagent (`+reagent`), re-frame (`+re-frame`),
+* A ClojureScript interface to Facebook's React. You can choose between
+  Reagent (default), Om-next (`+om-next`), re-frame (`+re-frame`),
   Rum (`+rum`), or use `+vanilla` to do without a React wrapper.
 * [Ring](https://github.com/ring-clojure/ring) + Compojure. Clojure's de facto
   HTTP interface. Chestnut uses a Jetty or HttpKit server to serve the
@@ -138,11 +138,10 @@ General options:
 
 Choice of UI library:
 
-- `+vanilla` Don't include Om, use this if you intend to use some other view library.
-- `+om-next` Use om.next, instead of legacy Om.
-- `+reagent` Use Reagent instead of Om.
+- `+vanilla` Don't include Reagent, use this if you intend to use some other view library.
+- `+om-next` Use om.next, instead of Reagent.
 - `+re-frame` Use Reagent and re-frame.
-- `+rum` Use Rum instead of Om.
+- `+rum` Use Rum instead of Reagent.
 
 Choice of CSS style:
 
@@ -224,7 +223,7 @@ Clojure/ClojureScript templates.
 
 ## License
 
-Copyright © 2014-2016 Arne Brasseur
+Copyright © 2014-2018 Arne Brasseur
 
 Distributed under the Eclipse Public License either version 1.0 or (at
 your option) any later version.

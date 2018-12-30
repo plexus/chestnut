@@ -103,7 +103,7 @@
               :plugins [{{{project-clj-dev-plugins}}}]
 
               :source-paths ["dev"]
-              :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}}
+              :repl-options {:nrepl-middleware [cider.piggieback/wrap-cljs-repl]}}
 
              :uberjar
              {:source-paths ^:replace ["src/clj" "src/cljc"]

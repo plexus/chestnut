@@ -13,6 +13,7 @@
                             [org.clojure/clojurescript "1.9.854" :scope "provided"]
                             [com.cognitect/transit-clj "0.8.300"]
                             [ring "1.6.2"]
+                            [javax.xml.bind/jaxb-api "2.3.1"]
                             [ring/ring-defaults "0.3.1"]
                             [bk/ring-gzip "0.2.1"]
                             [radicalzephyr/ring.middleware.logger "0.6.0"]
@@ -23,13 +24,12 @@
                             [org.clojure/tools.namespace "0.2.11"]])
 
 (def optional-project-deps '{:garden [lambdaisland/garden-watcher "0.3.1"]
-                             :http-kit [http-kit "2.2.0"]
+                             :http-kit [http-kit "2.3.0"]
                              :compojure [compojure "1.6.0"]
                              :bidi [bidi "2.1.3"]
                              :lein-auto [lein-auto "0.1.3"]
                              :lein-less [lein-less "1.7.5"]
                              :lein-sassc [lein-sassc "0.10.4"]
-                             :om [org.omcljs/om "1.0.0-beta1"]
                              :om-next [org.omcljs/om "1.0.0-beta1"]
                              :re-frame [re-frame "0.9.4"]
                              :reagent [reagent "0.7.0"]
@@ -38,14 +38,14 @@
 (def default-project-plugins '[[lein-cljsbuild "1.1.7"]
                                [lein-environ "1.1.0"]])
 
-(def project-clj-dev-deps '[[figwheel "0.5.12"]
-                            [figwheel-sidecar "0.5.12"]
-                            [com.cemerick/piggieback "0.2.2"]
-                            [org.clojure/tools.nrepl "0.2.13"]
+(def project-clj-dev-deps '[[figwheel "0.5.18"]
+                            [figwheel-sidecar "0.5.18"]
+                            [cider/piggieback "0.3.10"]
+                            [cider/cider-nrepl "0.18.0"]
                             [lein-doo "0.1.7"]
-                            [reloaded.repl "0.2.3"]])
+                            [reloaded.repl "0.2.4"]])
 
-(def project-clj-dev-plugins '[[lein-figwheel "0.5.12"]
+(def project-clj-dev-plugins '[[lein-figwheel "0.5.18"]
                                [lein-doo "0.1.7"]])
 
 ;; When using `pr`, output quoted forms as 'foo, and not as (quote foo)
@@ -82,7 +82,6 @@
    "site-middleware" "Use Ring's site-middleware, instead of the api-middleware. (session support)"
    "less"            "Use the LESS CSS pre-processor."
    "sass"            "Use the SASS CSS pre-processor."
-   "reagent"         "Use Reagent as UI library."
    "vanilla"         "Don't use a UI library (vanilla Javascript)"
    "garden"          "Use Garden for writing CSS in Clojure"
    "rum"             "Use Rum as UI library"
@@ -101,7 +100,6 @@
    "less"
    "sass"
    "garden"
-   "reagent"
    "re-frame"
    "rum"
    "om-next"
@@ -121,9 +119,8 @@
 (defn compojure? [opts]
   (not (bidi? opts)))
 
-(defn om? [opts]
-  (and (not (reagent? opts))
-       (not (rum? opts))
+(defn reagent? [opts]
+  (and (not (rum? opts))
        (not (vanilla? opts))
        (not (om-next? opts))
        (not (re-frame? opts))))
@@ -159,7 +156,6 @@
      (compojure? opts) (conj (get optional-project-deps :compojure))
      (bidi? opts)     (conj (get optional-project-deps :bidi))
      (reagent? opts)  (conj (get optional-project-deps :reagent))
-     (om? opts)       (conj (get optional-project-deps :om))
      (om-next? opts)  (conj (get optional-project-deps :om-next))
      (rum? opts)      (conj (get optional-project-deps :rum))
      (re-frame? opts) (conj (get optional-project-deps :re-frame))
@@ -244,6 +240,7 @@
 (defn files-to-render [opts]
   (cond-> ["project.clj"
            "resources/public/index.html"
+           "resources/public/favicon.ico"
            "resources/log4j.properties"
            "src/clj/chestnut/application.clj"
            "src/clj/chestnut/routes.clj"
@@ -282,9 +279,8 @@
      (map render-file (files-to-render opts))
      ["src/cljs/{{sanitized}}/core.cljs"
       (render (cond
-                (om? opts) "src/cljs/chestnut/core_om.cljs"
-                (om-next? opts) "src/cljs/chestnut/core_om_next.cljs"
                 (reagent? opts) "src/cljs/chestnut/core_reagent.cljs"
+                (om-next? opts) "src/cljs/chestnut/core_om_next.cljs"
                 (rum? opts) "src/cljs/chestnut/core_rum.cljs"
                 (vanilla? opts) "src/cljs/chestnut/core_vanilla.cljs"
                 (re-frame? opts) "src/cljs/chestnut/core_re_frame.cljs")

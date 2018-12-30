@@ -17,7 +17,7 @@ setup.
 
 ### Solid Choices Across the Stack
 
-* Om, build data driven, component based UIs
+* Reagent, build data driven, component based UIs
 * Ring, Compojure, get server side routing and request handling
 
 ### Easy Deployment

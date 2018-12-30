@@ -1,7 +1,8 @@
-(defproject chestnut/lein-template "0.15.3-SNAPSHOT"
+(defproject chestnut/lein-template "0.17.0-SNAPSHOT"
   :description "A Leiningen template for a minimal but complete Clojure/ClojureScript setup."
   :url "https://github.com/plexus/chestnut"
-
+  :jar-inclusions [#"leiningen/new/chestnut/\.gitignore"
+                   #"leiningen/new/chestnut/\.dir-locals\.el"]
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
