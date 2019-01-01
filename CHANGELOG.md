@@ -1,11 +1,14 @@
 ## Changelog
 
-### [0.17.0] (unreleased)
+### [0.18.0] (unreleased)
+
+### [0.17.0] - 2019-01-01
 
 - Drop Om, replace Reagent as the default UI library
 - Update critically breaking dependencies
 - Add javax xml bind dependency to fix Java 9+ compatability
 - Explicitly add dotfiles to project for lein compatability
+- Bump dependencies so project flags work out of the box
 
 ### [0.16.0] - 2018-05-06
 
