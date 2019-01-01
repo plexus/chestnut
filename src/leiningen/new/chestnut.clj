@@ -9,31 +9,30 @@
             [ancient-clj.core :as ancient])
   (:import java.io.Writer))
 
-(def default-project-deps '[[org.clojure/clojure "1.8.0"]
-                            [org.clojure/clojurescript "1.9.854" :scope "provided"]
-                            [com.cognitect/transit-clj "0.8.300"]
-                            [ring "1.6.2"]
-                            [javax.xml.bind/jaxb-api "2.3.1"]
-                            [ring/ring-defaults "0.3.1"]
-                            [bk/ring-gzip "0.2.1"]
+(def default-project-deps '[[org.clojure/clojure "1.10.0"]
+                            [org.clojure/clojurescript "1.10.439" :scope "provided"]
+                            [com.cognitect/transit-clj "0.8.313"]
+                            [ring "1.7.1"]
+                            [ring/ring-defaults "0.3.2"]
+                            [bk/ring-gzip "0.3.0"]
                             [radicalzephyr/ring.middleware.logger "0.6.0"]
                             [clj-logging-config "1.9.12"]
                             [environ "1.1.0"]
                             [com.stuartsierra/component "0.3.2"]
-                            [org.danielsz/system "0.4.0"]
+                            [org.danielsz/system "0.4.1"]
                             [org.clojure/tools.namespace "0.2.11"]])
 
-(def optional-project-deps '{:garden [lambdaisland/garden-watcher "0.3.1"]
+(def optional-project-deps '{:garden [lambdaisland/garden-watcher "0.3.3"]
                              :http-kit [http-kit "2.3.0"]
-                             :compojure [compojure "1.6.0"]
-                             :bidi [bidi "2.1.3"]
+                             :compojure [compojure "1.6.1"]
+                             :bidi [bidi "2.1.5"]
                              :lein-auto [lein-auto "0.1.3"]
                              :lein-less [lein-less "1.7.5"]
-                             :lein-sassc [lein-sassc "0.10.4"]
-                             :om-next [org.omcljs/om "1.0.0-beta1"]
-                             :re-frame [re-frame "0.9.4"]
-                             :reagent [reagent "0.7.0"]
-                             :rum [rum "0.10.8"]})
+                             :lein-sassc [lein-sassc "0.10.5"]
+                             :om-next [org.omcljs/om "1.0.0-beta4"]
+                             :re-frame [re-frame "0.10.6"]
+                             :reagent [reagent "0.8.1"]
+                             :rum [rum "0.11.3"]})
 
 (def default-project-plugins '[[lein-cljsbuild "1.1.7"]
                                [lein-environ "1.1.0"]])
@@ -42,11 +41,11 @@
                             [figwheel-sidecar "0.5.18"]
                             [cider/piggieback "0.3.10"]
                             [cider/cider-nrepl "0.18.0"]
-                            [lein-doo "0.1.7"]
+                            [lein-doo "0.1.11"]
                             [reloaded.repl "0.2.4"]])
 
 (def project-clj-dev-plugins '[[lein-figwheel "0.5.18"]
-                               [lein-doo "0.1.7"]])
+                               [lein-doo "0.1.11"]])
 
 ;; When using `pr`, output quoted forms as 'foo, and not as (quote foo)
 (defmethod clojure.core/print-method clojure.lang.ISeq [o ^Writer w]
