@@ -1,6 +1,11 @@
 ## Changelog
 
-### [0.18.0] (unreleased)
+### [0.19.0] (unreleased)
+
+### [0.18.0] - 2019-04-03
+
+- Update CIDER vars in dir-locals.el
+- Bump Piggieback for latest jvm support
 
 ### [0.17.0] - 2019-01-01
 
