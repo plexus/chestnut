@@ -2,6 +2,9 @@
 
 ### [0.19.0] (unreleased)
 
+- Bring back `+reagent` / `--reagent` for compatibility
+- Add `"dev-target"` to the resource path, so that a plain `lein figwheel` still works
+
 ### [0.18.0] - 2019-04-03
 
 - Update CIDER vars in dir-locals.el

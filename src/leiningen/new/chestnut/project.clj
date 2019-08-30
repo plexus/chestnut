@@ -103,6 +103,7 @@
               :plugins [{{{project-clj-dev-plugins}}}]
 
               :source-paths ["dev"]
+              :resource-paths ["dev-target"]
               :repl-options {:nrepl-middleware [cider.piggieback/wrap-cljs-repl]}}
 
              :uberjar
