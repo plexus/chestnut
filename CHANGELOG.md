@@ -2,6 +2,8 @@
 
 ### [0.19.0] (unreleased)
 
+- Bring back `+reagent` / `--reagent` for compatibility
+
 ### [0.18.0] - 2019-04-03
 
 - Update CIDER vars in dir-locals.el
