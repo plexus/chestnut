@@ -101,6 +101,21 @@ After that it's the regular
 
 as described above.
 
+### Terminal/Console/Shell/Command-line
+
+```
+lein repl
+```
+
+```
+(go)
+```
+
+```
+(cljs-repl)
+```
+
+as described above.
 ## List of Contents
 
 This template gives you everything you need to start developing
